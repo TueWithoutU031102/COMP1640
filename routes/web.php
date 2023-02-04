@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('admin.index');
 });
 
-Route::get('createAcc',[UserController::class,'createAcc'])->name('createAcc');
+//Route::get('createAcc',[UserController::class,'createAcc'])->name('createAcc');
 
 Route::get('admin/login',function(){
     return view('admin.login');
