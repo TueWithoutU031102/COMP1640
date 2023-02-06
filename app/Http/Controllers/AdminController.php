@@ -14,16 +14,15 @@ class AdminController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials)) {
 
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.index');
         } else return redirect();
     }
 
-    public function dashboard()
+    public function index()
     {
-        if (Auth::guard('admin')->check()) {
-            $adminUser  = Auth::guard('admin')->user();
-            return view('admin.dashboard', ['user' => $adminUser]);
-        } else return redirect('admin/login');
+        if (Auth::guard('admin')->check())
+            return view('admin.index');
+        else return redirect('admin/login');
     }
 
     public function logout()
