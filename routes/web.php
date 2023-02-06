@@ -22,9 +22,12 @@ Route::get('/', function () {
 
 Route::get('admin/login',function(){
     return view('admin.login');
+})->name('admin.login');
+
+Route::post('admin/login',[AdminController::class,'login']);
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('admin/index',[AdminController::class,'index'])->name('admin.index');
 });
 
-Route::post('admin/login',[AdminController::class,'loginPost'])->name('admin.loginPost');
-
-Route::get('admin/index',[AdminController::class,'index'])->name('admin.index')->middleware('admin');
 Route::get('admin/logout',[AdminController::class,'logout'])->name('admin.logout');

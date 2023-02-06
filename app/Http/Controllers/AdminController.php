@@ -8,21 +8,21 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     //
-    public function loginPost(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-
-            return redirect()->route('admin.index');
-        } else return redirect();
+        return Auth::guard('admin')->attempt($credentials)
+           ? redirect()->route('admin.index')
+           : redirect()->route('admin.login');
     }
 
     public function index()
     {
-        if (Auth::guard('admin')->check())
-            return view('admin.index');
-        else return redirect('admin/login');
+        return Auth::guard('admin')->check()
+        ? to_route('admin.index')
+        : to_route('admin.login');
+
     }
 
     public function logout()
