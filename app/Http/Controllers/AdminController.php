@@ -30,4 +30,16 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
         return redirect('admin/login');
     }
+
+    public function acc()
+    {
+        $data['title'] = 'Show Account';
+        return view('admin/acc', $data);
+    }
+
+    public function createAcc()
+    {
+        $data['title'] = 'Create Account';
+        return view('admin/createAcc', $data);
+    }
 }
