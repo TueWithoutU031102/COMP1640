@@ -29,8 +29,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/index', function () {
         return view('admin/index');
     })->name('admin.index');
-    Route::get('admin/acc',[AdminController::class, 'acc'])->name('admin.acc');
-    // Route::get('admin/users', [AdminController::class,'createAcc'])->name('admin.users');
+    Route::get('admin/acc', [AdminController::class, 'acc'])->name('admin.acc');
+    Route::get('admin/createAcc', [AdminController::class, 'createAcc'])->name('admin.createAcc');
 });
 
 Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
