@@ -13,16 +13,15 @@ class AdminController extends Controller
         $credentials = $request->only('email', 'password');
 
         return Auth::guard('admin')->attempt($credentials)
-           ? redirect()->route('admin.index')
-           : redirect()->route('admin.login');
+            ? redirect()->route('admin.index')
+            : redirect()->route('admin.login');
     }
 
     public function index()
     {
         return Auth::guard('admin')->check()
-        ? to_route('admin.index')
-        : to_route('admin.login');
-
+            ? to_route('admin.index')
+            : to_route('admin.login');
     }
 
     public function logout()
