@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,13 +32,14 @@ class AdminController extends Controller
 
     public function acc()
     {
-        $data['title'] = 'Show Account';
-        return view('admin/acc', $data);
+        $user = User::all();
+        return view('admin.acc')->with('user', $user);
     }
 
-    public function createAcc()
+    public function createAcc(Request $request)
     {
-        $data['title'] = 'Create Account';
-        return view('admin/createAcc', $data);
+        $input = $request->all();
+        User::create($input);
+        return redirect('admin/acc')->with('flash_message','Create Successful!!!!!');
     }
 }

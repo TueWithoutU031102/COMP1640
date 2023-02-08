@@ -192,7 +192,9 @@
             </div>
     </main>
     <h2>User Account</h2>
-    <button class="btn btn-primary" href="createAcc">Create Account</button>
+    <a href="createAcc">
+        <button class="btn btn-primary">Create Account</button>
+    </a>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
@@ -200,6 +202,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Image</th>
+                    <th score="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -207,6 +210,17 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td>
+                        <a href="" title="View Profile"><button class="btn btn-info btn-sm"><i
+                                    aria-hidden="true">View</button>
+                        </a>
+                        <a href="" title="Edit Account"><button class="btn btn-primary btn-sm"><i
+                                    aria-hidden="true">Edit</button>
+                        </a>
+                        <a href="" title="Delete Account"><button class="btn btn-danger btn-sm"><i
+                                    aria-hidden="true">Delete</button>
+                        </a>
+                    </td>
                 </tr>
         </table>
     </div>

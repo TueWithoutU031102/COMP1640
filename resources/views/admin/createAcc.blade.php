@@ -12,32 +12,38 @@
 
 <body>
     <h1>Create Account</h1>
-    <form>
+    <form action="/admin/createAcc" method="POST">
+        @csrf
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="name" class="form-label">Name</label>
+            <input type="name" class="form-control" id="name" aria-describedby="name">
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="email">
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Role</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Roles</option>
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <select class="form-select" id="role" aria-label="Role">
                 <option value="1">Staff</option>
                 <option value="2">abc</option>
                 <option value="3">efg</option>
             </select>
         </div>
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <input type="checkbox" class="form-check-input" id="check-email">
+            <label class="form-check-label" for="check-email">Check account</label>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="submit" class="btn btn-primary">Back</button>
     </form>
+    <a href="/admin/acc">
+        <button class="btn btn-primary">Back</button>
+    </a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>

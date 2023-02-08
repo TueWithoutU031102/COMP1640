@@ -30,7 +30,11 @@ Route::middleware(['admin'])->group(function () {
         return view('admin/index');
     })->name('admin.index');
     Route::get('admin/acc', [AdminController::class, 'acc'])->name('admin.acc');
-    Route::get('admin/createAcc', [AdminController::class, 'createAcc'])->name('admin.createAcc');
+    Route::get('admin/createAcc',function(){
+        return view('admin/createAcc');
+    });
+    
+    Route::post('admin/createAcc', [AdminController::class, 'createAcc']);
 });
 
 Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
