@@ -201,15 +201,19 @@
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Role</th>
                     <th scope="col">Image</th>
                     <th score="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @foreach ($users as $user)
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->role }}</td>
+                        <td><img src="{{ $user->image }}"></td>
+                    @endforeach
                     <td>
                         <a href="" title="View Profile"><button class="btn btn-info btn-sm"><i
                                     aria-hidden="true">View</button>

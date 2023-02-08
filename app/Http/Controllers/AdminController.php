@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -32,14 +35,17 @@ class AdminController extends Controller
 
     public function acc()
     {
-        $user = User::all();
-        return view('admin.acc')->with('user', $user);
+        $users = User::all();
+
+        return view('admin.acc', ['users' => $users]);
     }
 
     public function createAcc(Request $request)
     {
+
+        $request['password'] = Hash::make($request['password']);
         $input = $request->all();
         User::create($input);
-        return redirect('admin/acc')->with('flash_message','Create Successful!!!!!');
+        return redirect('admin/acc')->with('flash_message', 'Create Successful!!!!!');
     }
 }

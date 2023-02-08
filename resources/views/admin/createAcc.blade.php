@@ -16,19 +16,23 @@
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="name" class="form-control" id="name" aria-describedby="name">
+            <input type="name" name="name" class="form-control" id="name" aria-describedby="name">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" aria-describedby="email">
+            <input type="email" name="email" class="form-control" id="email" aria-describedby="email">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" name="password" class="form-control" id="password">
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="text" name="image" class="form-control" id="image">
         </div>
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
-            <select class="form-select" id="role" aria-label="Role">
+            <select name="role" class="form-select" id="role" aria-label="Role">
                 <option value="1">Staff</option>
                 <option value="2">abc</option>
                 <option value="3">efg</option>
