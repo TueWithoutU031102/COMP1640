@@ -32,10 +32,11 @@
         </div>
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
+
             <select name="role" class="form-select" id="role" aria-label="Role">
-                <option value="1">Staff</option>
-                <option value="2">Quality Assurance Coordinator</option>
-                <option value="3">Quality Assurance Manager</option>
+                <option value="Staff">Staff</option>
+                <option value="Quality Assurance Coordinator">Quality Assurance Coordinator</option>
+                <option value="Quality Assurance Manager">Quality Assurance Manager</option>
             </select>
         </div>
         <div class="mb-3 form-check">

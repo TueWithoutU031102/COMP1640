@@ -207,25 +207,27 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    @foreach ($users as $user)
+                @foreach ($users as $user)
+                    <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role }}</td>
                         <td><img src="{{ $user->image }}"></td>
-                    @endforeach
-                    <td>
-                        <a href="" title="View Profile"><button class="btn btn-info btn-sm"><i
-                                    aria-hidden="true">View</button>
-                        </a>
-                        <a href="" title="Edit Account"><button class="btn btn-primary btn-sm"><i
-                                    aria-hidden="true">Edit</button>
-                        </a>
-                        <a href="" title="Delete Account"><button class="btn btn-danger btn-sm"><i
-                                    aria-hidden="true">Delete</button>
-                        </a>
-                    </td>
-                </tr>
+
+                        <td>
+                            <a href="" title="View Profile"><button class="btn btn-info btn-sm"><i
+                                        aria-hidden="true">View</button>
+                            </a>
+                            <a href="" title="Edit Account"><button class="btn btn-primary btn-sm"><i
+                                        aria-hidden="true">Edit</button>
+                            </a>
+                            <a href="" title="Delete Account"><button class="btn btn-danger btn-sm"><i
+                                        aria-hidden="true">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 </body>
