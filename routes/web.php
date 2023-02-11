@@ -35,5 +35,6 @@ Route::middleware(['admin'])->group(function () {
     });
     Route::post('admin/createAcc', [AdminController::class, 'createAcc']);
 });
+Route::get("admin/showAcc/", [AdminController::class, 'showAcc']);
 
 Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
