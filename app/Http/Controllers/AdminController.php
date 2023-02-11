@@ -50,8 +50,7 @@ class AdminController extends Controller
 
     public function showAcc($id)
     {
-        dd($id);
         $account = User::find($id);
-        return view('admin.showAcc')->with('account', $account);
+        return view('admin/showAcc')->with('account', $account);
     }
 }

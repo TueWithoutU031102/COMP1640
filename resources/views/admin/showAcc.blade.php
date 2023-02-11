@@ -12,6 +12,14 @@
     <div class="card" style="margin:20px">
         <div class="card-header">Account page</div>
     </div>
+    <div class="card-body">
+        <h5 class="card-title">Name:{{$account->name}}</h5>
+        <p class="card-text">ID:{{$account->id}}</p>
+        <p class="card-text">Email:{{$account->email}}</p>
+        <p class="card-text">Role:{{$account->role}}</p>
+        <p class="card-text">Image: <img src="{{ $account->image }}"></p>
+
+    </div>
 </body>
 
 </html>

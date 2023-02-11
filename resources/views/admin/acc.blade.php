@@ -199,25 +199,21 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
-                    <th scope="col">Image</th>
                     <th score="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($users as $user)
                     <tr>
-                        <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role }}</td>
-                        <td><img src="{{ $user->image }}"></td>
 
                         <td>
-                            <a href="/admin/showAcc" id="{{ $user->id }}" title="View Profile {{ $user->id }}"><button class="btn btn-info btn-sm"><i
+                            <a href="{{url('/admin/showAcc/'.$user->id)}}" title="View Profile {{ $user->id }}"><button class="btn btn-info btn-sm"><i
                                         aria-hidden="true">View</button>
                             </a>
                             <a href="" title="Edit Account"><button class="btn btn-primary btn-sm"><i
