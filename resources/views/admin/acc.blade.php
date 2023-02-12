@@ -213,10 +213,10 @@
                         <td>{{ $user->role }}</td>
 
                         <td>
-                            <a href="{{url('/admin/showAcc/'.$user->id)}}" title="View Profile {{ $user->id }}"><button class="btn btn-info btn-sm"><i
+                            <a href="/admin/showAcc/{{$user->id}}" title="View Profile"><button class="btn btn-info btn-sm"><i
                                         aria-hidden="true">View</button>
                             </a>
-                            <a href="" title="Edit Account"><button class="btn btn-primary btn-sm"><i
+                            <a href="/admin/editAcc/{{$user->id}}" title="Edit Account"><button class="btn btn-primary btn-sm"><i
                                         aria-hidden="true">Edit</button>
                             </a>
                             <a href="" title="Delete Account"><button class="btn btn-danger btn-sm"><i

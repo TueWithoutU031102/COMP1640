@@ -5,39 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Account</title>
+    <title>Create Account</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
 <body>
     <h1>Edit Account</h1>
-    <form action="/admin/createAcc" method="POST">
+    <form action="/admin/editAcc/{id}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="name" name="name" class="form-control" id="name" aria-describedby="name">
+            <input type="name" value="{{$account->name}}" name="name" class="form-control" id="name" aria-describedby="name">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" name="email" class="form-control" id="email" aria-describedby="email">
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" value="123456" name="password" class="form-control" id="password">
-        </div>
-        <div class="mb-3">
-            <label for="phonenumber" class="form-label">Phone Number</label>
-            <input type="phonenumber" name="phonenumber" class="form-control" id="phonenumber" aria-describedby="phonenumber">
+            <input type="email" value="{{$account->email}}" name="email" class="form-control" id="email" aria-describedby="email">
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" name="image" class="form-control" id="image">
+            <input type="text" value="{{$account->image}}" name="image" class="form-control" id="image">
         </div>
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
 
-            <select name="role" class="form-select" id="role" aria-label="Role">
+            <select value="{{$account->role}}" name="role" class="form-select" id="role" aria-label="Role">
                 <option value="Staff">Staff</option>
                 <option value="Quality Assurance Coordinator">Quality Assurance Coordinator</option>
                 <option value="Quality Assurance Manager">Quality Assurance Manager</option>

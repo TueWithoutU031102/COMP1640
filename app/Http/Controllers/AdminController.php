@@ -53,4 +53,16 @@ class AdminController extends Controller
         $account = User::find($id);
         return view('admin/showAcc')->with('account', $account);
     }
+    public function editAcc($id)
+    {
+        $account = User::find($id);
+        return view('admin/editAcc')->with('account', $account);
+    }
+    public function updateAcc(Request $request,$id)
+    {
+        $account = User::find($id);
+        $input = $request->all();
+        $account->updateAcc($input);
+        return redirect('admin/acc')->with('flash_message','account updated successfully');
+    }
 }
