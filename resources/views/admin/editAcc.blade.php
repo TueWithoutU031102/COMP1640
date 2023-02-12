@@ -27,6 +27,14 @@
             <input type="text" value="{{$account->image}}" name="image" class="form-control" id="image">
         </div>
         <div class="mb-3">
+            <label for="phonenumber" class="form-label">Phone Number</label>
+            <input type="text" value="{{$account->phonenumber}}" name="phonenumber" class="form-control" id="phonenumber">
+        </div>
+        <div class="mb-3">
+            <label for="DoB" class="form-label">Phone Number</label>
+            <input type="date" value="{{$account->DoB}}" name="DoB" class="form-control" id="DoB">
+        </div>
+        <div class="mb-3">
             <label for="role" class="form-label">Role</label>
 
             <select value="{{$account->role}}" name="role" class="form-select" id="role" aria-label="Role">

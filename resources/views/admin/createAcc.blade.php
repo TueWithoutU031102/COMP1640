@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <h1>Edit Account</h1>
+    <h1>Create Account</h1>
     <form action="/admin/createAcc" method="POST">
         @csrf
         <div class="mb-3">
@@ -29,6 +29,10 @@
         <div class="mb-3">
             <label for="phonenumber" class="form-label">Phone Number</label>
             <input type="phonenumber" name="phonenumber" class="form-control" id="phonenumber" aria-describedby="phonenumber">
+        </div>
+        <div class="mb-3">
+            <label for="DoB" class="form-label">Date of Birth</label>
+            <input type="date" name="DoB" class="form-control" id="DoB" aria-describedby="DoB">
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
