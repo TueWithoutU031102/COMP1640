@@ -28,7 +28,8 @@
         </div>
         <div class="mb-3">
             <label for="phonenumber" class="form-label">Phone Number</label>
-            <input type="phonenumber" name="phonenumber" class="form-control" id="phonenumber" aria-describedby="phonenumber">
+            <input type="phonenumber" name="phonenumber" class="form-control" id="phonenumber"
+                aria-describedby="phonenumber">
         </div>
         <div class="mb-3">
             <label for="DoB" class="form-label">Date of Birth</label>

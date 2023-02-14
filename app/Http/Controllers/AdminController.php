@@ -45,7 +45,7 @@ class AdminController extends Controller
         $request['password'] = Hash::make($request['password']);
         $input = $request->all();
         User::create($input);
-        return redirect('admin/acc')->with('flash_message', 'Create Successful!!!!!');
+        return redirect('admin/acc')->with('success', 'Create Successful!!!!!');
     }
 
     public function showAcc($id)
@@ -58,11 +58,22 @@ class AdminController extends Controller
         $account = User::find($id);
         return view('admin/editAcc')->with('account', $account);
     }
-    public function updateAcc(Request $request,$id)
+    public function updateAcc(Request $request)
+    {
+        $input = $request->all();
+        $id = $request->id;
+        User::find($id)->update($input);
+        return redirect('admin/acc')->with('success', 'account updated successfully');
+    }
+    public function deleteAcc($id)
     {
         $account = User::find($id);
-        $input = $request->all();
-        $account->updateAcc($input);
-        return redirect('admin/acc')->with('flash_message','account updated successfully');
+        return view('admin/deleteAcc')->with('account', $account);
+    }
+
+    public function delete($id)
+    {
+        User::find($id)->delete();
+        return redirect('admin/acc')->with('success', 'account deleted successfully');
     }
 }

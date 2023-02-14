@@ -14,9 +14,10 @@
     <h1>Edit Account</h1>
     <form action="/admin/editAcc/{id}" method="POST">
         @csrf
+        <input type="hidden" name="id" value="{{$account->id}}" name="id" class="form-control" id="id">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="name" value="{{$account->name}}" name="name" class="form-control" id="name" aria-describedby="name">
+            <input type="text" value="{{$account->name}}" name="name" class="form-control" id="name" aria-describedby="name">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>

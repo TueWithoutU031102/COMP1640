@@ -192,6 +192,9 @@
             </div>
     </main>
     <h2>User Account</h2>
+    @if (Session::has('success'))
+        <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
+    @endif
     <a href="createAcc">
         <button class="btn btn-primary">Create Account</button>
     </a>
@@ -219,7 +222,7 @@
                             <a href="/admin/editAcc/{{$user->id}}" title="Edit Account"><button class="btn btn-primary btn-sm"><i
                                         aria-hidden="true">Edit</button>
                             </a>
-                            <a href="" title="Delete Account"><button class="btn btn-danger btn-sm"><i
+                            <a href="/admin/deleteAcc/{{$user->id}}" title="Delete Account"><button class="btn btn-danger btn-sm"><i
                                         aria-hidden="true">Delete</button>
                             </a>
                         </td>
