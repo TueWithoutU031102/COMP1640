@@ -17,9 +17,9 @@ return new class extends Migration
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->date('dateStarted');
-            $table->date('dateFinished');
+            $table->longText('description');
+            $table->datetime('dateStarted');
+            $table->datetime('dateFinished');
             $table->timestamps();
         });
     }

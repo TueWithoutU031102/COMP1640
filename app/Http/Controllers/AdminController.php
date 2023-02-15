@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -88,4 +89,19 @@ class AdminController extends Controller
         move_uploaded_file($file->getPathname(), public_path('images/' . $name));
         return "images/" . $name;
     }
+
+    public function sub()
+    {
+        $subs = Submission::all();
+        return view('Goodi/admin/sub', ['subs' => $subs]);
+    }
+
+    public function createSub(Request $request)
+    {
+        $submission = new Submission($request->all());
+        $submission->save();
+        return redirect('admin/sub')->with('success','submission created successfully');
+    }
+
+
 }

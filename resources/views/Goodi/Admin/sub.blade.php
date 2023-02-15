@@ -191,39 +191,39 @@
                 </div>
             </div>
     </main>
-    <h2>User Account</h2>
+    <h2>Submissions</h2>
     @if (Session::has('success'))
         <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
     @endif
-    <a href="createAcc">
-        <button class="btn btn-primary">Create Account</button>
+    <a href="createSub">
+        <button class="btn btn-primary">Create Submission</button>
     </a>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
+                    <th scope="col">Date Started</th>
+                    <th score="col">Date Finished</th>
                     <th score="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($subs as $sub)
                     <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->role }}</td>
+                        <td>{{ $sub->name }}</td>
+                        <td>{{ $sub->dateStarted }}</td>
+                        <td>{{ $sub->dateFinished }}</td>
 
                         <td>
-                            <a href="/admin/showAcc/{{ $user->id }}" title="View Profile"><button
+                            <a href="{{ $sub->id }}" title="View Profile"><button
                                     class="btn btn-info btn-sm"><i aria-hidden="true">View</button>
                             </a>
-                            <a href="/admin/editAcc/{{ $user->id }}" title="Edit Account"><button
+                            <a href="{{ $sub->id }}" title="Edit Account"><button
                                     class="btn btn-primary btn-sm"><i aria-hidden="true">Edit</button>
                             </a>
-                            <form action="/admin/deleteAcc/{{ $user->id }}" method="POST" class="d-inline"
-                                onsubmit="return confirm('Are you sure to delete {{ $user->name }} !!!???')">
+                            <form action="{{ $sub->id }}" method="POST" class="d-inline"
+                                onsubmit="return confirm('Are you sure to delete {{ $sub->name }} !!!???')">
                                 @csrf
                                 <button class="btn btn-danger btn-sm"><i aria-hidden="true">Delete</button>
                             </form>

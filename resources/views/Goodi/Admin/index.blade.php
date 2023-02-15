@@ -120,7 +120,7 @@
                         </svg>
                     </a>
                     <ul class="dropdown-menu text-small shadow">
-                        <li><a class="dropdown-item" href="#">Deadline</a></li>
+                        <li><a class="dropdown-item" href="sub">Deadline</a></li>
                         <li><a class="dropdown-item" href="acc">Accounts</a></li>
                         <li><a class="dropdown-item" href="#">List Ideas</a></li>
                     </ul>

@@ -29,15 +29,27 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/index', function () {
         return view('Goodi/admin/index');
     })->name('admin.index');
+
     Route::get('admin/acc', [AdminController::class, 'acc'])->name('admin.acc');
+
     Route::get('admin/createAcc', function () {
         return view('Goodi/admin/createAcc');
     });
     Route::post('admin/createAcc', [AdminController::class, 'createAcc']);
+
     Route::get("admin/showAcc/{id}", [AdminController::class, 'showAcc']);
+
     Route::get("admin/editAcc/{id}", [AdminController::class, 'editAcc']);
     Route::post("admin/editAcc/{id}", [AdminController::class, 'updateAcc']);
+
     Route::post("admin/deleteAcc/{user}", [AdminController::class, 'delete']);
+
+    Route::get("admin/sub", [AdminController::class, 'sub']);
+
+    Route::get("admin/createSub", function () {
+        return view('Goodi/admin/createSub');
+    });
+    Route::post("admin/createSub", [AdminController::class, 'createSub']);
 });
 
 
