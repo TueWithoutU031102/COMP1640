@@ -214,7 +214,6 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role }}</td>
-
                         <td>
                             <a href="/admin/showAcc/{{$user->id}}" title="View Profile"><button class="btn btn-info btn-sm"><i
                                         aria-hidden="true">View</button>

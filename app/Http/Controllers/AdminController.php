@@ -73,6 +73,8 @@ class AdminController extends Controller
 
     public function delete($id)
     {
+        $account = User::find($id);
+        dd($account);
         User::find($id)->delete();
         return redirect('admin/acc')->with('success', 'account deleted successfully');
     }

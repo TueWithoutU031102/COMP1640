@@ -10,20 +10,23 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
-<body action="/admin/deleteAcc" method="POST">
-    <div class="card" style="margin:20px">
-        <div class="card-header">Account page</div>
-    </div>
-    <div class="card-body" >
-        <h5 class="card-title">Name:{{ $account->name }}</h5>
-        <p class="card-text">ID:{{ $account->id }}</p>
-        <p class="card-text">Email:{{ $account->email }}</p>
-        <p class="card-text">Phone Number:{{ $account->phonenumber }}</p>
-        <p class="card-text">Bate of Birth:{{ $account->DoB }}</p>
-        <p class="card-text">Role:{{ $account->role }}</p>
-        <p class="card-text">Image: <img src="{{ $account->image }}"></p>
+<body>
+    <form action="/admin/deleteAcc/{id}" method="POST">
+        @csrf
+        <div class="card" style="margin:20px">
+            <div class="card-header">Account page</div>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Name:{{ $account->name }}</h5>
+            <p class="card-text">ID:{{ $account->id }}</p>
+            <p class="card-text">Email:{{ $account->email }}</p>
+            <p class="card-text">Phone Number:{{ $account->phonenumber }}</p>
+            <p class="card-text">Bate of Birth:{{ $account->DoB }}</p>
+            <p class="card-text">Role:{{ $account->role }}</p>
+            <p class="card-text">Image: <img src="{{ $account->image }}"></p>
+        </div>
         <button type="submit" class="btn btn-danger">Delete</button>
-    </div>
+    </form>
     <a href="/admin/acc">
         <button class="btn btn-primary">Back</button>
     </a>
