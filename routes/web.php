@@ -16,22 +16,22 @@ use Illuminate\Support\Carbon;
 */
 
 Route::get('/', function () {
-    return view('admin.login');
+    return view('Goodi.index');
 });
 
-Route::get('admin/login', function () {
-    return view('admin.login');
+Route::get('/login', function () {
+    return view('Goodi.login');
 })->name('admin.login');
 
 Route::post('admin/login', [AdminController::class, 'login']);
 
 Route::middleware(['admin'])->group(function () {
     Route::get('admin/index', function () {
-        return view('admin/index');
+        return view('Goodi/admin/index');
     })->name('admin.index');
     Route::get('admin/acc', [AdminController::class, 'acc'])->name('admin.acc');
     Route::get('admin/createAcc', function () {
-        return view('admin/createAcc');
+        return view('Goodi/admin/createAcc');
     });
     Route::post('admin/createAcc', [AdminController::class, 'createAcc']);
     Route::get("admin/showAcc/{id}", [AdminController::class, 'showAcc']);
@@ -42,4 +42,4 @@ Route::middleware(['admin'])->group(function () {
 });
 
 
-Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
