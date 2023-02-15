@@ -215,15 +215,17 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role }}</td>
                         <td>
-                            <a href="/admin/showAcc/{{$user->id}}" title="View Profile"><button class="btn btn-info btn-sm"><i
-                                        aria-hidden="true">View</button>
+                            <a href="/admin/showAcc/{{ $user->id }}" title="View Profile"><button
+                                    class="btn btn-info btn-sm"><i aria-hidden="true">View</button>
                             </a>
-                            <a href="/admin/editAcc/{{$user->id}}" title="Edit Account"><button class="btn btn-primary btn-sm"><i
-                                        aria-hidden="true">Edit</button>
+                            <a href="/admin/editAcc/{{ $user->id }}" title="Edit Account"><button
+                                    class="btn btn-primary btn-sm"><i aria-hidden="true">Edit</button>
                             </a>
-                            <a href="/admin/deleteAcc/{{$user->id}}" title="Delete Account"><button class="btn btn-danger btn-sm"><i
-                                        aria-hidden="true">Delete</button>
-                            </a>
+                            <form>
+                                <a href="/admin/deleteAcc/{{ $user->id }}" title="Delete Account"><button
+                                        class="btn btn-danger btn-sm"><i aria-hidden="true">Delete</button>
+                                </a>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

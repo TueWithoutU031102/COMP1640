@@ -38,7 +38,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get("admin/editAcc/{id}", [AdminController::class, 'editAcc']);
     Route::post("admin/editAcc/{id}", [AdminController::class, 'updateAcc']);
     Route::get("admin/deleteAcc/{id}", [AdminController::class, 'deleteAcc']);
-    Route::post("admin/deleteAcc/{id}", [AdminController::class, 'delete']);
 });
 
 
