@@ -18,26 +18,26 @@ class AdminController extends Controller
 
         return Auth::guard('admin')->attempt($credentials)
             ? redirect()->route('admin.index')
-            : redirect()->route('admin.login');
+            : redirect()->route('Goodi.login');
     }
 
     public function index()
     {
         return Auth::guard('admin')->check()
             ? to_route('admin.index')
-            : to_route('admin.login');
+            : to_route('Goodi.login');
     }
 
     public function logout()
     {
         Auth::guard('admin')->logout();
-        return redirect('admin/login');
+        return redirect('/login');
     }
 
     public function acc()
     {
         $users = User::all();
-        return view('admin.acc', ['users' => $users]);
+        return view('Goodi.admin.acc', ['users' => $users]);
     }
 
     public function createAcc(Request $request)
@@ -51,12 +51,12 @@ class AdminController extends Controller
     public function showAcc($id)
     {
         $account = User::find($id);
-        return view('admin/showAcc')->with('account', $account);
+        return view('Goodi/admin/showAcc')->with('account', $account);
     }
     public function editAcc($id)
     {
         $account = User::find($id);
-        return view('admin/editAcc')->with('account', $account);
+        return view('Goodi/admin/editAcc')->with('account', $account);
     }
     public function updateAcc(Request $request)
     {
@@ -68,8 +68,14 @@ class AdminController extends Controller
     public function deleteAcc($id)
     {
         $account = User::find($id);
-        view('admin/deleteAcc')->with('account', $account);
-        $account->delete();
+        return view('Goodi/admin/deleteAcc')->with('account', $account);
+    }
+
+    public function delete($id)
+    {
+        $account = User::find($id);
+        dd($account);
+        User::find($id)->delete();
         return redirect('admin/acc')->with('success', 'account deleted successfully');
     }
 }
