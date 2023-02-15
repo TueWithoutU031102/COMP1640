@@ -25,7 +25,7 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" value="{{$account->image}}" name="image" class="form-control" id="image">
+            <input type="file" value="{{$account->image}}" name="image" class="form-control" id="image">
         </div>
         <div class="mb-3">
             <label for="phonenumber" class="form-label">Phone Number</label>

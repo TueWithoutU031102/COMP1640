@@ -223,11 +223,10 @@
                                     class="btn btn-primary btn-sm"><i aria-hidden="true">Edit</button>
                             </a>
                             <form action="/admin/deleteAcc/{{ $user->id }}" method="POST" class="d-inline"
-                                onsubmit="return confirm('Ban co chac muon xoa {{ $user->name }} k')">
+                                onsubmit="return confirm('Are you sure to delete {{ $user->name }} !!!???')">
                                 @csrf
                                 <button class="btn btn-danger btn-sm"><i aria-hidden="true">Delete</button>
                             </form>
-
                         </td>
                     </tr>
                 @endforeach

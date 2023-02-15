@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function removeImage()
+    {
+        return unlink(public_path($this->image));
+    }
 }

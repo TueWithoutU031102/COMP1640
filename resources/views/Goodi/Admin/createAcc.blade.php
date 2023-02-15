@@ -12,7 +12,7 @@
 
 <body>
     <h1>Create Account</h1>
-    <form action="/admin/createAcc" method="POST">
+    <form action="/admin/createAcc" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
@@ -37,7 +37,7 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" name="image" class="form-control" id="image">
+            <input type="file" name="image" class="form-control" id="image">
         </div>
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
