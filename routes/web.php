@@ -23,7 +23,7 @@ Route::get('/login', function () {
     return view('Goodi.login');
 })->name('admin.login');
 
-Route::post('admin/login', [AdminController::class, 'login']);
+Route::post('/login', [AdminController::class, 'login']);
 
 Route::middleware(['admin'])->group(function () {
     Route::get('admin/index', function () {
@@ -37,7 +37,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get("admin/showAcc/{id}", [AdminController::class, 'showAcc']);
     Route::get("admin/editAcc/{id}", [AdminController::class, 'editAcc']);
     Route::post("admin/editAcc/{id}", [AdminController::class, 'updateAcc']);
-    Route::get("admin/deleteAcc/{id}", [AdminController::class, 'deleteAcc']);
     Route::post("admin/deleteAcc/{id}", [AdminController::class, 'delete']);
 });
 

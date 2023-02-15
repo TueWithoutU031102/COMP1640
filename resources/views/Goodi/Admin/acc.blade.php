@@ -185,7 +185,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="{{route('logout')}}">Sign out</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -216,15 +216,18 @@
                         <td>{{ $user->role }}</td>
 
                         <td>
-                            <a href="/admin/showAcc/{{$user->id}}" title="View Profile"><button class="btn btn-info btn-sm"><i
-                                        aria-hidden="true">View</button>
+                            <a href="/admin/showAcc/{{ $user->id }}" title="View Profile"><button
+                                    class="btn btn-info btn-sm"><i aria-hidden="true">View</button>
                             </a>
-                            <a href="/admin/editAcc/{{$user->id}}" title="Edit Account"><button class="btn btn-primary btn-sm"><i
-                                        aria-hidden="true">Edit</button>
+                            <a href="/admin/editAcc/{{ $user->id }}" title="Edit Account"><button
+                                    class="btn btn-primary btn-sm"><i aria-hidden="true">Edit</button>
                             </a>
-                            <a href="/admin/deleteAcc/{{$user->id}}" title="Delete Account"><button class="btn btn-danger btn-sm"><i
-                                        aria-hidden="true">Delete</button>
-                            </a>
+                            <form action="/admin/deleteAcc/{{ $user->id }}" method="POST" class="d-inline"
+                                onsubmit="return confirm('Ban co chac muon xoa {{ $user->name }} k')">
+                                @csrf
+                                <button class="btn btn-danger btn-sm"><i aria-hidden="true">Delete</button>
+                            </form>
+
                         </td>
                     </tr>
                 @endforeach

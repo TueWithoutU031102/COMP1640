@@ -142,11 +142,12 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="{{route('logout')}}">Sign out</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
+        </header>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

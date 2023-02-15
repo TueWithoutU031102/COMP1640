@@ -104,7 +104,7 @@
 
     <main class="form-signin w-100 m-auto">
         <section class="login-form">
-            <form id="admin-login" method="POST" action="/admin/login">
+            <form id="admin-login" method="POST" action="/login">
                 @csrf
                 <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72"
                     height="57">
