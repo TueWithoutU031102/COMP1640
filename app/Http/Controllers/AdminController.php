@@ -45,7 +45,7 @@ class AdminController extends Controller
         $request['password'] = Hash::make($request['password']);
         $input = $request->all();
         User::create($input);
-        return redirect()->back()->with('success', 'Create Successful!!!!!');
+        return redirect('admin/acc')->with('success', 'Create Successful!!!!!');
     }
 
     public function showAcc($id)
@@ -60,17 +60,20 @@ class AdminController extends Controller
     }
     public function updateAcc(Request $request)
     {
-        $request->validate([
-            'name' => 'required', 
-            'email' => 'email', 
-            'phonenumber' => 'required',
-            'DoB'=>'required',
-            'role' => 'required',
-            'image' => 'required',
-        ]);
         $input = $request->all();
-        $account = $request->id;
-        $account->updateAcc($input);
+        $id = $request->id;
+        User::find($id)->update($input);
         return redirect('admin/acc')->with('success', 'account updated successfully');
+    }
+    public function deleteAcc($id)
+    {
+        $account = User::find($id);
+        return view('admin/deleteAcc')->with('account', $account);
+    }
+
+    public function delete($id)
+    {
+        User::find($id)->delete();
+        return redirect('admin/acc')->with('success', 'account deleted successfully');
     }
 }
