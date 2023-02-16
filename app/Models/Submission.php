@@ -11,7 +11,7 @@ class Submission extends Model
     protected $table ='submissions';
 
     protected $fillable = [
-        'name',
+        'title',
         'description',
         'startDate',
         'dueDate',

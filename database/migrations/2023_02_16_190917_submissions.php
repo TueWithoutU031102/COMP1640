@@ -16,7 +16,7 @@ return new class extends Migration {
         Schema::dropIfExists('submissions');
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->longText('description');
             $table->datetime('startDate');
             $table->datetime('dueDate');
