@@ -13,13 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('submissions', function (Blueprint $table) {
+        Schema::dropIfExists('users');
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('description');
-            $table->datetime('dateStarted');
-            $table->datetime('dateFinished');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('phone_number');
+            $table->date('DoB');
+            $table->longText('image');
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')
+                ->references('id')
+                ->on('roles');
             $table->timestamps();
         });
     }
@@ -31,7 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('submissions');
+        Schema::dropIfExists('users');
     }
 };

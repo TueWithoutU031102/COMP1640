@@ -13,8 +13,8 @@ class Submission extends Model
     protected $fillable = [
         'name',
         'description',
-        'dateStarted',
-        'dateFinished',
+        'startDate',
+        'dueDate',
     ];
 
 }
