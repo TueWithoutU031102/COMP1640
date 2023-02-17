@@ -54,6 +54,125 @@ nav{
     width: 100%
 }
 
+.black-nav-link{
+    float: right;
+    letter-spacing: 30px;
+}
+
+.black-nav-link ul li{
+    color: black;
+    list-style: none;
+    display: inline-block;
+    padding: 8px 20px;
+    position: relative;
+}
+
+.black-nav-link ul li a{
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+    letter-spacing: 0px;
+}
+
+.black-nav-link ul li a::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: black;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+
+.black-nav-link ul li a:hover::after{
+    width: 100%
+}
+
+.info{
+    justify-content: center;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.info h3{
+    font-size: 22px;
+}
+
+.info p{
+    font-size: 17px;
+    color: darkgray;
+}
+
+.menu{
+    background-color: aliceblue;
+    border-radius: 20px;
+    position: absolute;
+    right: 20px;
+    top: 70px;
+}
+
+.action .menu{
+    position: absolute;
+    top: 80px;
+    right: -10px;
+    width: 200px;
+    transition: 0.3s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.action .menu.active{
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.action .menu::before{
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 40px;
+    width: 30px;
+    height: 30px;
+    background: aliceblue;
+    transform: rotate(45deg);
+}
+
+.menu_pro{
+    background-color: aliceblue;
+    border-radius: 20px;
+    position: absolute;
+    right: 20px;
+    top: 70px;
+}
+
+.action .menu_pro{
+    position: absolute;
+    top: 80px;
+    right: -10px;
+    width: 200px;
+    transition: 0.1s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.action .menu_pro.active{
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.action .menu_pro::before{
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 40px;
+    width: 30px;
+    height: 30px;
+    background: aliceblue;
+    transform: rotate(45deg);
+}
+
 .text-box{
     color: white;
     padding: 200px 150px;
