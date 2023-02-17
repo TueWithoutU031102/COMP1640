@@ -9,16 +9,21 @@
 }
 
 .nav-link{
-    text-align: right;
+    float: right;
     letter-spacing: 30px;
 }
 
 nav{
     background: transparent;
-    display: flex;
+    /* display: flex; */
     padding: 0px 40px;
     justify-content: space-between;
     align-items: center;
+}
+
+.logo{
+    width: 14%;
+    line-height: 80px;
 }
 
 .nav-link ul li{
@@ -142,3 +147,11 @@ nav{
     bottom: 2500px;
     color: #000000;
 }
+
+@media(max-width: 714px){
+    .action-btn{
+        background: aquamarine;
+    }
+}
+
+

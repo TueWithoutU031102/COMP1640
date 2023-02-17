@@ -1,6 +1,6 @@
 @extends('Master.Master')
 <nav>
-    <a href="/" ><img src="/css/images/logo_transparent_white.png" style="width: 16%"></a>
+    <a href="/" ><img class="logo" src="/css/images/logo_transparent_white.png"></a>
     <div class="nav-link" id="navlink">
         <ul>
             <li><a
