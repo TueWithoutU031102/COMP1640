@@ -15,14 +15,13 @@
 
 nav{
     background: transparent;
-    /* display: flex; */
     padding: 0px 40px;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo{
-    width: 14%;
+    width: 13%;
     line-height: 80px;
 }
 
@@ -97,13 +96,8 @@ nav{
 .some_about{
     display: flex;
     justify-content: center;
-    height: 85vh;
-    align-items: center;
-}
-
-.card_container{
-    justify-content: space-between;
-    display: flex;
+    /* align-items: center; */
+    flex-wrap: wrap;
 }
 
 .card{
@@ -117,7 +111,7 @@ nav{
 }
 
 .card_link .card_img{
-    width: 500px;
+    background-size: cover;
     border-radius: 20px;
     transition: 0.3s;
 }
@@ -143,15 +137,69 @@ nav{
 
 
 .intro{
-    margin: 20px 20px 20px 20px;
-    bottom: 2500px;
+    margin: 0px 20px 20px 20px;
     color: #000000;
 }
 
-@media(max-width: 714px){
-    .action-btn{
-        background: aquamarine;
-    }
+/* 25% */
+@media(max-width: 5400px){
+
 }
 
+/* 33% */
+@media(max-width: 4000px){
+
+}
+
+/* 50% */
+@media(max-width: 2700px){
+
+}
+
+/* 67% */
+@media(max-width: 2000px){
+
+}
+
+/* 75% */
+@media(max-width: 1800px){
+
+}
+
+/* 80% */
+@media(max-width: 1700px){
+
+}
+
+/* 90% */
+@media(max-width: 1500px){
+
+}
+
+/* 100% */
+@media(max-width: 1300px){
+
+}
+
+/* 110% */
+@media(max-width: 1200px){
+
+}
+
+/* 125% */
+@media(max-width: 1000px){
+
+}
+
+/* 150% */
+@media(max-width: 900px){
+
+
+}
+
+/* >175% */
+@media(max-width: 800px){
+
+
+}
 

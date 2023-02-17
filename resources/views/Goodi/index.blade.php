@@ -34,7 +34,7 @@
                 <img class="card_img" src="/css/images/cuu-sinh-vien-greenwich.png" alt="sinh-vien-G">
                 <h2 class="hidden_btn">Learn more</h2>
                 <div class="intro">
-                    <h1>Study with international lecturers and students</h1>
+                    <h1>Study with foreign lecturers and students</h1>
                     <p>Greenwich Vietnam is committed to providing students with a comprehensive educational environment in which professionalism is one of the core values. Students will study in a world-class educational environment like studying overseas with international curriculum, faculty and students from many countries around the world.</p>
                 </div>
             </div>
