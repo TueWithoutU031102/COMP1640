@@ -21,7 +21,7 @@ class Admin
         if (Auth::guard('admin')->check()) return $next($request);
         else {
 
-            return redirect('/login')->with('notice',"You do not have permission to access this page!!!!");
+            return redirect('/login')->with('notice', "You do not have permission to access this page!!!!");
         }
     }
 }

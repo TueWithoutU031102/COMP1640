@@ -3,6 +3,7 @@
 use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Carbon;
 
 /*
@@ -24,7 +25,7 @@ Route::get('/login', function () {
     return view('Goodi.login');
 })->name('admin.login');
 
-Route::post('/login', [AdminController::class, 'login']);
+Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::middleware(['admin'])->group(function () {
     Route::get('admin/index', function () {
