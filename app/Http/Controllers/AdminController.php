@@ -64,7 +64,7 @@ class AdminController extends Controller
         return view('Goodi/admin/editAcc')->with('account', $account);
     }
 
-    public function updateAcc(Request $request)
+    public function updvVateAcc(Request $request)
     {
         $input = $request->all();
         $id = $request->id;

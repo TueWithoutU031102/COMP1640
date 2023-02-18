@@ -27,15 +27,15 @@
 
                         <td>
                             <a href="{{ $sub->id }}" title="View Profile"><button
-                                    class="btn btn-info btn-sm"><i aria-hidden="true">View</button>
+                                    class="btn btn-info btn-sm"><i aria-hidden="true">View</i></button>
                             </a>
                             <a href="{{ $sub->id }}" title="Edit Account"><button
-                                    class="btn btn-primary btn-sm"><i aria-hidden="true">Edit</button>
+                                    class="btn btn-primary btn-sm"><i aria-hidden="true">Edit</i></button>
                             </a>
                             <form action="{{ $sub->id }}" method="POST" class="d-inline"
                                 onsubmit="return confirm('Are you sure to delete {{ $sub->name }} !!!???')">
                                 @csrf
-                                <button class="btn btn-danger btn-sm"><i aria-hidden="true">Delete</button>
+                                <button class="btn btn-danger btn-sm"><i aria-hidden="true">Delete</i></button>
                             </form>
                         </td>
                     </tr>

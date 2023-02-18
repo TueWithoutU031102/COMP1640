@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return unlink(public_path($this->image));
     }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
 }

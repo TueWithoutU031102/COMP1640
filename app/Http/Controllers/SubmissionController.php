@@ -41,12 +41,13 @@ class SubmissionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Submission  $submission
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Submission $submission)
+    public function show($id)
     {
-        //
+        $submission = Submission::find($id);
+
     }
 
     /**
