@@ -15,7 +15,10 @@ class AdminController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
+        $validateLogin = $request->validate([
+            'email' => 'email',
+            'password' => 'current_password:|size:20',
+        ]);
         return Auth::guard('admin')->attempt($credentials)
             ? redirect()->route('admin.index')
             : redirect()->route('admin.login');
@@ -48,7 +51,7 @@ class AdminController extends Controller
         $user->image = $this->saveImage($request->file('image'));
 
         $user->save();
-        return redirect('admin/acc')->with('success', 'Create Successful!!!!!');
+        return redirect('admin/acc')->with('errors', 'Create Successful!!!!!');
     }
 
 
@@ -100,8 +103,6 @@ class AdminController extends Controller
     {
         $submission = new Submission($request->all());
         $submission->save();
-        return redirect('admin/sub')->with('success','submission created successfully');
+        return redirect('admin/sub')->with('success', 'submission created successfully');
     }
-
-
 }

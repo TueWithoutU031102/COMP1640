@@ -24,7 +24,6 @@ return new class extends Migration {
             $table->foreign('admin_id')
                 ->references('id')
                 ->on('admins');
-            $table->timestamps();
         });
     }
 
