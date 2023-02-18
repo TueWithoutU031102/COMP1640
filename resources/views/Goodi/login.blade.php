@@ -104,6 +104,9 @@
 
     <main class="form-signin w-100 m-auto">
         <section class="login-form">
+            @if (Session::has('errors'))
+                <div class="alert alert-danger" role="alert"><strong>{{ Session::get('errors') }}</strong></div>
+            @endif
             <form id="admin-login" method="POST" action="/login">
                 @csrf
                 <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72"
@@ -111,19 +114,22 @@
                 <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
                 <div class="form-floating">
-                    <input type="email" name ="email" class="form-control" placeholder="Email">
+                    <input type="email" name="email" class="form-control" placeholder="Email">
                     <label for="floatingInput">Email address</label>
                 </div>
                 <div class="form-floating">
                     <input type="password" name="password" class="form-control" placeholder="Password">
                     <label for="floatingPassword">Password</label>
                 </div>
-
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
