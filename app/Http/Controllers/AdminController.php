@@ -18,7 +18,7 @@ class AdminController extends Controller
 
         return Auth::guard('admin')->attempt($credentials)
             ? redirect()->route('admin.index')
-            : redirect()->route('Goodi.login');
+            : redirect()->route('admin.login');
     }
 
     public function index()
