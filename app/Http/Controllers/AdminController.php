@@ -12,18 +12,6 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        $validateLogin = $request->validate([
-            'email' => 'email',
-            'password' => 'current_password:|size:20',
-        ]);
-        return Auth::guard('admin')->attempt($credentials)
-            ? redirect()->route('admin.index')
-            : redirect()->route('admin.login');
-    }
-
     public function index()
     {
         return Auth::guard('admin')->check()
@@ -105,4 +93,5 @@ class AdminController extends Controller
         $submission->save();
         return redirect('admin/sub')->with('success', 'submission created successfully');
     }
+
 }

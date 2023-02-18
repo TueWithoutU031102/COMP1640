@@ -11,16 +11,12 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => ['email'],
+            'password' => ['current_password','gt:1'],
         ]);
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('dashboard');
-        }
-
-        return back()->withErrors([
-            'email' => 'Email or Password is incorrect',
-        ])->onlyInput('email');
+        $errors = ['current_password'=>'Email or password is incorrect'];
+        return Auth::guard('admin')->attempt($credentials)
+        ? redirect()->route('admin.index')
+        : redirect()->route('admin.login')->withErrors($errors);
     }
 }
