@@ -14,7 +14,8 @@ class SubmissionController extends Controller
      */
     public function index()
     {
-        //
+        $subs = Submission::all();
+        return view('Goodi/Admin/submission/list', ['subs' => $subs]);
     }
 
     /**
@@ -24,7 +25,7 @@ class SubmissionController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +36,9 @@ class SubmissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $submission = new Submission($request->all());
+        $submission->save();
+        return redirect('admin/submission/index')->with('success','submission created successfully');
     }
 
     /**

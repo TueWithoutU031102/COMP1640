@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Carbon;
@@ -44,12 +45,12 @@ Route::middleware(['admin'])->group(function () {
 
     Route::post("admin/deleteAcc/{user}", [AdminController::class, 'delete']);
 
-    Route::get("admin/sub", [AdminController::class, 'sub']);
+    Route::get("admin/submission/index", [SubmissionController::class, 'index']);
 
-    Route::get("admin/createSub", function () {
-        return view('Goodi/admin/createSub');
+    Route::get("admin/submission/create", function () {
+        return view('Goodi/admin/submission/create');
     });
-    Route::post("admin/createSub", [AdminController::class, 'createSub']);
+    Route::post("admin/submission/create", [SubmissionController::class, 'store']);
 });
 
 
