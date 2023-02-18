@@ -50,6 +50,7 @@ class SubmissionController extends Controller
     public function show($id)
     {
         $submission = Submission::find($id);
+        return view('Goodi/Admin/submission/show')->with('submission',$submission);
 
     }
 
