@@ -17,6 +17,6 @@ class LoginController extends Controller
 
         return Auth::guard('admin')->attempt($credentials)
             ? redirect()->route('admin.index')
-            : redirect()->route('admin.login');
+            : redirect()->route('admin.login')->withErrors("Email or password is incorrect");
     }
 }
