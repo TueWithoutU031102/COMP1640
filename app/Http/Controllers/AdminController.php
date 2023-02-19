@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-
     public function index()
     {
         return Auth::guard('admin')->check()

@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    //
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
+        $this->validate($request, [
             'email' => ['email'],
-            'password' => ['current_password','gt:1'],
+            'password' => ['gt:1'],
         ]);
-        $errors = ['current_password'=>'Email or password is incorrect'];
+        $credentials = $request->only('email', 'password');
+
         return Auth::guard('admin')->attempt($credentials)
-        ? redirect()->route('admin.index')
-        : redirect()->route('admin.login')->withErrors($errors);
+            ? redirect()->route('admin.index')
+            : redirect()->route('admin.login');
     }
 }

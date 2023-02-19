@@ -104,8 +104,8 @@
 
     <main class="form-signin w-100 m-auto">
         <section class="login-form">
-            @if (Session::has('notice'))
-                <div class="alert alert-warning" role="alert"><strong>{{ Session::get('notice') }}</strong></div>
+            @if (Session::has('errors'))
+                <div class="alert alert-warning" role="alert"><strong>{{ Session::get('errors') }}</strong></div>
             @endif
             <form id="admin-login" method="POST" action="/login">
                 @csrf
