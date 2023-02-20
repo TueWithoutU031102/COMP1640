@@ -35,7 +35,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/acc', [AdminController::class, 'acc'])->name('admin.acc');
 
     Route::get('admin/createAcc', function () {
-        return view('Goodi/admin/createAcc');
+        return view('Goodi/admin/user/createAcc');
     });
     Route::post('admin/createAcc', [AdminController::class, 'createAcc']);
 

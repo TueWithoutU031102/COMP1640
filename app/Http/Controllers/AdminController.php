@@ -27,11 +27,20 @@ class AdminController extends Controller
     public function acc()
     {
         $users = User::all();
-        return view('Goodi.admin.acc', ['users' => $users]);
+        return view('Goodi.admin.user.acc', ['users' => $users]);
     }
 
     public function createAcc(Request $request)
     {
+        $this->validate($request, [
+            'name' => ['required'],
+            'email' => ['email'],
+            'password' => ['gt:1'],
+            'phone_number' => ['digits:9', 'starts_with:0'],
+            'DoB' => ['required', 'before_or_equal:today'],
+            'image' => ['image', 'required'],
+            'role' => ['required'],
+        ]);
         $user = new User($request->all());
         $user->password = Hash::make($request->password);
 
@@ -92,5 +101,4 @@ class AdminController extends Controller
         $submission->save();
         return redirect('admin/sub')->with('success', 'submission created successfully');
     }
-
 }
