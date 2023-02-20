@@ -63,8 +63,17 @@ class AdminController extends Controller
         return view('Goodi/admin/editAcc')->with('account', $account);
     }
 
-    public function updvVateAcc(Request $request)
+    public function updateAcc(Request $request)
     {
+        $this->validate($request, [
+            'name' => ['required'],
+            'email' => ['email'],
+            'password' => ['gt:1'],
+            'phone_number' => ['digits:9', 'starts_with:0'],
+            'DoB' => ['required', 'before_or_equal:today'],
+            'image' => ['image', 'required'],
+            'role' => ['required'],
+        ]);
         $input = $request->all();
         $id = $request->id;
         User::find($id)->update($input);
