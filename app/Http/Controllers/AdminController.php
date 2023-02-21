@@ -31,10 +31,12 @@ class AdminController extends Controller
         return view('Goodi.admin.user.acc', ['users' => $users]);
     }
 
-    function showFormCreateAccount(){
+    function showFormCreateAccount()
+    {
         $listRoles = Role::all();
         return view('Goodi/admin/user/createAcc')->with('listRoles', $listRoles);
     }
+
     public function createAcc(Request $request)
     {
         $this->validate($request, [
@@ -64,10 +66,14 @@ class AdminController extends Controller
         return view('Goodi/admin/showAcc')->with('account', $account);
     }
 
-    public function editAcc($id)
+    public function showFormEditAccount($id)
     {
         $account = User::find($id);
-        return view('Goodi/admin/editAcc')->with('account', $account);
+        $listRoles = Role::all();
+
+        return view('Goodi/admin/user/editAcc')
+            ->with('account', $account)
+            ->with('listRole', $listRoles);
     }
 
     public function updateAcc(Request $request)

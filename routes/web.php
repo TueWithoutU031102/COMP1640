@@ -40,7 +40,7 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get("admin/showAcc/{id}", [AdminController::class, 'showAcc']);
 
-    Route::get("admin/editAcc/{id}", [AdminController::class, 'editAcc']);
+    Route::get("admin/editAcc/{id}", [AdminController::class, 'showFormEditAccount']);
     Route::post("admin/editAcc/{id}", [AdminController::class, 'updateAcc']);
 
     Route::post("admin/deleteAcc/{user}", [AdminController::class, 'delete']);

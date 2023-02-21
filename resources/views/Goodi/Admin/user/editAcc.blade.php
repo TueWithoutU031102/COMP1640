@@ -29,10 +29,9 @@
             <label for="role" class="form-label">Role</label>
 
             <select value="{{$account->role}}" name="role" class="form-select" id="role" aria-label="Role">
-                <option value="Staff">Staff</option>
-                <option value="Quality Assurance Coordinator">Quality Assurance Coordinator</option>
-                <option value="Quality Assurance Manager">Quality Assurance Manager</option>
-            </select>
+                @foreach($listRoles as $role )
+                    <option value="{{$role->id}}">{{$role->name}}</option>
+                @endforeach</select>
         </div>
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="check-email">
