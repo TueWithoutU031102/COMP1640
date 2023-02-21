@@ -69,12 +69,41 @@ class SubmissionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Submission  $submission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Submission $submission)
+    public function update(Request $request)
     {
-        //
+        $input = $request->all();
+        $id = $request->id;
+        Submission::find($id)->update($input);
+        return redirect('admin/acc')->with('success', 'account updated successfully');
+    }
+
+    /**
+     * Update startDate of specified submission.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStartDate(Request $request)
+    {
+        $input = $request->all();
+        $id = $request->id;
+        Submission::find($id)->update($input);
+        return redirect('admin/acc')->with('success', 'account updated successfully');
+    }
+/**
+     * Update dueDate of specified submission.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDueDate(Request $request)
+    {
+        $input = $request->all();
+        $id = $request->id;
+        Submission::find($id)->update($input);
+        return redirect('admin/acc')->with('success', 'account updated successfully');
     }
 
     /**

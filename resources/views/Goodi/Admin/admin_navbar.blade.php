@@ -12,7 +12,7 @@
                     </div>
                     <div class="menu">
                         <ul>
-                            <li><a href="/admin/submission/create">Submissions</a></li>
+                            <li><a href="/admin/submission/index">Submissions</a></li>
                             <li><a href="acc">Accounts</a></li>
                             <li><a href="#">Ideas</a></li>
                         </ul>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Submission;
 use Illuminate\Http\Request;
@@ -27,18 +28,24 @@ class AdminController extends Controller
     public function acc()
     {
         $users = User::all();
-        return view('Goodi.admin.acc', ['users' => $users]);
+        return view('Goodi.admin.user.acc', ['users' => $users]);
     }
 
+    function showFormCreateAccount(){
+        $listRoles = Role::all();
+        return view('Goodi/admin/user/createAcc')->with('listRoles', $listRoles);
+    }
     public function createAcc(Request $request)
     {
         $user = new User($request->all());
+
         $user->password = Hash::make($request->password);
 
         $user->image = $this->saveImage($request->file('image'));
 
         $user->save();
-        return redirect('admin/acc')->with('errors', 'Create Successful!!!!!');
+        return redirect('admin/acc')->with('errors', 'Create Successful!!!!!')
+            ->with('listRole');
     }
 
 
