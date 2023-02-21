@@ -17,9 +17,9 @@
             <input type="password" value="123456" name="password" class="form-control" id="password">
         </div>
         <div class="mb-3">
-            <label for="phonenumber" class="form-label">Phone Number</label>
-            <input type="phonenumber" name="phonenumber" class="form-control" id="phonenumber"
-                aria-describedby="phonenumber">
+            <label for="phone_number" class="form-label">Phone Number</label>
+            <input type="phone_number" name="phone_number" class="form-control" id="phone_number"
+                aria-describedby="phone_number">
         </div>
         <div class="mb-3">
             <label for="DoB" class="form-label">Date of Birth</label>

@@ -35,6 +35,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/acc', [AdminController::class, 'acc'])->name('admin.acc');
 
     Route::get('admin/createAcc', [AdminController::class, 'showFormCreateAccount']);
+
     Route::post('admin/createAcc', [AdminController::class, 'createAcc']);
 
     Route::get("admin/showAcc/{id}", [AdminController::class, 'showAcc']);

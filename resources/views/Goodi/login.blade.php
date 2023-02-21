@@ -104,9 +104,9 @@
 
     <main class="form-signin w-100 m-auto">
         <section class="login-form">
-            @if (Session::has('errors'))
+            {{-- @if (Session::has('errors'))
                 <div class="alert alert-warning" role="alert"><strong>{{ Session::get('errors') }}</strong></div>
-            @endif
+            @endif --}}
             <form id="admin-login" method="POST" action="/login">
                 @csrf
                 <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72"
