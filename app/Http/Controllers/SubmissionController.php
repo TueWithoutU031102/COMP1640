@@ -37,6 +37,7 @@ class SubmissionController extends Controller
     public function store(Request $request)
     {
         $submission = new Submission($request->all());
+        dd($submission);
         $submission->save();
         return redirect('admin/submission/index')->with('success','submission created successfully');
     }
@@ -98,12 +99,12 @@ class SubmissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function updateDueDate(Request $request)
+    public function updateDate(Request $request)
     {
         $input = $request->all();
         $id = $request->id;
         Submission::find($id)->update($input);
-        return redirect('admin/acc')->with('success', 'account updated successfully');
+        return redirect(route("listSubmission"))->with('success', 'account updated successfully');
     }
 
     /**

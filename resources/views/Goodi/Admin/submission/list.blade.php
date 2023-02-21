@@ -24,14 +24,20 @@
         <button class="btn btn-primary">Create Submission</button>
     </a>
     <div class="row" id="editForm">
+        <input type="text" id="submissionIdToUpdateDate">
+
         <div class="editStartDate popup col-4" id="editStartDate" hidden>
             <h1>StartDate</h1>
+            <input type="datetime-local" id="inputEditStartDate">
+            <button onclick="updateDate('startDate')">Ok</button>
             <button onclick="closeForm('editStartDate')">close</button>
         </div>
+
         <div class="editDueDate popup col-4" id="editDueDate" hidden>
             <h1>DueDate</h1>
+            <input type="datetime-local" id="inputEditDueDate">
             <button onclick="closeForm('editDueDate')">close</button>
-
+            <button onclick="updateDate('dueDate')">Ok</button>
         </div>
     </div>
     <div class="table-responsive">
@@ -49,10 +55,10 @@
                 <tr>
                     <td id="title{{$sub->id}}">{{ $sub->title }}</td>
                     <td id="startDate{{$sub->startDate}}">{{ $sub->startDate }} |
-                        <button onclick="showForm('editStartDate', {{$sub->id}})">Sửa</button>
+                        <button onclick="showForm('editStartDate', {{$sub->id}}, '{{$sub->startDate}}')">Sửa</button>
                     </td>
                     <td id="dueDate{{ $sub->dueDate }}">{{ $sub->dueDate }}
-                        <button onclick="showForm('editDueDate', {{$sub->id}})">Sửa</button>
+                        <button onclick="showForm('editDueDate', {{$sub->id}}, '{{$sub->dueDate}}')">Sửa</button>
                     </td>
 
                     <td>
@@ -77,17 +83,42 @@
     </div>
 
     <script !src="">
-        function showForm(formId) {
+        function showForm(formId, submissionId, date) {
             document.getElementById(formId).hidden = false;
+            document.getElementById('submissionIdToUpdateDate').value = submissionId;
+
+            if (formId == 'editDueDate') {
+                document.getElementById('inputEditDueDate').value = date;
+            } else {
+                document.getElementById('inputEditStartDate').value = date;
+            }
         }
-        function closeForm(formId){
+
+        function closeForm(formId) {
             document.getElementById(formId).hidden = true;
         }
 
-        function updateStartDate(){
-            window.location.href = "/submission/update"
+
+        function updateDate(dateType) {
+            let startDateInput = document.getElementById('inputEditStartDate').value;
+            let dueDateInput = document.getElementById('inputEditDueDate').value;
+            let submissionId = document.getElementById('submissionIdToUpdateDate').value;
+
+            let url = "{{route('updateDate', ['id'=>'_submissionId', '_dateType'=>'_newDate']) }}";
+            url = url.replace('_submissionId', submissionId)
+            url = url.replace('&amp;', '&')
+
+            if(dateType == 'dueDate'){
+                url = url.replace('_dateType', 'dueDate')
+                url = url.replace('_newDate', dueDateInput)
+            }else {
+                url = url.replace('_dateType', 'startDate')
+                url = url.replace('_newDate', startDateInput)
+            }
+
+            window.location.href = url;
         }
-        function updateDueDate(){}
+
         // function closeFormByListenClick() {
         //     let editStartDate = document.getElementById("editStartDate");
         //     let editDueDate = document.getElementById("editDueDate");
