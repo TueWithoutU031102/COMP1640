@@ -51,9 +51,9 @@ Route::middleware(['admin'])->group(function () {
 
     /////// SUBMISSION//
     Route::get("admin/submission/index", [SubmissionController::class, 'index'])->name("listSubmission");
-    Route::get("admin/submission/create", function () {return view('Goodi/admin/submission/create');});
-    Route::post("admin/submission/create", [SubmissionController::class, 'store']);
-    Route::get("admin/submission/show/{id}", [SubmissionController::class, 'show']);
+    Route::get("admin/submission/create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
+    Route::post("admin/submission/create", [SubmissionController::class, 'store'])->name("storeSubmission");
+    Route::get("admin/submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
 
     Route::get("admin/submission/updateDueDate", [SubmissionController::class, 'updateDate'])->name("updateDate");
     Route::get("admin/submission/updateStarDate", [SubmissionController::class, 'updateDate'])->name("updateStartDate");

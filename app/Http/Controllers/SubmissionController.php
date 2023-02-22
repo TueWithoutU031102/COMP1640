@@ -26,7 +26,7 @@ class SubmissionController extends Controller
      */
     public function create()
     {
-
+        return view('Goodi/Admin/submission/create');
     }
 
     /**
@@ -37,9 +37,9 @@ class SubmissionController extends Controller
      */
     public function store(Request $request)
     {
-        dd(Auth::user());
-
+        $authorId = Auth::user()->getAuthIdentifier();
         $submission = new Submission($request->all());
+        $submission['admin_id'] = $authorId;
         $submission->save();
         return redirect('admin/submission/index')->with('success','submission created successfully');
     }
