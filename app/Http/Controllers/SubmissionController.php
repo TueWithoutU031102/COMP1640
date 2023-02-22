@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubmissionController extends Controller
 {
@@ -36,8 +37,9 @@ class SubmissionController extends Controller
      */
     public function store(Request $request)
     {
+        dd(Auth::user());
+
         $submission = new Submission($request->all());
-        dd($submission);
         $submission->save();
         return redirect('admin/submission/index')->with('success','submission created successfully');
     }
