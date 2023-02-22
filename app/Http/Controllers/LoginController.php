@@ -14,12 +14,8 @@ class LoginController extends Controller
             'password' => ['gt:1'],
         ]);
         $credentials = $request->only('email', 'password');
-        if (Auth::guard('admin')->attempt($credentials)) {
-            Auth::
-            dd(Auth::user());
-            return redirect()->route('admin.index');
-        } else {
-            return redirect()->route('admin.login')->withErrors("Email or password is incorrect");
-        }
+        return Auth::guard('admin')->attempt($credentials)
+            ? redirect()->route('admin.index')
+            : redirect()->route('admin.login')->withErrors("Email or password is incorrect");
     }
 }
