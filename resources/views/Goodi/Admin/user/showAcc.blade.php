@@ -10,7 +10,7 @@
         <p class="card-text">Email:{{ $account->email }}</p>
         <p class="card-text">Phone Number:{{ $account->phonenumber }}</p>
         <p class="card-text">Bate of Birth:{{ $account->DoB }}</p>
-        <p class="card-text">Role:{{ $account->role }}</p>
+        <p class="card-text">Role:{{ $account->role->name}}</p>
         <p class="card-text">Image: <img src="{{ asset($account->image) }}"></p>
     </div>
     <a href="/admin/acc">

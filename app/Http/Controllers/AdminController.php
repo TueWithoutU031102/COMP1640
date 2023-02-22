@@ -27,7 +27,7 @@ class AdminController extends Controller
 
     public function acc()
     {
-        $users = User::all();
+        $users = User::where('role_id', '!=', '1')->get();
         return view('Goodi.admin.user.acc', ['users' => $users]);
     }
 
@@ -43,13 +43,12 @@ class AdminController extends Controller
             'name' => ['required'],
             'email' => ['email'],
             'password' => ['gt:1'],
-            'phone_number' => ['digits:9', 'starts_with:0'],
+            'phone_number' => ['digits:10', 'starts_with:0'],
             'DoB' => ['required', 'before_or_equal:today'],
             'image' => ['image', 'required'],
-            'role' => ['required'],
+            'role_id' => ['required'],
         ]);
         $user = new User($request->all());
-
         $user->password = Hash::make($request->password);
 
         $user->image = $this->saveImage($request->file('image'));
@@ -62,33 +61,38 @@ class AdminController extends Controller
 
     public function showAcc($id)
     {
+        if ($id == 1) return redirect('admin/acc')->with('success', 'You must not see this account');
         $account = User::find($id);
-        return view('Goodi/admin/showAcc')->with('account', $account);
+        return view('Goodi/admin/user/showAcc')->with('account', $account);
     }
 
     public function showFormEditAccount($id)
     {
         $account = User::find($id);
-        $listRoles = Role::all();
-
+        $listRoles = Role::where('name', '!=', 'ADMIN')->get();
         return view('Goodi/admin/user/editAcc')
             ->with('account', $account)
-            ->with('listRole', $listRoles);
+            ->with('listRoles', $listRoles);
     }
 
     public function updateAcc(Request $request)
     {
+
+        $existedImage = $request->existedImage;
+        $input = $request->all();
+        if ($request->image == null) {
+            $input['image'] = $existedImage;
+        }
+
+        $id = $request->id;
         $this->validate($request, [
             'name' => ['required'],
             'email' => ['email'],
             'password' => ['gt:1'],
-            'phone_number' => ['digits:9', 'starts_with:0'],
+            'phone_number' => ['digits:10', 'starts_with:0'],
             'DoB' => ['required', 'before_or_equal:today'],
-            'image' => ['image', 'required'],
-            'role' => ['required'],
+            'role_id' => ['required'],
         ]);
-        $input = $request->all();
-        $id = $request->id;
         User::find($id)->update($input);
         return redirect('admin/acc')->with('success', 'account updated successfully');
     }
@@ -109,18 +113,5 @@ class AdminController extends Controller
         // public_path() là tạo đường dẫn tuyệt đối từ file tới chỗ mình cần lưu file
         move_uploaded_file($file->getPathname(), public_path('images/' . $name));
         return "images/" . $name;
-    }
-
-    public function sub()
-    {
-        $subs = Submission::all();
-        return view('Goodi/admin/sub', ['subs' => $subs]);
-    }
-
-    public function createSub(Request $request)
-    {
-        $submission = new Submission($request->all());
-        $submission->save();
-        return redirect('admin/sub')->with('success', 'submission created successfully');
     }
 }

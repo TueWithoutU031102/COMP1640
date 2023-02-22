@@ -25,14 +25,15 @@
             <input type="email" value="{{ $account->email }}" name="email" class="form-control" id="email"
                 aria-describedby="email">
         </div>
+        <input type="longText" value="{{ $account->image }}" name="existedImage">
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
             <input type="file" value="{{ $account->image }}" name="image" class="form-control" id="image">
         </div>
         <div class="mb-3">
-            <label for="phonenumber" class="form-label">Phone Number</label>
-            <input type="text" value="{{ $account->phonenumber }}" name="phonenumber" class="form-control"
-                id="phonenumber">
+            <label for="phone_number" class="form-label">Phone Number</label>
+            <input type="text" value="{{ $account->phone_number }}" name="phone_number" class="form-control"
+                id="phone_number">
         </div>
         <div class="mb-3">
             <label for="DoB" class="form-label">Phone Number</label>
@@ -41,7 +42,7 @@
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
 
-            <select value="{{ $account->role }}" name="role" class="form-select" id="role" aria-label="Role">
+            <select value="{{ $account->role }}" name="role_id" class="form-select" id="role" aria-label="Role">
                 @foreach ($listRoles as $role)
                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                 @endforeach
