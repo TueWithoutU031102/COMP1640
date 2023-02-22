@@ -260,6 +260,155 @@ nav{
     color: #000000;
 }
 
+.create-form input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-form input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.create-form {
+    margin-right: 500px;
+    margin-left: 500px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.search_form{
+    justify-content: flex-end;
+}
+
+.search_bar{
+    border-radius: 40px;
+    padding: 10px 20px;
+}
+
+.search_bar[type=text] {
+    transition: width 0.4s ease-in-out;
+}
+
+.search_bar[type=text]:focus {
+    width: 73%;
+}
+
+.banner{
+    background: #eeeeee6d;
+}
+
+.idea-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 5%;
+}
+
+.left-side{
+    margin-top: 60px;
+    border-radius: 20px;
+    background: aliceblue;
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    height: 100vh;
+}
+
+.main-content{
+    border-radius: 20px;
+    background: white;
+    flex-basis: 47%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    height: 100vh;
+}
+
+.right-side{
+    margin-top: 60px;
+    border-radius: 20px;
+    background: aliceblue;
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    height: 100vh;
+}
+
+.profile-display{
+    padding-left: 70px;
+    padding-top: 40px;
+    display: flex;
+}
+
+.profile-display h3{
+    padding-top: 5px;
+    padding-left: 30px;
+
+}
+
+.imp-link{
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.imp-link a{
+    font-size: 22px;
+    margin-bottom: 10px;
+    padding-left: 70px;
+    text-decoration: none;
+    color: #545454;
+}
+
+.idea-action{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sort-idea select{
+    background: #b1b1b1;
+    border-radius: 10px;
+    margin-left: 100px;
+    padding: 10px 50px 10px 50px;
+}
+
+.btn-idea{
+    margin-right: 100px;
+}
+
+.add-idea{
+    border: none;
+    border-radius: 10px;
+    background-color:#a26dec;
+    padding: 5px 15px 5px 15px;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+}
+
+.refresh-idea{
+    border: none;
+    border-radius: 10px;
+    background-color: #b1b1b1;
+    padding: 10px 5px 10px 5px;
+
+}
+
+.create-idea{
+    border: solid #a7a7a7;
+    padding: 20px 20px 20px 20px;
+    border-radius: 20px;
+}
+
 /* 25% */
 @media(max-width: 5400px){
 
@@ -322,3 +471,92 @@ nav{
 
 }
 
+/* login */
+
+*{
+    padding :0;
+    margin: 0;
+}
+
+body{
+    background-color: whitesmoke no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: sans-serif;
+}
+.container {
+    position: relative;
+    margin-top: 100px;
+    width: 450px;
+    height: auto;
+    background: #def8f9;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: #0a0a0a;
+}
+.container .logo{
+    width: 100px;
+    padding: 20px 40px ;
+}
+.login_form .logosocial img{
+    width: 50px;
+    padding: 20px 20px 15px 35px;
+}
+.label {
+    padding: 5px 180px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #0a0a0a;
+}
+.login_form{
+    padding: 20px 40px;
+    width: 350px;
+}
+
+.login_form .font{
+    font-size: 13px;
+    color: #0a0a0a;
+    margin: 5px 0;
+    font-weight: 750;
+}
+.login_form input {
+    outline: none;
+    height: 20px;
+    width: 350px;
+    padding: 0 5px;
+    font-size: 13px;
+    border: 0px;
+    border-bottom: 1px outset rgb(245, 242, 242);
+}
+.login_form .font2{
+    margin-top: 10px;
+}
+.login_form button{
+    margin: 30px 0 20px 0;
+    height: 35px;
+    width: 350px;
+    font-size:20px ;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    border-radius: 25px;
+    border: 0px;
+    background-color: rgb(73, 202, 235);
+
+} 
+
+.login_form .check input{
+    height: 16px;
+    width: 16px;
+    float: left;
+    
+}
+.login_form .check {
+    padding: 10px 10px;
+    font-size: 15px;
+    margin-right: 20px;
+}
+
+/* login */
