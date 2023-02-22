@@ -43,8 +43,7 @@
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
-            <tr>
-                <th scope="col">Name</th>
+            <tr>                <th scope="col">Name</th>
                 <th scope="col">Date Started</th>
                 <th score="col">Date Finished</th>
                 <th score="col">Actions</th>

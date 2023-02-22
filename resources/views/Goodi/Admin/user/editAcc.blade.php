@@ -1,9 +1,9 @@
 @extends('Goodi.Admin.admin_navbar')
-@section('main')
 
-    <h1>
-        Edit Account</h1>
-    <form action="/admin/editAcc/{id}" method="POST">
+@section('main')
+<br><br>
+    <form action="/admin/editAcc/{id}" class="create-form" method="POST">
+        <h2>Edit Account</h2><br><br>
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -15,32 +15,35 @@
             </div>
         @endif
         <input type="hidden" name="id" value="{{ $account->id }}" name="id" class="form-control" id="id">
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" value="{{ $account->name }}" name="name" class="form-control" id="name"
-                aria-describedby="name">
+        <div class="form-group">
+            <label for="name" class="font-weight-bold">Name</label>
+            <input type="text" value="{{ $account->name }}" name="name" class="form-control" id="name" aria-describedby="name">
         </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
+        <div class="form-group">
+            <label for="email" class="font-weight-bold">Email address</label>
             <input type="email" value="{{ $account->email }}" name="email" class="form-control" id="email"
                 aria-describedby="email">
         </div>
-        <input type="longText" value="{{ $account->image }}" name="existedImage">
-        <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
-            <input type="file" value="{{ $account->image }}" name="image" class="form-control" id="image">
+        <div class="form-group">
+            <label for="password" class="font-weight-bold">Password</label>
+            <input type="password" value="123456" name="password" class="form-control" id="password">
         </div>
-        <div class="mb-3">
-            <label for="phone_number" class="form-label">Phone Number</label>
+        <div class="form-group">
+            <label for="phone_number" class="font-weight-bold">Phone Number</label>
             <input type="text" value="{{ $account->phone_number }}" name="phone_number" class="form-control"
                 id="phone_number">
         </div>
-        <div class="mb-3">
-            <label for="DoB" class="form-label">Phone Number</label>
+        <div class="form-group">
+            <label for="DoB" class="font-weight-bold">Date of Birth</label>
             <input type="date" value="{{ $account->DoB }}" name="DoB" class="form-control" id="DoB">
         </div>
-        <div class="mb-3">
-            <label for="role" class="form-label">Role</label>
+        <div class="form-group">
+            <label for="image" class="font-weight-bold">Image</label>
+            <input type="longText" value="{{ $account->image }}" name="existedImage">
+            <input type="file" value="{{ $account->image }}" name="image" class="form-control" id="image">
+        </div>
+        <div class="form-group">
+            <label for="role" class="font-weight-bold">Role</label>
 
             <select value="{{ $account->role }}" name="role_id" class="form-select" id="role" aria-label="Role">
                 @foreach ($listRoles as $role)
@@ -48,16 +51,11 @@
                 @endforeach
             </select>
         </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="check-email">
-            <label class="form-check-label" for="check-email">Check account</label>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/admin/acc">
+            <button class="btn btn-danger">Back</button>
+        </a>
     </form>
-    <a href="/admin/acc">
-        <button class="btn btn-primary">Back</button>
-    </a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>

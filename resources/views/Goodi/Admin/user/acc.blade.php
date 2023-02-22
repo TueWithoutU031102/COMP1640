@@ -66,7 +66,7 @@
                 <td>
                     <ul class="img">
                         <li>
-                            <img  src="{{ $user->image}}">
+                            <img  src="{{ asset($user->image) }}">
                         </li>
                     </ul>
                 </td>

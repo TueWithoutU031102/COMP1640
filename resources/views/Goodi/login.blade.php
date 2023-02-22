@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container_login">
         <img class="logo" src="images/331294928_2804183029713156_7463841755418801747_n.png" alt="">
         <h1 class="label"> LOGIN </h1>
         @if ($errors->any())
