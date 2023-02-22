@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     function showFormCreateAccount()
     {
-        $listRoles = Role::all();
+        $listRoles = Role::where('name', '!=', 'ADMIN')->get();
         return view('Goodi/admin/user/createAcc')->with('listRoles', $listRoles);
     }
 

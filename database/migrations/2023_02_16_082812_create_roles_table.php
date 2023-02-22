@@ -18,6 +18,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
         });
+
+        DB::table('roles')->insert([
+           ['name' => 'ADMIN'],
+           ['name' => 'STAFF'],
+           ['name' => 'QAC'],
+           ['name' => 'QAM'],
+        ]);
     }
 
     /**
