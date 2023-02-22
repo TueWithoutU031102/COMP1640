@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('phone_number');
-            $table->date('DoB');
+            $table->string('phone_number')->default("");
+            $table->date('DoB')->default("2023-02-13T10:10");
             $table->longText('image');
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')
@@ -28,6 +28,17 @@ return new class extends Migration
                 ->on('roles');
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            [
+                'name' => 'admin',
+                'email' => 'email@gmail.com',
+                'password' => Hash::make("123456"),
+                'image' => "adad.dd",
+                'role_id' => '1'
+
+            ],
+        ]);
     }
 
     /**

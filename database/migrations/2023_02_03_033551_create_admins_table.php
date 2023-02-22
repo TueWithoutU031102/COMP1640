@@ -28,7 +28,6 @@ return new class extends Migration {
                 'email' => 'email@gmail.com',
                 'password' => Hash::make("123456")
             ],
-
         ]);
     }
 

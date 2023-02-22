@@ -86,7 +86,7 @@
         function showForm(formId, submissionId, date) {
             document.getElementById(formId).hidden = false;
             document.getElementById('submissionIdToUpdateDate').value = submissionId;
-
+            console.log(date)
             if (formId == 'editDueDate') {
                 document.getElementById('inputEditDueDate').value = date;
             } else {
