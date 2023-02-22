@@ -77,22 +77,23 @@ class AdminController extends Controller
 
     public function updateAcc(Request $request)
     {
-
-        $existedImage = $request->existedImage;
-        $input = $request->all();
-        if ($request->image == null) {
-            $input['image'] = $existedImage;
-        }
-
-        $id = $request->id;
         $this->validate($request, [
             'name' => ['required'],
             'email' => ['email'],
             'password' => ['gt:1'],
             'phone_number' => ['digits:10', 'starts_with:0'],
             'DoB' => ['required', 'before_or_equal:today'],
+            'image' => ['image', 'required'],
             'role_id' => ['required'],
         ]);
+        $existedImage = $request->existedImage;
+        $input = $request->all();
+        $id = $request->id;
+        if ($request->image == null) {
+            $request['image'] =  $existedImage;
+        }
+        $input['image'] = $this->saveImage($request->file('image'));
+
         User::find($id)->update($input);
         return redirect('admin/acc')->with('success', 'account updated successfully');
     }
