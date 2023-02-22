@@ -4,6 +4,15 @@
     <h1>Create Account</h1>
     <form action="/admin/createAcc" method="POST" enctype="multipart/form-data">
         @csrf
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="name" name="name" class="form-control" id="name" aria-describedby="name">
@@ -33,16 +42,11 @@
             <label for="role" class="form-label">Role</label>
 
             <select name="role" class="form-select" id="role" aria-label="Role">
-               @foreach($listRoles as $role )
-                   <option value="{{$role->id}}">{{$role->name}}</option>
-               @endforeach
+                @foreach ($listRoles as $role)
+                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                @endforeach
             </select>
         </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="check-email">
-            <label class="form-check-label" for="check-email">Check account</label>
-        </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <a href="/admin/acc">
