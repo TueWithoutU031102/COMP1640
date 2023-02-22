@@ -54,10 +54,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get("admin/submission/create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
     Route::post("admin/submission/create", [SubmissionController::class, 'store'])->name("storeSubmission");
     Route::get("admin/submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
-
-    Route::get("admin/submission/updateDueDate", [SubmissionController::class, 'updateDate'])->name("updateDate");
-    Route::get("admin/submission/updateStarDate", [SubmissionController::class, 'updateDate'])->name("updateStartDate");
-
+    Route::get("admin/submission/update", [SubmissionController::class, 'update'])->name("update");
 });
 
 Route::prefix('/a')->group(__DIR__.'/web/submission.php');

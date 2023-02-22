@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 
 class SubmissionController extends Controller
 {
@@ -32,7 +34,7 @@ class SubmissionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -40,27 +42,43 @@ class SubmissionController extends Controller
         $authorId = Auth::user()->getAuthIdentifier();
         $submission = new Submission($request->all());
         $submission['admin_id'] = $authorId;
+
+        $startDate = new Carbon($submission['startDate']);
+        $dueDate = new Carbon($submission['dueDate']);
+
+        $days = $startDate->diffInHours($dueDate);
+        $minutes = $startDate->diffInMinutes($dueDate) % 60;
+        $different = (string)$days." hours |".(string)$minutes." minutes";
+
+        $isStartDateLessThanDueDate = $startDate->lt($dueDate);
+        if ($isStartDateLessThanDueDate) {
+            $submission->save();
+            return redirect('admin/submission/index')
+                ->with('success', 'submission created successfully')
+                ->with('$different', $different);
+        }
+
         $submission->save();
-        return redirect('admin/submission/index')->with('success','submission created successfully');
+        return redirect('admin/submission/index')->with('success', 'submission created successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $submission = Submission::find($id);
-        return view('Goodi/Admin/submission/show')->with('submission',$submission);
+        return view('Goodi/Admin/submission/show')->with('submission', $submission);
 
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Submission  $submission
+     * @param \App\Models\Submission $submission
      * @return \Illuminate\Http\Response
      */
     public function edit(Submission $submission)
@@ -71,7 +89,7 @@ class SubmissionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -79,44 +97,24 @@ class SubmissionController extends Controller
         $input = $request->all();
         $id = $request->id;
         Submission::find($id)->update($input);
-        return redirect('admin/acc')->with('success', 'account updated successfully');
-    }
-
-    /**
-     * Update startDate of specified submission.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function updateStartDate(Request $request)
-    {
-        $input = $request->all();
-        $id = $request->id;
-        Submission::find($id)->update($input);
-        return redirect('admin/acc')->with('success', 'account updated successfully');
-    }
-/**
-     * Update dueDate of specified submission.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function updateDate(Request $request)
-    {
-        $input = $request->all();
-        $id = $request->id;
-        Submission::find($id)->update($input);
         return redirect(route("listSubmission"))->with('success', 'account updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Submission  $submission
+     * @param \App\Models\Submission $submission
      * @return \Illuminate\Http\Response
      */
     public function destroy(Submission $submission)
     {
         //
+    }
+
+    function getDifferent($sD, $dD){
+        $days = $sD->diffInHours($dD);
+        $minutes = $sD->diffInMinutes($dD) % 60;
+        return (string)$days." hours |".(string)$minutes." minutes";
     }
 }

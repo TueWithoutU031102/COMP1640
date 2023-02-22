@@ -16,12 +16,12 @@
         <div class="mb-3">
             <label for="startDate" class="form-label">Date Started</label>
             <input type="datetime-local" name="startDate" class="form-control" id="startDate"
-                   aria-describedby="startDate">
+                   aria-describedby="startDate" style="width: 300px">
         </div>
         <div class="mb-3">
             <label for="dueDate" class="form-label">Date Finished</label>
             <input type="datetime-local" name="dueDate" class="form-control" id="dueDate"
-                   aria-describedby="dueDate">
+                   aria-describedby="dueDate"  style="width: 300px">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

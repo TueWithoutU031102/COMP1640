@@ -17,6 +17,7 @@
         }
     </style>
     <h2>Submissions</h2>
+
     @if (Session::has('success'))
         <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
     @endif
@@ -43,9 +44,11 @@
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
-            <tr>                <th scope="col">Name</th>
+            <tr>
+                <th scope="col">Name</th>
                 <th scope="col">Date Started</th>
                 <th score="col">Date Finished</th>
+                <th> time remaining</th>
                 <th score="col">Actions</th>
             </tr>
             </thead>
@@ -59,7 +62,9 @@
                     <td id="dueDate{{ $sub->dueDate }}">{{ $sub->dueDate }}
                         <button onclick="showForm('editDueDate', {{$sub->id}}, '{{$sub->dueDate}}')">Sửa</button>
                     </td>
-
+                    <td onclick="getTimeRemaining('{{ $sub->startDate }}', '{{ $sub->dueDate }}', this)">
+                   | |
+                    </td>
                     <td>
                         <a href="{{ $sub->id }}" title="View Profile">
                             <button
@@ -91,6 +96,7 @@
             } else {
                 document.getElementById('inputEditStartDate').value = date;
             }
+
         }
 
         function closeForm(formId) {
@@ -103,7 +109,7 @@
             let dueDateInput = document.getElementById('inputEditDueDate').value;
             let submissionId = document.getElementById('submissionIdToUpdateDate').value;
 
-            let url = "{{route('updateDate', ['id'=>'_submissionId', '_dateType'=>'_newDate']) }}";
+            let url = "{{route('update', ['id'=>'_submissionId', '_dateType'=>'_newDate']) }}";
             url = url.replace('_submissionId', submissionId)
             url = url.replace('&amp;', '&')
 
@@ -114,10 +120,23 @@
                 url = url.replace('_dateType', 'startDate')
                 url = url.replace('_newDate', startDateInput)
             }
-
             window.location.href = url;
         }
 
+        function getTimeRemaining(sD, dD, seft){
+            let startDate = new Date(sD);
+            let dueDate = new Date(dD);
+            let diffMs = (dueDate - startDate); // milliseconds between now & Christmas
+            let diffDays = Math.floor(diffMs / 86400000); // days
+            let diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+            let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+
+            let timeRemaining = diffDays + " days, " + diffHrs + " hours, " + diffMins + " minutes";
+            console.log(timeRemaining);
+
+            seft.innerHTML = timeRemaining;
+            return timeRemaining;
+        }
         // function closeFormByListenClick() {
         //     let editStartDate = document.getElementById("editStartDate");
         //     let editDueDate = document.getElementById("editDueDate");
