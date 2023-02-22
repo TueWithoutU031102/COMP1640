@@ -23,9 +23,9 @@
             <button type="submit">Submit</button>
             <h5>Or Sign-up Using</h5>
             <div class="logosocial">
-            <a href=""><img src="images/—Pngtree—facebook social media icon_8704814.png" padding="100px" alt="" ></a>
-            <a href=""><img src="images/Twitter-Logo-PNG-2012-–-Now-2.png" alt=""></a>
-            <a href=""><img  src="images/Google__G__Logo.svg.png" alt=""></a>
+            <a href=""><img src="css/images/—Pngtree—facebook social media icon_8704814.png" padding="100px" alt="" ></a>
+            <a href=""><img src="css/images/Twitter-Logo-PNG-2012-–-Now-2.png" alt=""></a>
+            <a href=""><img  src="css/images/Google__G__Logo.svg.png" alt=""></a>
             </div>
         </form>
     </div>
