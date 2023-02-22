@@ -11,11 +11,22 @@
     <div class="container">
         <img class="logo" src="images/331294928_2804183029713156_7463841755418801747_n.png" alt="">
         <h1 class="label"> LOGIN </h1>
-        <form class="login_form">
+        @if ($errors->any())
+
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form class="login_form"  method="POST" action="/login">
+            @csrf
             <div class="font">Email</div>
-            <input type="text" name="">
+            <input type="text" name="email" placeholder="Email">
             <div class="font font2">Password</div>
-            <input type="password" name="">
+            <input type="password" name="password" placeholder="Password">
             <br>
             <div class="check">
                 <input type="checkbox" name="check"> <label for="check">Remember me</label>
