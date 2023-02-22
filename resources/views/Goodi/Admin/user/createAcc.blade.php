@@ -4,9 +4,23 @@
 <br><br>
     <form action="/admin/createAcc" class="create-form" method="POST" enctype="multipart/form-data">
         @csrf
+<<<<<<< HEAD
         <h1 style="text-align: center">Create Account</h1>
         <div class="form-group">
             <label for="name" class="font-weight-bold">Name</label>
+=======
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+>>>>>>> 7f2f6bd5fb211731b242678308fc59a07aa3567c
             <input type="name" name="name" class="form-control" id="name" aria-describedby="name">
         </div>
         <div class="form-group">
@@ -34,20 +48,12 @@
             <label for="role" class="font-weight-bold">Role</label>
 
             <select name="role" class="form-select" id="role" aria-label="Role">
-                <option value="Staff">Staff</option>
-                <option value="Quality Assurance Coordinator">Quality Assurance Coordinator</option>
-                <option value="Quality Assurance Manager">Quality Assurance Manager</option>
+                @foreach ($listRoles as $role)
+                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                @endforeach
             </select>
         </div>
-        <div class="form-group">
-            <input type="checkbox" class="form-check-input" id="check-email">
-            <label class="form-check-label" for="check-email">Check account</label>
-        </div>
-
-        <button type="submit" class="btn btn-success">Submit</button>
-        <a href="/admin/acc">
-            <button class="btn btn-danger">Back</button>
-        </a>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">

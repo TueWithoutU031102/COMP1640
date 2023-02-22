@@ -38,24 +38,28 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('admin/acc', [AdminController::class, 'acc'])->name('admin.acc');
 
-    Route::get('admin/createAcc', function () {
-        return view('Goodi/admin/user/createAcc');
-    });
+    Route::get('admin/createAcc', [AdminController::class, 'showFormCreateAccount']);
+
     Route::post('admin/createAcc', [AdminController::class, 'createAcc']);
 
     Route::get("admin/showAcc/{id}", [AdminController::class, 'showAcc']);
 
-    Route::get("admin/editAcc/{id}", [AdminController::class, 'editAcc']);
+    Route::get("admin/editAcc/{id}", [AdminController::class, 'showFormEditAccount']);
     Route::post("admin/editAcc/{id}", [AdminController::class, 'updateAcc']);
 
     Route::post("admin/deleteAcc/{user}", [AdminController::class, 'delete']);
 
-    Route::get("admin/submission/index", [SubmissionController::class, 'index']);
-
+    /////// SUBMISSION//
+    Route::get("admin/submission/index", [SubmissionController::class, 'index'])->name("listSubmission");
     Route::get("admin/submission/create", function () {return view('Goodi/admin/submission/create');});
     Route::post("admin/submission/create", [SubmissionController::class, 'store']);
     Route::get("admin/submission/show/{id}", [SubmissionController::class, 'show']);
+
+    Route::get("admin/submission/updateDueDate", [SubmissionController::class, 'updateDate'])->name("updateDate");
+    Route::get("admin/submission/updateStarDate", [SubmissionController::class, 'updateDate'])->name("updateStartDate");
+
 });
 
+Route::prefix('/a')->group(__DIR__.'/web/submission.php');
 
 Route::get('/logout', [AdminController::class, 'logout'])->name('logout');

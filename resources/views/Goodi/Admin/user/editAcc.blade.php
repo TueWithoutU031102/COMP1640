@@ -1,37 +1,50 @@
 @extends('Goodi.Admin.admin_navbar')
 @section('main')
 
-    <h1>Edit Account</h1>
+    <h1>
+        Edit Account</h1>
     <form action="/admin/editAcc/{id}" method="POST">
         @csrf
-        <input type="hidden" name="id" value="{{$account->id}}" name="id" class="form-control" id="id">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <input type="hidden" name="id" value="{{ $account->id }}" name="id" class="form-control" id="id">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" value="{{$account->name}}" name="name" class="form-control" id="name" aria-describedby="name">
+            <input type="text" value="{{ $account->name }}" name="name" class="form-control" id="name"
+                aria-describedby="name">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" value="{{$account->email}}" name="email" class="form-control" id="email" aria-describedby="email">
+            <input type="email" value="{{ $account->email }}" name="email" class="form-control" id="email"
+                aria-describedby="email">
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="file" value="{{$account->image}}" name="image" class="form-control" id="image">
+            <input type="file" value="{{ $account->image }}" name="image" class="form-control" id="image">
         </div>
         <div class="mb-3">
             <label for="phonenumber" class="form-label">Phone Number</label>
-            <input type="text" value="{{$account->phonenumber}}" name="phonenumber" class="form-control" id="phonenumber">
+            <input type="text" value="{{ $account->phonenumber }}" name="phonenumber" class="form-control"
+                id="phonenumber">
         </div>
         <div class="mb-3">
             <label for="DoB" class="form-label">Phone Number</label>
-            <input type="date" value="{{$account->DoB}}" name="DoB" class="form-control" id="DoB">
+            <input type="date" value="{{ $account->DoB }}" name="DoB" class="form-control" id="DoB">
         </div>
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
 
-            <select value="{{$account->role}}" name="role" class="form-select" id="role" aria-label="Role">
-                <option value="Staff">Staff</option>
-                <option value="Quality Assurance Coordinator">Quality Assurance Coordinator</option>
-                <option value="Quality Assurance Manager">Quality Assurance Manager</option>
+            <select value="{{ $account->role }}" name="role" class="form-select" id="role" aria-label="Role">
+                @foreach ($listRoles as $role)
+                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="mb-3 form-check">

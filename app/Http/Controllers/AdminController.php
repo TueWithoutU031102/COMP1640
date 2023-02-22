@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Submission;
 use Illuminate\Http\Request;
@@ -30,6 +31,12 @@ class AdminController extends Controller
         return view('Goodi.admin.user.acc', ['users' => $users]);
     }
 
+    function showFormCreateAccount()
+    {
+        $listRoles = Role::where('name', '!=', 'ADMIN')->get();
+        return view('Goodi/admin/user/createAcc')->with('listRoles', $listRoles);
+    }
+
     public function createAcc(Request $request)
     {
         $this->validate($request, [
@@ -42,12 +49,14 @@ class AdminController extends Controller
             'role' => ['required'],
         ]);
         $user = new User($request->all());
+
         $user->password = Hash::make($request->password);
 
         $user->image = $this->saveImage($request->file('image'));
 
         $user->save();
-        return redirect('admin/acc')->with('errors', 'Create Successful!!!!!');
+        return redirect('admin/acc')->with('errors', 'Create Successful!!!!!')
+            ->with('listRole');
     }
 
 
@@ -57,10 +66,14 @@ class AdminController extends Controller
         return view('Goodi/admin/showAcc')->with('account', $account);
     }
 
-    public function editAcc($id)
+    public function showFormEditAccount($id)
     {
         $account = User::find($id);
-        return view('Goodi/admin/editAcc')->with('account', $account);
+        $listRoles = Role::all();
+
+        return view('Goodi/admin/user/editAcc')
+            ->with('account', $account)
+            ->with('listRole', $listRoles);
     }
 
     public function updateAcc(Request $request)

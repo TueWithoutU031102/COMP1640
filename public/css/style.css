@@ -471,3 +471,92 @@ nav{
 
 }
 
+/* login */
+
+*{
+    padding :0;
+    margin: 0;
+}
+
+body{
+    background-color: whitesmoke no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: sans-serif;
+}
+.container {
+    position: relative;
+    margin-top: 100px;
+    width: 450px;
+    height: auto;
+    background: #def8f9;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: #0a0a0a;
+}
+.container .logo{
+    width: 100px;
+    padding: 20px 40px ;
+}
+.login_form .logosocial img{
+    width: 50px;
+    padding: 20px 20px 15px 35px;
+}
+.label {
+    padding: 5px 180px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #0a0a0a;
+}
+.login_form{
+    padding: 20px 40px;
+    width: 350px;
+}
+
+.login_form .font{
+    font-size: 13px;
+    color: #0a0a0a;
+    margin: 5px 0;
+    font-weight: 750;
+}
+.login_form input {
+    outline: none;
+    height: 20px;
+    width: 350px;
+    padding: 0 5px;
+    font-size: 13px;
+    border: 0px;
+    border-bottom: 1px outset rgb(245, 242, 242);
+}
+.login_form .font2{
+    margin-top: 10px;
+}
+.login_form button{
+    margin: 30px 0 20px 0;
+    height: 35px;
+    width: 350px;
+    font-size:20px ;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    border-radius: 25px;
+    border: 0px;
+    background-color: rgb(73, 202, 235);
+
+} 
+
+.login_form .check input{
+    height: 16px;
+    width: 16px;
+    float: left;
+    
+}
+.login_form .check {
+    padding: 10px 10px;
+    font-size: 15px;
+    margin-right: 20px;
+}
+
+/* login */

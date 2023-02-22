@@ -37,6 +37,7 @@ class SubmissionController extends Controller
     public function store(Request $request)
     {
         $submission = new Submission($request->all());
+        dd($submission);
         $submission->save();
         return redirect('admin/submission/index')->with('success','submission created successfully');
     }
@@ -69,12 +70,41 @@ class SubmissionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Submission  $submission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Submission $submission)
+    public function update(Request $request)
     {
-        //
+        $input = $request->all();
+        $id = $request->id;
+        Submission::find($id)->update($input);
+        return redirect('admin/acc')->with('success', 'account updated successfully');
+    }
+
+    /**
+     * Update startDate of specified submission.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStartDate(Request $request)
+    {
+        $input = $request->all();
+        $id = $request->id;
+        Submission::find($id)->update($input);
+        return redirect('admin/acc')->with('success', 'account updated successfully');
+    }
+/**
+     * Update dueDate of specified submission.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDate(Request $request)
+    {
+        $input = $request->all();
+        $id = $request->id;
+        Submission::find($id)->update($input);
+        return redirect(route("listSubmission"))->with('success', 'account updated successfully');
     }
 
     /**
