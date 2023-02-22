@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('Goodi.index');
 });
 
+Route::get('/idea', function () {
+    return view('Goodi.Admin.idea.index');
+});
+
 Route::get('/login', function () {
     return view('Goodi.login');
 })->name('admin.login');

@@ -260,6 +260,155 @@ nav{
     color: #000000;
 }
 
+.create-form input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-form input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.create-form {
+    margin-right: 500px;
+    margin-left: 500px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.search_form{
+    justify-content: flex-end;
+}
+
+.search_bar{
+    border-radius: 40px;
+    padding: 10px 20px;
+}
+
+.search_bar[type=text] {
+    transition: width 0.4s ease-in-out;
+}
+
+.search_bar[type=text]:focus {
+    width: 73%;
+}
+
+.banner{
+    background: #eeeeee6d;
+}
+
+.idea-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 5%;
+}
+
+.left-side{
+    margin-top: 60px;
+    border-radius: 20px;
+    background: aliceblue;
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    height: 100vh;
+}
+
+.main-content{
+    border-radius: 20px;
+    background: white;
+    flex-basis: 47%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    height: 100vh;
+}
+
+.right-side{
+    margin-top: 60px;
+    border-radius: 20px;
+    background: aliceblue;
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    height: 100vh;
+}
+
+.profile-display{
+    padding-left: 70px;
+    padding-top: 40px;
+    display: flex;
+}
+
+.profile-display h3{
+    padding-top: 5px;
+    padding-left: 30px;
+
+}
+
+.imp-link{
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.imp-link a{
+    font-size: 22px;
+    margin-bottom: 10px;
+    padding-left: 70px;
+    text-decoration: none;
+    color: #545454;
+}
+
+.idea-action{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sort-idea select{
+    background: #b1b1b1;
+    border-radius: 10px;
+    margin-left: 100px;
+    padding: 10px 50px 10px 50px;
+}
+
+.btn-idea{
+    margin-right: 100px;
+}
+
+.add-idea{
+    border: none;
+    border-radius: 10px;
+    background-color:#a26dec;
+    padding: 5px 15px 5px 15px;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+}
+
+.refresh-idea{
+    border: none;
+    border-radius: 10px;
+    background-color: #b1b1b1;
+    padding: 10px 5px 10px 5px;
+
+}
+
+.create-idea{
+    border: solid #a7a7a7;
+    padding: 20px 20px 20px 20px;
+    border-radius: 20px;
+}
+
 /* 25% */
 @media(max-width: 5400px){
 

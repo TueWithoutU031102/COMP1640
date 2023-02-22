@@ -14,7 +14,7 @@
                         <ul>
                             <li><a href="/admin/submission/create">Submissions</a></li>
                             <li><a href="acc">Accounts</a></li>
-                            <li><a href="#">Ideas</a></li>
+                            <li><a href="/idea">Ideas</a></li>
                         </ul>
                     </div>
                 </div>
