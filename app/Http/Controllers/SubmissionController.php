@@ -97,7 +97,7 @@ class SubmissionController extends Controller
         $input = $request->all();
         $id = $request->id;
         Submission::find($id)->update($input);
-        return redirect(route("listSubmission"))->with('success', 'account updated successfully');
+        return redirect(route("listSubmission"))->with('success', 'date updated successfully');
     }
 
 

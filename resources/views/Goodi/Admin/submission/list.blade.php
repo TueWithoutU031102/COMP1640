@@ -57,13 +57,13 @@
                 <tr>
                     <td id="title{{$sub->id}}">{{ $sub->title }}</td>
                     <td id="startDate{{$sub->startDate}}">{{ $sub->startDate }} |
-                        <button onclick="showForm('editStartDate', {{$sub->id}}, '{{$sub->startDate}}')">Sửa</button>
+                        <button onclick="showForm('editStartDate', {{$sub->id}},'{{$sub->dueDate}}' ,'{{$sub->startDate}}')">Sửa</button>
                     </td>
                     <td id="dueDate{{ $sub->dueDate }}">{{ $sub->dueDate }}
-                        <button onclick="showForm('editDueDate', {{$sub->id}}, '{{$sub->dueDate}}')">Sửa</button>
+                        <button onclick="showForm('editDueDate', {{$sub->id}}, '{{$sub->dueDate}}', '{{$sub->startDate}}')">Sửa</button>
                     </td>
                     <td onclick="getTimeRemaining('{{ $sub->startDate }}', '{{ $sub->dueDate }}', this)">
-                   | |
+                        | |
                     </td>
                     <td>
                         <a href="{{ $sub->id }}" title="View Profile">
@@ -87,14 +87,18 @@
     </div>
 
     <script !src="">
-        function showForm(formId, submissionId, date) {
+        function showForm(formId, submissionId, dueDate, startDate) {
             document.getElementById(formId).hidden = false;
             document.getElementById('submissionIdToUpdateDate').value = submissionId;
-            console.log(date)
+            console.log(dueDate)
             if (formId == 'editDueDate') {
-                document.getElementById('inputEditDueDate').value = date;
+                let dueDateInput = document.getElementById('inputEditDueDate');
+                dueDateInput.value = dueDate;
+                dueDateInput.min = startDate;
             } else {
-                document.getElementById('inputEditStartDate').value = date;
+                let startDateInput = document.getElementById('inputEditStartDate');
+                startDateInput.value = startDate;
+                startDateInput.max = dueDate;
             }
 
         }
@@ -113,17 +117,17 @@
             url = url.replace('_submissionId', submissionId)
             url = url.replace('&amp;', '&')
 
-            if(dateType == 'dueDate'){
+            if (dateType == 'dueDate') {
                 url = url.replace('_dateType', 'dueDate')
                 url = url.replace('_newDate', dueDateInput)
-            }else {
+            } else {
                 url = url.replace('_dateType', 'startDate')
                 url = url.replace('_newDate', startDateInput)
             }
             window.location.href = url;
         }
 
-        function getTimeRemaining(sD, dD, seft){
+        function getTimeRemaining(sD, dD, seft) {
             let startDate = new Date(sD);
             let dueDate = new Date(dD);
             let diffMs = (dueDate - startDate); // milliseconds between now & Christmas
@@ -137,6 +141,7 @@
             seft.innerHTML = timeRemaining;
             return timeRemaining;
         }
+
         // function closeFormByListenClick() {
         //     let editStartDate = document.getElementById("editStartDate");
         //     let editDueDate = document.getElementById("editDueDate");
