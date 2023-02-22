@@ -3,12 +3,8 @@
 @section('main')
 <br><br>
     <form action="/admin/createAcc" class="create-form" method="POST" enctype="multipart/form-data">
+        <h2>Create Account</h2><br><br>
         @csrf
-<<<<<<< HEAD
-        <h1 style="text-align: center">Create Account</h1>
-        <div class="form-group">
-            <label for="name" class="font-weight-bold">Name</label>
-=======
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -19,8 +15,7 @@
             </div>
         @endif
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
->>>>>>> 7f2f6bd5fb211731b242678308fc59a07aa3567c
+            <label for="name" class="font-weight-bold">Name</label>
             <input type="name" name="name" class="form-control" id="name" aria-describedby="name">
         </div>
         <div class="form-group">

@@ -37,7 +37,6 @@ class SubmissionController extends Controller
     public function store(Request $request)
     {
         $submission = new Submission($request->all());
-        dd($submission);
         $submission->save();
         return redirect('admin/submission/index')->with('success','submission created successfully');
     }

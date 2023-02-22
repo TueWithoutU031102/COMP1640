@@ -283,6 +283,11 @@ nav{
     padding: 20px;
 }
 
+.create-form h2{
+    font-weight: bold;
+    text-align: center;
+}
+
 .search_form{
     justify-content: flex-end;
 }
@@ -472,21 +477,7 @@ nav{
 }
 
 /* login */
-
-*{
-    padding :0;
-    margin: 0;
-}
-
-body{
-    background-color: whitesmoke no-repeat;
-    background-size: cover;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    font-family: sans-serif;
-}
-.container {
+.container_login {
     position: relative;
     margin-top: 100px;
     width: 450px;
@@ -545,13 +536,13 @@ body{
     border: 0px;
     background-color: rgb(73, 202, 235);
 
-} 
+}
 
 .login_form .check input{
     height: 16px;
     width: 16px;
     float: left;
-    
+
 }
 .login_form .check {
     padding: 10px 10px;
