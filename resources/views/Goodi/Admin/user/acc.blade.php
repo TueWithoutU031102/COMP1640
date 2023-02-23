@@ -72,7 +72,7 @@
                 </td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->role }}</td>
+                <td>{{ $user->role->name }}</td>
 
                 <td>
                     <a href="/admin/showAcc/{{ $user->id }}" title="View Profile"><button

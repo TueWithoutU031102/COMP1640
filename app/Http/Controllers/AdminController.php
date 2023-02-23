@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Admin\createAcc;
+use App\Http\Requests\Admin\updateAcc;
 
 class AdminController extends Controller
 {
@@ -37,17 +39,9 @@ class AdminController extends Controller
         return view('Goodi/admin/user/createAcc')->with('listRoles', $listRoles);
     }
 
-    public function createAcc(Request $request)
+    public function createAcc(createAcc $request)
     {
-        $this->validate($request, [
-            'name' => ['required'],
-            'email' => ['email'],
-            'password' => ['gt:1'],
-            'phone_number' => ['digits:10', 'starts_with:0'],
-            'DoB' => ['required', 'before_or_equal:today'],
-            'image' => ['image', 'required'],
-            'role_id' => ['required'],
-        ]);
+
         $user = new User($request->all());
         $user->password = Hash::make($request->password);
 
@@ -75,16 +69,8 @@ class AdminController extends Controller
             ->with('listRoles', $listRoles);
     }
 
-    public function updateAcc(Request $request)
+    public function updateAcc(updateAcc $request)
     {
-        $this->validate($request, [
-            'name' => ['required'],
-            'email' => ['email'],
-            'phone_number' => ['digits:10', 'starts_with:0'],
-            'DoB' => ['required', 'before_or_equal:today'],
-            'role_id' => ['required'],
-        ]);
-
         $input = $request->except('image');
         $input['password'] = Hash::make($request->password);
         dd($input);
