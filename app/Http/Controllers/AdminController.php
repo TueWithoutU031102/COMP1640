@@ -80,20 +80,15 @@ class AdminController extends Controller
         $this->validate($request, [
             'name' => ['required'],
             'email' => ['email'],
-            'password' => ['gt:1'],
             'phone_number' => ['digits:10', 'starts_with:0'],
             'DoB' => ['required', 'before_or_equal:today'],
-            'image' => ['image', 'required'],
             'role_id' => ['required'],
         ]);
-        $existedImage = $request->existedImage;
-        $input = $request->all();
-        $id = $request->id;
-        if ($request->image == null) {
-            $request['image'] =  $existedImage;
-        }
-        $input['image'] = $this->saveImage($request->file('image'));
 
+        $input = $request->except('image');
+        $input['password'] = Hash::make($request->password);
+        dd($input);
+        $id = $request->id;
         User::find($id)->update($input);
         return redirect('admin/acc')->with('success', 'account updated successfully');
     }
