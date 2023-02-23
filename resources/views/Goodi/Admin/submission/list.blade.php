@@ -94,7 +94,9 @@
             if (formId == 'editDueDate') {
                 let dueDateInput = document.getElementById('inputEditDueDate');
                 dueDateInput.value = dueDate;
-                dueDateInput.min = startDate;
+                dueDateInput.min = startDate.replace(" ", 'T');
+
+                console.log("min dueDaet", dueDateInput.min)
             } else {
                 let startDateInput = document.getElementById('inputEditStartDate');
                 startDateInput.value = startDate;
@@ -128,9 +130,9 @@
         }
 
         function getTimeRemaining(sD, dD, seft) {
-            let startDate = new Date(sD);
+            let now = new Date();
             let dueDate = new Date(dD);
-            let diffMs = (dueDate - startDate); // milliseconds between now & Christmas
+            let diffMs = (dueDate - now); // milliseconds between now & Christmas
             let diffDays = Math.floor(diffMs / 86400000); // days
             let diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
             let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
