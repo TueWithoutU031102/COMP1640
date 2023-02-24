@@ -1,4 +1,4 @@
-@extends('Goodi.Admin.admin_navbar')
+@extends('Goodi.User.admin_navbar')
 
 @section('main')
     <h1>Create Submission</h1>
@@ -10,22 +10,17 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input type="longText" name="description" class="form-control" id="description"
-                   aria-describedby="description">
+            <input type="longText" name="description" class="form-control" id="description" aria-describedby="description">
         </div>
         <div class="mb-3">
             <label for="startDate" class="form-label">Date Started</label>
             <input type="datetime-local" name="startDate" class="form-control" id="startDateInput"
-                   aria-describedby="startDate" style="width: 300px"
-                   onchange="limitDueDate(this.value)"
-            >
+                aria-describedby="startDate" style="width: 300px" onchange="limitDueDate(this.value)">
         </div>
         <div class="mb-3">
             <label for="dueDate" class="form-label">Date Finished</label>
-            <input type="datetime-local" name="dueDate" class="form-control" id="dueDateInput"
-                   aria-describedby="dueDate" style="width: 300px"
-                   onchange="checkDueDate(this)"
-            >
+            <input type="datetime-local" name="dueDate" class="form-control" id="dueDateInput" aria-describedby="dueDate"
+                style="width: 300px" onchange="checkDueDate(this)">
         </div>
         <button type="submit" class="btn btn-primary" id="submitCreate">Submit</button>
     </form>
@@ -33,7 +28,7 @@
         <button class="btn btn-primary">Back</button>
     </a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
     <script !src="">
         let startDateInput = document.getElementById('startDateInput');
@@ -42,6 +37,7 @@
         startDateInput.value = today.toISOString().slice(0, 16);
 
         limitDueDate(today.toISOString().slice(0, 16))
+
         function limitDueDate(startDate) {
             let dueDateInput = document.getElementById('dueDateInput');
             dueDateInput.min = startDate;
@@ -52,10 +48,10 @@
             let dueDate = new Date(seft.value);
             let now = new Date();
             if (dueDate < now) {
-                submitCreate.disabled  = true;
+                submitCreate.disabled = true;
                 alert("due date must be latter than " + startDateInput.value.replace('T', ' - '));
             } else {
-                submitCreate.disabled  = false;
+                submitCreate.disabled = false;
             }
         }
     </script>

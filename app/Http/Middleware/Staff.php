@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Support\Facades\Auth;
-
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class Admin
+
+class Staff
 {
     /**
      * Handle an incoming request.
@@ -20,7 +20,7 @@ class Admin
     {
         $user = Auth::user(); // lay thong tin khi dang nhap
         $route = $request->route()->getName();
-        if (!$request->user()->isAdmin())
+        if (!$request->user()->isStaff())
             abort(403);
         return $next($request);
     }

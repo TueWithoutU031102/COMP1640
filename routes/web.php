@@ -4,6 +4,7 @@ use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Carbon;
 
 /*
@@ -27,36 +28,36 @@ Route::get('/idea', function () {
 
 Route::get('/login', function () {
     return view('Goodi.login');
-})->name('admin.login');
+})->name('user.login');
 
 Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::middleware(['admin'])->group(function () {
-    Route::get('admin/index', function () {
-        return view('Goodi/admin/index');
-    })->name('admin.index');
+Route::get('index', [UserController::class, 'index'])->name('user.index');
 
-    Route::get('admin/acc', [AdminController::class, 'acc'])->name('admin.acc');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
 
-    Route::get('admin/createAcc', [AdminController::class, 'showFormCreateAccount']);
+    Route::get('acc', [AdminController::class, 'acc'])->name('admin.acc');
 
-    Route::post('admin/createAcc', [AdminController::class, 'createAcc']);
+    Route::get('createAcc', [AdminController::class, 'showFormCreateAccount']);
 
-    Route::get("admin/showAcc/{id}", [AdminController::class, 'showAcc']);
+    Route::post('createAcc', [AdminController::class, 'createAcc']);
 
-    Route::get("admin/editAcc/{id}", [AdminController::class, 'showFormEditAccount']);
-    Route::post("admin/editAcc/{id}", [AdminController::class, 'updateAcc']);
+    Route::get("showAcc/{id}", [AdminController::class, 'showAcc']);
 
-    Route::post("admin/deleteAcc/{user}", [AdminController::class, 'delete']);
+    Route::get("editAcc/{id}", [AdminController::class, 'showFormEditAccount']);
+
+    Route::post("editAcc/{id}", [AdminController::class, 'updateAcc']);
+
+    Route::post("deleteAcc/{user}", [AdminController::class, 'delete']);
 
     /////// SUBMISSION//
-    Route::get("admin/submission/index", [SubmissionController::class, 'index'])->name("listSubmission");
-    Route::get("admin/submission/create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
-    Route::post("admin/submission/create", [SubmissionController::class, 'store'])->name("storeSubmission");
-    Route::get("admin/submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
-    Route::get("admin/submission/update", [SubmissionController::class, 'update'])->name("update");
+    Route::get("submission/index", [SubmissionController::class, 'index'])->name("listSubmission");
+    Route::get("submission/create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
+    Route::post("submission/create", [SubmissionController::class, 'store'])->name("storeSubmission");
+    Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
+    Route::get("submission/update", [SubmissionController::class, 'update'])->name("update");
 });
 
-Route::prefix('/a')->group(__DIR__.'/web/submission.php');
+Route::prefix('/a')->group(__DIR__ . '/web/submission.php');
 
-Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');

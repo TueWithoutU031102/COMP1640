@@ -30,22 +30,24 @@ class AdminController extends Controller
     public function acc()
     {
         $users = User::where('role_id', '!=', '1')->get();
-        return view('Goodi.admin.user.acc', ['users' => $users]);
+        return view('Goodi/User/admin/account/acc', ['users' => $users]);
     }
 
     function showFormCreateAccount()
     {
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
-        return view('Goodi/admin/user/createAcc')->with('listRoles', $listRoles);
+        return view('Goodi/User/admin/account/createAcc')->with('listRoles', $listRoles);
     }
 
     public function createAcc(createAcc $request)
     {
         $user = new User($request->all());
         $user->password = Hash::make($request->password);
+
         $user->image = $this->saveImage($request->file('image'));
+
         $user->save();
-        return redirect('admin/acc')->with('errors', 'Create Successful!!!!!')
+        return redirect()->route('admin.acc')->with('errors', 'Create Successful!!!!!')
             ->with('listRole');
     }
 
