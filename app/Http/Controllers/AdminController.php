@@ -30,13 +30,13 @@ class AdminController extends Controller
     public function acc()
     {
         $users = User::where('role_id', '!=', '1')->get();
-        return view('Goodi/User/admin/account/acc', ['users' => $users]);
+        return view('Goodi/User/admin/Account/acc', ['users' => $users]);
     }
 
     function showFormCreateAccount()
     {
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
-        return view('Goodi/User/admin/account/createAcc')->with('listRoles', $listRoles);
+        return view('Goodi/User/admin/Account/createAcc')->with('listRoles', $listRoles);
     }
 
     public function createAcc(createAcc $request)
@@ -54,9 +54,9 @@ class AdminController extends Controller
 
     public function showAcc($id)
     {
-        if ($id == 1) return redirect('admin/acc')->with('success', 'You must not see this account');
+        if ($id == 1) return redirect('admin/acc')->with('success', 'You must not see this Account');
         $account = User::find($id);
-        return view('Goodi/admin/user/showAcc')->with('account', $account);
+        return view('Goodi/admin/user/showAcc')->with('Account', $account);
     }
 
     public function showFormEditAccount($id)
@@ -64,7 +64,7 @@ class AdminController extends Controller
         $account = User::find($id);
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
         return view('Goodi/admin/user/editAcc')
-            ->with('account', $account)
+            ->with('Account', $account)
             ->with('listRoles', $listRoles);
     }
 
@@ -74,14 +74,14 @@ class AdminController extends Controller
         $input['password'] = Hash::make($request->password);
         $id = $request->id;
         User::find($id)->update($input);
-        return redirect('admin/acc')->with('success', 'account updated successfully');
+        return redirect('admin/acc')->with('success', 'Account updated successfully');
     }
 
     public function delete(User $user)
     {
         $user->removeImage();
         $user->delete();
-        return redirect('admin/acc')->with('success', 'account deleted successfully');
+        return redirect('admin/acc')->with('success', 'Account deleted successfully');
     }
 
     protected function saveImage(UploadedFile $file)

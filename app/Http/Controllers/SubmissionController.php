@@ -18,7 +18,7 @@ class SubmissionController extends Controller
     public function index()
     {
         $subs = Submission::all();
-        return view('Goodi/User/Admin/submission/list', ['subs' => $subs]);
+        return view('Goodi/User/Admin/Submission/list', ['subs' => $subs]);
     }
 
     /**
@@ -28,7 +28,7 @@ class SubmissionController extends Controller
      */
     public function create()
     {
-        return view('Goodi/User/Admin/submission/create');
+        return view('Goodi/User/Admin/Submission/create');
     }
 
     /**
@@ -53,13 +53,13 @@ class SubmissionController extends Controller
         $isStartDateLessThanDueDate = $startDate->lt($dueDate);
         if ($isStartDateLessThanDueDate) {
             $submission->save();
-            return redirect('admin/submission/index')
-                ->with('success', 'submission created successfully')
+            return redirect('admin/Submission/index')
+                ->with('success', 'Submission created successfully')
                 ->with('$different', $different);
         }
 
         $submission->save();
-        return redirect('admin/submission/index')->with('success', 'submission created successfully');
+        return redirect('admin/Submission/index')->with('success', 'Submission created successfully');
     }
 
     /**
@@ -71,7 +71,7 @@ class SubmissionController extends Controller
     public function show($id)
     {
         $submission = Submission::find($id);
-        return view('Goodi/User/Admin/submission/show')->with('submission', $submission);
+        return view('Goodi/User/Admin/Submission/show')->with('Submission', $submission);
 
     }
 
