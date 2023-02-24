@@ -42,7 +42,14 @@ class User extends Authenticatable
         return unlink(public_path($this->image));
     }
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class);
+    }
+    public function isAdmin(): bool
+    {
+        if ($this->role_id == '1')
+            return true;
+        return false;
     }
 }

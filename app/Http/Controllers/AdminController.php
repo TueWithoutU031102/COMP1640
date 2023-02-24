@@ -41,12 +41,9 @@ class AdminController extends Controller
 
     public function createAcc(createAcc $request)
     {
-
         $user = new User($request->all());
         $user->password = Hash::make($request->password);
-
         $user->image = $this->saveImage($request->file('image'));
-
         $user->save();
         return redirect('admin/acc')->with('errors', 'Create Successful!!!!!')
             ->with('listRole');
@@ -73,7 +70,6 @@ class AdminController extends Controller
     {
         $input = $request->except('image');
         $input['password'] = Hash::make($request->password);
-        dd($input);
         $id = $request->id;
         User::find($id)->update($input);
         return redirect('admin/acc')->with('success', 'account updated successfully');
