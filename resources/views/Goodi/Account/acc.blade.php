@@ -43,7 +43,7 @@
         <div class="form-group">
             <input class="search_bar" placeholder="Search by name">
         </div>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+        {{-- <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button> --}}
     </form>
         <a type="button" href="createAcc" class="btn btn-primary font-weight-bold">+</a>
     </div>

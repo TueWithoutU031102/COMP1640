@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::get('/idea', function () {
-    return view('Goodi.User.Admin.Idea.index');
+    return view('Goodi.Idea.index');
 });
 
 Route::get('/login', function () {

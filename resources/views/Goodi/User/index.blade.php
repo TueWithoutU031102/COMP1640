@@ -1,3 +1,3 @@
 @extends('Master.Master')
 
-@extends('Goodi.User.admin_navbar')
+@include('Goodi.nav_bar')

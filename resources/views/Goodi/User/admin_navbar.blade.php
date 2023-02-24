@@ -24,7 +24,7 @@
             <li>
                 <div class="action">
                     <div class="profile" onclick="profileToggle();">
-                        <img src="images/avatar_63f826aa19394.jpg" alt="mdo" width="50" height="50" class="rounded-circle">
+                        <img src="images/avatar_63f8b0069c831.jpg" alt="mdo" width="50" height="50" class="rounded-circle">
                     </div>
                     <div class="menu_pro">
                         <div class="info">
