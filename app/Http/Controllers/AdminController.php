@@ -63,8 +63,8 @@ class AdminController extends Controller
     {
         $account = User::find($id);
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
-        return view('Goodi/User/editAcc')
-            ->with('Account', $account)
+        return view('Goodi/Account/editAcc')
+            ->with('account', $account)
             ->with('listRoles', $listRoles);
     }
 
