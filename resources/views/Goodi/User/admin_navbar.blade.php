@@ -24,13 +24,13 @@
             <li>
                 <div class="action">
                     <div class="profile" onclick="profileToggle();">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle">
+                        <img src="images/avatar_63f826aa19394.jpg" alt="mdo" width="50" height="50" class="rounded-circle">
                     </div>
                     <div class="menu_pro">
                         <div class="info">
                             <br>
-                            <h3>Username</h3>
-                            <p>Role</p>
+                            <h3>{{Auth::user()->name}}</h3>
+                            <p>{{Auth::user()->role->name}}</p>
                         </div>
                         <ul>
                             <li><a href="#">My Profile</a></li>

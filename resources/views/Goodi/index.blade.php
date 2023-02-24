@@ -11,7 +11,9 @@
             Goodi, Idea Forum for Staff in University of Greenwich
         </p>
         <br>
-        <a href="/login" class="action-btn" style="text-decoration: none;">LOGIN NOW</a>
+        @if(!Auth::user())
+            <a href="/login" class="action-btn" style="text-decoration: none;">LOGIN NOW</a>
+        @endif
     </div>
 </section>
 <h1 class="title-header">About Greenwich University</h1>

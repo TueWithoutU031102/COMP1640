@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::get('/idea', function () {
-    return view('Goodi.User.Admin.idea.index');
+    return view('Goodi.User.Admin.Idea.index');
 });
 
 Route::get('/login', function () {
@@ -51,11 +51,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::post("deleteAcc/{user}", [AdminController::class, 'delete']);
 
     /////// SUBMISSION//
-    Route::get("submission/index", [SubmissionController::class, 'index'])->name("listSubmission");
-    Route::get("submission/create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
-    Route::post("submission/create", [SubmissionController::class, 'store'])->name("storeSubmission");
-    Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
-    Route::get("submission/update", [SubmissionController::class, 'update'])->name("update");
+    Route::get("Submission/index", [SubmissionController::class, 'index'])->name("listSubmission");
+    Route::get("Submission/create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
+    Route::post("Submission/create", [SubmissionController::class, 'store'])->name("storeSubmission");
+    Route::get("Submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
+    Route::get("Submission/update", [SubmissionController::class, 'update'])->name("update");
 });
 
 Route::prefix('/a')->group(__DIR__ . '/web/submission.php');
