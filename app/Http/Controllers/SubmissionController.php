@@ -18,7 +18,7 @@ class SubmissionController extends Controller
     public function index()
     {
         $subs = Submission::all();
-        return view('Goodi/User/Admin/Submission/list', ['subs' => $subs]);
+        return view('Goodi/Submission/list', ['subs' => $subs]);
     }
 
     /**
@@ -28,7 +28,7 @@ class SubmissionController extends Controller
      */
     public function create()
     {
-        return view('Goodi/User/Admin/Submission/create');
+        return view('Goodi/Submission/create');
     }
 
     /**
@@ -71,7 +71,7 @@ class SubmissionController extends Controller
     public function show($id)
     {
         $submission = Submission::find($id);
-        return view('Goodi/User/Admin/Submission/show')->with('Submission', $submission);
+        return view('Goodi/Submission/show')->with('Submission', $submission);
 
     }
 
