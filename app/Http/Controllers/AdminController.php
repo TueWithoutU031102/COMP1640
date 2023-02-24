@@ -30,13 +30,13 @@ class AdminController extends Controller
     public function acc()
     {
         $users = User::where('role_id', '!=', '1')->get();
-        return view('Goodi/User/admin/Account/acc', ['users' => $users]);
+        return view('Goodi/Account/acc', ['users' => $users]);
     }
 
     function showFormCreateAccount()
     {
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
-        return view('Goodi/User/admin/Account/createAcc')->with('listRoles', $listRoles);
+        return view('Goodi/Account/createAcc')->with('listRoles', $listRoles);
     }
 
     public function createAcc(createAcc $request)
@@ -56,14 +56,14 @@ class AdminController extends Controller
     {
         if ($id == 1) return redirect('admin/acc')->with('success', 'You must not see this Account');
         $account = User::find($id);
-        return view('Goodi/admin/user/showAcc')->with('Account', $account);
+        return view('Goodi/User/showAcc')->with('Account', $account);
     }
 
     public function showFormEditAccount($id)
     {
         $account = User::find($id);
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
-        return view('Goodi/admin/user/editAcc')
+        return view('Goodi/User/editAcc')
             ->with('Account', $account)
             ->with('listRoles', $listRoles);
     }
