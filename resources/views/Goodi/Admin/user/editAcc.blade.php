@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
             <label for="password" class="font-weight-bold">Password</label>
-            <input type="password" value="123456" name="password" class="form-control" id="password">
+            <input type="password" value="" name="password" class="form-control" id="password">
         </div>
         <div class="form-group">
             <label for="phone_number" class="font-weight-bold">Phone Number</label>
