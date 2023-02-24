@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Submission\createSubmission;
+use App\Http\Requests\Submission\updateSubmission;
 use App\Models\Submission;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -37,7 +38,7 @@ class SubmissionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(createSubmission $request)
     {
         $authorId = Auth::user()->getAuthIdentifier();
         $submission = new Submission($request->all());
@@ -48,7 +49,7 @@ class SubmissionController extends Controller
 
         $days = $startDate->diffInHours($dueDate);
         $minutes = $startDate->diffInMinutes($dueDate) % 60;
-        $different = (string)$days." hours |".(string)$minutes." minutes";
+        $different = (string)$days . " hours |" . (string)$minutes . " minutes";
 
         $isStartDateLessThanDueDate = $startDate->lt($dueDate);
         if ($isStartDateLessThanDueDate) {
@@ -72,7 +73,6 @@ class SubmissionController extends Controller
     {
         $submission = Submission::find($id);
         return view('Goodi/Submission/show')->with('Submission', $submission);
-
     }
 
     /**
@@ -92,7 +92,7 @@ class SubmissionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(updateSubmission $request)
     {
         $input = $request->all();
         $id = $request->id;
@@ -112,9 +112,10 @@ class SubmissionController extends Controller
         //
     }
 
-    function getDifferent($sD, $dD){
+    function getDifferent($sD, $dD)
+    {
         $days = $sD->diffInHours($dD);
         $minutes = $sD->diffInMinutes($dD) % 60;
-        return (string)$days." hours |".(string)$minutes." minutes";
+        return (string)$days . " hours |" . (string)$minutes . " minutes";
     }
 }

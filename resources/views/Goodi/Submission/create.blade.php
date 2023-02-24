@@ -24,7 +24,7 @@
         </div>
         <button type="submit" class="btn btn-primary" id="submitCreate">Submit</button>
     </form>
-    <a href="/admin/sub">
+    <a href="/admin/submission/index">
         <button class="btn btn-primary">Back</button>
     </a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

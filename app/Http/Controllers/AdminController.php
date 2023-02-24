@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Submission;
-use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\Admin\createAcc;
-use App\Http\Requests\Admin\updateAcc;
+use App\Http\Requests\Account\createAcc;
+use App\Http\Requests\Account\updateAcc;
 
 class AdminController extends Controller
 {

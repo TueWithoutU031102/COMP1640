@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Account;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class updateAcc extends FormRequest
+class createAcc extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,20 +26,26 @@ class updateAcc extends FormRequest
         return [
             'name' => ['required'],
             'email' => ['email'],
+            'password' => ['gt:1'],
             'phone_number' => ['digits:10', 'starts_with:0'],
             'DoB' => ['required', 'before_or_equal:today'],
+            'image' => ['image', 'required'],
             'role_id' => ['required'],
         ];
     }
+
     public function messages()
     {
         return [
             'name.required' => 'Name cannot be empty',
             'email.email' => 'Email cannot be empty and must be in the form of email',
+            'password.gt' => 'Password must be at least 1 character',
             'phone_number.digits' => 'Phone number must be numeric and 10 characters long',
             'phone_number.starts_with' => 'Phone number must start with 0',
             'DoB.required' => 'The date of birth cannot be empty',
             'DoB.before_or_equal' => 'Please declare the correct date of birth',
+            'image.image' => 'The file under validation must be an image (jpg, jpeg, png, bmp, gif, svg, or webp).',
+            'image.required' => 'Image cannot be empty',
             'role_id.required' => 'The role cannot be empty',
         ];
     }
