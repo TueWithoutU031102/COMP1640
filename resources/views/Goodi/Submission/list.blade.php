@@ -32,7 +32,7 @@
     </div>
         <br><br>
     <div class="row" id="editForm">
-        <input type="text" id="submissionIdToUpdateDate">
+        {{-- <input type="text" id="submissionIdToUpdateDate"> --}}
 
         <div class="editStartDate popup col-4" id="editStartDate" hidden>
             <h1>StartDate</h1>
@@ -49,7 +49,7 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
