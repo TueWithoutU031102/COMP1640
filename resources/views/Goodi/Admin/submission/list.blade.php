@@ -141,6 +141,9 @@
             console.log(timeRemaining);
 
             seft.innerHTML = timeRemaining;
+            if(now > dueDate){
+                seft.style.color ="red"
+            }
             return timeRemaining;
         }
 
