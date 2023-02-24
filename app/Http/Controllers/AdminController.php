@@ -14,38 +14,28 @@ use App\Http\Requests\Admin\updateAcc;
 
 class AdminController extends Controller
 {
-    public function index()
-    {
-        return Auth::guard('admin')->check()
-            ? to_route('admin.index')
-            : to_route('Goodi.login');
-    }
-
-    public function logout()
-    {
-        Auth::guard('admin')->logout();
-        return redirect('/');
-    }
 
     public function acc()
     {
         $users = User::where('role_id', '!=', '1')->get();
-        return view('Goodi.admin.user.acc', ['users' => $users]);
+        return view('Goodi/User/admin/account/acc', ['users' => $users]);
     }
 
     function showFormCreateAccount()
     {
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
-        return view('Goodi/admin/user/createAcc')->with('listRoles', $listRoles);
+        return view('Goodi/User/admin/account/createAcc')->with('listRoles', $listRoles);
     }
 
     public function createAcc(createAcc $request)
     {
         $user = new User($request->all());
         $user->password = Hash::make($request->password);
+
         $user->image = $this->saveImage($request->file('image'));
+
         $user->save();
-        return redirect('admin/acc')->with('errors', 'Create Successful!!!!!')
+        return redirect()->route('admin.acc')->with('errors', 'Create Successful!!!!!')
             ->with('listRole');
     }
 
@@ -54,14 +44,14 @@ class AdminController extends Controller
     {
         if ($id == 1) return redirect('admin/acc')->with('success', 'You must not see this account');
         $account = User::find($id);
-        return view('Goodi/admin/user/showAcc')->with('account', $account);
+        return view('Goodi/user/admin/account/showAcc')->with('account', $account);
     }
 
     public function showFormEditAccount($id)
     {
         $account = User::find($id);
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
-        return view('Goodi/admin/user/editAcc')
+        return view('Goodi/user/admin/account/editAcc')
             ->with('account', $account)
             ->with('listRoles', $listRoles);
     }

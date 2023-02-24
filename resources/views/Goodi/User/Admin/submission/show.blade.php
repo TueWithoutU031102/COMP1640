@@ -1,4 +1,4 @@
-@extends('Goodi.Admin.admin_navbar')
+@extends('Goodi.User.admin_navbar')
 
 @section('main')
     <h1>{{$submission->title}}</h1>

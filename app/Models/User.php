@@ -52,4 +52,22 @@ class User extends Authenticatable
             return true;
         return false;
     }
+    public function isStaff(): bool
+    {
+        if ($this->role_id != '2')
+            return true;
+        return false;
+    }
+    public function isQAC(): bool
+    {
+        if ($this->role_id != '3')
+            return true;
+        return false;
+    }
+    public function isQAM(): bool
+    {
+        if ($this->role_id != '4')
+            return true;
+        return false;
+    }
 }
