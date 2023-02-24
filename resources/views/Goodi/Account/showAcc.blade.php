@@ -1,17 +1,17 @@
 @extends('Goodi.nav_bar')
 
 @section('main')
-    <h1>Account Information</h1>
+<br>
+<h1 class="display-4" style="text-align: center; font-weight: bold">ACCOUNT INFORMATION</h1><br>
     <div class="user-card">
         <img src="{{ asset($account->image) }}">
         <div class="user-information">
-            <h2>{{ $account->name }}</h3>
-                <h4>Information</h4>
-                <p>User ID: {{ $account->id }}</p>
-                <p>Email: {{ $account->email }}</p>
-                <p>Phone Number: {{ $account->phonenumber }}</p>
-                <p>DOB: {{ $account->DoB }}</p>
-                <p>Role: {{ $account->role->name }}</p>
+            <h2>{{ $account->name }}</h2>
+                <p><span>User ID: </span>{{ $account->id }}</p>
+                <p><span>Email: </span>{{ $account->email }}</p>
+                <p><span>Phone Number: </span>{{ $account->phone_number }}</p>
+                <p><span>DOB: </span>{{ $account->DoB }}</p>
+                <p><span>Role: </span>{{ $account->role->name }}</p>
                 <a href="/admin/acc">
                     <button class="btn btn-primary">Back</button>
                 </a>

@@ -14,14 +14,23 @@
 
         .row {}
     </style>
-    <h2>Submissions</h2>
-
+<br><br>
+<div class="container">
+    <br>
+    <h1 class="display-4" style="text-align: center; font-weight: bold">Submissions</h1><br>
     @if (Session::has('success'))
         <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
     @endif
-    <a href="/admin/submission/create">
-        <button class="btn btn-primary">Create Submission</button>
-    </a>
+    <div class="create-btn">
+        <form action="" class="form-inline" >
+            <div class="form-group">
+                <input class="search_bar" placeholder="Search by name">
+            </div>
+            {{-- <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button> --}}
+        </form>
+        <a type="button" href="/admin/submission/create" class="btn btn-primary" style="font-weight: bold; font-size: 20px;">+</a>
+    </div>
+        <br><br>
     <div class="row" id="editForm">
         <input type="text" id="submissionIdToUpdateDate">
 
@@ -83,6 +92,7 @@
             </tbody>
         </table>
     </div>
+</div>
 
     <script !src="">
         function showForm(formId, submissionId, dueDate, startDate) {
@@ -166,3 +176,7 @@
         // }
     </script>
 @endsection
+
+
+
+

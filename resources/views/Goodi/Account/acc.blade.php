@@ -19,8 +19,11 @@
             box-shadow: 0 0 0 4px #333, 0 0 0 6px #86ff3b
         }
         .img li img{
+            height: 1500%;
             width: 1500%;
             visibility: hidden;
+            object-fit: cover;
+            object-position: center center;
             background: rgba(44, 181, 137, 0.3);
             margin-left: 100px;
             transform: translateX(-170%) translateY(-70%);
@@ -45,7 +48,7 @@
         </div>
         {{-- <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button> --}}
     </form>
-        <a type="button" href="createAcc" class="btn btn-primary font-weight-bold">+</a>
+        <a type="button" href="createAcc" class="btn btn-primary" style="font-weight: bold; font-size: 20px;">+</a>
     </div>
     <br><br>
     <table class="table table-hover">
@@ -55,8 +58,6 @@
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
-            <th scope="col">&nbsp;</th>
-            <th scope="col">&nbsp;</th>
             <th scope="col">&nbsp;</th>
         </tr>
         </thead>
