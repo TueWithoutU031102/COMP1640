@@ -56,15 +56,15 @@ class AdminController extends Controller
     {
         if ($id == 1) return redirect('admin/acc')->with('success', 'You must not see this Account');
         $account = User::find($id);
-        return view('Goodi/User/showAcc')->with('Account', $account);
+        return view('Goodi/Account/showAcc')->with('account', $account);
     }
 
     public function showFormEditAccount($id)
     {
         $account = User::find($id);
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
-        return view('Goodi/User/editAcc')
-            ->with('Account', $account)
+        return view('Goodi/Account/editAcc')
+            ->with('account', $account)
             ->with('listRoles', $listRoles);
     }
 
