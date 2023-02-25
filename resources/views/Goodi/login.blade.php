@@ -37,7 +37,7 @@
                 <div class="check">
                     <input type="checkbox" name="check"> <label for="check">Remember me</label>
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit">Login</button>
                 <h5>Or Sign-up Using</h5>
                 <div class="logosocial">
                 {{-- <a href=""><img src="css/images/—Pngtree—facebook social media icon_8704814.png" padding="100px" alt="" ></a>

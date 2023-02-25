@@ -72,7 +72,7 @@ class SubmissionController extends Controller
     public function show($id)
     {
         $submission = Submission::find($id);
-        return view('Goodi/Submission/show')->with('Submission', $submission);
+        return view('Goodi/Submission/show')->with('submission', $submission);
     }
 
     /**
@@ -99,7 +99,6 @@ class SubmissionController extends Controller
         Submission::find($id)->update($input);
         return redirect(route("listSubmission"))->with('success', 'date updated successfully');
     }
-
 
     /**
      * Remove the specified resource from storage.

@@ -68,9 +68,15 @@ class AdminController extends Controller
 
     public function updateAcc(updateAcc $request)
     {
-        $input = $request->except('image');
+        $input = $request->all();
+
+        if ($request->hasFile('image')) {
+            $input['image'] = $this->saveImage($request->file('image'));
+        }
+
         $input['password'] = Hash::make($request->password);
         $id = $request->id;
+        User::find($id)->removeImage();
         User::find($id)->update($input);
         return redirect('admin/acc')->with('success', 'Account updated successfully');
     }

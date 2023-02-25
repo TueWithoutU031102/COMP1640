@@ -20,7 +20,7 @@ class Admin
     {
         $user = Auth::user(); // lay thong tin khi dang nhap
         $route = $request->route()->getName();
-        if (!$request->user()->isAdmin($request))
+        if (!$request->user()->isUser($request))
             abort(403);
         return $next($request);
     }

@@ -1,9 +1,10 @@
 @extends('Goodi.nav_bar')
 
 @section('main')
-<br><br>
-    <form action="/admin/editAcc/{id}" class="create-form" method="POST">
+    <br><br>
+    <form action="/admin/editAcc/{id}" class="create-form" method="POST" enctype="multipart/form-data">
         <h2>Edit Account</h2><br><br>
+        <img style="width:100%;" src="{{ asset($account->image) }}">
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -17,7 +18,8 @@
         <input type="hidden" name="id" value="{{ $account->id }}" name="id" class="form-control" id="id">
         <div class="form-group">
             <label for="name" class="font-weight-bold">Name</label>
-            <input type="text" value="{{ $account->name }}" name="name" class="form-control" id="name" aria-describedby="name">
+            <input type="text" value="{{ $account->name }}" name="name" class="form-control" id="name"
+                aria-describedby="name">
         </div>
         <div class="form-group">
             <label for="email" class="font-weight-bold">Email address</label>
@@ -39,7 +41,6 @@
         </div>
         <div class="form-group">
             <label for="image" class="font-weight-bold">Image</label>
-            <input type="longText" value="{{ $account->image }}" name="existedImage">
             <input type="file" value="{{ $account->image }}" name="image" class="form-control" id="image">
         </div>
         <div class="form-group">
