@@ -28,6 +28,7 @@
                                 <li><a href="/submission/index">Submissions</a></li>
                                 <li><a href="/admin/acc">Accounts</a></li>
                                 <li><a href="/idea/index">Ideas</a></li>
+                                <li><a href="/category/index">Categories</a></li>
                             </ul>
                         </div>
                     </div>
