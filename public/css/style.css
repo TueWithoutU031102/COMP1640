@@ -108,6 +108,7 @@ nav{
 }
 
 .menu{
+    z-index: 10;
     background-color: aliceblue;
     border-radius: 20px;
     position: absolute;
@@ -143,6 +144,7 @@ nav{
 }
 
 .menu_pro{
+    z-index: 10;
     background-color: aliceblue;
     border-radius: 20px;
     position: absolute;
@@ -314,6 +316,7 @@ nav{
 }
 
 .idea-container{
+    background: #eeeeee6d;
     display: flex;
     justify-content: space-between;
     padding: 13px 5%;
@@ -322,7 +325,7 @@ nav{
 .left-side{
     margin-top: 60px;
     border-radius: 20px;
-    background: aliceblue;
+    background: transparent;
     flex-basis: 25%;
     position: sticky;
     top: 70px;
@@ -332,7 +335,7 @@ nav{
 
 .main-content{
     border-radius: 20px;
-    background: white;
+    /* background: #eeeeee6d; */
     flex-basis: 47%;
     position: sticky;
     top: 70px;
@@ -341,6 +344,7 @@ nav{
 }
 
 .right-side{
+
     margin-top: 60px;
     border-radius: 20px;
     background: aliceblue;
@@ -413,11 +417,34 @@ nav{
 }
 
 .create-idea{
+    height: 0%;
     background: #EAE7DD;
     border: solid #a7a7a7;
     padding: 20px 20px 20px 20px;
     border-radius: 20px;
+    transition: 0.2s;
+    visibility: hidden;
+    opacity: 0;
 }
+
+.create-idea.active{
+    height: 43%;
+    visibility: visible;
+    opacity: 1;
+}
+
+.button-idea{
+    transition: 0.2s;
+    visibility: hidden;
+    transform: translateY(-200px);
+}
+
+.button-idea.active{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 .user-card{
     width: 1130px;
@@ -468,6 +495,38 @@ nav{
 .user-information span{
     font-weight: bold;
     color: #4c4b42;
+}
+
+.post-container{
+    background: white;
+    border:#d1d1d1 solid;
+    border-radius: 20px;
+    padding: 20px 10px 20px 10px;
+}
+
+.user-detail{
+    display: flex;
+    align-items: flex-start;
+}
+
+.post-content{
+    margin-left: 10px;
+}
+
+.post-content h4{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.post-content small{
+    font-size: 14px;
+    color: #a7a7a7;
+}
+
+.post-content p{
+    font-weight: none;
+    font-size: 16px;
+    letter-spacing: 1px;
 }
 
 
