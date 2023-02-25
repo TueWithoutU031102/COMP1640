@@ -21,6 +21,7 @@
                 </div>
             @endif
             <form class="login_form"  method="POST" action="/login">
+                @csrf
                 <h2>Login</h2>
                 <div class="input_box">
                     <input type="text" name="email" required="required">
@@ -36,7 +37,7 @@
                 <div class="check">
                     <input type="checkbox" name="check"> <label for="check">Remember me</label>
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit">Login</button>
                 <h5>Or Sign-up Using</h5>
                 <div class="logosocial">
                 {{-- <a href=""><img src="css/images/—Pngtree—facebook social media icon_8704814.png" padding="100px" alt="" ></a>

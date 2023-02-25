@@ -2,7 +2,7 @@
 
 @section('main')
     <h1>Create Submission</h1>
-    <form action="/admin/submission/create" method="POST" enctype="multipart/form-data">
+    <form action="/submission/create" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>

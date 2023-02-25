@@ -28,7 +28,7 @@
             </div>
             {{-- <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button> --}}
         </form>
-        <a type="button" href="/admin/submission/create" class="btn btn-primary" style="font-weight: bold; font-size: 20px;">+</a>
+        <a type="button" href="/submission/create" class="btn btn-primary" style="font-weight: bold; font-size: 20px;">+</a>
     </div>
         <br><br>
     <div class="row" id="editForm">
@@ -74,7 +74,7 @@
                             | |
                         </td>
                         <td>
-                            <a href="{{ $sub->id }}" title="View Profile">
+                            <a href="/submission/show/{{ $sub->id }}" title="View Profile">
                                 <button class="btn btn-info btn-sm"><i aria-hidden="true">View</i></button>
                             </a>
                             <a href="{{ $sub->id }}" title="Edit Account">

@@ -46,6 +46,13 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function isUser(): bool
+    {
+        if ($this->role_id != null)
+            return true;
+        return false;
+    }
     public function isAdmin(): bool
     {
         if ($this->role_id == '1')

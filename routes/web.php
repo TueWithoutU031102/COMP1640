@@ -22,10 +22,6 @@ Route::get('/', function () {
     return view('Goodi.index');
 });
 
-Route::get('/idea', function () {
-    return view('Goodi.Idea.index');
-});
-
 Route::get('/login', function () {
     return view('Goodi.login');
 })->name('user.login');
@@ -34,8 +30,23 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('index', [UserController::class, 'index'])->name('user.index');
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+Route::get("submission/index", [SubmissionController::class, 'index'])->name("indexSubmission");
 
+Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
+
+Route::get('idea/index', function () {
+    return view('Goodi.Idea.index');
+});
+Route::group(['prefix' => 'submission', 'middleware' => ['auth', 'admin']], function () {
+    /////// SUBMISSION//
+    Route::get("create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
+
+    Route::post("create", [SubmissionController::class, 'store'])->name("storeSubmission");
+
+    Route::get("update", [SubmissionController::class, 'update'])->name("update");
+});
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+    /////// ADMIN//
     Route::get('acc', [AdminController::class, 'acc'])->name('admin.acc');
 
     Route::get('createAcc', [AdminController::class, 'showFormCreateAccount']);
@@ -49,13 +60,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::post("editAcc/{id}", [AdminController::class, 'updateAcc']);
 
     Route::post("deleteAcc/{user}", [AdminController::class, 'delete']);
-
-    /////// SUBMISSION//
-    Route::get("submission/index", [SubmissionController::class, 'index'])->name("indexSubmission");
-    Route::get("submission/create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
-    Route::post("submission/create", [SubmissionController::class, 'store'])->name("storeSubmission");
-    Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
-    Route::get("submission/update", [SubmissionController::class, 'update'])->name("update");
 });
 
 Route::prefix('/a')->group(__DIR__ . '/web/submission.php');
