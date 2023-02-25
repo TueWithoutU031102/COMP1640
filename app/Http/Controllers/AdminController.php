@@ -12,12 +12,6 @@ use App\Http\Requests\Account\updateAcc;
 
 class AdminController extends Controller
 {
-    public function index()
-    {
-        return Auth::guard('admin')->check()
-            ? to_route('admin.index')
-            : to_route('Goodi.login');
-    }
 
     public function logout()
     {

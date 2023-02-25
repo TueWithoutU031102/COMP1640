@@ -3,6 +3,7 @@
 use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Carbon;
@@ -37,6 +38,12 @@ Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name(
 Route::get('idea/index', function () {
     return view('Goodi.Idea.index');
 });
+
+Route::get('category/index', [CategoryController::class, 'index'])->name('category.index');
+
+Route::get('category/create', [CategoryController::class, 'formCreateCategory']);
+
+Route::post('category/create', [CategoryController::class, 'create']);
 Route::group(['prefix' => 'submission', 'middleware' => ['auth', 'admin']], function () {
     /////// SUBMISSION//
     Route::get("create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
