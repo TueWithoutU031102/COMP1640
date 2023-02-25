@@ -38,8 +38,8 @@
                 <li>
                     <div class="action">
                         <div class="profile" onclick="profileToggle();">
-                            <img src="images/avatar_63f8b0069c831.jpg" alt="mdo" width="50" height="50"
-                                class="rounded-circle">
+                            <img src="{{ Auth::user()->image }}" alt="mdo" width="50" height="50"
+                                class="rounded-circle" style="object-fit: cover; object-position: center center;">
                         </div>
                         <div class="menu_pro">
                             <div class="info">

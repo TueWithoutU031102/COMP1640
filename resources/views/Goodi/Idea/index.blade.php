@@ -46,7 +46,7 @@
                         <label for="title" class="font-weight-bold">Title</label>
                         <input type="title" name="title" class="form-control" id="title" aria-describedby="title">
                     </div>
-                    <div class="">
+                    <div class="form-group">
                         <label for="discussion" class="font-weight-bold">Discussion</label>
                         <textarea type="discussion" name="discusstion" class="form-control" id="discussion" aria-describedby="discussion" rows="7"></textarea>
                     </div><br>
