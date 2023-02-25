@@ -1,5 +1,6 @@
 @extends('Master.Master')
 @if(!Auth::user())
+<header class="navi">
 <nav>
     <a href="/" ><img class="logo" src="/css/images/logo_transparent_white.png"></a>
     <div class="nav-link" id="navlink">
@@ -12,7 +13,9 @@
         </ul>
     </div>
 </nav>
+</header>
 @else
+<header class="navi">
 <nav>
     <a href="/" ><img class="logo" src="/css/images/logo_transparent.png"></a>
     <div class="black-nav-link" id="navlink">
@@ -58,9 +61,10 @@
         </ul>
     </div>
 </nav>
+</header>
 @endif
 
-<script>
+<script type="text/javascript">
     function menuToggle(){
         const toggleMenu = document.querySelector('.menu');
         toggleMenu.classList.toggle('active')

@@ -21,6 +21,7 @@
                 </div>
             @endif
             <form class="login_form"  method="POST" action="/login">
+                @csrf
                 <h2>Login</h2>
                 <div class="input_box">
                     <input type="text" name="email" required="required">
