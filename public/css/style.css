@@ -534,54 +534,15 @@ nav{
 
 }
 
-/* login */
-.container_login {
-    position: relative;
-    margin-top: 100px;
-    width: 450px;
-    height: auto;
-    background: #def8f9;
-    border-radius: 5px;
-    border-width: 2px;
-    border-color: #0a0a0a;
-}
-.container .logo{
-    width: 100px;
-    padding: 20px 40px ;
-}
-.login_form .logosocial img{
-    width: 50px;
-    padding: 20px 20px 15px 35px;
-}
-.label {
-    padding: 5px 180px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #0a0a0a;
-}
-.login_form{
-    padding: 20px 40px;
-    width: 350px;
-}
-
-.login_form .font{
-    font-size: 13px;
-    color: #0a0a0a;
-    margin: 5px 0;
-    font-weight: 750;
-}
 .login_form input {
     outline: none;
     height: 20px;
     width: 350px;
-    padding: 0 5px;
+    padding: 0 20px;
     font-size: 13px;
     border: 0px;
-    border-bottom: 1px outset rgb(245, 242, 242);
 }
-.login_form .font2{
-    margin-top: 10px;
-}
+
 .login_form button{
     margin: 30px 0 20px 0;
     height: 35px;
@@ -592,8 +553,7 @@ nav{
     cursor: pointer;
     border-radius: 25px;
     border: 0px;
-    background-color: rgb(73, 202, 235);
-
+    background-color: rgb(255, 161, 60);
 }
 
 .login_form .check input{
@@ -608,4 +568,131 @@ nav{
     margin-right: 20px;
 }
 
-/* login */
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login_box{
+    position: relative;
+    width: 470px;
+    height: 520px;
+    border-radius: 10px;
+    background: #bcbcbc;
+    overflow: hidden;
+}
+
+.login_box::before
+{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 470px;
+    height: 520px;
+    transform-origin: bottom right;
+    background: linear-gradient(0deg, #63dce1, #f9d750, #FF9900);
+    animation: animate 6s linear infinite;
+}
+
+.login_box::after
+{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 470px;
+    height: 520px;
+    transform-origin: bottom right;
+    background: linear-gradient(0deg, #63dce1, #f9d750, #FF9900);
+    animation: animate 6s linear infinite;
+    animation-delay: -3s;
+}
+
+@keyframes animate{
+    0%{
+        transform: rotate(0deg);
+    }
+
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.login_form{
+    position: absolute;
+    inset: 3px;
+    border-radius: 10px;
+    background: #e6e6e6;
+    z-index: 10;
+    width: 464px;
+    height: 514px;
+    padding: 50px 40px;
+    display: flex;
+    gap: 10pxpx;
+    flex-direction: column;
+}
+
+.login_form h2{
+    color: #FF9900;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.1rem;
+}
+
+.input_box{
+    position: relative;
+    width: 300px;
+    margin-top: 35px;
+}
+
+.input_box input{
+    position: relative;
+    width: 100%;
+    padding: 20px 10px 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #535353;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    z-index: 10;
+}
+
+.input_box span{
+    position: absolute;
+    left: 0;
+    padding: 8px 10px 40px;
+    font-size: 1em;
+    color: #535353;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+}
+
+.input_box input:valid ~ span,
+.input_box input:focus ~ span{
+    color: #FF9900;
+    transform: translateY(-34px);
+    font-size: 0.75em;
+}
+
+.input_box i{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: #FF9900;
+    transition: 0.5s;
+    pointer-events: none;
+    z-index: 9;
+}
+
+.input_box input:valid ~ i,
+.input_box input:focus ~ i{
+    height: 35px;
+    border-radius: 8px;
+}
