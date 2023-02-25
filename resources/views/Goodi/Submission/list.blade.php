@@ -32,8 +32,7 @@
     </div>
         <br><br>
     <div class="row" id="editForm">
-        {{-- <input type="text" id="submissionIdToUpdateDate"> --}}
-
+         <input type="text" id="submissionIdToUpdateDate" hidden>
         <div class="editStartDate popup col-4" id="editStartDate" hidden>
             <h1>StartDate</h1>
             <input type="datetime-local" id="inputEditStartDate">
