@@ -20,10 +20,10 @@ return new class extends Migration {
             $table->longText('description');
             $table->datetime('startDate');
             $table->datetime('dueDate');
-            $table->unsignedBigInteger('admin_id')->default(3);
-            $table->foreign('admin_id')
+            $table->unsignedBigInteger('author_id')->default(3);
+            $table->foreign('author_id')
                 ->references('id')
-                ->on('admins');
+                ->on('users');
             $table->timestamps();
         });
     }

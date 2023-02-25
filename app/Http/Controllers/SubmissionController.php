@@ -42,7 +42,7 @@ class SubmissionController extends Controller
     {
         $authorId = Auth::user()->getAuthIdentifier();
         $submission = new Submission($request->all());
-        $submission['admin_id'] = $authorId;
+        $submission['author_id'] = $authorId;
 
         $startDate = new Carbon($submission['startDate']);
         $dueDate = new Carbon($submission['dueDate']);
@@ -54,13 +54,13 @@ class SubmissionController extends Controller
         $isStartDateLessThanDueDate = $startDate->lt($dueDate);
         if ($isStartDateLessThanDueDate) {
             $submission->save();
-            return redirect('admin/Submission/index')
+            return redirect(route('indexSubmission'))
                 ->with('success', 'Submission created successfully')
                 ->with('$different', $different);
         }
 
         $submission->save();
-        return redirect('admin/Submission/index')->with('success', 'Submission created successfully');
+        return redirect(route('indexSubmission'))->with('success', 'Submission created successfully');
     }
 
     /**

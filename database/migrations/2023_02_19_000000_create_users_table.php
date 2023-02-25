@@ -38,6 +38,22 @@ return new class extends Migration
                 'role_id' => '1'
 
             ],
+            [
+                'name' => 'staff account',
+                'email' => 'staff@gmail.com',
+                'password' => Hash::make("123456"),
+                'image' => "adad.dd",
+                'role_id' => '2'
+
+            ],
+            [
+                'name' => 'QAM account',
+                'email' => 'qam@gmail.com',
+                'password' => Hash::make("123456"),
+                'image' => "adad.dd",
+                'role_id' => '4'
+
+            ],
         ]);
     }
 

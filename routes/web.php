@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::post("deleteAcc/{user}", [AdminController::class, 'delete']);
 
     /////// SUBMISSION//
-    Route::get("submission/index", [SubmissionController::class, 'index'])->name("listSubmission");
+    Route::get("submission/index", [SubmissionController::class, 'index'])->name("indexSubmission");
     Route::get("submission/create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
     Route::post("submission/create", [SubmissionController::class, 'store'])->name("storeSubmission");
     Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");

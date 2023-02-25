@@ -15,6 +15,12 @@ class Submission extends Model
         'description',
         'startDate',
         'dueDate',
+        'author_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
