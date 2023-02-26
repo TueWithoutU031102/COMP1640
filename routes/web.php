@@ -44,6 +44,13 @@ Route::get('category/index', [CategoryController::class, 'index'])->name('catego
 Route::get('category/create', [CategoryController::class, 'formCreateCategory']);
 
 Route::post('category/create', [CategoryController::class, 'create']);
+
+Route::get('category/show/{id}', [CategoryController::class, 'show']);
+
+Route::get('category/edit/{id}', [CategoryController::class, 'formEditCategory']);
+
+Route::post('category/edit/{id}', [CategoryController::class, 'edit']);
+
 Route::group(['prefix' => 'submission', 'middleware' => ['auth', 'admin']], function () {
     /////// SUBMISSION//
     Route::get("create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");

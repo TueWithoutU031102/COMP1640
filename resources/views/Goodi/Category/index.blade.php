@@ -14,6 +14,19 @@
             @foreach ($categories as $category)
                 <tr>
                     <td>{{ $category->title }}</td>
+                    <td>
+                        <a href="/category/show/{{ $category->id }}" title="View Category"><button
+                                class="btn btn-info btn-sm"><i aria-hidden="true">View</button>
+                        </a>
+                        <a href="/category/edit/{{ $category->id }}" title="Edit Account"><button
+                                class="btn btn-primary btn-sm"><i aria-hidden="true">Edit</button>
+                        </a>
+                        <form action="/category/delete/{{ $category->id }}" method="POST" class="d-inline"
+                            onsubmit="return confirm('Are you sure to delete {{ $category->title }} !!!???')">
+                            @csrf
+                            <button class="btn btn-danger btn-sm"><i aria-hidden="true">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
