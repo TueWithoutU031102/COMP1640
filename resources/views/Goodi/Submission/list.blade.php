@@ -1,6 +1,117 @@
 @extends('Goodi.nav_bar')
 
 @section('main')
+{{-- <section class="banner">
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+</section><br> --}}
+<section class="main_idea">
+    <div class="idea-container">
+        <div class="left-side">
+            <div class="profile-display">
+                <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle">
+                <h3 style="font-weight: bold">LongNT</h5>
+            </div>
+            <div class="imp-link">
+                <a href="#">All Discussion</a>
+                <a href="#">Category</a>
+            </div>
+        </div>
+        <div class="main-content">
+            <section class="idea-action">
+                <div class="sort-idea">
+                    <select>
+                        <option>test</option>
+                        <option>test</option>
+                        <option>test</option>
+                        <option>test</option>
+                        <option>test</option>
+                        <option>test</option>
+                    </select>
+                </div>
+                <form action="" class="form-inline" >
+                    <div class="form-group">
+                        <input class="search_bar" placeholder="Search Idea">
+                    </div>
+                </form>
+                <div class="btn-idea">
+                    <button class="add-idea" onclick="formToggle();">+</button>
+                    <button class="refresh-idea">Refresh</button>
+                </div>
+            </section>
+            <section class="create-idea">
+                <h2>New Submission</h2>
+                <i></i>
+                <form action="/submission/create" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="title" name="title" class="form-control" id="title" aria-describedby="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate" class="form-label">Date Started</label>
+                        <input type="datetime-local" name="startDate" class="form-control" id="startDateInput"
+                        aria-describedby="startDate" style="width: 300px" onchange="limitDueDate(this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label for="dueDate" class="form-label">Date Finished</label>
+                        <input type="datetime-local" name="dueDate" class="form-control" id="dueDateInput" aria-describedby="dueDate"
+                        style="width: 300px" onchange="checkDueDate(this)">
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="font-weight-bold">Description</label>
+                        <textarea type="description" name="description" class="form-control" id="description" aria-describedby="description" rows="1"></textarea>
+                    </div>
+                    <br>
+                    <div class="button-idea">
+                        <button class="btn btn-success" style="padding: 10px 100px;" type="submit" id="submitCreate">Submit</button>
+                    </div>
+                </form>
+            </section>
+            <section class="post">
+                <br>
+                <div class="post-container">
+                    <div class="user-detail">
+                        <img src="https://github.com/mdo.png" width="50" height="50"
+                        class="rounded-circle" alt="">
+                        <div class="post-content">
+                            <h4>We need a better solution for teaching children in math<h6>
+                            <small>LongNT Has Posted on Feburary 12, 2023</small><br><br>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                                Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor.
+                                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum,
+                                nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>
+                        </div>
+                    </div>
+                    <div class="idea-interact">
+
+                    </div>
+                </div>
+
+            </section>
+        </div>
+        <div class="right-side">
+
+        </div>
+    </div>
+</section>
+
+@endsection
+
+<script>
+    function formToggle() {
+        const toggleForm = document.querySelector('.create-idea');
+        const toggleButton = document.querySelector('.button-idea');
+        toggleForm.classList.toggle('active')
+        toggleButton.classList.toggle('active')
+    }
+</script>
+
+
+
+
+{{-- @extends('Goodi.nav_bar')
+
+@section('main')
     <style>
         .popup {
             border: solid 2px red;
@@ -26,7 +137,10 @@
             <div class="form-group">
                 <input class="search_bar" placeholder="Search by name">
             </div>
-            {{-- <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button> --}}
+
+            remove
+            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+
         </form>
         <a type="button" href="/submission/create" class="btn btn-primary" style="font-weight: bold; font-size: 20px;">+</a>
     </div>
@@ -154,27 +268,30 @@
             return timeRemaining;
         }
 
-        // function closeFormByListenClick() {
-        //     let editStartDate = document.getElementById("editStartDate");
-        //     let editDueDate = document.getElementById("editDueDate");
-        //     let check = editStartDate.hidden ||editDueDate.hidden;
-        //     console.log(check)
-        //     if (!check) {
-        //         window.addEventListener('click', function (e) {
-        //             if (editDueDate.contains(e.target) && editStartDate.contains((e.target))) {
-        //                 // Clicked in box
-        //                 console.log("in")
-        //             } else {
-        //                 // Clicked outside the box
-        //                 console.log("out")
-        //                 editStartDate.hidden = true;
-        //                 editDueDate.hidden = true;
-        //             }
-        //         }, {once:true});
-        //     }
-        // }
+
+        remove//
+
+        function closeFormByListenClick() {
+            let editStartDate = document.getElementById("editStartDate");
+            let editDueDate = document.getElementById("editDueDate");
+            let check = editStartDate.hidden ||editDueDate.hidden;
+            console.log(check)
+            if (!check) {
+                window.addEventListener('click', function (e) {
+                    if (editDueDate.contains(e.target) && editStartDate.contains((e.target))) {
+                        // Clicked in box
+                        console.log("in")
+                    } else {
+                        // Clicked outside the box
+                        console.log("out")
+                        editStartDate.hidden = true;
+                        editDueDate.hidden = true;
+                    }
+                }, {once:true});
+            }
+        }
     </script>
-@endsection
+@endsection --}}
 
 
 
