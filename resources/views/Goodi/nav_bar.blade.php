@@ -38,7 +38,7 @@
                 <li>
                     <div class="action">
                         <div class="profile" onclick="profileToggle();">
-                            <img src="{{ Auth::user()->image }}" alt="mdo" width="50" height="50"
+                            <img src="{{ asset( Auth::user()->image )}}" alt="mdo" width="50" height="50"
                                 class="rounded-circle" style="object-fit: cover; object-position: center center;">
                         </div>
                         <div class="menu_pro">

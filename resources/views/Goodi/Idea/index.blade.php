@@ -8,8 +8,9 @@
     <div class="idea-container">
         <div class="left-side">
             <div class="profile-display">
-                <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle">
-                <h3 style="font-weight: bold">LongNT</h5>
+                <img src="{{ asset( Auth::user()->image )}}" alt="mdo" width="50" height="50"
+                                class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
             </div>
             <div class="imp-link">
                 <a href="#">All Discussion</a>

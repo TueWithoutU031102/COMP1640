@@ -4,7 +4,6 @@
     <br><br>
     <form action="/admin/editAcc/{id}" class="create-form" method="POST" enctype="multipart/form-data">
         <h2>Edit Account</h2><br><br>
-        <img style="width:100%;" src="{{ asset($account->image) }}">
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -41,8 +40,11 @@
         </div>
         <div class="form-group">
             <label for="image" class="font-weight-bold">Image</label>
-            <input type="file" value="{{ $account->image }}" name="image" class="form-control" id="image">
-        </div>
+            <div style="display: flex">
+                <input type="file" value="{{ $account->image }}" name="image" class="form-control" id="image"><br>
+                <img style="width:100%; object-fit: cover; object-position: center center; height: 100px; width: 100px;;" src="{{ asset($account->image) }}">
+            </div>
+        </div><br>
         <div class="form-group">
             <label for="role" class="font-weight-bold">Role</label>
 

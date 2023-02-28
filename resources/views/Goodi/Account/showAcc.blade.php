@@ -5,7 +5,7 @@
 <h1 class="display-4" style="text-align: center; font-weight: bold">ACCOUNT INFORMATION</h1><br>
     <div class="user-card">
         <img src="{{ asset($account->image) }}">
-        <div class="user-information">
+        <div class="submission-information">
             <h2>{{ $account->name }}</h2>
                 <p><span>User ID: </span>{{ $account->id }}</p>
                 <p><span>Email: </span>{{ $account->email }}</p>
