@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
             <label for="password" class="font-weight-bold">Password</label>
-            <input type="password" value="" name="password" class="form-control" id="password">
+            <input type="password" name="password" class="form-control" id="password">
         </div>
         <div class="form-group">
             <label for="phone_number" class="font-weight-bold">Phone Number</label>
@@ -42,7 +42,8 @@
             <label for="image" class="font-weight-bold">Image</label>
             <div style="display: flex">
                 <input type="file" value="{{ $account->image }}" name="image" class="form-control" id="image"><br>
-                <img style="width:100%; object-fit: cover; object-position: center center; height: 100px; width: 100px;;" src="{{ asset($account->image) }}">
+                <img style="width:100%; object-fit: cover; object-position: center center; height: 100px; width: 100px;;"
+                    src="{{ asset($account->image) }}">
             </div>
         </div><br>
         <div class="form-group">

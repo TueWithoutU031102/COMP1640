@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class Staff
+class QAM
 {
     /**
      * Handle an incoming request.

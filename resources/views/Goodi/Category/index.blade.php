@@ -3,6 +3,10 @@
 @section('main')
     <table class="table table-hover">
         <h1 class="display-4" style="text-align: center; font-weight: bold">Categories</h1><br>
+        @if (Session::has('success'))
+            <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
+        @endif
+        <br>
         <a type="button" href="/category/create" class="btn btn-primary" style="font-weight: bold; font-size: 20px;">+</a>
         <thead class="thead-dark">
             <tr>

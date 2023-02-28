@@ -38,18 +38,21 @@ Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name(
 Route::get('idea/index', function () {
     return view('Goodi.Idea.index');
 });
+Route::group(['prefix' => 'category', 'middleware' => ['auth', 'qam']], function () {
+    Route::get('index', [CategoryController::class, 'index'])->name('category.index');
 
-Route::get('category/index', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('create', [CategoryController::class, 'formCreateCategory']);
 
-Route::get('category/create', [CategoryController::class, 'formCreateCategory']);
+    Route::post('create', [CategoryController::class, 'create']);
 
-Route::post('category/create', [CategoryController::class, 'create']);
+    Route::get('show/{id}', [CategoryController::class, 'show']);
 
-Route::get('category/show/{id}', [CategoryController::class, 'show']);
+    Route::get('edit/{id}', [CategoryController::class, 'formEditCategory']);
 
-Route::get('category/edit/{id}', [CategoryController::class, 'formEditCategory']);
+    Route::post('edit/{id}', [CategoryController::class, 'edit']);
 
-Route::post('category/edit/{id}', [CategoryController::class, 'edit']);
+    Route::post('delete/{category}', [CategoryController::class, 'delete']);
+});
 
 Route::group(['prefix' => 'submission', 'middleware' => ['auth', 'admin']], function () {
     /////// SUBMISSION//

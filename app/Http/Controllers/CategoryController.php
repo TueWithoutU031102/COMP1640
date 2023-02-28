@@ -44,6 +44,12 @@ class CategoryController extends Controller
         $category = $request->all();
         $id = $request->id;
         Category::find($id)->update($category);
-        return redirect('Goodi/Category/index', ['category' => $category])->with('success', 'Category updated successfully');;
+        return redirect('category/index')->with('success', 'Category updated successfully');;
+    }
+
+    public function delete(Category $category)
+    {
+        $category->delete();
+        return redirect('category/index')->with('success', 'Category deleted successfully');
     }
 }

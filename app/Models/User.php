@@ -39,7 +39,9 @@ class User extends Authenticatable
 
     public function removeImage()
     {
-        return unlink(public_path($this->image));
+        if ($this->image != null)
+            return unlink(public_path($this->image));
+        else return;
     }
 
     public function role()
@@ -73,7 +75,7 @@ class User extends Authenticatable
     }
     public function isQAM(): bool
     {
-        if ($this->role_id != '4')
+        if ($this->role_id == '4')
             return true;
         return false;
     }
