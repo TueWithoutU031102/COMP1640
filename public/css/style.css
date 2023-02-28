@@ -2,6 +2,15 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+#preloader{
+    background: #ffffff url(images/loader.gif) no-repeat center center;
+    background-size: 30%;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+}
+
 .header{
     min-height: 100vh;
 	width: 100%;

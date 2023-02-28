@@ -57,6 +57,4 @@
     </a>
 </section>
 
-
-
 @endsection
