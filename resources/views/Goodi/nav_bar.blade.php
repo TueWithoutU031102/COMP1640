@@ -49,7 +49,6 @@
                             <ul>
                                 <li><a href="#">My Profile</a></li>
                                 <li><a href="#">Edit Profile</a></li>
-                                <li><a href="#">Setting</a></li>
                                 <li><a href="{{ route('logout') }}">Logout</a></li>
                             </ul>
                         </div>
