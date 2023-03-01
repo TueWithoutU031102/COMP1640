@@ -46,6 +46,7 @@
             }
         }
 
+
         function getTimeRemaining(sD, dD, seft) {
             let now = new Date();
             let dueDate = new Date(dD);
