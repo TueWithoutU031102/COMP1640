@@ -23,6 +23,10 @@ Route::get('/', function () {
     return view('Goodi.index');
 });
 
+Route::get('/forbiddenPage',function (){
+    return view('403');
+})->name("forbidden");
+
 Route::get('/login', function () {
     return view('Goodi.login');
 })->name('user.login');
@@ -79,6 +83,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::post("deleteAcc/{user}", [AdminController::class, 'delete']);
 });
 
-Route::prefix('/a')->group(__DIR__ . '/web/submission.php');
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
