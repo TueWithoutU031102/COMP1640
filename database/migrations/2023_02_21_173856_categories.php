@@ -18,10 +18,10 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->longText('description');
-            $table->unsignedBigInteger('submission_id');
-            $table->foreign('submission_id')
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')
                 ->references('id')
-                ->on('submissions');
+                ->on('users');
             $table->timestamps();
         });
     }
