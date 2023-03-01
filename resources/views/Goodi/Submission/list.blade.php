@@ -35,7 +35,9 @@
                     </div>
                 </form>
                 <div class="btn-idea">
-                    <button class="add-idea" onclick="formToggle();">+</button>
+                    @if(\Illuminate\Support\Facades\Auth::user()->role->name == "ADMIN")
+                        <button class="add-idea" onclick="formToggle();">+</button>
+                    @endif
                     <button class="refresh-idea">Refresh</button>
                 </div>
             </section>
@@ -79,7 +81,7 @@
                             <div class="submission-detail">
                                 <i class="fa-solid fa-file-lines fa-4x"></i>
                                 <div class="submission-content">
-                                    <h4>{{ $sub->title }}<h4>
+                                    <h4>{{ $sub->title }}</h4>
                                     <small>Create by: </small><br>
                                     <p>{{ $sub->description }}</p>
                                     <span class="due-date"><i class="fa-solid fa-triangle-exclamation"></i>  Due {{ $sub->dueDate }}</span>
