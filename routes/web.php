@@ -23,7 +23,7 @@ Route::get('/', function () {
     return view('Goodi.index');
 });
 
-Route::get('/forbiddenPage',function (){
+Route::get('/forbiddenPage', function () {
     return view('403');
 })->name("forbidden");
 
