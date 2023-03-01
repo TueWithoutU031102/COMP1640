@@ -31,10 +31,14 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
     <script !src="">
-        let startDateInput = document.getElementById('startDateInput');
-        let tzOffset = (new Date()).getTimezoneOffset() * 60000;
-        let today = new Date(Date.now() - tzOffset);
-        startDateInput.value = today.toISOString().slice(0, 16);
+        getStartDateEqualToday("startDateInput");
+        function getStartDateEqualToday(startDateInputId){
+            let startDateInput = document.getElementById(startDateInputId);
+            console.log(startDateInput)
+            let tzOffset = (new Date()).getTimezoneOffset() * 60000;
+            let today = new Date(Date.now() - tzOffset);
+            startDateInput.value = today.toISOString().slice(0, 16);
+        }
 
         limitDueDate(today.toISOString().slice(0, 16))
 
