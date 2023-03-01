@@ -1,9 +1,11 @@
 @extends('Master.Master')
-@if (!Auth::user())
     <nav>
-        <a href="/"><img class="logo" src="/css/images/logo_transparent_white.png"></a>
-        <div class="nav-link" id="navlink">
-            <ul>
+        <div class="nav-logo">
+            <a href="/"><img class="logo" src="/css/images/logo_transparent.png"></a>
+        </div>
+        @if (!Auth::user())
+        <div class="black-nav-link" id="navlink">
+            <ul style="display: flex;">
                 <li><a href="/index">FORUM</a></li>
                 <li><a href="/about">ABOUT</a></li>
                 <li><a href="/department">DEPARTMENT</a></li>
@@ -11,12 +13,9 @@
                 <li><a href="/login">LOGIN</a></li>
             </ul>
         </div>
-    </nav>
-@else
-    <nav>
-        <a href="/"><img class="logo" src="/css/images/logo_transparent.png"></a>
+        @else
         <div class="black-nav-link" id="navlink">
-            <ul>
+            <ul style="display: flex;">
                 <li><a href="/forum">FORUM</a></li>
                 <li>
                     <div class="action">
@@ -59,8 +58,8 @@
                 <li><a href="/FAQ">FAQs</a></li>
             </ul>
         </div>
+        @endif
     </nav>
-@endif
 
 <script>
     function menuToggle() {
