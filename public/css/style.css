@@ -1,5 +1,6 @@
 *{
     font-family: 'Open Sans', sans-serif;
+    scroll-behavior: smooth;
 }
 
 #preloader{
@@ -349,7 +350,7 @@ nav{
     position: sticky;
     top: 70px;
     align-self: flex-start;
-    height: 100%;
+    height: auto;
 }
 
 .right-side{
@@ -444,7 +445,7 @@ nav{
 }
 
 .create-idea{
-    height: 0%;
+    height: 0;
     background: #e6e6e6;
     border: solid #a7a7a7;
     padding: 20px 20px 20px 20px;
@@ -680,7 +681,26 @@ nav{
     font-weight: bold;
 }
 
+.home-btn{
+    position: fixed;
+    bottom: 16px;
+    right: 32px;
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+    padding-top: 10px;
+    /* display: flex; */
+    border: none;
+    background: #62626234;
+    font-size: 30px;
+    text-align: center
+}
 
+.home-btn a{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
 
 
 /* 25% */
@@ -725,7 +745,7 @@ nav{
 
 /* 110% */
 @media( width <= 1200px){
-    .left-side{
+    /* .left-side{
         margin-top: 60px;
         border-radius: 20px;
         background: transparent;
@@ -756,7 +776,7 @@ nav{
         top: 70px;
         align-self: flex-start;
         height: 100vh;
-    }
+    } */
 
 }
 

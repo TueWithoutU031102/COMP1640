@@ -4,6 +4,7 @@
     {{-- <section class="banner">
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section><br> --}}
+<section class="main_idea">
         <div class="idea-container">
             <div class="left-side">
                 <div class="profile-display">
@@ -23,7 +24,7 @@
                 </div>
             </div>
             <div class="main-content">
-                <div class="idea-action">
+                <section class="idea-action">
                     <div class="sort-idea">
                         <select>
                             <option>test</option>
@@ -43,12 +44,10 @@
                         <button class="add-idea" onclick="formToggle();">+</button>
                         {{-- <button class="refresh-idea">Refresh</button> --}}
                     </div>
-                </div>
-                <div class="create-idea" id="create-idea">
-                    <div style="display: flex; justify-content: space-between">
-                        <h2>New Idea</h2>
-                        <button class="close-btn">&times;</button>
-                    </div>
+                </section>
+                <section class="create-idea">
+                    <h2>New Idea</h2>
+                    <i></i>
                     <form action="">
                         <div class="">
                             <label for="title" class="font-weight-bold">Title</label>
@@ -74,8 +73,8 @@
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit</button>
                         </div>
                     </form>
-                </div>
-                <div class="post">
+                </section>
+                <section class="post">
                     <br>
                     <div class="post-container">
                         <div class="user-detail">
@@ -231,12 +230,16 @@
                         </div>
                     </div>
 
-                </div>
+                </section>
             </div>
             <div class="right-side">
 
             </div>
         </div>
+        <div class="home-btn">
+            <a href="#"><i class="fa-solid fa-angles-up"></i></a>
+        </div>
+        <
 @endsection
 
 <script>
