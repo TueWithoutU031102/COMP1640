@@ -54,8 +54,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'qam' => Middleware\is\QAM::class,
-        'use
-        r' => \App\Http\Middleware\User::class,
+        'user' => \App\Http\Middleware\User::class,
         'admin' => Middleware\is\Admin::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

@@ -16,10 +16,9 @@
                     <a href="#"><i class="fa-solid fa-comments"></i> All Discussion</a>
                     <div class="category">
                         <p>Category</p>
-                        <a href="#">Category 1</a>
-                        <a href="#">Category 2</a>
-                        <a href="#">Category 3</a>
-                        <a href="#">Category 4</a>
+                        @foreach ($listCategories as $category)
+                            <a value="{{ $category->id }}">{{ $category->title }}</a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -27,10 +26,6 @@
                 <section class="idea-action">
                     <div class="sort-idea">
                         <select>
-                            <option>test</option>
-                            <option>test</option>
-                            <option>test</option>
-                            <option>test</option>
                             <option>test</option>
                             <option>test</option>
                         </select>

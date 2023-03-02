@@ -21,4 +21,9 @@ class Idea extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function files()
+    {
+        return $this->hasMany(File::class);
+    }
 }
