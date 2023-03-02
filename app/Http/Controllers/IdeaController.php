@@ -10,13 +10,22 @@ use Illuminate\Support\Facades\Auth;
 class IdeaController extends Controller
 {
     //
+    public function index()
+    {
+        $listCategories = Category::all();
+
+        $idea = Idea::all();
+        dd($listCategories);
+        return view('Goodi.Idea.index', ['idea' => $idea, 'listCategories' => $listCategories]);
+    }
+
     public function create(Request $request)
     {
         $idea = new Idea($request->all());
         $authorId = Auth::user()->getAuthIdentifier();
-        $listCategories = Category::where('title')->get();
-        $category['author_id'] = $authorId;
+        $idea['author_id'] = $authorId;
 
-
+        $idea->save();
+        return redirect()->route('indexIdea');
     }
 }

@@ -39,18 +39,11 @@ Route::get("submission/index", [SubmissionController::class, 'index'])->name("in
 
 Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
 
-Route::group(['prefix' => 'idea', 'middleware' => []], function () {
-    Route::get('/index', function () {
-        return view('Goodi.Idea.index');
-    });
-    Route::get('/list', function () {
-        return view('Goodi.Idea.list');
-    });
-});
+Route::get('idea/index', [IdeaController::class, 'index'])->name('indexIdea');
 
+Route::post("create", [IdeaController::class, 'create'])->name("createIdea");
 
-
-Route::group(['prefix' => 'category', 'middleware' => ['qam', 'admin']], function () {
+Route::group(['prefix' => 'category', 'middleware' => ['auth', 'qam']], function () {
     Route::get('index', [CategoryController::class, 'index'])->name('category.index');
 
     Route::get('create', [CategoryController::class, 'formCreateCategory']);
