@@ -3,7 +3,6 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use Illuminate\Support\Facades\App;
 
 class Kernel extends HttpKernel
 {
@@ -54,9 +53,10 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        'qam' => \App\Http\Middleware\QAM::class,
-        'user' => \App\Http\Middleware\User::class,
-        'admin' => \App\Http\Middleware\Admin::class,
+        'qam' => Middleware\is\QAM::class,
+        'use
+        r' => \App\Http\Middleware\User::class,
+        'admin' => Middleware\is\Admin::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,

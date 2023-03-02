@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\is;
 
 use Closure;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class QAM
     {
         $user = Auth::user(); // lay thong tin khi dang nhap
         $route = $request->route()->getName();
-        if (!$request->user()->isQAM())
+        if (!($request->user()->isQAM() || $request->user()->isAdmin($request)))
             abort(403);
         return $next($request);
     }

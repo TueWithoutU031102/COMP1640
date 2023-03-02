@@ -50,7 +50,7 @@ Route::group(['prefix' => 'idea', 'middleware' => []], function () {
 
 
 
-Route::group(['prefix' => 'category', 'middleware' => ['auth', 'qam']], function () {
+Route::group(['prefix' => 'category', 'middleware' => ['qam', 'admin']], function () {
     Route::get('index', [CategoryController::class, 'index'])->name('category.index');
 
     Route::get('create', [CategoryController::class, 'formCreateCategory']);

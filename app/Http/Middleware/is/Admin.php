@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\is;
 
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-class Staff
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -20,8 +19,8 @@ class Staff
     {
         $user = Auth::user(); // lay thong tin khi dang nhap
         $route = $request->route()->getName();
-        if (!$request->user()->isStaff())
-            abort(403);
+        if (!$request->user()->isAdmin($request))
+            return redirect()->route("forbidden");
         return $next($request);
     }
 }
