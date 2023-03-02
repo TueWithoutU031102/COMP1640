@@ -1,5 +1,6 @@
 *{
     font-family: 'Open Sans', sans-serif;
+    scroll-behavior: smooth;
 }
 
 #preloader{
@@ -21,21 +22,24 @@
 	position: relative;
 }
 
-.nav-link{
-    float: right;
-    letter-spacing: 30px;
-}
-
 nav{
-    background: transparent;
+    display: flex;
+    background: rgba(255, 255, 255, 0.347);
     padding: 0px 40px;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .logo{
-    width: 13%;
+    width: 20%;
     line-height: 80px;
+}
+
+.nav-link ul{
+    display: flex;
 }
 
 .nav-link ul li{
@@ -66,11 +70,6 @@ nav{
 
 .nav-link ul li a:hover::after{
     width: 100%
-}
-
-.black-nav-link{
-    float: right;
-    letter-spacing: 30px;
 }
 
 .black-nav-link ul li{
@@ -341,7 +340,7 @@ nav{
     position: sticky;
     top: 70px;
     align-self: flex-start;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .main-content{
@@ -351,19 +350,21 @@ nav{
     position: sticky;
     top: 70px;
     align-self: flex-start;
-    height: 100vh;
+    height: auto;
 }
 
 .right-side{
-
     margin-top: 60px;
     border-radius: 20px;
-    background: aliceblue;
+    background: white;
     flex-basis: 25%;
     position: sticky;
     top: 70px;
     align-self: flex-start;
-    height: 100vh;
+    /* height: 100vh; */
+    padding: 20px;
+    border-radius: 4px;
+    color: #626262;
 }
 
 .profile-display{
@@ -380,9 +381,11 @@ nav{
 
 .imp-link{
     padding-top: 40px;
+    padding-left: 0;
     display: flex;
     flex-direction: column;
     width: fit-content;
+    border-bottom: 1px solid #545454;
 }
 
 .imp-link a{
@@ -390,6 +393,20 @@ nav{
     margin-bottom: 10px;
     padding-left: 70px;
     text-decoration: none;
+    color: #545454;
+}
+
+.category{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.category p{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-left: 70px;
     color: #545454;
 }
 
@@ -428,7 +445,7 @@ nav{
 }
 
 .create-idea{
-    height: 0%;
+    height: 0;
     background: #e6e6e6;
     border: solid #a7a7a7;
     padding: 20px 20px 20px 20px;
@@ -439,9 +456,16 @@ nav{
 }
 
 .create-idea.active{
-    height: 43%;
+    height: 500px;
     visibility: visible;
     opacity: 1;
+}
+
+.close-btn{
+    border: none;
+    background: transparent;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .button-idea{
@@ -515,6 +539,8 @@ nav{
     padding: 20px 10px 20px 10px;
     box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
 }
+
+.post{}
 
 .user-detail{
     display: flex;
@@ -655,7 +681,26 @@ nav{
     font-weight: bold;
 }
 
+.home-btn{
+    position: fixed;
+    bottom: 16px;
+    right: 32px;
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+    padding-top: 10px;
+    /* display: flex; */
+    border: none;
+    background: #62626234;
+    font-size: 30px;
+    text-align: center
+}
 
+.home-btn a{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
 
 
 /* 25% */
@@ -700,7 +745,7 @@ nav{
 
 /* 110% */
 @media( width <= 1200px){
-    .left-side{
+    /* .left-side{
         margin-top: 60px;
         border-radius: 20px;
         background: transparent;
@@ -731,7 +776,7 @@ nav{
         top: 70px;
         align-self: flex-start;
         height: 100vh;
-    }
+    } */
 
 }
 

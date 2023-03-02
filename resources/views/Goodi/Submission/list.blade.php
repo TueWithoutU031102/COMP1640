@@ -38,7 +38,7 @@
                     @if(\Illuminate\Support\Facades\Auth::user()->role->name == "ADMIN")
                         <button class="add-idea" onclick="formToggle();">+</button>
                     @endif
-                    <button class="refresh-idea">Refresh</button>
+                    {{-- <button class="refresh-idea">Refresh</button> --}}
                 </div>
             </section>
             <section class="create-idea">
@@ -97,6 +97,9 @@
 
         </div>
     </div>
+    <div class="home-btn">
+        <a href="#"><i class="fa-solid fa-angles-up"></i></a>
+    </div>
 </section>
 
 @endsection
@@ -108,6 +111,34 @@
         toggleForm.classList.toggle('active')
         toggleButton.classList.toggle('active')
     }
+
+    getStartDateEqualToday("startDateInput");
+        function getStartDateEqualToday(startDateInputId){
+            let startDateInput = document.getElementById(startDateInputId);
+            console.log(startDateInput)
+            let tzOffset = (new Date()).getTimezoneOffset() * 60000;
+            let today = new Date(Date.now() - tzOffset);
+            startDateInput.value = today.toISOString().slice(0, 16);
+        }
+
+        limitDueDate(today.toISOString().slice(0, 16))
+
+        function limitDueDate(startDate) {
+            let dueDateInput = document.getElementById('dueDateInput');
+            dueDateInput.min = startDate;
+        }
+
+        function checkDueDate(seft) {
+            let submitCreate = document.getElementById('submitCreate');
+            let dueDate = new Date(seft.value);
+            let now = new Date();
+            if (dueDate < now) {
+                submitCreate.disabled = true;
+                alert("due date must be latter than " + startDateInput.value.replace('T', ' - '));
+            } else {
+                submitCreate.disabled = false;
+            }
+        }
 </script>
 
 
