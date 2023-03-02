@@ -42,7 +42,7 @@
                 <section class="create-idea">
                     <h2>New Idea</h2>
                     <i></i>
-                    <form action="">
+                    <form action="createIdea">
                         <div class="">
                             <label for="title" class="font-weight-bold">Title</label>
                             <input type="title" name="title" class="form-control" id="title"
@@ -58,9 +58,9 @@
 
                             <select name="category_id" value="{{ old('category_id') }}" class="form-select" id="category"
                                 aria-label="Category">
-                                {{-- @foreach ($listCategories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach --}}
+                                @foreach ($listCategories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                @endforeach
                             </select>
                         </div><br>
                         <div class="button-idea">
