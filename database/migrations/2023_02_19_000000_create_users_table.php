@@ -42,7 +42,7 @@ return new class extends Migration
                 'name' => 'staff account',
                 'email' => 'staff@gmail.com',
                 'password' => Hash::make("123456"),
-                'image' => "",
+                'image' => "images/default-avatar.jpg",
                 'role_id' => '2'
 
             ],
@@ -50,7 +50,7 @@ return new class extends Migration
                 'name' => 'QAM account',
                 'email' => 'qam@gmail.com',
                 'password' => Hash::make("123456"),
-                'image' => "",
+                'image' => "images/default-avatar.jpg",
                 'role_id' => '4'
 
             ],

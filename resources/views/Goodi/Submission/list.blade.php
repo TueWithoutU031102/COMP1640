@@ -107,6 +107,37 @@
         const toggleButton = document.querySelector('.button-idea');
         toggleForm.classList.toggle('active')
         toggleButton.classList.toggle('active')
+
+        getStartDateEqualToday("startDateInput");
+    }
+
+    function getStartDateEqualToday(startDateInputId){
+        let startDateInput = document.getElementById(startDateInputId);
+        console.log(startDateInput)
+        let tzOffset = (new Date()).getTimezoneOffset() * 60000;
+        let today = new Date(Date.now() - tzOffset);
+        startDateInput.value = today.toISOString().slice(0, 16);
+
+        console.log(startDateInput)
+    }
+
+    limitDueDate(today.toISOString().slice(0, 16))
+
+    function limitDueDate(startDate) {
+        let dueDateInput = document.getElementById('dueDateInput');
+        dueDateInput.min = startDate;
+    }
+
+    function checkDueDate(seft) {
+        let submitCreate = document.getElementById('submitCreate');
+        let dueDate = new Date(seft.value);
+        let now = new Date();
+        if (dueDate < now) {
+            submitCreate.disabled = true;
+            alert("due date must be latter than " + startDateInput.value.replace('T', ' - '));
+        } else {
+            submitCreate.disabled = false;
+        }
     }
 </script>
 

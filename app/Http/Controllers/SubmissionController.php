@@ -6,6 +6,7 @@ use App\Http\Requests\Submission\createSubmission;
 use App\Http\Requests\Submission\updateSubmission;
 use App\Models\Submission;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 
@@ -72,7 +73,10 @@ class SubmissionController extends Controller
     public function show($id)
     {
         $submission = Submission::find($id);
-        return view('Goodi/Submission/show')->with('submission', $submission);
+        $timeRemaining = getDifferent($submission->startDate);
+        return view('Goodi/Submission/show')
+            ->with('submission', $submission)
+            ->with('timeRemaining', $timeRemaining);
     }
 
     /**
@@ -92,12 +96,12 @@ class SubmissionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update(updateSubmission $request)
+    public function update(Request $request)
     {
         $input = $request->all();
-        $id = $request->id;
-        Submission::find($id)->update($input);
-        return redirect(route("listSubmission"))->with('success', 'date updated successfully');
+        $submissionId = $request->id;
+        Submission::find($submissionId)->update($input);
+        return redirect(route("showSpecifiedSubmission", ['id' => $submissionId]))->with('success', 'date updated successfully');
     }
 
     /**
