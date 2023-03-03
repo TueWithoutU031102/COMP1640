@@ -34,7 +34,7 @@ return new class extends Migration
                 'name' => 'admin',
                 'email' => 'email@gmail.com',
                 'password' => Hash::make("123456"),
-                'image' => "",
+                'image' => "images/default-avatar.jpg",
                 'role_id' => '1'
 
             ],

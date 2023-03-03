@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Idea;
-use Illuminate\Http\Request;
+use App\Models\File;
+use App\Http\Requests\StoreFileRequest;
+use App\Http\Requests\UpdateFileRequest;
 
-class IdeaController extends Controller
+class FileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('Goodi/Idea/index')
-            ->with('listCategories', $categories);
+        //
     }
 
     /**
@@ -33,10 +31,10 @@ class IdeaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreFileRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFileRequest $request)
     {
         //
     }
@@ -44,10 +42,10 @@ class IdeaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Idea  $idea
+     * @param  \App\Models\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function show(Idea $idea)
+    public function show(File $file)
     {
         //
     }
@@ -55,10 +53,10 @@ class IdeaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Idea  $idea
+     * @param  \App\Models\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function edit(Idea $idea)
+    public function edit(File $file)
     {
         //
     }
@@ -66,11 +64,11 @@ class IdeaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Idea  $idea
+     * @param  \App\Http\Requests\UpdateFileRequest  $request
+     * @param  \App\Models\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Idea $idea)
+    public function update(UpdateFileRequest $request, File $file)
     {
         //
     }
@@ -78,10 +76,10 @@ class IdeaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Idea  $idea
+     * @param  \App\Models\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Idea $idea)
+    public function destroy(File $file)
     {
         //
     }
