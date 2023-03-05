@@ -4,7 +4,7 @@
     {{-- <section class="banner">
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section><br> --}}
-<section class="main_idea">
+    <section class="main_idea">
         <div class="idea-container">
             <div class="left-side">
                 <div class="profile-display">
@@ -61,8 +61,8 @@
                         </div>
                         <div class="form-group">
                             <label for="discussion" class="font-weight-bold">Discussion</label>
-                            <textarea style="resize: none;" type="discussion" name="discusstion" class="form-control" id="discussion" aria-describedby="discussion"
-                                rows="7"></textarea>
+                            <textarea style="resize: none;" type="discussion" name="discusstion" class="form-control" id="discussion"
+                                aria-describedby="discussion" rows="7"></textarea>
                         </div><br>
                         <div class="button-idea">
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit</button>
@@ -76,16 +76,23 @@
                             <img src="https://github.com/mdo.png" width="50" height="50" class="rounded-circle"
                                 alt="">
                             <div class="post-content">
-                                <h4>We need a better solution for teaching children in math<h6>
-                                        <small>LongNT Has Posted on Feburary 12, 2023</small><br><br>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
-                                            laoreet.
-                                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-                                            sodales pulvinar tempor.
-                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                            mus. Nam fermentum,
-                                            nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
-                                            nunc eget odio.</p>
+                                <h4>We need a better solution for teaching children in math</h4>
+                                <small>LongNT Has Posted on Feburary 12, 2023</small><br><br>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                    laoreet.
+                                    Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
+                                    sodales pulvinar tempor.
+                                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                                    mus. Nam fermentum,
+                                    nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
+                                    nunc eget odio.
+                                </p>
+                                <div class="mt-3">
+                                    <form action="" method="post">
+                                        @csrf
+                                        <button class="text-blue-500" type="submit">Like</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div class="idea-interact">
@@ -234,14 +241,11 @@
         <div class="home-btn">
             <a href="#"><i class="fa-solid fa-angles-up"></i></a>
         </div>
-        <
-@endsection
-
-<script>
-    function formToggle() {
-        const toggleForm = document.querySelector('.create-idea');
-        const toggleButton = document.querySelector('.button-idea');
-        toggleForm.classList.toggle('active')
-        toggleButton.classList.toggle('active')
-    }
-</script>
+    < @endsection <script>
+        function formToggle() {
+            const toggleForm = document.querySelector('.create-idea');
+            const toggleButton = document.querySelector('.button-idea');
+            toggleForm.classList.toggle('active')
+            toggleButton.classList.toggle('active')
+        }
+    </script>

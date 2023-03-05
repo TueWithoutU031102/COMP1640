@@ -43,6 +43,8 @@ Route::get('idea/index', [\App\Http\Controllers\IdeaController::class, 'index'])
 
 Route::post("create", [IdeaController::class, 'create'])->name("createIdea");
 
+Route::post("idea/{id}/like",[LikeController::class, 'store'])->name('postLike');
+
 Route::group(['prefix' => 'category', 'middleware' => ['auth', 'qam']], function () {
     Route::get('index', [CategoryController::class, 'index'])->name('category.index');
 

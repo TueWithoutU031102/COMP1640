@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Idea extends Model
 {
     use HasFactory;
-    protected $table ='ideas';
+    protected $table = 'ideas';
 
     protected $fillable = [
         'title',
@@ -20,6 +20,11 @@ class Idea extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 
     public function files()
