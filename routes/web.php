@@ -40,6 +40,7 @@ Route::get("submission/index", [SubmissionController::class, 'index'])->name("in
 Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
 
 Route::get('idea/index', [\App\Http\Controllers\IdeaController::class, 'index'])->name('indexIdea');
+Route::post('idea/store', [\App\Http\Controllers\IdeaController::class, 'store'])->name('storeIdea');
 
 Route::post("create", [IdeaController::class, 'create'])->name("createIdea");
 

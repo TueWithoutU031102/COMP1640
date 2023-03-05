@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('files');
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string('path');
+            $table->unsignedBigInteger('idea_id');
+            $table->foreign('idea_id')
+                ->references('id')
+                ->on('ideas');
             $table->timestamps();
         });
     }

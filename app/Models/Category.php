@@ -11,9 +11,10 @@ class Category extends Model
     protected $fillable = [
         'title',
         'description',
+        'author_id',
     ];
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 }
