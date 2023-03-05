@@ -108,6 +108,12 @@
                             <br>
                     @endforeach
                 </section>
+                <div class="mt-3">
+                    <form action="{{route('postLike',$idea->id)}}" method="post">
+                        @csrf
+                        <button class="text-blue-500" type="submit">Like</button>
+                    </form>
+                </div>
 
             </div>
             <div class="right-side">

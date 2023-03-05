@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\IdeaController;
 use Illuminate\Support\Carbon;
 
 /*
@@ -39,12 +40,12 @@ Route::get("submission/index", [SubmissionController::class, 'index'])->name("in
 
 Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
 
-Route::get('idea/index', [\App\Http\Controllers\IdeaController::class, 'index'])->name('indexIdea');
-Route::post('idea/store', [\App\Http\Controllers\IdeaController::class, 'store'])->name('storeIdea');
+Route::get('idea/index', [IdeaController::class, 'index'])->name('indexIdea');
+Route::post('idea/store', [IdeaController::class, 'store'])->name('storeIdea');
 
 Route::post("create", [IdeaController::class, 'create'])->name("createIdea");
 
-Route::post("idea/{id}/like",[LikeController::class, 'store'])->name('postLike');
+Route::post("idea/{idea:id}/like", [LikeController::class, 'store'])->name('postLike');
 
 Route::group(['prefix' => 'category', 'middleware' => ['auth', 'qam']], function () {
     Route::get('index', [CategoryController::class, 'index'])->name('category.index');
