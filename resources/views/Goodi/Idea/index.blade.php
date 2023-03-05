@@ -85,37 +85,30 @@
                                 <div class="post-content">
                                     <h4>{{ $idea->title }}</h4>
                                     <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
-                                        laoreet.
-                                        Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-                                        sodales pulvinar tempor.
-                                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                        mus. Nam fermentum,
-                                        nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
-                                        nunc eget odio.</p>
-
+                                    <p>{{ $idea->description }}</p>
                                 </div>
                             </div>
                             <div class="idea-interact">
                                 <br>
+                                <p>{{ $idea->likes->count() }}</p>
                                 <div class="mt-3">
-                                    <form action="" method="post">
-                                        @csrf
-                                        <button class="text-blue-500" type="submit">Like</button>
-                                    </form>
+                                    @if (!$idea->likedBy(auth()->user()))
+                                        <form action="{{ route('postLike', $idea->id) }}" method="POST">
+                                            @csrf
+                                            <button class="text-blue-500" type="submit">Like</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="text-blue-500" type="submit">Unlike</button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                             <br>
-                            <div class="mt-3">
-                                <form action="{{route('postLike',$idea->id)}}" method="post">
-                                    @csrf
-                                    <button class="text-blue-500" type="submit">Like</button>
-                                </form>
-                            </div>
                     @endforeach
                 </section>
-
-
             </div>
             <div class="right-side">
 

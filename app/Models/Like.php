@@ -9,7 +9,7 @@ class Like extends Model
 {
     use HasFactory;
 
-    protected $filltable=[
-        'user_id'
+    protected $fillable = [
+        'user_id',
     ];
 }
