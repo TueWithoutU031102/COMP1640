@@ -12,6 +12,7 @@ class File extends Model
 
     protected $fillable = [
         'path',
+        'idea_id'
     ];
     public function idea()
     {

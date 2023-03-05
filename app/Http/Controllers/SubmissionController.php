@@ -48,16 +48,14 @@ class SubmissionController extends Controller
         $startDate = new Carbon($submission['startDate']);
         $dueDate = new Carbon($submission['dueDate']);
 
-        $days = $startDate->diffInHours($dueDate);
-        $minutes = $startDate->diffInMinutes($dueDate) % 60;
-        $different = (string)$days . " hours |" . (string)$minutes . " minutes";
+        $timeRemaining = $this->getTimeRemaining($submission['dueDate']);
 
         $isStartDateLessThanDueDate = $startDate->lt($dueDate);
         if ($isStartDateLessThanDueDate) {
             $submission->save();
             return redirect(route('indexSubmission'))
                 ->with('success', 'Submission created successfully')
-                ->with('$different', $different);
+                ->with('timeRemaining', $timeRemaining);
         }
         $submission->save();
         return redirect(route('indexSubmission'))->with('success', 'Submission created successfully');
@@ -72,10 +70,7 @@ class SubmissionController extends Controller
     public function show($id)
     {
         $submission = Submission::find($id);
-        $startDate = new Carbon($submission->startDate);
-        $dueDate = new Carbon( $submission->dueDate);
-
-        $timeRemaining = $this->getDifferent($startDate,$dueDate);
+        $timeRemaining = $this->getTimeRemaining($submission->dueDate);
         return view('Goodi/Submission/show')
             ->with('submission', $submission)
             ->with('timeRemaining', $timeRemaining);
@@ -117,11 +112,14 @@ class SubmissionController extends Controller
         //
     }
 
-    function getDifferent($sD, $dD)
+    function getTimeRemaining($dD)
     {
-        $days = $sD->diffInDays($dD);
-        $hours = $sD->diffInHours($dD);
-        $minutes = $sD->diffInMinutes($dD) % 60;
+        $now = Carbon::now();
+        $dD = new Carbon($dD);
+
+        $days = $now->diffInDays($dD);
+        $hours = $now->diffInHours($dD);
+        $minutes = $now->diffInMinutes($dD) % 60;
 
 
         return $days ." days |".($hours%24). " hours |" .($minutes%60). " minutes";

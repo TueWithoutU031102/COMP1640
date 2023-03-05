@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use App\Http\Requests\StoreFileRequest;
 use App\Http\Requests\UpdateFileRequest;
+use Cassandra\Date;
 use Illuminate\Http\UploadedFile;
 
 class FileController extends Controller
@@ -35,11 +36,19 @@ class FileController extends Controller
      * @param \App\Http\Requests\StoreFileRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFileRequest $request)
+    public function store(StoreFileRequest $request, int $ideaId)
     {
-        //
         $pdfs = $request->file('files');
-        $pdfs[0]->store('idea');
+
+        foreach ($pdfs as $pdf){
+            $path = $this->saveImage($pdf);
+            $file = new File(
+                [
+                    "path" => $path,
+                    "idea_id" => $ideaId
+                ]);
+            $file->save();
+        }
     }
 
     /**
@@ -87,9 +96,10 @@ class FileController extends Controller
         //
     }
 
-    public function saveFile(UploadedFile $file)
+    protected function saveImage(UploadedFile $file)
     {
-        $name = uniqid("idea_") . "." . $file->getClientOriginalExtension();
+
+        $name = uniqid("idea_").".". $file->getClientOriginalExtension();
         move_uploaded_file($file->getPathname(), public_path('idea/' . $name));
         return "idea/" . $name;
     }

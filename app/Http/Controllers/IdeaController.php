@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Idea;
 use App\Models\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
 class IdeaController extends Controller
@@ -19,8 +20,10 @@ class IdeaController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $ideas = Idea::all();
         return view('Goodi/Idea/index')
-            ->with('listCategories', $categories);
+            ->with('listCategories', $categories)
+            ->with("ideas", $ideas);
     }
 
     /**
@@ -44,9 +47,11 @@ class IdeaController extends Controller
         $authorId = Auth::user()->getAuthIdentifier();
         $idea = new Idea($request->all());
         $idea['author_id'] = $authorId;
+        $idea->save();
 
+        $ideaId = $idea->id;
         $fileController = new FileController();
-        $fileController->store($request);
+        $fileController->store($request, $ideaId);
 //        return redirect(route("showSpecifiedSubmission", ['id' => $request->submissionId]))->with('success', 'Submit idea successfully');
         return redirect(route("indexIdea"))->with('success', 'Submit idea successfully');
 
@@ -96,4 +101,6 @@ class IdeaController extends Controller
     {
         //
     }
+
+
 }

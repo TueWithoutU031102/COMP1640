@@ -68,7 +68,7 @@
 
                         <div class="form-group">
                             <label for="files" class="font-weight-bold">Discussion</label>
-                            <input type="file" id="files" name="files" multiple>
+                            <input type="file" id="files" name="files[]" multiple>
                         </div><br>
                         <div class="button-idea">
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit</button>
@@ -76,162 +76,33 @@
                     </form>
                 </section>
                 <section class="post">
-                    <br>
-                    <div class="post-container">
-                        <div class="user-detail">
-                            <img src="https://github.com/mdo.png" width="50" height="50" class="rounded-circle"
-                                alt="">
-                            <div class="post-content">
-                                <h4>We need a better solution for teaching children in math<h6>
-                                        <small>LongNT Has Posted on Feburary 12, 2023</small><br><br>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
-                                            laoreet.
-                                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-                                            sodales pulvinar tempor.
-                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                            mus. Nam fermentum,
-                                            nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
-                                            nunc eget odio.</p>
+                    @foreach($ideas as $idea)
+                        <br>
+                        <div class="post-container">
+                            <div class="user-detail">
+                                <img src="https://github.com/mdo.png" width="50" height="50" class="rounded-circle"
+                                     alt="">
+                                <div class="post-content">
+                                    <h4>{{$idea->title}}</h4>
+                                    <small>{{$idea->user->name}} Has Posted on {{$idea->created_at}}</small><br><br>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet.
+                                        Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
+                                        sodales pulvinar tempor.
+                                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                                        mus. Nam fermentum,
+                                        nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
+                                        nunc eget odio.</p>
+                                </div>
+                            </div>
+                            <div class="idea-interact">
+
                             </div>
                         </div>
-                        <div class="idea-interact">
-
-                        </div>
-                    </div>
-                    <br>
-                    <div class="post-container">
-                        <div class="user-detail">
-                            <img src="https://github.com/mdo.png" width="50" height="50" class="rounded-circle"
-                                alt="">
-                            <div class="post-content">
-                                <h4>We need a better solution for teaching children in math<h6>
-                                        <small>LongNT Has Posted on Feburary 12, 2023</small><br><br>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
-                                            laoreet.
-                                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-                                            sodales pulvinar tempor.
-                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                            mus. Nam fermentum,
-                                            nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
-                                            nunc eget odio.</p>
-                            </div>
-                        </div>
-                        <div class="idea-interact">
-
-                        </div>
-                    </div>
-                    <br>
-                    <div class="post-container">
-                        <div class="user-detail">
-                            <img src="https://github.com/mdo.png" width="50" height="50" class="rounded-circle"
-                                alt="">
-                            <div class="post-content">
-                                <h4>We need a better solution for teaching children in math<h6>
-                                        <small>LongNT Has Posted on Feburary 12, 2023</small><br><br>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
-                                            laoreet.
-                                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-                                            sodales pulvinar tempor.
-                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                            mus. Nam fermentum,
-                                            nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
-                                            nunc eget odio.</p>
-                            </div>
-                        </div>
-                        <div class="idea-interact">
-
-                        </div>
-                    </div>
-                    <br>
-                    <div class="post-container">
-                        <div class="user-detail">
-                            <img src="https://github.com/mdo.png" width="50" height="50" class="rounded-circle"
-                                alt="">
-                            <div class="post-content">
-                                <h4>We need a better solution for teaching children in math<h6>
-                                        <small>LongNT Has Posted on Feburary 12, 2023</small><br><br>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
-                                            laoreet.
-                                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-                                            sodales pulvinar tempor.
-                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                            mus. Nam fermentum,
-                                            nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
-                                            nunc eget odio.</p>
-                            </div>
-                        </div>
-                        <div class="idea-interact">
-
-                        </div>
-                    </div>
-                    <br>
-                    <div class="post-container">
-                        <div class="user-detail">
-                            <img src="https://github.com/mdo.png" width="50" height="50" class="rounded-circle"
-                                alt="">
-                            <div class="post-content">
-                                <h4>We need a better solution for teaching children in math<h6>
-                                        <small>LongNT Has Posted on Feburary 12, 2023</small><br><br>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
-                                            laoreet.
-                                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-                                            sodales pulvinar tempor.
-                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                            mus. Nam fermentum,
-                                            nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
-                                            nunc eget odio.</p>
-                            </div>
-                        </div>
-                        <div class="idea-interact">
-
-                        </div>
-                    </div>
-                    <br>
-                    <div class="post-container">
-                        <div class="user-detail">
-                            <img src="https://github.com/mdo.png" width="50" height="50" class="rounded-circle"
-                                alt="">
-                            <div class="post-content">
-                                <h4>We need a better solution for teaching children in math<h6>
-                                        <small>LongNT Has Posted on Feburary 12, 2023</small><br><br>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
-                                            laoreet.
-                                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-                                            sodales pulvinar tempor.
-                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                            mus. Nam fermentum,
-                                            nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
-                                            nunc eget odio.</p>
-                            </div>
-                        </div>
-                        <div class="idea-interact">
-
-                        </div>
-                    </div>
-                    <br>
-                    <div class="post-container">
-                        <div class="user-detail">
-                            <img src="https://github.com/mdo.png" width="50" height="50" class="rounded-circle"
-                                alt="">
-                            <div class="post-content">
-                                <h4>We need a better solution for teaching children in math<h6>
-                                        <small>LongNT Has Posted on Feburary 12, 2023</small><br><br>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
-                                            laoreet.
-                                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin
-                                            sodales pulvinar tempor.
-                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                            mus. Nam fermentum,
-                                            nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien
-                                            nunc eget odio.</p>
-                            </div>
-                        </div>
-                        <div class="idea-interact">
-
-                        </div>
-                    </div>
-
+                        <br>
+                    @endforeach
                 </section>
+
             </div>
             <div class="right-side">
 
@@ -240,14 +111,13 @@
         <div class="home-btn">
             <a href="#"><i class="fa-solid fa-angles-up"></i></a>
         </div>
-        <
+    <script>
+        function formToggle() {
+            const toggleForm = document.querySelector('.create-idea');
+            const toggleButton = document.querySelector('.button-idea');
+            toggleForm.classList.toggle('active')
+            toggleButton.classList.toggle('active')
+        }
+    </script>
 @endsection
 
-<script>
-    function formToggle() {
-        const toggleForm = document.querySelector('.create-idea');
-        const toggleButton = document.querySelector('.button-idea');
-        toggleForm.classList.toggle('active')
-        toggleButton.classList.toggle('active')
-    }
-</script>
