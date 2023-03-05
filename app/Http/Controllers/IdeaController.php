@@ -48,6 +48,7 @@ class IdeaController extends Controller
         $idea = new Idea($request->all());
         $idea['author_id'] = $authorId;
         $idea->save();
+
         $ideaId = $idea->id;
         $fileController = new FileController();
         $fileController->store($request, $ideaId);
