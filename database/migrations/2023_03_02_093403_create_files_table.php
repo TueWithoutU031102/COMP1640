@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('files');
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string('path');
             $table->timestamps();
         });
     }

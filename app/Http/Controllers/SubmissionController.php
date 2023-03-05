@@ -59,7 +59,6 @@ class SubmissionController extends Controller
                 ->with('success', 'Submission created successfully')
                 ->with('$different', $different);
         }
-
         $submission->save();
         return redirect(route('indexSubmission'))->with('success', 'Submission created successfully');
     }
@@ -73,7 +72,10 @@ class SubmissionController extends Controller
     public function show($id)
     {
         $submission = Submission::find($id);
-        $timeRemaining = getDifferent($submission->startDate);
+        $startDate = new Carbon($submission->startDate);
+        $dueDate = new Carbon( $submission->dueDate);
+
+        $timeRemaining = $this->getDifferent($startDate,$dueDate);
         return view('Goodi/Submission/show')
             ->with('submission', $submission)
             ->with('timeRemaining', $timeRemaining);
@@ -117,8 +119,11 @@ class SubmissionController extends Controller
 
     function getDifferent($sD, $dD)
     {
-        $days = $sD->diffInHours($dD);
+        $days = $sD->diffInDays($dD);
+        $hours = $sD->diffInHours($dD);
         $minutes = $sD->diffInMinutes($dD) % 60;
-        return (string)$days . " hours |" . (string)$minutes . " minutes";
+
+
+        return $days ." days |".($hours%24). " hours |" .($minutes%60). " minutes";
     }
 }

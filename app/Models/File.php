@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 
 class File extends Model
 {
@@ -16,4 +17,6 @@ class File extends Model
     {
         return $this->belongsTo(Idea::class);
     }
+
+
 }

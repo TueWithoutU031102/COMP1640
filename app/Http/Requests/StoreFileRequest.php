@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreFileRequest extends FormRequest
 {
@@ -13,6 +14,10 @@ class StoreFileRequest extends FormRequest
      */
     public function authorize()
     {
+        $user = Auth::user();
+        if ($user->isUser()){
+            return true;
+        }
         return false;
     }
 

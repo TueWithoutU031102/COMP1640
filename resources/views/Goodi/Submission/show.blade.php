@@ -24,6 +24,7 @@
             <h2>{{ $submission->title }}</h2>
             <p><span>ID: </span>{{$submission->id}}</p>
             <p><span>Create by: </span></p>
+            <p><span>Start date: </span>{{$submission->startDate}}</p>
             <p><span>Due date: </span>{{$submission->dueDate}}</p>
             <span>Time remaining: </span>
             {{--            <p onclick="getTimeRemaining('{{ $submission->startDate }}', '{{ $submission->dueDate }}', this)">||</p>--}}

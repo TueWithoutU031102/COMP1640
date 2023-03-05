@@ -43,7 +43,8 @@
                 <section class="create-idea">
                     <h2>New Idea</h2>
                     <i></i>
-                    <form action="createIdea">
+                    <form action="{{ route('storeIdea') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="">
                             <label for="title" class="font-weight-bold">Title</label>
                             <input type="title" name="title" class="form-control" id="title"
@@ -60,9 +61,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="discussion" class="font-weight-bold">Discussion</label>
-                            <textarea style="resize: none;" type="discussion" name="discusstion" class="form-control" id="discussion" aria-describedby="discussion"
+                            <label for="description" class="font-weight-bold">Discussion</label>
+                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion" aria-describedby="discussion"
                                 rows="7"></textarea>
+                        </div><br>
+
+                        <div class="form-group">
+                            <label for="files" class="font-weight-bold">Discussion</label>
+                            <input type="file" id="files" name="files" multiple>
                         </div><br>
                         <div class="button-idea">
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit</button>
