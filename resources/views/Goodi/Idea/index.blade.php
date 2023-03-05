@@ -61,8 +61,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="discussion" class="font-weight-bold">Discussion</label>
-                            <textarea style="resize: none;" type="discussion" name="discusstion" class="form-control" id="discussion"
+                            <label for="description" class="font-weight-bold">Discussion</label>
+                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
                                 aria-describedby="discussion" rows="7"></textarea>
                         </div><br>
 
@@ -106,14 +106,15 @@
                                 </div>
                             </div>
                             <br>
+                            <div class="mt-3">
+                                <form action="{{route('postLike',$idea->id)}}" method="post">
+                                    @csrf
+                                    <button class="text-blue-500" type="submit">Like</button>
+                                </form>
+                            </div>
                     @endforeach
                 </section>
-                <div class="mt-3">
-                    <form action="{{route('postLike',$idea->id)}}" method="post">
-                        @csrf
-                        <button class="text-blue-500" type="submit">Like</button>
-                    </form>
-                </div>
+
 
             </div>
             <div class="right-side">
