@@ -538,6 +538,7 @@ nav{
     border-radius: 20px;
     padding: 20px 10px 20px 10px;
     box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
+    width: 1000px;
 }
 
 .post{}
@@ -548,7 +549,7 @@ nav{
 }
 
 .post-content{
-    width: auto;
+    /* width: auto; */
     margin-left: 10px;
 }
 
@@ -562,12 +563,53 @@ nav{
     color: #a7a7a7;
 }
 
-.post-content p{
-    width: 40%;
+/* .des{
+    width: 900px;
     overflow-wrap: break-word;
     font-weight: none;
     font-size: 16px;
     letter-spacing: 1px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+#view {
+    display: none;
+}
+
+.post-content label{
+    margin-top: 10px;
+    display: inline-block;
+    color: #3564fb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#view:checked ~ .des{
+    -webkit-line-clamp: 0;
+}
+
+#view:checked ~ label{
+    visibility: hidden;
+}
+
+#view:checked ~ label:after{
+    content: 'Show Less';
+    display: block;
+    visibility: visible;
+} */
+
+.idea-interact{
+    display: flex;
+    align-items: center;
+}
+
+.idea-interact button{
+    border: none;
+    background: transparent;
+
 }
 
 .submission-date{
