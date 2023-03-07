@@ -9,6 +9,7 @@ use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class IdeaController extends Controller
 {
@@ -99,5 +100,10 @@ class IdeaController extends Controller
     public function destroy(Idea $idea)
     {
         //
+    }
+
+    public function download()
+    {
+        return view('Goodi/Idea/show');
     }
 }
