@@ -39,8 +39,8 @@ class FileController extends Controller
     public function store(StoreFileRequest $request, int $ideaId)
     {
         $pdfs = $request->file('files');
-
-        foreach ($pdfs as $pdf){
+        if (!$pdfs) return false;
+        foreach ($pdfs as $pdf) {
             $path = $this->saveImage($pdf);
             $file = new File(
                 [
@@ -49,6 +49,7 @@ class FileController extends Controller
                 ]);
             $file->save();
         }
+        return true;
     }
 
     /**
@@ -99,7 +100,7 @@ class FileController extends Controller
     protected function saveImage(UploadedFile $file)
     {
 
-        $name = uniqid("idea_").".". $file->getClientOriginalExtension();
+        $name = uniqid("idea_") . "." . $file->getClientOriginalExtension();
         move_uploaded_file($file->getPathname(), public_path('idea/' . $name));
         return "idea/" . $name;
     }

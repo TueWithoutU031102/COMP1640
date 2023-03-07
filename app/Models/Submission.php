@@ -24,4 +24,9 @@ class Submission extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function ideas()
+    {
+        return $this->hasMany(Idea::class);
+    }
+
 }

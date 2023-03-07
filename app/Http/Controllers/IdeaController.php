@@ -47,13 +47,13 @@ class IdeaController extends Controller
         $authorId = Auth::user()->getAuthIdentifier();
         $idea = new Idea($request->all());
         $idea['author_id'] = $authorId;
-        $idea->save();
-
-        $ideaId = $idea->id;
-        $fileController = new FileController();
-        $fileController->store($request, $ideaId);
-        //        return redirect(route("showSpecifiedSubmission", ['id' => $request->submissionId]))->with('success', 'Submit idea successfully');
-        return redirect(route("indexIdea"))->with('success', 'Submit idea successfully');
+        if ($idea->save()) {
+            $ideaId = $idea->id;
+            $fileController = new FileController();
+            $fileController->store($request, $ideaId);
+            return redirect(route("showSpecifiedSubmission", ['id' => $request->submission_id]))->with('message', 'Submit idea successfully');
+        };
+        return redirect()->back()->with('message', 'Submit idea fail!');
     }
 
     /**
