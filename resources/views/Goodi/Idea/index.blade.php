@@ -48,7 +48,7 @@
     visibility: visible;
 }
 
-</style>
+    </style>
 @endforeach
     <section class="main_idea">
         <div class="idea-container">
