@@ -136,7 +136,7 @@
                                  </div>
                                  <div class="col-6">
                                      @foreach($idea->files as $file)
-                                         <a href="{{ url($file->path) }}">{{$file->filename}}</a>
+                                         <a href="{{ url($file->path) }}" target="_blank">{{$file->filename}}</a>
                                          <hr>
                                      @endforeach
                                  </div>
