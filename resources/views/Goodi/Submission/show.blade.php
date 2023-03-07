@@ -102,35 +102,46 @@
                 <section class="post">
 
                     @foreach ($ideas as $idea)
-                        <div class="post-container">
-                            <div class="user-detail">
-                                <img src="{{asset($idea->user->image)}}" width="50" height="50" class="rounded-circle"
-                                     alt="">
-                                <div class="post-content">
-                                    <h4>{{ $idea->title }}</h4>
-                                    <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
-                                    <p>{{ $idea->description }}</p>
-                                </div>
+                        <div class="col-6">
+                            <div class="post-container">
+                             <div class="row">
+                                 <div class="col-6">
+                                     <div class="user-detail">
+                                         <img src="{{asset($idea->user->image)}}" width="50" height="50" class="rounded-circle"
+                                              alt="">
+                                         <div class="post-content">
+                                             <h4>{{ $idea->title }}</h4>
+                                             <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
+                                             <p>{{ $idea->description }}</p>
+                                         </div>
+                                     </div>
+                                     <div class="idea-interact">
+                                         <br>
+                                         <p>{{ $idea->likes->count() }}</p>
+                                         <div class="mt-3">
+                                             @if (!$idea->likedBy(auth()->user()))
+                                                 <form action="{{ route('postLike', $idea->id) }}" method="POST">
+                                                     @csrf
+                                                     <button class="text-blue-500" type="submit">Like</button>
+                                                 </form>
+                                             @else
+                                                 <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
+                                                     @csrf
+                                                     @method('DELETE')
+                                                     <button class="text-blue-500" type="submit">Unlike</button>
+                                                 </form>
+                                             @endif
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-6">
+                                     @foreach($idea->files as $file)
+                                         <a href="{{ url($file->path) }}">{{$file->filename}}</a>
+                                         <hr>
+                                     @endforeach
+                                 </div>
+                             </div>
                             </div>
-                            <div class="idea-interact">
-                                <br>
-                                <p>{{ $idea->likes->count() }}</p>
-                                <div class="mt-3">
-                                    @if (!$idea->likedBy(auth()->user()))
-                                        <form action="{{ route('postLike', $idea->id) }}" method="POST">
-                                            @csrf
-                                            <button class="text-blue-500" type="submit">Like</button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="text-blue-500" type="submit">Unlike</button>
-                                        </form>
-                                    @endif
-                                </div>
-                            </div>
-                            <br>
                         </div>
                     @endforeach
                 </section>

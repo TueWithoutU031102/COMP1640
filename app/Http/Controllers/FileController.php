@@ -45,6 +45,7 @@ class FileController extends Controller
             $file = new File(
                 [
                     "path" => $path,
+                    "filename" => $pdf->getClientOriginalName(),
                     "idea_id" => $ideaId
                 ]);
             $file->save();
@@ -99,7 +100,6 @@ class FileController extends Controller
 
     protected function saveImage(UploadedFile $file)
     {
-
         $name = uniqid("idea_") . "." . $file->getClientOriginalExtension();
         move_uploaded_file($file->getPathname(), public_path('idea/' . $name));
         return "idea/" . $name;

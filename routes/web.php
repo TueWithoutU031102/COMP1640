@@ -35,6 +35,8 @@ Route::get('/login', function () {
 
 Route::post('/login', [LoginController::class, 'authenticate']);
 
+Route::get('/showFile', [IdeaController::class, 'download']);
+
 Route::get('index', [UserController::class, 'index'])->name('user.index');
 
 
