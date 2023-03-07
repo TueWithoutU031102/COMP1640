@@ -9,6 +9,7 @@ use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class IdeaController extends Controller
 {
@@ -47,12 +48,13 @@ class IdeaController extends Controller
         $authorId = Auth::user()->getAuthIdentifier();
         $idea = new Idea($request->all());
         $idea['author_id'] = $authorId;
-        $idea->save();
-        $ideaId = $idea->id;
-        $fileController = new FileController();
-        $fileController->store($request, $ideaId);
-        //        return redirect(route("showSpecifiedSubmission", ['id' => $request->submissionId]))->with('success', 'Submit idea successfully');
-        return redirect(route("indexIdea"))->with('success', 'Submit idea successfully');
+        if ($idea->save()) {
+            $ideaId = $idea->id;
+            $fileController = new FileController();
+            $fileController->store($request, $ideaId);
+            return redirect(route("showSpecifiedSubmission", ['id' => $request->submission_id]))->with('message', 'Submit idea successfully');
+        };
+        return redirect()->back()->with('message', 'Submit idea fail!');
     }
 
     /**
@@ -98,5 +100,10 @@ class IdeaController extends Controller
     public function destroy(Idea $idea)
     {
         //
+    }
+
+    public function download()
+    {
+        return view('Goodi/Idea/show');
     }
 }

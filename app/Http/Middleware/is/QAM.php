@@ -21,7 +21,7 @@ class QAM
         $user = Auth::user(); // lay thong tin khi dang nhap
         $route = $request->route()->getName();
         if (!($request->user()->isQAM() || $request->user()->isAdmin($request)))
-            abort(403);
+            return redirect()->route("forbidden");
         return $next($request);
     }
 }

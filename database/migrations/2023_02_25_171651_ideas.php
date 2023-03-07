@@ -22,6 +22,10 @@ return new class extends Migration
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories');
+            $table->unsignedBigInteger('submission_id');
+            $table->foreign('submission_id')
+                ->references('id')
+                ->on('submissions');
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')
                 ->references('id')

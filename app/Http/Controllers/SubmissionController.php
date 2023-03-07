@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Submission\createSubmission;
 use App\Http\Requests\Submission\updateSubmission;
+use App\Models\Category;
+use App\Models\Idea;
 use App\Models\Submission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -69,11 +71,26 @@ class SubmissionController extends Controller
      */
     public function show($id)
     {
+
         $submission = Submission::find($id);
-        $timeRemaining = $this->getTimeRemaining($submission->dueDate);
-        return view('Goodi/Submission/show')
-            ->with('submission', $submission)
-            ->with('timeRemaining', $timeRemaining);
+        $categories = Category::all();
+        $message = "";
+        $data =
+            [
+                'submission' => $submission,
+            ];
+        if (!$submission) {
+            $message = 'Not found!';
+        } else {
+            $timeRemaining = $this->getTimeRemaining($submission->dueDate);
+            $ideas = $submission->ideas;
+            $data['timeRemaining'] = $timeRemaining;
+            $data['ideas'] = $ideas;
+        }
+
+        return view('Goodi/Submission/show', $data)
+            ->with('listCategories', $categories)
+            ->with('message', $message);
     }
 
     /**
@@ -122,6 +139,6 @@ class SubmissionController extends Controller
         $minutes = $now->diffInMinutes($dD) % 60;
 
 
-        return $days ." days |".($hours%24). " hours |" .($minutes%60). " minutes";
+        return $days . " days |" . ($hours % 24) . " hours |" . ($minutes % 60) . " minutes";
     }
 }
