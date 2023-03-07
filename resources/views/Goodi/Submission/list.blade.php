@@ -64,7 +64,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description" class="font-weight-bold">Description</label>
-                        <textarea type="description" name="description" class="form-control" id="description" aria-describedby="description" rows="5"></textarea>
+                        <textarea style="resize: none;" type="description" name="description" class="form-control" id="description" aria-describedby="description" rows="6"></textarea>
                     </div>
                     <br>
                     <div class="button-idea">

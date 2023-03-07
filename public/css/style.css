@@ -548,6 +548,7 @@ nav{
 }
 
 .post-content{
+    width: auto;
     margin-left: 10px;
 }
 
@@ -562,6 +563,8 @@ nav{
 }
 
 .post-content p{
+    width: 40%;
+    overflow-wrap: break-word;
     font-weight: none;
     font-size: 16px;
     letter-spacing: 1px;

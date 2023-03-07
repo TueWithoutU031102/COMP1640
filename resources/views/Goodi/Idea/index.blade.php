@@ -64,12 +64,10 @@
                             <label for="description" class="font-weight-bold">Discussion</label>
                             <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
                                 aria-describedby="discussion" rows="7"></textarea>
-                        </div><br>
-
+                        </div>
                         <div class="form-group">
-                            <label for="files" class="font-weight-bold">Discussion</label>
                             <input type="file" id="files" name="files[]" multiple>
-                        </div><br>
+                        </div>
                         <div class="button-idea">
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit</button>
                         </div>
@@ -106,7 +104,8 @@
                                     @endif
                                 </div>
                             </div>
-                            <br>
+                        </div>
+                        <br>
                     @endforeach
                 </section>
             </div>
