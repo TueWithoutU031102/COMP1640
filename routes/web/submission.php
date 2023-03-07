@@ -1,9 +1,21 @@
 <?php
 
+use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
 
-Route::get("admin/Submission/index", [SubmissionController::class, 'index']);
-Route::get("admin/Submission/create", function () {return view('Goodi/admin/Submission/create');});
-Route::post("admin/Submission/create", [SubmissionController::class, 'store']);
-Route::get("admin/Submission/show/{id}", [SubmissionController::class, 'show']);
+
+Route::middleware(['auth'])->group(function (){
+    Route::get("submission/index", [SubmissionController::class, 'index'])->name("indexSubmission");
+
+    Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
+});
+
+Route::group(['prefix' => 'submission', 'middleware' => ['auth', 'admin', 'qam']], function () {
+    /////// SUBMISSION//
+    Route::get("create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
+
+    Route::post("create", [SubmissionController::class, 'store'])->name("storeSubmission");
+
+    Route::get("update", [SubmissionController::class, 'update'])->name("update");
+});
 
