@@ -20,7 +20,7 @@ class Staff
     {
         $user = Auth::user(); // lay thong tin khi dang nhap
         $route = $request->route()->getName();
-        if (!$request->user()->isStaff())
+        if (!($request->user()->isStaff() || $request->user()->isAdmin($request)))
             return redirect()->route("forbidden");
         return $next($request);
     }

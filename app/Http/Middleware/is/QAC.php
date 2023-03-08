@@ -20,7 +20,7 @@ class QAC
     {
         $user = Auth::user(); // lay thong tin khi dang nhap
         $route = $request->route()->getName();
-        if (!$request->user()->isQAC())
+        if (!($request->user()->isQAC() || $request->user()->isAdmin($request)))
             return redirect()->route("forbidden");
         return $next($request);
     }

@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'category', 'middleware' => ['auth', 'qam']], function () {
+    
     Route::get('index', [CategoryController::class, 'index'])->name('category.index');
 
     Route::get('create', [CategoryController::class, 'formCreateCategory']);

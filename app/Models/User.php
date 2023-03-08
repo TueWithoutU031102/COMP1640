@@ -55,24 +55,28 @@ class User extends Authenticatable
             return true;
         return false;
     }
+
     public function isAdmin(): bool
     {
         if ($this->role_id == '1')
             return true;
         return false;
     }
+
     public function isStaff(): bool
     {
-        if ($this->role_id != '2')
+        if ($this->role_id == '2')
             return true;
         return false;
     }
+
     public function isQAC(): bool
     {
-        if ($this->role_id != '3')
+        if ($this->role_id == '3')
             return true;
         return false;
     }
+
     public function isQAM(): bool
     {
         if ($this->role_id == '4')
@@ -84,6 +88,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Submission::class);
     }
+
     public function categories()
     {
         return $this->hasMany(Category::class);
