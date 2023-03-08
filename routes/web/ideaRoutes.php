@@ -4,13 +4,15 @@ use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('idea/index', [IdeaController::class, 'index'])->name('indexIdea');
+Route::group(['prefix' => 'idea', 'middleware' => ['auth', 'staff']], function () {
 
-Route::post('idea/store', [IdeaController::class, 'store'])->name('storeIdea');
+    Route::get('index', [IdeaController::class, 'index'])->name('indexIdea');
 
-Route::post("create", [IdeaController::class, 'create'])->name("createIdea");
+    Route::post('store', [IdeaController::class, 'store'])->name('storeIdea');
 
-Route::post("idea/{idea}/like", [LikeController::class, 'store'])->name('postLike');
+    Route::post("create", [IdeaController::class, 'create'])->name("createIdea");
 
-Route::delete("idea/{idea}/like", [LikeController::class, 'destroy'])->name('destroyLike');
+    Route::post("{idea}/like", [LikeController::class, 'store'])->name('postLike');
 
+    Route::delete("{idea}/like", [LikeController::class, 'destroy'])->name('destroyLike');
+});

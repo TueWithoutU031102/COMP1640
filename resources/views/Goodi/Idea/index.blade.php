@@ -4,52 +4,50 @@
     {{-- <section class="banner">
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section><br> --}}
-@foreach ($ideas as $idea)
-    <style>
+    @foreach ($ideas as $idea)
+        <style>
+            .des {
 
-.des{
+                --max-line: 3;
 
-    --max-line: 3;
+                width: 900px;
+                overflow-wrap: break-word;
+                font-weight: none;
+                font-size: 16px;
+                letter-spacing: 1px;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: var(--max-line);
+                overflow: hidden;
+            }
 
-    width: 900px;
-    overflow-wrap: break-word;
-    font-weight: none;
-    font-size: 16px;
-    letter-spacing: 1px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: var(--max-line);
-    overflow: hidden;
-}
+            #view{{ $idea->id }} {
+                display: none;
+            }
 
-        #view{{$idea->id}} {
-    display: none;
-}
-
-.post-content label{
-    display: inline-block;
-    color: #3564fb;
-    text-decoration: none;
-    cursor: pointer;
-}
+            .post-content label {
+                display: inline-block;
+                color: #3564fb;
+                text-decoration: none;
+                cursor: pointer;
+            }
 
 
-#view{{$idea->id}}:checked ~ .des{
-    --max-line: 0;
-}
+            #view{{ $idea->id }}:checked~.des {
+                --max-line: 0;
+            }
 
-#view{{$idea->id}}:checked ~ label{
-    visibility: hidden;
-}
+            #view{{ $idea->id }}:checked~label {
+                visibility: hidden;
+            }
 
-#view{{$idea->id}}:checked ~ label:after{
-    content: 'Show Less';
-    display: block;
-    visibility: visible;
-}
-
-    </style>
-@endforeach
+            #view{{ $idea->id }}:checked~label:after {
+                content: 'Show Less';
+                display: block;
+                visibility: visible;
+            }
+        </style>
+    @endforeach
     <section class="main_idea">
         <div class="idea-container">
             <div class="left-side">
@@ -81,10 +79,6 @@
                             <input class="search_bar" placeholder="Search Idea">
                         </div>
                     </form>
-                    <div class="btn-idea">
-                        {{-- <button class="add-idea" onclick="formToggle();">+</button> --}}
-                        {{-- <button class="refresh-idea">Refresh</button> --}}
-                    </div>
                 </section>
                 <section class="create-idea">
                     <h2>New Idea</h2>
@@ -124,34 +118,35 @@
                         <br>
                         <div class="post-container">
                             <div class="user-detail">
-                                <img src="{{asset($idea->user->image)}}" width="50" height="50" class="rounded-circle"
-                                    alt="" style="object-fit: cover; object-position: center center;">
+                                <img src="{{ asset($idea->user->image) }}" width="50" height="50"
+                                    class="rounded-circle" alt=""
+                                    style="object-fit: cover; object-position: center center;">
                                 <div class="post-content">
                                     <h4>{{ $idea->title }}</h4>
                                     <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
-                                    @foreach($idea->files as $file)
-                                        <a href="{{ url($file->path) }}" target="_blank">{{$file->filename}}</a>
+                                    @foreach ($idea->files as $file)
+                                        <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
                                     @endforeach
                                     <br>
-                                    <input type="checkbox" id="view{{$idea->id}}">
+                                    <input type="checkbox" id="view{{ $idea->id }}">
                                     <p class="des">{{ $idea->description }}</p>
-                                    <label for="view{{$idea->id}}">View More</label>
+                                    <label for="view{{ $idea->id }}">View More</label>
                                 </div>
                             </div>
-                            <div class="idea-interact" >
+                            <div class="idea-interact">
                                 <br>
-                                    @if (!$idea->likedBy(auth()->user()))
-                                        <form action="{{ route('postLike', $idea->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
+                                @if (!$idea->likedBy(auth()->user()))
+                                    <form action="{{ route('postLike', $idea->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <button type="submit"><i class="fa-solid fa-thumbs-up fa-2x"></i></button>
                                     </form>
-                                    @endif
+                                @endif
                                 <h6>{{ $idea->likes->count() }}</h6>
                             </div>
                         </div>

@@ -56,6 +56,7 @@ class Kernel extends HttpKernel
         'qam' => Middleware\is\QAM::class,
         'user' => \App\Http\Middleware\User::class,
         'admin' => Middleware\is\Admin::class,
+        'staff' => Middleware\is\Staff::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
