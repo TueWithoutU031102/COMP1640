@@ -72,7 +72,7 @@ class User extends Authenticatable
 
     public function isQAC(): bool
     {
-        if ($this->role_id != '3')
+        if ($this->role_id == '3')
             return true;
         return false;
     }
