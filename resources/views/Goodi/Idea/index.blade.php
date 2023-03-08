@@ -9,7 +9,7 @@
             <div class="left-side">
                 <div class="profile-display">
                     <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                        class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                         class="rounded-circle" style="object-fit: cover; object-position: center center;">
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
                 <div class="imp-link">
@@ -48,13 +48,14 @@
                         <div class="">
                             <label for="title" class="font-weight-bold">Title</label>
                             <input type="title" name="title" class="form-control" id="title"
-                                aria-describedby="title">
+                                   aria-describedby="title">
                         </div>
                         <div class="form-group">
                             <label for="category_id" class="font-weight-bold">Category</label>
 
-                            <select name="category_id" value="{{ old('category_id') }}" class="form-select" id="category"
-                                aria-label="Category">
+                            <select name="category_id" value="{{ old('category_id') }}" class="form-select"
+                                    id="category"
+                                    aria-label="Category">
                                 @foreach ($listCategories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
@@ -62,14 +63,17 @@
                         </div>
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Discussion</label>
-                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
-                                aria-describedby="discussion" rows="7"></textarea>
-                        </div><br>
+                            <textarea style="resize: none;" type="description" name="description" class="form-control"
+                                      id="description"
+                                      aria-describedby="description" rows="7"></textarea>
+                        </div>
+                        <br>
 
                         <div class="form-group">
                             <label for="files" class="font-weight-bold">Discussion</label>
                             <input type="file" id="files" name="files[]" multiple>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="button-idea">
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit</button>
                         </div>
@@ -81,7 +85,7 @@
                         <div class="post-container">
                             <div class="user-detail">
                                 <img src="https://github.com/mdo.png" width="50" height="50" class="rounded-circle"
-                                    alt="">
+                                     alt="">
                                 <div class="post-content">
                                     <h4>{{ $idea->title }}</h4>
                                     <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
@@ -117,11 +121,12 @@
         <div class="home-btn">
             <a href="#"><i class="fa-solid fa-angles-up"></i></a>
         </div>
-    < @endsection <script>
-        function formToggle() {
-            const toggleForm = document.querySelector('.create-idea');
-            const toggleButton = document.querySelector('.button-idea');
-            toggleForm.classList.toggle('active')
-            toggleButton.classList.toggle('active')
-        }
-    </script>
+        <script>
+            function formToggle() {
+                const toggleForm = document.querySelector('.create-idea');
+                const toggleButton = document.querySelector('.button-idea');
+                toggleForm.classList.toggle('active')
+                toggleButton.classList.toggle('active')
+            }
+        </script>
+@endsection
