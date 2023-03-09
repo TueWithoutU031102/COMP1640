@@ -79,6 +79,12 @@
                             <input class="search_bar" placeholder="Search Idea">
                         </div>
                     </form>
+                    <div class="btn-idea">
+                        @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'ADMIN')
+                            <button class="add-idea" onclick="formToggle();">+</button>
+                        @endif
+                        {{-- <button class="refresh-idea">Refresh</button> --}}
+                    </div>
                 </section>
                 <section class="create-idea">
                     <h2>New Idea</h2>
@@ -161,7 +167,9 @@
         <div class="home-btn">
             <a href="#"><i class="fa-solid fa-angles-up"></i></a>
         </div>
-    < @endsection <script>
+    </section>
+    @endsection
+    <script>
         function formToggle() {
             const toggleForm = document.querySelector('.create-idea');
             const toggleButton = document.querySelector('.button-idea');

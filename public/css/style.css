@@ -453,10 +453,11 @@ nav{
     transition: 0.2s;
     visibility: hidden;
     opacity: 0;
+    transition: 0.2s;
 }
 
 .create-idea.active{
-    height: 500px;
+    height: auto;
     visibility: visible;
     opacity: 1;
 }
