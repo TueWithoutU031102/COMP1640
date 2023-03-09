@@ -10,7 +10,7 @@
 
                 --max-line: 3;
 
-                width: 900px;
+                width: 700px;
                 overflow-wrap: break-word;
                 font-weight: none;
                 font-size: 16px;

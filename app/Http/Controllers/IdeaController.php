@@ -6,6 +6,7 @@ use App\Http\Requests\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
 use App\Models\Submission;
+use App\Services\IdeaService;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Storage;
 
 class IdeaController extends Controller
 {
+    protected $ideaService;
+
+    public function __construct(IdeaService $ideaService)
+    {
+        $this->ideaService = $ideaService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +29,7 @@ class IdeaController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $ideas = Idea::all();
+        $ideas = $this->ideaService->findAll();
         return view('Goodi/Idea/index')
             ->with('listCategories', $categories)
             ->with("ideas", $ideas);
@@ -41,13 +49,18 @@ class IdeaController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreFileRequest $request)
     {
+        if ($this->ideaService->checkDueDate($request->input('dueDate'))){
+            return redirect()->back()->with('message', 'Over due!');
+        }
+
         $authorId = Auth::user()->getAuthIdentifier();
         $idea = new Idea($request->all());
         $idea['author_id'] = $authorId;
+
         if ($idea->save()) {
             $ideaId = $idea->id;
             $fileController = new FileController();
