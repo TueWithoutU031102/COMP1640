@@ -26,8 +26,12 @@ class createSubmission extends FormRequest
         return [
             'title' => ['required'],
             'description' => ['required'],
-            'startDate' => ['required'],
-            'dueDate' => ['required'],
+            'startDate' => ['after_or_equal:today'],
+            'dueDate' => ['after_or_equal:startDate'],
         ];
+    }
+    public function messages()
+    {
+        return [];
     }
 }

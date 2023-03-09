@@ -1,106 +1,119 @@
 @extends('Goodi.nav_bar')
 
 @section('main')
-{{-- <section class="banner">
+    {{-- <section class="banner">
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section><br> --}}
-<section class="main_idea">
-    <div class="idea-container">
-        <div class="left-side">
-            <div class="profile-display">
-                <img src="{{ asset( Auth::user()->image )}}" alt="mdo" width="50" height="50"
-                                class="rounded-circle" style="object-fit: cover; object-position: center center;">
-                <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
-            </div>
-            <div class="imp-link">
-                <a href="#">All Discussion</a>
-                <a href="#">Category</a>
-            </div>
-        </div>
-        <div class="main-content">
-            <section class="idea-action">
-                <div class="sort-idea">
-                    <select>
-                        <option>test</option>
-                        <option>test</option>
-                        <option>test</option>
-                        <option>test</option>
-                        <option>test</option>
-                        <option>test</option>
-                    </select>
+    <section class="main_idea">
+        <div class="idea-container">
+            <div class="left-side">
+                <div class="profile-display">
+                    <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
+                        class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                    <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
-                <form action="" class="form-inline" >
-                    <div class="form-group">
-                        <input class="search_bar" placeholder="Search Idea">
+                <div class="imp-link">
+                    <a href="#">All Discussion</a>
+                    <a href="#">Category</a>
+                </div>
+            </div>
+            <div class="main-content">
+                <section class="idea-action">
+                    <div class="sort-idea">
+                        <select>
+                            <option>test</option>
+                            <option>test</option>
+                            <option>test</option>
+                            <option>test</option>
+                            <option>test</option>
+                            <option>test</option>
+                        </select>
                     </div>
-                </form>
-                <div class="btn-idea">
-                    @if(\Illuminate\Support\Facades\Auth::user()->role->name == "ADMIN")
-                        <button class="add-idea" onclick="formToggle();">+</button>
+                    <form action="" class="form-inline">
+                        <div class="form-group">
+                            <input class="search_bar" placeholder="Search Idea">
+                        </div>
+                    </form>
+                    <div class="btn-idea">
+                        @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'ADMIN')
+                            <button class="add-idea" onclick="formToggle();">+</button>
+                        @endif
+                        {{-- <button class="refresh-idea">Refresh</button> --}}
+                    </div>
+                </section>
+                <section class="create-idea">
+                    <h2>New Submission</h2>
+                    <i></i>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
-                    {{-- <button class="refresh-idea">Refresh</button> --}}
-                </div>
-            </section>
-            <section class="create-idea">
-                <h2>New Submission</h2>
-                <i></i>
-                <form action="/submission/create" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="title" class="font-weight-bold">Title</label>
-                        <input type="title" name="title" class="form-control" id="title" aria-describedby="title">
-                    </div>
-                    <div class="submission-date">
+                    <form action="/submission/create" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
-                            <label for="startDate" class="font-weight-bold">Date Started</label>
-                            <input type="datetime-local" name="startDate" class="form-control" id="startDateInput"
-                            aria-describedby="startDate" style="width: 300px" onchange="limitDueDate(this.value)">
+                            <label for="title" class="font-weight-bold">Title</label>
+                            <input type="title" name="title" class="form-control" id="title"
+                                aria-describedby="title">
                         </div>
-                        <div class="form-group">
-                            <label for="dueDate" class="font-weight-bold">Date Finished</label>
-                            <input type="datetime-local" name="dueDate" class="form-control" id="dueDateInput" aria-describedby="dueDate"
-                            style="width: 300px" onchange="checkDueDate(this)">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="font-weight-bold">Description</label>
-                        <textarea style="resize: none;" type="description" name="description" class="form-control" id="description" aria-describedby="description" rows="6"></textarea>
-                    </div>
-                    <br>
-                    <div class="button-idea">
-                        <button class="btn btn-success" style="padding: 10px 100px;" type="submit" id="submitCreate">Submit</button>
-                    </div>
-                </form>
-            </section>
-            <section class="submission">
-                <br>
-                @foreach ($subs as $sub)
-                    <br>
-                    <a class="submission-link" href="/submission/show/{{ $sub->id }}">
-                        <div class="submission-container">
-                            <div class="submission-detail">
-                                <i class="fa-solid fa-file-lines fa-4x"></i>
-                                <div class="submission-content">
-                                    <h4>{{ $sub->title }}</h4>
-                                    <small>Create by: </small><br>
-                                    <p>{{ $sub->description }}</p>
-                                    <span class="due-date"><i class="fa-solid fa-triangle-exclamation"></i>  Due {{ $sub->dueDate }}</span>
-                                </div>
+                        <div class="submission-date">
+                            <div class="form-group">
+                                <label for="startDate" class="font-weight-bold">Date Started</label>
+                                <input type="datetime-local" name="startDate" class="form-control" id="startDateInput"
+                                    aria-describedby="startDate" style="width: 300px" onchange="limitDueDate(this.value)">
+                            </div>
+                            <div class="form-group">
+                                <label for="dueDate" class="font-weight-bold">Date Finished</label>
+                                <input type="datetime-local" name="dueDate" class="form-control" id="dueDateInput"
+                                    aria-describedby="dueDate" style="width: 300px" onchange="checkDueDate(this)">
                             </div>
                         </div>
-                    </a>
-                @endforeach
+                        <div class="form-group">
+                            <label for="description" class="font-weight-bold">Description</label>
+                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="description"
+                                aria-describedby="description" rows="6"></textarea>
+                        </div>
+                        <br>
+                        <div class="button-idea">
+                            <button class="btn btn-success" style="padding: 10px 100px;" type="submit"
+                                id="submitCreate">Submit</button>
+                        </div>
+                    </form>
+                </section>
+                <section class="submission">
+                    <br>
+                    @foreach ($subs as $sub)
+                        <br>
+                        <a class="submission-link" href="/submission/show/{{ $sub->id }}">
+                            <div class="submission-container">
+                                <div class="submission-detail">
+                                    <i class="fa-solid fa-file-lines fa-4x"></i>
+                                    <div class="submission-content">
+                                        <h4>{{ $sub->title }}</h4>
+                                        <small>Create by: </small><br>
+                                        <p>{{ $sub->description }}</p>
+                                        <span class="due-date"><i class="fa-solid fa-triangle-exclamation"></i> Due
+                                            {{ $sub->dueDate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
 
-            </section>
-        </div>
-        <div class="right-side">
+                </section>
+            </div>
+            <div class="right-side">
 
+            </div>
         </div>
-    </div>
-    <div class="home-btn">
-        <a href="#"><i class="fa-solid fa-angles-up"></i></a>
-    </div>
-</section>
+        <div class="home-btn">
+            <a href="#"><i class="fa-solid fa-angles-up"></i></a>
+        </div>
+    </section>
 
 @endsection
 
@@ -114,7 +127,7 @@
         getStartDateEqualToday("startDateInput");
     }
 
-    function getStartDateEqualToday(startDateInputId){
+    function getStartDateEqualToday(startDateInputId) {
         let startDateInput = document.getElementById(startDateInputId);
         console.log(startDateInput)
         let tzOffset = (new Date()).getTimezoneOffset() * 60000;
@@ -144,32 +157,33 @@
     }
 
     getStartDateEqualToday("startDateInput");
-        function getStartDateEqualToday(startDateInputId){
-            let startDateInput = document.getElementById(startDateInputId);
-            console.log(startDateInput)
-            let tzOffset = (new Date()).getTimezoneOffset() * 60000;
-            let today = new Date(Date.now() - tzOffset);
-            startDateInput.value = today.toISOString().slice(0, 16);
-        }
 
-        limitDueDate(today.toISOString().slice(0, 16))
+    function getStartDateEqualToday(startDateInputId) {
+        let startDateInput = document.getElementById(startDateInputId);
+        console.log(startDateInput)
+        let tzOffset = (new Date()).getTimezoneOffset() * 60000;
+        let today = new Date(Date.now() - tzOffset);
+        startDateInput.value = today.toISOString().slice(0, 16);
+    }
 
-        function limitDueDate(startDate) {
-            let dueDateInput = document.getElementById('dueDateInput');
-            dueDateInput.min = startDate;
-        }
+    limitDueDate(today.toISOString().slice(0, 16))
 
-        function checkDueDate(seft) {
-            let submitCreate = document.getElementById('submitCreate');
-            let dueDate = new Date(seft.value);
-            let now = new Date();
-            if (dueDate < now) {
-                submitCreate.disabled = true;
-                alert("due date must be latter than " + startDateInput.value.replace('T', ' - '));
-            } else {
-                submitCreate.disabled = false;
-            }
+    function limitDueDate(startDate) {
+        let dueDateInput = document.getElementById('dueDateInput');
+        dueDateInput.min = startDate;
+    }
+
+    function checkDueDate(seft) {
+        let submitCreate = document.getElementById('submitCreate');
+        let dueDate = new Date(seft.value);
+        let now = new Date();
+        if (dueDate < now) {
+            submitCreate.disabled = true;
+            alert("due date must be latter than " + startDateInput.value.replace('T', ' - '));
+        } else {
+            submitCreate.disabled = false;
         }
+    }
 </script>
 
 
@@ -358,7 +372,3 @@
         }
     </script>
 @endsection --}}
-
-
-
-
