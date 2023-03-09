@@ -24,7 +24,10 @@ class createSubmission extends FormRequest
     public function rules()
     {
         return [
-
+            'title' => ['required'],
+            'description' => ['required'],
+            'startDate' => ['required'],
+            'dueDate' => ['required'],
         ];
     }
 }
