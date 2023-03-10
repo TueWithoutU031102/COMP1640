@@ -48,6 +48,18 @@
             }
         </style>
     @endforeach
+    <section class="banner">
+        @include('Goodi.nav_bar')
+        <div class="text-box">
+            <h1>
+                <p>IDEA <span class="text-highlight">DISCUSSION</span></p>
+            </h1>
+            <p>
+                Goodi idea, where people can discuss all idea together
+            </p>
+            <br>
+        </div>
+    </section>
     <section class="main_idea">
         <div class="idea-container">
             <div class="left-side">
@@ -81,7 +93,7 @@
                     </form>
                     <div class="btn-idea">
                         @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'ADMIN')
-                            <button class="add-idea" onclick="formToggle();">+</button>
+                            <button class="add-idea" onclick="formToggle();">Post Idea</button>
                         @endif
                         {{-- <button class="refresh-idea">Refresh</button> --}}
                     </div>
@@ -170,6 +182,35 @@
                                     @endif
                                     <h6>{{ $idea->likes->count() }}</h6>
                                 </div>
+                            <div class="idea-interact">
+                                <br>
+                                @if (!$idea->likedBy(auth()->user()))
+                                    <form action="{{ route('postLike', $idea->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"><i class="fa-solid fa-thumbs-up fa-2x"></i></button>
+                                    </form>
+                                @endif
+                                <h6>{{ $idea->likes->count() }}</h6>
+
+                                @if (!$idea->dislikedBy(auth()->user()))
+                                    <form action="{{ route('postDislike', $idea->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
+                                    </form>
+                                @endif
+                                <h6>{{ $idea->dislikes->count() }}</h6>
                             </div>
                         </div>
                         <br>
@@ -184,12 +225,12 @@
             <a href="#"><i class="fa-solid fa-angles-up"></i></a>
         </div>
     </section>
-    @endsection
-    <script>
-        function formToggle() {
-            const toggleForm = document.querySelector('.create-idea');
-            const toggleButton = document.querySelector('.button-idea');
-            toggleForm.classList.toggle('active')
-            toggleButton.classList.toggle('active')
-        }
-    </script>
+@endsection
+<script>
+    function formToggle() {
+        const toggleForm = document.querySelector('.create-idea');
+        const toggleButton = document.querySelector('.button-idea');
+        toggleForm.classList.toggle('active')
+        toggleButton.classList.toggle('active')
+    }
+</script>

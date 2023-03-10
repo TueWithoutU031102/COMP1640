@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\DislikeController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'idea', 'middleware' => ['auth', 'staff']], function () {
@@ -16,7 +17,7 @@ Route::group(['prefix' => 'idea', 'middleware' => ['auth', 'staff']], function (
 
     Route::delete("{idea}/like", [LikeController::class, 'destroy'])->name('destroyLike');
 
-    Route::post("{idea}/dislike", [LikeController::class, 'store'])->name('postDislike');
+    Route::post("{idea}/dislike", [DislikeController::class, 'store'])->name('postDislike');
 
-    Route::delete("{idea}/dislike", [LikeController::class, 'destroy'])->name('destroyDislike');
+    Route::delete("{idea}/dislike", [DislikeController::class, 'destroy'])->name('destroyDislike');
 });
