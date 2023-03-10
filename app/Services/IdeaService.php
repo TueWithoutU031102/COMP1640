@@ -36,6 +36,6 @@ class IdeaService
 
     public function checkDueDate($dD): bool
     {
-        return Carbon::create($dD)->isPast();
+        return Carbon::create($dD)->isFuture();
     }
 }
