@@ -1,9 +1,21 @@
-@extends('Goodi.nav_bar')
+@extends('Master.Master')
 
 @section('main')
     {{-- <section class="banner">
     <br><br><br><br><br><br><br><br><br><br><br><br><br>
     </section><br> --}}
+    <<section class="banner">
+        @include('Goodi.nav_bar')
+        <div class="text-box">
+            <h1>
+                <p>IDEA <span class="text-highlight">DISCUSSION</span></p>
+            </h1>
+            <p>
+                Goodi idea, where people can discuss all idea together
+            </p>
+            <br>
+        </div>
+    </section>
     <section class="main_idea">
         <div class="idea-container">
             <div class="col-3 left-side" style="border: #FF9900 solid 2px;">
