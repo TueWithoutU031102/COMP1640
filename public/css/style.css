@@ -323,12 +323,13 @@ nav{
 
 .banner{
     min-height: 60vh;
-	width: 100%;
+	width: 92%;
 	background-image: linear-gradient(rgba(26, 6, 44, 0.7),rgba(7, 15, 44, 0.7)),
 	url(images/banner.png);
 	background-position: center;
 	background-size: cover;
 	position: relative;
+    margin-left: 80px;
 }
 
 /* .main_idea{
@@ -573,6 +574,71 @@ nav{
     color: #a7a7a7;
 }
 
+.profile-layer{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 92%;
+    margin-left: 80px;
+    margin-right: 80px;
+    background: #eeeeeea2;
+    height: 300px;
+}
+
+.profile-layer img{
+    border: sli;
+    margin-left: 100px;
+    transform: translateY(-70px);
+    border: 5px solid #555555;
+}
+
+.profile-header{
+    font-weight: bold;
+    transform: translateY(-70px);
+}
+
+.modify-profile{
+    margin-bottom: 170px;
+}
+
+.profile-content{
+
+}
+
+.profile-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 5%;
+}
+
+.left-profile{
+    padding: 40px 40px 40px 40px;
+    margin-left: 40px;
+    margin-top: 60px;
+    border-radius: 20px;
+    background: transparent;
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    /* height: 100vh; */
+}
+
+.right-profile{
+    margin-top: 60px;
+    border-radius: 20px;
+    background: white;
+    flex-basis: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    /* height: 100vh; */
+    padding: 20px;
+    border-radius: 4px;
+    color: #626262;
+}
+
+
 /* .des{
     width: 900px;
     overflow-wrap: break-word;
@@ -612,6 +678,7 @@ nav{
 } */
 
 .idea-interact{
+    gap: 10px;
     display: flex;
     align-items: center;
 }

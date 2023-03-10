@@ -170,7 +170,7 @@
                                 @if (!$idea->dislikedBy(auth()->user()))
                                     <form action="{{ route('postDislike', $idea->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
+                                        <button type="submit"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
                                     </form>
                                 @else
                                     <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
