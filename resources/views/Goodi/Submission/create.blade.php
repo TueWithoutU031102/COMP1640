@@ -32,7 +32,8 @@
     </script>
     <script !src="">
         getStartDateEqualToday("startDateInput");
-        function getStartDateEqualToday(startDateInputId){
+
+        function getStartDateEqualToday(startDateInputId) {
             let startDateInput = document.getElementById(startDateInputId);
             console.log(startDateInput)
             let tzOffset = (new Date()).getTimezoneOffset() * 60000;
