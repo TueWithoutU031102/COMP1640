@@ -81,7 +81,7 @@
                     </form>
                     <div class="btn-idea">
                         @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'ADMIN')
-                            <button class="add-idea" onclick="formToggle();">+</button>
+                            <button class="add-idea" onclick="formToggle();">Post Idea</button>
                         @endif
                         {{-- <button class="refresh-idea">Refresh</button> --}}
                     </div>
