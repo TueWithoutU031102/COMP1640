@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Comment;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreFileRequest extends FormRequest
+class UpdateCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,10 +13,6 @@ class StoreFileRequest extends FormRequest
      */
     public function authorize()
     {
-        $user = Auth::user();
-        if ($user->isUser()){
-            return true;
-        }
         return false;
     }
 

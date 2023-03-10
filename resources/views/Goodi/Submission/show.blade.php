@@ -4,12 +4,10 @@
     @foreach ($ideas as $idea)
         <style>
             .des {
-
                 --max-line: 3;
-
                 width: 700px;
                 overflow-wrap: break-word;
-                font-weight: none;
+                font-weight: unset;
                 font-size: 16px;
                 letter-spacing: 1px;
                 display: -webkit-box;
@@ -18,7 +16,7 @@
                 overflow: hidden;
             }
 
-            #view{{ $idea->id }} {
+            #view{{ $idea->id }}    {
                 display: none;
             }
 
@@ -30,15 +28,15 @@
             }
 
 
-            #view{{ $idea->id }}:checked~.des {
+            #view:{{ $idea->id }}:checked ~ .des {
                 --max-line: 0;
             }
 
-            #view{{ $idea->id }}:checked~label {
+            #view:{{ $idea->id }}:checked ~ label {
                 visibility: hidden;
             }
 
-            #view{{ $idea->id }}:checked~label:after {
+            #view:{{ $idea->id }}:checked ~ label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
@@ -56,7 +54,7 @@
                 <div class="left-side">
                     <div class="profile-display">
                         <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                            class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                             class="rounded-circle" style="object-fit: cover; object-position: center center;">
                         <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                     </div>
                     <div class="imp-link">
@@ -99,39 +97,23 @@
                             <div class="form-group">
                                 <label for="dueDate" class="font-weight-bold">Due Date:</label>
                                 <input type="title" name="dueDate" class="form-control" id="dueDate"
-                                    aria-describedby="title" value="{{ $submission->dueDate }}" disabled>
-                                <div class="row" id="editForm">
-                                    <input type="text" id="submissionIdToUpdateDate" hidden>
-                                    <div class="editStartDate popup col-4" id="editStartDate" hidden>
-                                        <h1>StartDate</h1>
-                                        <input type="datetime-local" id="inputEditStartDate">
-                                        <button onclick="updateDate('startDate')">Ok</button>
-                                        <button onclick="closeForm('editStartDate')">close</button>
-                                    </div>
-
-                                    <div class="editDueDate popup col-4" id="editDueDate" hidden>
-                                        <h1>DueDate</h1>
-                                        <input type="datetime-local" id="inputEditDueDate">
-                                        <button onclick="closeForm('editDueDate')">close</button>
-                                        <button onclick="updateDate('dueDate')">Ok</button>
-                                    </div>
-                                </div>
+                                       aria-describedby="title" value="{{ $submission->dueDate }}" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="title" class="font-weight-bold">Title:</label>
                                 <input type="title" name="title" class="form-control" id="title"
-                                    aria-describedby="title">
+                                       aria-describedby="title">
                             </div>
                             <div class="form-group">
                                 <label for="filename" class="font-weight-bold">Save as:</label>
                                 <input type="text" name="filename" class="form-control" id="title"
-                                    aria-describedby="title">
+                                       aria-describedby="title">
                             </div>
                             <div class="form-group">
                                 <label for="category_id" class="font-weight-bold">Category:</label>
 
                                 <select name="category_id" value="{{ old('category_id') }}" class="form-select"
-                                    id="category" aria-label="Category">
+                                        id="category" aria-label="Category">
                                     @foreach ($listCategories as $category)
                                         <option value="{{ $category->id }}">{{ $category->title }}</option>
                                     @endforeach
@@ -139,45 +121,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="description" class="font-weight-bold">Description: </label>
-                                <textarea type="description" name="description" class="form-control" id="discussion" aria-describedby="description"
-                                    rows="4"></textarea>
+                                <textarea type="description" name="description" class="form-control" id="discussion"
+                                          aria-describedby="description"
+                                          rows="4"></textarea>
                             </div>
                             <br>
-
-                            {{-- <section class="create-idea">
-                        <h2>New Idea</h2>
-                        <i></i>
-                        <form action="{{ route('storeIdea') }}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <div class="">
-                                <label for="title" class="font-weight-bold">Title</label>
-                                <input type="title" name="title" class="form-control" id="title"
-                                    aria-describedby="title">
-                            </div>
-                            <div class="form-group">
-                                <label for="category_id" class="font-weight-bold">Category</label>
-
-                                <select name="category_id" value="{{ old('category_id') }}" class="form-select" id="category"
-                                    aria-label="Category">
-                                    @foreach ($listCategories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="description" class="font-weight-bold">Discussion</label>
-                                <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
-                                    aria-describedby="discussion" rows="7"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <input type="file" id="files" name="files[]" multiple>
-                            </div>
-                            <div class="button-idea">
-                                <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit</button>
-                            </div>
-                        </form>
-                    </section> --}}
-
                             <div class="form-group">
                                 <label for="files" class="font-weight-bold"></label>
                                 <input type="file" id="files" name="files[]" multiple>
@@ -185,7 +133,8 @@
                             <br>
                             <div class="form-group">
                                 <button class="btn btn-success" style="padding: 10px 100px;"
-                                    type="submit">Submit</button>
+                                        type="submit">Submit
+                                </button>
                             </div>
                         </form>
                     </section>
@@ -195,8 +144,8 @@
                             <div class="post-container">
                                 <div class="user-detail">
                                     <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                        class="rounded-circle" alt=""
-                                        style="object-fit: cover; object-position: center center;">
+                                         class="rounded-circle" alt=""
+                                         style="object-fit: cover; object-position: center center;">
                                     <div class="post-content">
                                         <h4>{{ $idea->title }}</h4>
                                         <small>{{ $idea->user->name }} Has Posted on
@@ -231,24 +180,10 @@
                         @endforeach
                     </section>
                 </div>
+
+
                 <div class="right-side">
                     <h6 class="display-6" style="text-align: center; font-weight: bold">SUBMISSION DETAIL</h6>
-                    <div class="row" id="editForm">
-                        <input type="text" id="submissionIdToUpdateDate" hidden>
-                        <div class="editStartDate popup col-4" id="editStartDate" hidden>
-                            <h1>StartDate</h1>
-                            <input type="datetime-local" id="inputEditStartDate">
-                            <button onclick="updateDate('startDate')">Ok</button>
-                            <button onclick="closeForm('editStartDate')">close</button>
-                        </div>
-
-                        <div class="editDueDate popup col-4" id="editDueDate" hidden>
-                            <h1>DueDate</h1>
-                            <input type="datetime-local" id="inputEditDueDate">
-                            <button onclick="closeForm('editDueDate')">close</button>
-                            <button onclick="updateDate('dueDate')">Ok</button>
-                        </div>
-                    </div>
                     <div class="submission-index">
                         <div class="user-information">
                             <h2>{{ $submission->title }}</h2>
@@ -256,6 +191,29 @@
                             <p><span>Create by:{{ $submission->user->name }} </span></p>
                             <p><span>Start date: </span>{{ $submission->startDate }}</p>
                             <p><span>Due date: </span>{{ $submission->dueDate }}</p>
+                            <div class="row" id="editForm">
+                                <input type="text" id="submissionIdToUpdateDate" hidden>
+                                <div class="editStartDate popup col-4" id="editStartDate" hidden>
+                                    <h1>StartDate</h1>
+                                    <input type="datetime-local" id="inputEditStartDate">
+                                    <button onclick="updateDate('startDate')">Ok</button>
+                                    <button onclick="closeForm('editStartDate')">close</button>
+                                </div>
+
+                                <div class="editDueDate popup col-4" id="editDueDate" hidden>
+                                    <h1>DueDate</h1>
+                                    <input type="datetime-local" id="inputEditDueDate">
+                                    <button onclick="closeForm('editDueDate')">close</button>
+                                    <button onclick="updateDate('dueDate')">Ok</button>
+                                </div>
+                            </div>
+                            <div class="editDueDate" id="editDueDate" hidden>
+                                <h1>DueDate</h1>
+                                <input type="datetime-local" id="inputEditDueDate">
+                                <button onclick="closeForm('editDueDate')">close</button>
+                                <button onclick="updateDate('dueDate')">Ok</button>
+                            </div>
+
                             <span>Time remaining: </span>
                             {{-- <p
                                 onclick="getTimeRemaining('{{ $submission->startDate }}', '{{ $submission->dueDate }}', this)">
@@ -263,15 +221,18 @@
                             <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)">{{ $timeRemaining }}</p>
                             <p><span>Description: </span>{{ $submission->title }}</p>
                             <button class="btn btn-danger"
-                                onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
+                                    onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
                                 <i aria-hidden="true">Edit</i></button>
                             <form action="{{ $submission->id }}" method="POST" class="d-inline"
-                                onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
+                                  onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
                                 @csrf
                                 <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button>
                             </form>
                         </div>
                     </div>
+{{--                          edit date form--}}
+
+                     END    edit date form
                 </div>
                 </div>
                 </div>
@@ -297,21 +258,20 @@
             function getTimeRemaining(dD, seft) {
                 let now = new Date();
                 let dueDate = new Date(dD);
-                --
-            }
-            let diffMs = (dueDate - now); // milliseconds between now & Christmas
-            let diffDays = Math.floor(diffMs / 86400000); // days
-            let diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
-            let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+                let diffMs = (dueDate - now); // milliseconds between now & Christmas
+                let diffDays = Math.floor(diffMs / 86400000); // days
+                let diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+                let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
 
-            let timeRemaining = diffDays + " days, " + diffHrs + " hours, " + diffMins + " minutes";
-            console.log(timeRemaining);
+                let timeRemaining = diffDays + " days, " + diffHrs + " hours, " + diffMins + " minutes";
+                console.log(timeRemaining);
 
-            seft.innerHTML = timeRemaining;
-            if (now > dueDate) {
-                seft.style.color = "red"
+                seft.innerHTML = timeRemaining;
+                if (now > dueDate) {
+                    seft.style.color = "red"
+                }
+                return timeRemaining;
             }
-            return timeRemaining;
 
             function updateDate(dateType) {
                 let startDateInput = document.getElementById('inputEditStartDate').value;

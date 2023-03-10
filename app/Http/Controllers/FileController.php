@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\File\StoreFileRequest;
+use App\Http\Requests\File\UpdateFileRequest;
 use App\Models\File;
-use App\Http\Requests\StoreFileRequest;
-use App\Http\Requests\UpdateFileRequest;
-use Cassandra\Date;
 use Illuminate\Http\UploadedFile;
 
 class FileController extends Controller
@@ -33,7 +32,7 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\StoreFileRequest $request
+     * @param \App\Http\Requests\File\StoreFileRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreFileRequest $request, int $ideaId)
@@ -78,7 +77,7 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\UpdateFileRequest $request
+     * @param \App\Http\Requests\File\UpdateFileRequest $request
      * @param \App\Models\File $file
      * @return \Illuminate\Http\Response
      */
