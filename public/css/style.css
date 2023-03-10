@@ -621,7 +621,7 @@ nav{
     margin-top: 60px;
     border-radius: 20px;
     background: transparent;
-    flex-basis: 25%;
+    flex-basis: 35%;
     position: sticky;
     top: 70px;
     align-self: flex-start;
@@ -632,7 +632,7 @@ nav{
     margin-top: 60px;
     border-radius: 20px;
     background: white;
-    flex-basis: 25%;
+    flex-basis: 55%;
     position: sticky;
     top: 70px;
     align-self: flex-start;
