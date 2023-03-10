@@ -586,7 +586,6 @@ nav{
 }
 
 .profile-layer img{
-    border: sli;
     margin-left: 100px;
     transform: translateY(-70px);
     border: 5px solid #555555;
@@ -598,7 +597,12 @@ nav{
 }
 
 .modify-profile{
-    margin-bottom: 170px;
+    margin-bottom: 185px;
+}
+
+.modify-profile a{
+    text-decoration: none;
+    color: #000000;
 }
 
 .profile-content{
