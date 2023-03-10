@@ -12,7 +12,7 @@
 
                 width: 700px;
                 overflow-wrap: break-word;
-                font-weight: none;
+                font-weight: unset;
                 font-size: 16px;
                 letter-spacing: 1px;
                 display: -webkit-box;
@@ -33,15 +33,15 @@
             }
 
 
-            #view{{ $idea->id }}:checked~.des {
+            #view:{{ $idea->id }}:checked~.des {
                 --max-line: 0;
             }
 
-            #view{{ $idea->id }}:checked~label {
+            #view:{{ $idea->id }}:checked~label {
                 visibility: hidden;
             }
 
-            #view{{ $idea->id }}:checked~label:after {
+            #view:{{ $idea->id }}:checked~label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
@@ -123,49 +123,53 @@
                     @foreach ($ideas as $idea)
                         <br>
                         <div class="post-container">
-                            <div class="user-detail">
-                                <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                    class="rounded-circle" alt=""
-                                    style="object-fit: cover; object-position: center center;">
-                                <div class="post-content">
-                                    <h4>{{ $idea->title }}</h4>
-                                    <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
-                                    @foreach ($idea->files as $file)
-                                        <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
-                                    @endforeach
-                                    <br>
-                                    <input type="checkbox" id="view{{ $idea->id }}">
-                                    <p class="des">{{ $idea->description }}</p>
-                                    <label for="view{{ $idea->id }}">View More</label>
+                            <div class="row">
+                                <div class="user-detail">
+                                    <img src="{{ asset($idea->user->image) }}" width="50" height="50"
+                                         class="rounded-circle" alt=""
+                                         style="object-fit: cover; object-position: center center;">
+                                    <div class="post-content">
+                                        <h4>{{ $idea->title }}</h4>
+                                        <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
+                                        @foreach ($idea->files as $file)
+                                            <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
+                                        @endforeach
+                                        <br>
+                                        <input type="checkbox" id="view{{ $idea->id }}">
+                                        Description: <p class="des">{{ $idea->description }}</p>
+                                        <label for="view{{ $idea->id }}">View More</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="idea-interact">
-                                <br>
-                                @if (!$idea->likedBy(auth()->user()))
-                                    <form action="{{ route('postLike', $idea->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
-                                    </form>
-                                @else
-                                    <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"><i class="fa-solid fa-thumbs-up fa-2x"></i></button>
-                                    </form>
-                                @endif
-                                @if (!$idea->dislikedBy(auth()->user()))
-                                    <form action="{{ route('postDislike', $idea->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
-                                    </form>
-                                @else
-                                    <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
-                                    </form>
-                                @endif
-                                <h6>{{ $idea->likes->count() }}</h6>
+                            <div class="row">
+                                <div class="idea-interact">
+                                    <br>
+                                    @if (!$idea->likedBy(auth()->user()))
+                                        <form action="{{ route('postLike', $idea->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"><i class="fa-solid fa-thumbs-up fa-2x"></i></button>
+                                        </form>
+                                    @endif
+                                    @if (!$idea->dislikedBy(auth()->user()))
+                                        <form action="{{ route('postDislike', $idea->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
+                                        </form>
+                                    @endif
+                                    <h6>{{ $idea->likes->count() }}</h6>
+                                </div>
                             </div>
                         </div>
                         <br>
