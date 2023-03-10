@@ -1,4 +1,4 @@
-@extends('Goodi.nav_bar')
+@extends('Master.Master')
 
 @section('main')
     {{-- <section class="banner">
@@ -48,6 +48,18 @@
             }
         </style>
     @endforeach
+    <section class="banner">
+        @include('Goodi.nav_bar')
+        <div class="text-box">
+            <h1>
+                <p>IDEA <span class="text-highlight">DISCUSSION</span></p>
+            </h1>
+            <p>
+                Goodi idea, where people can discuss all idea together
+            </p>
+            <br>
+        </div>
+    </section>
     <section class="main_idea">
         <div class="idea-container">
             <div class="left-side">
@@ -81,7 +93,7 @@
                     </form>
                     <div class="btn-idea">
                         @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'ADMIN')
-                            <button class="add-idea" onclick="formToggle();">+</button>
+                            <button class="add-idea" onclick="formToggle();">Post Idea</button>
                         @endif
                         {{-- <button class="refresh-idea">Refresh</button> --}}
                     </div>

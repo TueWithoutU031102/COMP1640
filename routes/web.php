@@ -25,6 +25,10 @@ Route::get('/', function () {
     return view('Goodi.index');
 });
 
+Route::get('/profile', function () {
+    return view('Goodi.User.index');
+});
+
 Route::get('/forbiddenPage', function () {
     return view('403');
 })->name("forbidden");
