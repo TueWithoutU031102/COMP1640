@@ -13,6 +13,9 @@
                 <li><a href="/login">LOGIN</a></li>
             </ul>
         </div>
+        <div class="home-btn">
+            <a href="#"><i class="fa-solid fa-angles-up"></i></a>
+        </div>
         @else
         <div class="black-nav-link" id="navlink">
             <ul style="display: flex;">
@@ -56,6 +59,9 @@
                 </li>
                 <li><a href="/FAQ">FAQs</a></li>
             </ul>
+        </div>
+        <div class="home-btn">
+            <a href="#"><i class="fa-solid fa-angles-up"></i></a>
         </div>
         @endif
     </nav>

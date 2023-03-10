@@ -22,8 +22,8 @@
             </div>
         </div>
         <div class="modify-profile">
-            <a href="/admin/editAcc/" title="Edit Account"><button class="btn btn-primary btn-sm"><i
-                        aria-hidden="true">Edit</button>
+            <a href="/admin/editAcc/" title="Edit Account">
+                <i class="fa-solid fa-gear fa-2xl"></i>
             </a>
         </div>
     </section>

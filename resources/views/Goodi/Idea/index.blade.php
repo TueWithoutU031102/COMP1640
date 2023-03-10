@@ -190,9 +190,6 @@
 
             </div>
         </div>
-        <div class="home-btn">
-            <a href="#"><i class="fa-solid fa-angles-up"></i></a>
-        </div>
     </section>
 @endsection
 <script>
