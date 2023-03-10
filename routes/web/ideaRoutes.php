@@ -15,4 +15,8 @@ Route::group(['prefix' => 'idea', 'middleware' => ['auth', 'staff']], function (
     Route::post("{idea}/like", [LikeController::class, 'store'])->name('postLike');
 
     Route::delete("{idea}/like", [LikeController::class, 'destroy'])->name('destroyLike');
+
+    Route::post("{idea}/dislike", [LikeController::class, 'store'])->name('postDislike');
+
+    Route::delete("{idea}/dislike", [LikeController::class, 'destroy'])->name('destroyDislike');
 });
