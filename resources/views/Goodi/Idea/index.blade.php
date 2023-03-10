@@ -52,7 +52,7 @@
         @include('Goodi.nav_bar')
         <div class="text-box">
             <h1>
-                <p>IDEA <span class="text-highlight">DISCUSSION</span></p>
+                IDEA <span class="text-highlight">DISCUSSION</span>
             </h1>
             <p>
                 Goodi idea, where people can discuss all idea together
@@ -73,7 +73,7 @@
                     <div class="category">
                         <p>Category</p>
                         @foreach ($listCategories as $category)
-                            <a value="{{ $category->id }}">{{ $category->title }}</a>
+                            <a>{{ $category->title }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         @csrf
                         <div class="">
                             <label for="title" class="font-weight-bold">Title</label>
-                            <input type="title" name="title" class="form-control" id="title"
+                            <input type="text" name="title" class="form-control" id="title"
                                 aria-describedby="title">
                         </div>
                         <div class="form-group">
