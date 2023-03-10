@@ -165,10 +165,12 @@
                                         <button type="submit"><i class="fa-solid fa-thumbs-up fa-2x"></i></button>
                                     </form>
                                 @endif
+                                <h6>{{ $idea->likes->count() }}</h6>
+
                                 @if (!$idea->dislikedBy(auth()->user()))
                                     <form action="{{ route('postDislike', $idea->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
+                                        <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
                                     </form>
                                 @else
                                     <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
@@ -177,7 +179,7 @@
                                         <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
                                     </form>
                                 @endif
-                                <h6>{{ $idea->likes->count() }}</h6>
+                                <h6>{{ $idea->dislikes->count() }}</h6>
                             </div>
                         </div>
                         <br>
@@ -192,12 +194,12 @@
             <a href="#"><i class="fa-solid fa-angles-up"></i></a>
         </div>
     </section>
-    @endsection
-    <script>
-        function formToggle() {
-            const toggleForm = document.querySelector('.create-idea');
-            const toggleButton = document.querySelector('.button-idea');
-            toggleForm.classList.toggle('active')
-            toggleButton.classList.toggle('active')
-        }
-    </script>
+@endsection
+<script>
+    function formToggle() {
+        const toggleForm = document.querySelector('.create-idea');
+        const toggleButton = document.querySelector('.button-idea');
+        toggleForm.classList.toggle('active')
+        toggleButton.classList.toggle('active')
+    }
+</script>
