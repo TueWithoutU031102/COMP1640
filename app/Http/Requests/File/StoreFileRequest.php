@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Submission;
+namespace App\Http\Requests\File;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class createSubmission extends FormRequest
+class StoreFileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,11 @@ class createSubmission extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $user = Auth::user();
+        if ($user->isUser()){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -24,14 +29,7 @@ class createSubmission extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required'],
-            'description' => ['required'],
-            'startDate' => ['after_or_equal:today'],
-            'dueDate' => ['after_or_equal:startDate'],
+            //
         ];
-    }
-    public function messages()
-    {
-        return [2];
     }
 }
