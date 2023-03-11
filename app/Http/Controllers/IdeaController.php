@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
+use App\Models\User;
 use App\Services\IdeaService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class IdeaController extends Controller
 {
-    protected $ideaService;
+    protected IdeaService $ideaService;
+    protected User $currentUser;
 
     public function __construct(IdeaService $ideaService)
     {
+        $this->currentUser = Auth::user();
         $this->ideaService = $ideaService;
     }
 
@@ -30,6 +33,14 @@ class IdeaController extends Controller
         return view('Goodi/Idea/index')
             ->with('listCategories', $categories)
             ->with("ideas", $ideas);
+    }
+
+    public function findIdeasByUserId()
+    {
+        $listIdeas = $this->ideaService->findIdeasByUserId($this->currentUser);
+        dd($listIdeas);
+        return view('Goodi/User/index')
+            ->with('listIdeas', $listIdeas);
     }
 
     /**
@@ -50,7 +61,7 @@ class IdeaController extends Controller
      */
     public function store(StoreFileRequest $request)
     {
-        if ($this->ideaService->checkDueDate($request->input('dueDate'))){
+        if ($this->ideaService->checkDueDate($request->input('dueDate'))) {
             return redirect()->back()->with('message', 'Over due!');
         }
 
