@@ -50,7 +50,7 @@
                                 <p>{{ Auth::user()->role->name }}</p>
                             </div>
                             <ul>
-                                <li><a href="/profile">My Profile</a></li>
+                                <li><a href="/user/index">My Profile</a></li>
                                 <li><a href="#">Edit Profile</a></li>
                                 <li><a href="{{ route('logout') }}">Logout</a></li>
                             </ul>
