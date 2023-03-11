@@ -58,7 +58,12 @@ Route::group([], function () {
 });
 Route::group([], function () {
     // ... other routes ...
-    require __DIR__.'/web/userRoutes.php'; // include the new admin routes
+    require __DIR__ . '/web/userRoutes.php'; // include the new admin routes
+});
+
+Route::group([], function () {
+    // ... other routes ...
+    require __DIR__ . '/web/dashboardRoutes.php'; // include the new dashboard routes
 });
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
