@@ -44,19 +44,19 @@ Route::get('index', [UserController::class, 'index'])->name('user.index');
 
 Route::group([], function () {
     // ... other routes ...
-    require __DIR__.'/web/submission.php'; // include the new admin routes
+    require __DIR__ . '/web/submission.php'; // include the new admin routes
 });
 Route::group([], function () {
     // ... other routes ...
-    require __DIR__.'/web/ideaRoutes.php'; // include the new admin routes
+    require __DIR__ . '/web/ideaRoutes.php'; // include the new admin routes
 });
 Route::group([], function () {
     // ... other routes ...
-    require __DIR__.'/web/categoryRoutes.php'; // include the new admin routes
+    require __DIR__ . '/web/categoryRoutes.php'; // include the new admin routes
 });
 Route::group([], function () {
     // ... other routes ...
-    require __DIR__.'/web/adminRoutes.php'; // include the new admin routes
+    require __DIR__ . '/web/adminRoutes.php'; // include the new admin routes
 });
 Route::group([], function () {
     // ... other routes ...

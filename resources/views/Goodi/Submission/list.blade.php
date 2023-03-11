@@ -106,7 +106,7 @@
                                     <i class="fa-solid fa-file-lines fa-4x"></i>
                                     <div class="submission-content">
                                         <h4>{{ $sub->title }}</h4>
-                                        <small>Create by: </small><br>
+                                        <small>Create by:</small><br>
                                         <p>{{ $sub->description }}</p>
                                         <span class="due-date"><i class="fa-solid fa-triangle-exclamation"></i> Due
                                             {{ $sub->dueDate }}</span>
