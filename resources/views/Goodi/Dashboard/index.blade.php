@@ -43,4 +43,18 @@
                 config);
         </script>
     </div>
+    <div>
+        <p>Thông kê</p>
+        <form autocomplete="off">
+            @csrf
+            <div class="col-md-2">
+                <p>Từ ngày <input type="datetime-local" id="datepicker" class="form-control"></p>
+                <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả">
+            </div>
+            <div class="col-md-2">
+                <p>Đến ngày <input type="datetime-local" id="datepicker" class="form-control"></p>
+
+            </div>
+        </form>
+    </div>
 @endsection
