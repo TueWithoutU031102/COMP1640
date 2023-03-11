@@ -17,7 +17,6 @@ class IdeaController extends Controller
 
     public function __construct(IdeaService $ideaService)
     {
-        $this->currentUser = Auth::user();
         $this->ideaService = $ideaService;
     }
 
