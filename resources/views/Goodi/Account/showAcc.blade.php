@@ -1,20 +1,20 @@
 @extends('Goodi.nav_bar')
 
 @section('main')
-<br>
-<h1 class="display-4" style="text-align: center; font-weight: bold">ACCOUNT INFORMATION</h1><br>
+    <br>
+    <h1 class="display-4" style="text-align: center; font-weight: bold">ACCOUNT INFORMATION</h1><br>
     <div class="user-card">
         <img src="{{ asset($account->image) }}">
         <div class="submission-information">
             <h2>{{ $account->name }}</h2>
-                <p><span>User ID: </span>{{ $account->id }}</p>
-                <p><span>Email: </span>{{ $account->email }}</p>
-                <p><span>Phone Number: </span>{{ $account->phone_number }}</p>
-                <p><span>DOB: </span>{{ $account->DoB }}</p>
-                <p><span>Role: </span>{{ $account->role->name }}</p>
-                <a href="/admin/acc">
-                    <button class="btn btn-primary">Back</button>
-                </a>
+            <p><span>User ID: </span>{{ $account->id }}</p>
+            <p><span>Email: </span>{{ $account->email }}</p>
+            <p><span>Phone Number: </span>{{ $account->phone_number }}</p>
+            <p><span>DOB: </span>{{ $account->DoB }}</p>
+            <p><span>Role: </span>{{ $account->role->name }}</p>
+            <a href="/admin/acc">
+                <button class="btn btn-primary">Back</button>
+            </a>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

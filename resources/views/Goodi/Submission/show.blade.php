@@ -16,7 +16,7 @@
                 overflow: hidden;
             }
 
-            #view{{ $idea->id }}    {
+            #view{{ $idea->id }} {
                 display: none;
             }
 
@@ -28,15 +28,15 @@
             }
 
 
-            #view:{{ $idea->id }}:checked ~ .des {
+            #view:{{ $idea->id }}:checked~.des {
                 --max-line: 0;
             }
 
-            #view:{{ $idea->id }}:checked ~ label {
+            #view:{{ $idea->id }}:checked~label {
                 visibility: hidden;
             }
 
-            #view:{{ $idea->id }}:checked ~ label:after {
+            #view:{{ $idea->id }}:checked~label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
@@ -66,7 +66,7 @@
                 <div class="left-side">
                     <div class="profile-display">
                         <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                             class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                            class="rounded-circle" style="object-fit: cover; object-position: center center;">
                         <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                     </div>
                     <div class="imp-link">
@@ -109,23 +109,23 @@
                             <div class="form-group">
                                 <label for="dueDate" class="font-weight-bold">Due Date:</label>
                                 <input type="title" name="dueDate" class="form-control" id="dueDate"
-                                       aria-describedby="title" value="{{ $submission->dueDate }}" disabled>
+                                    aria-describedby="title" value="{{ $submission->dueDate }}" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="title" class="font-weight-bold">Title:</label>
                                 <input type="title" name="title" class="form-control" id="title"
-                                       aria-describedby="title">
+                                    aria-describedby="title">
                             </div>
                             <div class="form-group">
                                 <label for="filename" class="font-weight-bold">Save as:</label>
                                 <input type="text" name="filename" class="form-control" id="title"
-                                       aria-describedby="title">
+                                    aria-describedby="title">
                             </div>
                             <div class="form-group">
                                 <label for="category_id" class="font-weight-bold">Category:</label>
 
                                 <select name="category_id" value="{{ old('category_id') }}" class="form-select"
-                                        id="category" aria-label="Category">
+                                    id="category" aria-label="Category">
                                     @foreach ($listCategories as $category)
                                         <option value="{{ $category->id }}">{{ $category->title }}</option>
                                     @endforeach
@@ -133,9 +133,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="description" class="font-weight-bold">Description: </label>
-                                <textarea type="description" name="description" class="form-control" id="discussion"
-                                          aria-describedby="description"
-                                          rows="4"></textarea>
+                                <textarea type="description" name="description" class="form-control" id="discussion" aria-describedby="description"
+                                    rows="4"></textarea>
                             </div>
                             <br>
                             <div class="form-group">
@@ -144,8 +143,7 @@
                             </div>
                             <br>
                             <div class="form-group">
-                                <button class="btn btn-success" style="padding: 10px 100px;"
-                                        type="submit">Submit
+                                <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit
                                 </button>
                             </div>
                         </form>
@@ -156,8 +154,8 @@
                             <div class="post-container">
                                 <div class="user-detail">
                                     <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                         class="rounded-circle" alt=""
-                                         style="object-fit: cover; object-position: center center;">
+                                        class="rounded-circle" alt=""
+                                        style="object-fit: cover; object-position: center center;">
                                     <div class="post-content">
                                         <h4>{{ $idea->title }}</h4>
                                         <small>{{ $idea->user->name }} Has Posted on
@@ -186,6 +184,21 @@
                                         </form>
                                     @endif
                                     <h6>{{ $idea->likes->count() }}</h6>
+
+                                    @if (!$idea->dislikedBy(auth()->user()))
+                                        <form action="{{ route('postDislike', $idea->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit"><i
+                                                    class="fa-regular fa-thumbs-down fa-2x"></i></button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
+                                        </form>
+                                    @endif
+                                    <h6>{{ $idea->dislikes->count() }}</h6>
                                 </div>
                             </div>
                             <br>
@@ -233,23 +246,18 @@
                             <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)">{{ $timeRemaining }}</p>
                             <p><span>Description: </span>{{ $submission->title }}</p>
                             <button class="btn btn-danger"
-                                    onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
+                                onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
                                 <i aria-hidden="true">Edit</i></button>
                             <form action="{{ $submission->id }}" method="POST" class="d-inline"
-                                  onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
+                                onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
                                 @csrf
                                 <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button>
                             </form>
                         </div>
                     </div>
-{{--                          edit date form--}}
-
-                     END    edit date form
+                    {{--                          edit date form --}}
                 </div>
                 </div>
-                </div>
-                <div class="home-btn">
-                    <a href="#"><i class="fa-solid fa-angles-up"></i></a>
                 </div>
             </section>
         </section>
