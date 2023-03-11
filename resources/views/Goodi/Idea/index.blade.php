@@ -187,30 +187,23 @@
                 </section>
             </div>
             <div class="right-side">
-                <canvas id="myChart" height="100px"></canvas>
+                <canvas id="myChart" height="100"></canvas>
                 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <script type="text/javascript">
                     var labels = {{ Js::from($labels) }};
-                    var users = {{ Js::from($data) }};
+                    var amountIdea = {{ Js::from($data) }};
 
                     const data = {
                         labels: labels,
                         datasets: [{
-                            label: "test",
+                            label: "Amount",
                             backgroundColor: 'rgb(255,160,122)',
                             borderColor: 'rgb(255,0,0)',
                             borderWidth: 2,
                             borderSkipped: false,
-                            data: users,
-                        }, {
-                            label: 'Small Radius',
-                            borderColor: 'rgb(153,204,255)',
-                            backgroundColor: 'rgb(0,0,255)',
-                            borderWidth: 2,
-                            borderSkipped: false,
-                            data: users,
-                        }]
+                            data: amountIdea,
+                        }, ]
                     };
 
                     const config = {
@@ -224,7 +217,7 @@
                                 },
                                 title: {
                                     display: true,
-                                    text: 'Chart.js Bar Chart'
+                                    text: 'Number of ideas per department/year',
                                 }
                             }
                         },
