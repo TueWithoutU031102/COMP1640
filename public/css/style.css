@@ -323,13 +323,12 @@ nav{
 
 .banner{
     min-height: 60vh;
-	width: 92%;
+	width: 100%;
 	background-image: linear-gradient(rgba(26, 6, 44, 0.7),rgba(7, 15, 44, 0.7)),
 	url(images/banner.png);
 	background-position: center;
 	background-size: cover;
 	position: relative;
-    margin-left: 80px;
 }
 
 /* .main_idea{
@@ -578,9 +577,7 @@ nav{
     display: flex;
     align-items: center;
     gap: 30px;
-    width: 92%;
-    margin-left: 80px;
-    margin-right: 80px;
+    width: 100%;
     background: #eeeeeea2;
     height: 300px;
 }
