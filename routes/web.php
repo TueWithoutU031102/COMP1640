@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('Goodi.index');
 });
 
-Route::get('/{password}', function () {
+Route::get('/profile', function () {
     return view('Goodi.User.index');
 });
 
