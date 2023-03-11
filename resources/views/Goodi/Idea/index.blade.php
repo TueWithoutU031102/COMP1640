@@ -1,4 +1,4 @@
-@extends('Goodi.nav_bar')
+@extends('Master.Master')
 
 @section('main')
     {{-- <section class="banner">
@@ -52,7 +52,7 @@
         @include('Goodi.nav_bar')
         <div class="text-box">
             <h1>
-                IDEA <span class="text-highlight">DISCUSSION</span>
+                <p>IDEA <span class="text-highlight">DISCUSSION</span></p>
             </h1>
             <p>
                 Goodi idea, where people can discuss all idea together
@@ -65,7 +65,7 @@
             <div class="left-side">
                 <div class="profile-display">
                     <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                        class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                         class="rounded-circle" style="object-fit: cover; object-position: center center;">
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
                 <div class="imp-link">
@@ -73,7 +73,7 @@
                     <div class="category">
                         <p>Category</p>
                         @foreach ($listCategories as $category)
-                            <a>{{ $category->title }}</a>
+                            <a value="{{ $category->id }}">{{ $category->title }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -105,14 +105,14 @@
                         @csrf
                         <div class="">
                             <label for="title" class="font-weight-bold">Title</label>
-                            <input type="text" name="title" class="form-control" id="title"
-                                aria-describedby="title">
+                            <input type="title" name="title" class="form-control" id="title"
+                                   aria-describedby="title">
                         </div>
                         <div class="form-group">
                             <label for="category_id" class="font-weight-bold">Category</label>
 
                             <select name="category_id" value="{{ old('category_id') }}" class="form-select" id="category"
-                                aria-label="Category">
+                                    aria-label="Category">
                                 @foreach ($listCategories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
@@ -121,7 +121,7 @@
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Discussion</label>
                             <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
-                                aria-describedby="discussion" rows="7"></textarea>
+                                      aria-describedby="discussion" rows="7"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="file" id="files" name="files[]" multiple>
@@ -135,53 +135,22 @@
                     @foreach ($ideas as $idea)
                         <br>
                         <div class="post-container">
-                            <div class="row">
-                                <div class="user-detail">
-                                    <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                         class="rounded-circle" alt=""
-                                         style="object-fit: cover; object-position: center center;">
-                                    <div class="post-content">
-                                        <h4>{{ $idea->title }}</h4>
-                                        <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
-                                        @foreach ($idea->files as $file)
-                                            <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
-                                        @endforeach
-                                        <br>
-                                        <input type="checkbox" id="view{{ $idea->id }}">
-                                        Description: <p class="des">{{ $idea->description }}</p>
-                                        <label for="view{{ $idea->id }}">View More</label>
-                                    </div>
+                            <div class="user-detail">
+                                <img src="{{ asset($idea->user->image) }}" width="50" height="50"
+                                     class="rounded-circle" alt=""
+                                     style="object-fit: cover; object-position: center center;">
+                                <div class="post-content">
+                                    <h4>{{ $idea->title }}</h4>
+                                    <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
+                                    @foreach ($idea->files as $file)
+                                        <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
+                                    @endforeach
+                                    <br>
+                                    <input type="checkbox" id="view{{ $idea->id }}">
+                                    <p class="des">{{ $idea->description }}</p>
+                                    <label for="view{{ $idea->id }}">View More</label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="idea-interact">
-                                    <br>
-                                    @if (!$idea->likedBy(auth()->user()))
-                                        <form action="{{ route('postLike', $idea->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"><i class="fa-solid fa-thumbs-up fa-2x"></i></button>
-                                        </form>
-                                    @endif
-                                    @if (!$idea->dislikedBy(auth()->user()))
-                                        <form action="{{ route('postDislike', $idea->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
-                                        </form>
-                                    @endif
-                                    <h6>{{ $idea->likes->count() }}</h6>
-                                </div>
                             <div class="idea-interact">
                                 <br>
                                 @if (!$idea->likedBy(auth()->user()))
