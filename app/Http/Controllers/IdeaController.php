@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Services\IdeaService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class IdeaController extends Controller
 {
@@ -29,7 +30,19 @@ class IdeaController extends Controller
     {
         $categories = Category::all();
         $ideas = $this->ideaService->findAll();
-        return view('Goodi/Idea/index')
+
+        // $users = User::select('id', 'created_at')->get()->groupBy(function ($data) {
+        //     return Carbon::parse($data->created_at)->format('M');
+        // });
+        $users = User::select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
+            ->whereYear('created_at', date('Y'))
+            ->groupBy(DB::raw("Month(created_at)"))
+            ->pluck('count', 'month_name');
+
+        $labels = $users->keys();
+        $data = $users->values();
+
+        return view('Goodi/Idea/index', compact('labels', 'data'))
             ->with('listCategories', $categories)
             ->with("ideas", $ideas);
     }

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     /////// ADMIN//
+
     Route::get('acc', [AdminController::class, 'acc'])->name('admin.acc');
 
     Route::get('createAcc', [AdminController::class, 'showFormCreateAccount']);

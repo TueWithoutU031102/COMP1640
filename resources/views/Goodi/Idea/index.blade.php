@@ -65,7 +65,7 @@
             <div class="left-side">
                 <div class="profile-display">
                     <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                         class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                        class="rounded-circle" style="object-fit: cover; object-position: center center;">
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
                 <div class="imp-link">
@@ -106,13 +106,13 @@
                         <div class="">
                             <label for="title" class="font-weight-bold">Title</label>
                             <input type="title" name="title" class="form-control" id="title"
-                                   aria-describedby="title">
+                                aria-describedby="title">
                         </div>
                         <div class="form-group">
                             <label for="category_id" class="font-weight-bold">Category</label>
 
                             <select name="category_id" value="{{ old('category_id') }}" class="form-select" id="category"
-                                    aria-label="Category">
+                                aria-label="Category">
                                 @foreach ($listCategories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
@@ -121,7 +121,7 @@
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Discussion</label>
                             <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
-                                      aria-describedby="discussion" rows="7"></textarea>
+                                aria-describedby="discussion" rows="7"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="file" id="files" name="files[]" multiple>
@@ -137,8 +137,8 @@
                         <div class="post-container">
                             <div class="user-detail">
                                 <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                     class="rounded-circle" alt=""
-                                     style="object-fit: cover; object-position: center center;">
+                                    class="rounded-circle" alt=""
+                                    style="object-fit: cover; object-position: center center;">
                                 <div class="post-content">
                                     <h4>{{ $idea->title }}</h4>
                                     <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
@@ -187,7 +187,53 @@
                 </section>
             </div>
             <div class="right-side">
+                <canvas id="myChart" height="100px"></canvas>
+                <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script type="text/javascript">
+                    var labels = {{ Js::from($labels) }};
+                    var users = {{ Js::from($data) }};
 
+                    const data = {
+                        labels: labels,
+                        datasets: [{
+                            label: "test",
+                            backgroundColor: 'rgb(255,160,122)',
+                            borderColor: 'rgb(255,0,0)',
+                            borderWidth: 2,
+                            borderSkipped: false,
+                            data: users,
+                        }, {
+                            label: 'Small Radius',
+                            borderColor: 'rgb(153,204,255)',
+                            backgroundColor: 'rgb(0,0,255)',
+                            borderWidth: 2,
+                            borderSkipped: false,
+                            data: users,
+                        }]
+                    };
+
+                    const config = {
+                        type: 'bar',
+                        data: data,
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Chart.js Bar Chart'
+                                }
+                            }
+                        },
+                    };
+
+                    const myChart = new Chart(
+                        document.getElementById('myChart'),
+                        config);
+                </script>
             </div>
         </div>
     </section>
