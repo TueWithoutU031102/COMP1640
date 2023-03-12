@@ -17,6 +17,12 @@ class IdeaController extends Controller
 
     public function __construct(IdeaService $ideaService)
     {
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $this->currentUser = Auth::user();
+            }
+            return $next($request);
+        });
         $this->ideaService = $ideaService;
     }
 

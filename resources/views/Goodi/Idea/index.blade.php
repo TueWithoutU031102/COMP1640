@@ -21,7 +21,7 @@
                 overflow: hidden;
             }
 
-            #view{{ $idea->id }} {
+            #view{{ $idea->id }}    {
                 display: none;
             }
 
@@ -33,15 +33,15 @@
             }
 
 
-            #view:{{ $idea->id }}:checked~.des {
+            #view:{{ $idea->id }}:checked ~ .des {
                 --max-line: 0;
             }
 
-            #view:{{ $idea->id }}:checked~label {
+            #view:{{ $idea->id }}:checked ~ label {
                 visibility: hidden;
             }
 
-            #view:{{ $idea->id }}:checked~label:after {
+            #view:{{ $idea->id }}:checked ~ label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
@@ -111,7 +111,8 @@
                         <div class="form-group">
                             <label for="category_id" class="font-weight-bold">Category</label>
 
-                            <select name="category_id" value="{{ old('category_id') }}" class="form-select" id="category"
+                            <select name="category_id" value="{{ old('category_id') }}" class="form-select"
+                                    id="category"
                                     aria-label="Category">
                                 @foreach ($listCategories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -120,7 +121,8 @@
                         </div>
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Discussion</label>
-                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
+                            <textarea style="resize: none;" type="description" name="description" class="form-control"
+                                      id="discussion"
                                       aria-describedby="discussion" rows="7"></textarea>
                         </div>
                         <div class="form-group">
@@ -181,6 +183,97 @@
                                 @endif
                                 <h6>{{ $idea->dislikes->count() }}</h6>
                             </div>
+                            <hr>
+
+                            <section class="gradient-custom">
+                                <div class="card-body p-4">
+                                    <div class="mt-3 d-flex flex-row align-items-center p-3 form-color">
+                                        <img src="https://i.imgur.com/zQZSWrt.jpg" width="50" class="rounded-circle mr-2">
+                                        <input type="text" class="form-control" placeholder="Enter your comment...">
+                                        <button>sent</button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-flex flex-start mt-4">
+                                                <img class="rounded-circle shadow-1-strong me-3"
+                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
+                                                     alt="avatar" width="65"
+                                                     height="65"/>
+                                                <div class="flex-grow-1 flex-shrink-1">
+                                                    <div>
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-center">
+                                                            <p class="mb-1">
+                                                                <b>Maria Smantha</b><span
+                                                                    class="small">- 2 hours ago</span>
+                                                            </p>
+
+                                                        </div>
+                                                        <p class="small mb-0">
+                                                            It is a long established fact that a reader will
+                                                            be distracted by
+                                                            the readable content of a page.
+                                                        </p>
+                                                        <a href="#!"><i
+                                                                class="fas fa-reply fa-xs"></i><span
+                                                                class="small"> reply</span></a>
+                                                    </div>
+
+                                                    <div class="d-flex flex-start mt-4">
+                                                        <a class="me-3" href="#">
+                                                            <img class="rounded-circle shadow-1-strong"
+                                                                 src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
+                                                                 alt="avatar"
+                                                                 width="65" height="65"/>
+                                                        </a>
+                                                        <div class="flex-grow-1 flex-shrink-1">
+                                                            <div>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <p class="mb-1">
+                                                                        Simona Disa <span
+                                                                            class="small">- 3 hours ago</span>
+                                                                    </p>
+                                                                </div>
+                                                                <p class="small mb-0">
+                                                                    letters, as opposed to using 'Content
+                                                                    here, content here',
+                                                                    making it look like readable English.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-flex flex-start mt-4">
+                                                        <a class="me-3" href="#">
+                                                            <img class="rounded-circle shadow-1-strong"
+                                                                 src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                                                                 alt="avatar"
+                                                                 width="65" height="65"/>
+                                                        </a>
+                                                        <div class="flex-grow-1 flex-shrink-1">
+                                                            <div>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center">
+                                                                    <p class="mb-1">
+                                                                        John Smith <span
+                                                                            class="small">- 4 hours ago</span>
+                                                                    </p>
+                                                                </div>
+                                                                <p class="small mb-0">
+                                                                    the majority have suffered alteration in
+                                                                    some form, by
+                                                                    injected humour, or randomised words.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                         <br>
                     @endforeach
