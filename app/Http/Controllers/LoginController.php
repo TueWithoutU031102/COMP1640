@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
@@ -14,6 +15,14 @@ class LoginController extends Controller
             'password' => ['gt:1'],
         ]);
         $credentials = $request->only('email', 'password');
+
+//        if (!$token = JWTAuth::attempt($credentials)) {
+//            Auth::attempt($credentials);
+//            return response()->json(['error' => 'Unauthorized'], 401);
+//        }else{
+//            return response()->json(['token' => $token], 200);
+//        }
+
         if (Auth::guard('user')->attempt($credentials)) {
             Auth::attempt($credentials);
             return redirect()->route('user.index');

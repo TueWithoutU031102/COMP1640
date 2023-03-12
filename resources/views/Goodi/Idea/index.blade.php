@@ -21,7 +21,7 @@
                 overflow: hidden;
             }
 
-            #view{{ $idea->id }}    {
+            #view{{ $idea->id }} {
                 display: none;
             }
 
@@ -65,7 +65,7 @@
             <div class="left-side">
                 <div class="profile-display">
                     <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                         class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                        class="rounded-circle" style="object-fit: cover; object-position: center center;">
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
                 <div class="imp-link">
@@ -106,14 +106,13 @@
                         <div class="">
                             <label for="title" class="font-weight-bold">Title</label>
                             <input type="title" name="title" class="form-control" id="title"
-                                   aria-describedby="title">
+                                aria-describedby="title">
                         </div>
                         <div class="form-group">
                             <label for="category_id" class="font-weight-bold">Category</label>
 
-                            <select name="category_id" value="{{ old('category_id') }}" class="form-select"
-                                    id="category"
-                                    aria-label="Category">
+                            <select name="category_id" value="{{ old('category_id') }}" class="form-select" id="category"
+                                aria-label="Category">
                                 @foreach ($listCategories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
@@ -121,9 +120,8 @@
                         </div>
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Discussion</label>
-                            <textarea style="resize: none;" type="description" name="description" class="form-control"
-                                      id="discussion"
-                                      aria-describedby="discussion" rows="7"></textarea>
+                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
+                                aria-describedby="discussion" rows="7"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="file" id="files" name="files[]" multiple>
@@ -139,8 +137,8 @@
                         <div class="post-container">
                             <div class="user-detail">
                                 <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                     class="rounded-circle" alt=""
-                                     style="object-fit: cover; object-position: center center;">
+                                    class="rounded-circle" alt=""
+                                    style="object-fit: cover; object-position: center center;">
                                 <div class="post-content">
                                     <h4>{{ $idea->title }}</h4>
                                     <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>

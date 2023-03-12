@@ -10,6 +10,7 @@ use App\Services\IdeaService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class IdeaController extends Controller
 {
     protected IdeaService $ideaService;
@@ -35,6 +36,7 @@ class IdeaController extends Controller
     {
         $categories = Category::all();
         $ideas = $this->ideaService->findAll();
+
         return view('Goodi/Idea/index')
             ->with('listCategories', $categories)
             ->with("ideas", $ideas);

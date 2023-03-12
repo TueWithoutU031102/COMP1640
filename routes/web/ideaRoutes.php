@@ -5,7 +5,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\DislikeController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'idea', 'middleware' => ['auth', 'staff']], function () {
+Route::group(['prefix' => 'idea', 'middleware' => ['auth', 'user']], function () {
 
     Route::get('index', [IdeaController::class, 'index'])->name('indexIdea');
 

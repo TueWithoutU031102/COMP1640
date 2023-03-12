@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SubmissionService::class, function ($app) {
             return new SubmissionService();
         });
+
     }
 
     /**
