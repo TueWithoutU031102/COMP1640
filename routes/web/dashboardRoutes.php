@@ -5,5 +5,5 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['prefix' => 'dashboard',], function () {
-    Route::get('index', [DashboardController::class, 'index'])->name('admin.acc');
+    Route::get('index', [DashboardController::class, 'index']);
 });
