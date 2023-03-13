@@ -102,6 +102,12 @@
                             <input class="search_bar" placeholder="Search Idea">
                         </div>
                     </form>
+                    <div class="btn-idea">
+                        @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'ADMIN')
+                            <button class="add-idea" onclick="formToggle();">Post Idea</button>
+                        @endif
+                        {{-- <button class="refresh-idea">Refresh</button> --}}
+                    </div>
                 </section>
                 <section class="create-idea">
                     <h2>New Idea</h2>
@@ -149,7 +155,6 @@
                                     <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
                                     @foreach ($idea->files as $file)
                                         <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
-                                        <br>
                                     @endforeach
                                     <br>
                                     <input type="checkbox" id="view{{ $idea->id }}">
@@ -197,10 +202,11 @@
 
                             <section class="gradient-custom{{ $idea->id }}">
                                 <div class="card-body p-4">
-                                    <div class="mt-3  d-flex flex-row align-items-center p-3 form-color">
-                                        <img src="{{asset(Auth::user()->image)}}" width="50" class="rounded-circle mr-10" alt="user avatar">
-                                        <input id="commentInput" type="text" class="form-control" placeholder="Enter your comment...">
-                                        <button onclick="sentComment({{$idea->id}}, {{Auth::user()->id}}, {{ session()->get('jwt') }})">sent</button>
+                                    <div class="mt-3 d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
+                                        <img src="{{ asset(Auth::user()->image) }}" height="50" width="50"
+                                            class="rounded-circle">
+                                        <input type="text" class="form-control" placeholder="Enter your comment...">
+                                        <button>sent</button>
                                     </div>
                                     <div class="row">
                                         <div class="col">
@@ -251,8 +257,7 @@
                                                                 <div
                                                                     class="d-flex justify-content-between align-items-center">
                                                                     <p class="mb-1">
-                                                                        Simona Disa <span
-                                                                            class="small">- 3 hours ago</span>
+                                                                        <b>Simona Disa</b>
                                                                     </p>
                                                                 </div>
                                                                 <p class="small mb-0">
@@ -261,23 +266,27 @@
                                                                     making it look like readable English.
                                                                 </p>
                                                             </div>
+                                                            <span class="small" style="font-weight: bold">2 hours
+                                                                ago</span>
                                                         </div>
                                                     </div>
-
                                                     <div class="d-flex flex-start mt-4">
                                                         <a class="me-3" href="#">
-                                                            <img class="rounded-circle shadow-1-strong"
-                                                                 src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
-                                                                 alt="avatar"
-                                                                 width="65" height="65"/>
+                                                            <img class="rounded-circle"
+                                                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                                                                alt="avatar" width="50" height="50" />
                                                         </a>
                                                         <div class="flex-grow-1 flex-shrink-1">
-                                                            <div>
+                                                            <div
+                                                                style="
+                                                    background: #a6dbf8;
+                                                    border-radius: 20px;
+                                                    padding: 10px 10px 10px 10px;
+                                                    ">
                                                                 <div
                                                                     class="d-flex justify-content-between align-items-center">
                                                                     <p class="mb-1">
-                                                                        John Smith <span
-                                                                            class="small">- 4 hours ago</span>
+                                                                        <b>John Smith</b>
                                                                     </p>
                                                                 </div>
                                                                 <p class="small mb-0">
@@ -286,6 +295,8 @@
                                                                     injected humour, or randomised words.
                                                                 </p>
                                                             </div>
+                                                            <span class="small" style="font-weight: bold">2 hours
+                                                                ago</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -313,3 +324,13 @@
         toggleButton.classList.toggle('active')
     }
 </script>
+@foreach ($ideas as $idea)
+    <script>
+        function commentToggle{{ $idea->id }}() {
+            const commentForm = document.querySelector('.gradient-custom{{ $idea->id }}');
+            const commentButton = document.querySelector('.comment{{ $idea->id }}');
+            commentForm.classList.toggle('active')
+            commentButton.classList.toggle('active')
+        }
+    </script>
+@endforeach
