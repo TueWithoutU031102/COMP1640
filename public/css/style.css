@@ -23,12 +23,13 @@
 }
 
 nav{
+    width: 100%;
     display: flex;
     background: rgba(255, 255, 255, 0.347);
     padding: 0px 40px;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 100;
 }
@@ -682,12 +683,27 @@ nav{
     gap: 10px;
     display: flex;
     align-items: center;
+    text-align: center;
+}
+
+.idea-interact .comment{
+    margin-bottom: 10px;
 }
 
 .idea-interact button{
     border: none;
     background: transparent;
+}
 
+.gradient-custom{
+    height: 0;
+    visibility: hidden;
+    /* transition: 0.2s; */
+}
+
+.gradient-custom.active{
+    height: auto;
+    visibility: visible;
 }
 
 .submission-date{
