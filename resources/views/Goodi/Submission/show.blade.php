@@ -105,7 +105,7 @@
                         <form action="{{ route('storeIdea') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
-                            {{-- <input type="text" name="submission_id" value="{{ $submission->id }}"> --}}
+                            <input type="text" hidden name="submission_id" value="{{ $submission->id }}">
                             <div class="form-group">
                                 <label for="dueDate" class="font-weight-bold">Due Date:</label>
                                 <input type="title" name="dueDate" class="form-control" id="dueDate"
