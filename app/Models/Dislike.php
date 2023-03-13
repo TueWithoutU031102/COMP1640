@@ -10,6 +10,6 @@ class Dislike extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'author_id',
     ];
 }
