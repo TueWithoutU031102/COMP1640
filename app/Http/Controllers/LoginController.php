@@ -21,7 +21,7 @@ class LoginController extends Controller
         if (Auth::guard('user')->attempt($credentials)) {
             Auth::attempt($credentials);
             $token = JWTAuth::attempt($credentials);
-            Session::put('JWT', $token);
+            Session::put('jwt', $token);
             return redirect()->route('user.index');
         } else {
             return redirect()->route('user.login')->withErrors("Email or password is incorrect");
@@ -37,9 +37,10 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (!$token = JWTAuth::attempt($credentials)) {
-            Auth::attempt($credentials);
             return response()->json(['error' => 'Unauthorized'], 401);
         } else {
+            Auth::attempt($credentials);
+            Session::put('JWT', $token);
             return response()->json(['token' => $token], 200);
         }
     }

@@ -7,7 +7,7 @@
         }
     </style>
 
-    <h1>{{$JWT}}</h1>
+    <h1>{{ session()->pull('jwt') }}</h1>
     <section class="banner">
         @include('Goodi.nav_bar')
 
