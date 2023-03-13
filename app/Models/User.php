@@ -21,6 +21,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -39,9 +40,9 @@ class User extends Authenticatable implements JWTSubject
         'password',
     ];
 
-    public static function find($id)
-    {
-    }
+    // public static function find($id)
+    // {
+    // }
 
     public function removeImage()
     {
