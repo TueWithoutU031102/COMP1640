@@ -8,7 +8,7 @@ class CommentService
 {
     public function store(Comment $comment): bool
     {
-        return $comment->save($comment);
+        return $comment->save();
     }
 
     public function finByid(int $commentId){

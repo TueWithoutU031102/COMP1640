@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Comment;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class StoreCommentRequest extends FormRequest
 {
@@ -13,7 +14,13 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        try {
+            $token = JWTAuth::parseToken();
+            $user = $token->authenticate();
+            return $user ? true : false;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /**

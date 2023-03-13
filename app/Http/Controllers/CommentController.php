@@ -10,6 +10,7 @@ use App\Services\CommentService;
 use App\Services\IdeaService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CommentController extends Controller
 {
@@ -56,12 +57,16 @@ class CommentController extends Controller
      *
      * @param  \App\Http\Requests\Comment\StoreCommentRequest  $request
      *          include idea_id & user_id(author)
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request): \Illuminate\Http\Response
+    public function store(StoreCommentRequest $request)
     {
+        $token = JWTAuth::parseToken()->getToken();
+        $user = JWTAuth::parseToken()->authenticate();
+        $user_id = $user->id;
+
         $comment = new Comment($request->all());
-        $comment['author_id'] = $this->currentUser->id;
+        $comment['author_id'] = $user_id;
         $this->commentService->store($comment);
 
         return response()->json([

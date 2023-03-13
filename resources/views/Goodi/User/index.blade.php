@@ -6,6 +6,8 @@
             font-weight: bold
         }
     </style>
+
+    <h1>{{$JWT}}</h1>
     <section class="banner">
         @include('Goodi.nav_bar')
 
