@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('csrfToken', [AuthenController::class, 'getCsrfToken'])->name('api.csrfToken');
 
-Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/login', [LoginController::class, 'getJWT']);
 
 
 
