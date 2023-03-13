@@ -46,6 +46,17 @@
                 display: block;
                 visibility: visible;
             }
+
+            .gradient-custom{{ $idea->id }} {
+                height: 0;
+                visibility: hidden;
+                /* transition: 0.2s; */
+            }
+
+            .gradient-custom{{ $idea->id }}.active {
+                height: auto;
+                visibility: visible;
+            }
         </style>
     @endforeach
     <section class="banner">
@@ -92,7 +103,40 @@
                         </div>
                     </form>
                 </section>
-                <section class="ideas">
+                <section class="create-idea">
+                    <h2>New Idea</h2>
+                    <i></i>
+                    <form action="{{ route('storeIdea') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="">
+                            <label for="title" class="font-weight-bold">Title</label>
+                            <input type="title" name="title" class="form-control" id="title"
+                                aria-describedby="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="category_id" class="font-weight-bold">Category</label>
+
+                            <select name="category_id" value="{{ old('category_id') }}" class="form-select" id="category"
+                                aria-label="Category">
+                                @foreach ($listCategories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="font-weight-bold">Discussion</label>
+                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
+                                aria-describedby="discussion" rows="7"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" id="files" name="files[]" multiple>
+                        </div>
+                        <div class="button-idea">
+                            <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </section>
+                <section class="post">
                     @foreach ($ideas as $idea)
                         <br>
                         <div class="post-container">
@@ -113,6 +157,7 @@
                                     <label for="view{{ $idea->id }}">View More</label>
                                 </div>
                             </div>
+                            <br>
                             <div class="idea-interact">
                                 <br>
                                 @if (!$idea->likedBy(auth()->user()))
@@ -142,10 +187,15 @@
                                     </form>
                                 @endif
                                 <h6>{{ $idea->dislikes->count() }}</h6>
+
+                                <button onclick="commentToggle{{ $idea->id }}();"
+                                    class="comment{{ $idea->id }}"><i
+                                        class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
+                                <h6>10</h6>
                             </div>
                             <hr>
 
-                            <section class="gradient-custom">
+                            <section class="gradient-custom{{ $idea->id }}">
                                 <div class="card-body p-4">
                                     <div class="mt-3  d-flex flex-row align-items-center p-3 form-color">
                                         <img src="{{asset(Auth::user()->image)}}" width="50" class="rounded-circle mr-10" alt="user avatar">
@@ -154,18 +204,22 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <div class="d-flex flex-start mt-4">
-                                                <img class="rounded-circle shadow-1-strong me-3"
-                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
-                                                     alt="avatar" width="65"
-                                                     height="65"/>
+                                            <div class="d-flex flex-start mt-4" style="gap: 10px">
+                                                <img class="rounded-circle"
+                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
+                                                    alt="avatar" width="50" height="50" />
                                                 <div class="flex-grow-1 flex-shrink-1">
-                                                    <div>
-                                                        <div
-                                                            class="d-flex justify-content-between align-items-center">
+                                                    <div
+                                                        style="
+                                                    background: #a6dbf8;
+                                                    border-radius: 20px;
+                                                    padding: 10px 10px 10px 10px;
+                                                    ">
+                                                        <div class="d-flex justify-content-between align-items-center"
+                                                            style="gap: 10px
+                                                            ">
                                                             <p class="mb-1">
-                                                                <b>Maria Smantha</b><span
-                                                                    class="small">- 2 hours ago</span>
+                                                                <b>Maria Smantha</b>
                                                             </p>
 
                                                         </div>
@@ -174,20 +228,26 @@
                                                             be distracted by
                                                             the readable content of a page.
                                                         </p>
-                                                        <a href="#!"><i
-                                                                class="fas fa-reply fa-xs"></i><span
+                                                    </div>
+                                                    <div style="gap: 20px; display: flex">
+                                                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span
                                                                 class="small"> reply</span></a>
+                                                        <span class="small" style="font-weight: bold">2 hours ago</span>
                                                     </div>
 
                                                     <div class="d-flex flex-start mt-4">
                                                         <a class="me-3" href="#">
-                                                            <img class="rounded-circle shadow-1-strong"
-                                                                 src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
-                                                                 alt="avatar"
-                                                                 width="65" height="65"/>
+                                                            <img class="rounded-circle"
+                                                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
+                                                                alt="avatar" width="50" height="50" />
                                                         </a>
                                                         <div class="flex-grow-1 flex-shrink-1">
-                                                            <div>
+                                                            <div
+                                                                style="
+                                                    background: #a6dbf8;
+                                                    border-radius: 20px;
+                                                    padding: 10px 10px 10px 10px;
+                                                    ">
                                                                 <div
                                                                     class="d-flex justify-content-between align-items-center">
                                                                     <p class="mb-1">
@@ -246,10 +306,6 @@
     </section>
 @endsection
 <script>
-    function sentComment(ideaId, authorId, token){
-
-    }
-
     function formToggle() {
         const toggleForm = document.querySelector('.create-idea');
         const toggleButton = document.querySelector('.button-idea');

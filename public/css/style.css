@@ -682,12 +682,27 @@ nav{
     gap: 10px;
     display: flex;
     align-items: center;
+    text-align: center;
+}
+
+.idea-interact .comment{
+    margin-bottom: 10px;
 }
 
 .idea-interact button{
     border: none;
     background: transparent;
+}
 
+.gradient-custom{
+    height: 0;
+    visibility: hidden;
+    /* transition: 0.2s; */
+}
+
+.gradient-custom.active{
+    height: auto;
+    visibility: visible;
 }
 
 .submission-date{
