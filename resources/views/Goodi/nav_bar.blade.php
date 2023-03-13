@@ -1,9 +1,9 @@
 @extends('Master.Master')
-    <nav>
-        <div class="nav-logo">
-            <a href="/"><img class="logo" src="/css/images/logo_transparent.png"></a>
-        </div>
-        @if (!Auth::user())
+<nav>
+    <div class="nav-logo">
+        <a href="/"><img class="logo" src="/css/images/logo_transparent.png"></a>
+    </div>
+    @if (!Auth::user())
         <div class="black-nav-link" id="navlink">
             <ul style="display: flex;">
                 <li><a href="/index">FORUM</a></li>
@@ -16,7 +16,7 @@
         <div class="home-btn">
             <a href="#"><i class="fa-solid fa-angles-up"></i></a>
         </div>
-        @else
+    @else
         <div class="black-nav-link" id="navlink">
             <ul style="display: flex;">
                 <li><a href="/forum">FORUM</a></li>
@@ -40,7 +40,7 @@
                 <li>
                     <div class="action">
                         <div class="profile" onclick="profileToggle();">
-                            <img src="{{ asset( Auth::user()->image )}}" alt="mdo" width="50" height="50"
+                            <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
                                 class="rounded-circle" style="object-fit: cover; object-position: center center;">
                         </div>
                         <div class="menu_pro">
@@ -50,7 +50,7 @@
                                 <p>{{ Auth::user()->role->name }}</p>
                             </div>
                             <ul>
-                                <li><a href="/profile">My Profile</a></li>
+                                <li><a href="/user/index">My Profile</a></li>
                                 <li><a href="#">Edit Profile</a></li>
                                 <li><a href="{{ route('logout') }}">Logout</a></li>
                             </ul>
@@ -63,8 +63,8 @@
         <div class="home-btn">
             <a href="#"><i class="fa-solid fa-angles-up"></i></a>
         </div>
-        @endif
-    </nav>
+    @endif
+</nav>
 
 <script>
     function menuToggle() {

@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +38,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public static function find($id)
+    {
+    }
 
     public function removeImage()
     {
@@ -89,23 +95,38 @@ class User extends Authenticatable
         return $this->hasMany(Submission::class);
     }
 
+    public function ideas()
+    {
+        return $this->hasMany(Idea::class, 'author_id');
+    }
+
     public function categories()
     {
-        return $this->hasMany(Category::class);
+        return $this->hasMany(Category::class, 'author_id');
     }
 
     public function likes()
     {
-        return $this->hasMany(Like::class);
+        return $this->hasMany(Like::class, 'author_id');
     }
 
     public function dislikes()
     {
-        return $this->hasMany(Dislike::class);
+        return $this->hasMany(Dislike::class, 'author_id');
     }
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'author_id');
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

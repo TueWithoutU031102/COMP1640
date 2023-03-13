@@ -6,6 +6,8 @@
             font-weight: bold
         }
     </style>
+
+    <h1>{{$JWT}}</h1>
     <section class="banner">
         @include('Goodi.nav_bar')
 
@@ -54,6 +56,11 @@
                 </div>
                 <div class="idea-interact">
                     <br>
+                    @foreach($listIdeas as $idea)
+                        <ul>
+                            <li><h1>{{$idea->title}}</h1></li>
+                        </ul>
+                    @endforeach
                     {{-- @if (!$idea->likedBy(auth()->user()))
                             <form action="{{ route('postLike', $idea->id) }}" method="POST">
                                 @csrf
