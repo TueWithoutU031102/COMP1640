@@ -25,7 +25,9 @@ class LoginController extends Controller
 
         if (Auth::guard('user')->attempt($credentials)) {
             Auth::attempt($credentials);
-            return redirect()->route('user.index');
+            $token = JWTAuth::attempt($credentials);
+            return redirect()->route('user.index')
+                ->with('token', $token);
         } else {
             return redirect()->route('user.login')->withErrors("Email or password is incorrect");
         }
