@@ -33,15 +33,15 @@
             }
 
 
-            #view:{{ $idea->id }}:checked ~ .des {
+            #view{{ $idea->id }}:checked~.des {
                 --max-line: 0;
             }
 
-            #view:{{ $idea->id }}:checked ~ label {
+            #view{{ $idea->id }}:checked~label {
                 visibility: hidden;
             }
 
-            #view:{{ $idea->id }}:checked ~ label:after {
+            #view{{ $idea->id }}:checked~label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
@@ -202,11 +202,14 @@
 
                             <section class="gradient-custom{{ $idea->id }}">
                                 <div class="card-body p-4">
-                                    <div class="mt-3 d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
-                                        <img src="{{ asset(Auth::user()->image) }}" height="50" width="50"
-                                            class="rounded-circle">
-                                        <input type="text" class="form-control" placeholder="Enter your comment...">
-                                        <button>sent</button>
+                                    <div class="mt-3  d-flex flex-row align-items-center p-3 form-color"
+                                        style="gap: 10px">
+                                        <img src="{{ asset(Auth::user()->image) }}" width="50"
+                                            class="rounded-circle mr-10" alt="user avatar">
+                                        <input id="commentInput" type="text" class="form-control"
+                                            placeholder="Enter your comment...">
+                                        <button
+                                            onclick="sentComment({{ $idea->id }}, {{ Auth::user()->id }}, {{ session()->get('jwt') }})">sent</button>
                                     </div>
                                     <div class="row">
                                         <div class="col">
