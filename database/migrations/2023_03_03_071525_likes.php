@@ -17,8 +17,8 @@ return new class extends Migration
         Schema::dropIfExists('likes');
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')
                 ->references('id')
                 ->on('users');
             $table->unsignedBigInteger('idea_id');

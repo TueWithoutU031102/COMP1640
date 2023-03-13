@@ -14,7 +14,7 @@ class DislikeController extends Controller
             return response(null, 409);
 
         $idea->dislikes()->create([
-            'user_id' => $request->user()->id,
+            'author_id' => $request->user()->id,
         ]);
 
         return back();

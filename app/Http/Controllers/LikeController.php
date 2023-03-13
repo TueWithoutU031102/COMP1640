@@ -14,7 +14,7 @@ class LikeController extends Controller
             return response(null, 409);
 
         $idea->likes()->create([
-            'user_id' => $request->user()->id,
+            'author_id' => $request->user()->id,
         ]);
 
         return back();

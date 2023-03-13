@@ -31,7 +31,7 @@ class Idea extends Model
 
     public function likedBy(User $user)
     {
-        return $this->likes->contains('user_id', $user->id);
+        return $this->likes->contains('author_id', $user->id);
     }
 
     public function dislikes()
@@ -41,7 +41,7 @@ class Idea extends Model
 
     public function dislikedBy(User $user)
     {
-        return $this->dislikes->contains('user_id', $user->id);
+        return $this->dislikes->contains('author_id', $user->id);
     }
 
 
