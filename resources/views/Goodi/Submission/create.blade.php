@@ -1,5 +1,5 @@
 @extends('Goodi.nav_bar')
-
+<hr>
 @section('main')
     <h1>Create Submission</h1>
     <form action="/submission/create" method="POST" enctype="multipart/form-data">
