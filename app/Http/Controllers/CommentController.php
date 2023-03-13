@@ -37,8 +37,9 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
+        $comments =  $this->commentService->findAll();
         return response()->json([
-            'message' => 'Comment created',
+            'comments' => $comments,
         ], 200);
     }
 

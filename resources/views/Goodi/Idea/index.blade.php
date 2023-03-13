@@ -1,6 +1,7 @@
 @extends('Master.Master')
 
 @section('main')
+    <hr>
     {{-- <section class="banner">
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section><br> --}}
@@ -102,12 +103,7 @@
                             <input class="search_bar" placeholder="Search Idea">
                         </div>
                     </form>
-                    <div class="btn-idea">
-                        @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'ADMIN')
-                            <button class="add-idea" onclick="formToggle();">Post Idea</button>
-                        @endif
-                        {{-- <button class="refresh-idea">Refresh</button> --}}
-                    </div>
+
                 </section>
                 <section class="create-idea">
                     <h2>New Idea</h2>
