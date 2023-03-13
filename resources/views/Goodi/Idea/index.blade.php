@@ -34,15 +34,15 @@
             }
 
 
-            #view{{ $idea->id }}:checked~.des {
+            #view:{{ $idea->id }}:checked~.des {
                 --max-line: 0;
             }
 
-            #view{{ $idea->id }}:checked~label {
+            #view:{{ $idea->id }}:checked~label {
                 visibility: hidden;
             }
 
-            #view{{ $idea->id }}:checked~label:after {
+            #view:{{ $idea->id }}:checked~label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
@@ -189,7 +189,7 @@
                                 @endif
                                 <h6>{{ $idea->dislikes->count() }}</h6>
 
-                                <button onclick="commentToggle{{ $idea->id }}();"
+                                <button onclick="commentToggle({{ $idea->id }});"
                                     class="comment{{ $idea->id }}"><i
                                         class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
                                 <h6>10</h6>
@@ -209,97 +209,99 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <div class="d-flex flex-start mt-4" style="gap: 10px">
-                                                <img class="rounded-circle"
-                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
-                                                    alt="avatar" width="50" height="50" />
-                                                <div class="flex-grow-1 flex-shrink-1">
-                                                    <div
-                                                        style="
+                                            @foreach($idea->comments as $comment)
+                                                <div class="d-flex flex-start mt-4" style="gap: 10px">
+                                                    <img class="rounded-circle"
+                                                         src="{{asset($idea->user->image)}}"
+                                                         alt="avatar" width="50" height="50" />
+                                                    <div class="flex-grow-1 flex-shrink-1">
+                                                        <div
+                                                            style="
                                                     background: #a6dbf8;
                                                     border-radius: 20px;
                                                     padding: 10px 10px 10px 10px;
                                                     ">
-                                                        <div class="d-flex justify-content-between align-items-center"
-                                                            style="gap: 10px
+                                                            <div class="d-flex justify-content-between align-items-center"
+                                                                 style="gap: 10px
                                                             ">
-                                                            <p class="mb-1">
-                                                                <b>Maria Smantha</b>
+                                                                <p class="mb-1">
+                                                                    <b>{{$comment->user->name}}</b>
+                                                                </p>
+
+                                                            </div>
+                                                            <p class="small mb-0">
+                                                                It is a long established fact that a reader will
+                                                                be distracted by
+                                                                the readable content of a page.
                                                             </p>
-
                                                         </div>
-                                                        <p class="small mb-0">
-                                                            It is a long established fact that a reader will
-                                                            be distracted by
-                                                            the readable content of a page.
-                                                        </p>
-                                                    </div>
-                                                    <div style="gap: 20px; display: flex">
-                                                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span
-                                                                class="small"> reply</span></a>
-                                                        <span class="small" style="font-weight: bold">2 hours ago</span>
-                                                    </div>
+                                                        <div style="gap: 20px; display: flex">
+                                                            <a href="#!"><i class="fas fa-reply fa-xs"></i><span
+                                                                    class="small"> reply</span></a>
+                                                            <span class="small" style="font-weight: bold">2 hours ago</span>
+                                                        </div>
 
-                                                    <div class="d-flex flex-start mt-4">
-                                                        <a class="me-3" href="#">
-                                                            <img class="rounded-circle"
-                                                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
-                                                                alt="avatar" width="50" height="50" />
-                                                        </a>
-                                                        <div class="flex-grow-1 flex-shrink-1">
-                                                            <div
-                                                                style="
+                                                        <div class="d-flex flex-start mt-4">
+                                                            <a class="me-3" href="#">
+                                                                <img class="rounded-circle"
+                                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
+                                                                     alt="avatar" width="50" height="50" />
+                                                            </a>
+                                                            <div class="flex-grow-1 flex-shrink-1">
+                                                                <div
+                                                                    style="
                                                     background: #a6dbf8;
                                                     border-radius: 20px;
                                                     padding: 10px 10px 10px 10px;
                                                     ">
-                                                                <div
-                                                                    class="d-flex justify-content-between align-items-center">
-                                                                    <p class="mb-1">
-                                                                        <b>Simona Disa</b>
+                                                                    <div
+                                                                        class="d-flex justify-content-between align-items-center">
+                                                                        <p class="mb-1">
+                                                                            <b>Simona Disa</b>
+                                                                        </p>
+                                                                    </div>
+                                                                    <p class="small mb-0">
+                                                                        letters, as opposed to using 'Content
+                                                                        here, content here',
+                                                                        making it look like readable English.
                                                                     </p>
                                                                 </div>
-                                                                <p class="small mb-0">
-                                                                    letters, as opposed to using 'Content
-                                                                    here, content here',
-                                                                    making it look like readable English.
-                                                                </p>
-                                                            </div>
-                                                            <span class="small" style="font-weight: bold">2 hours
+                                                                <span class="small" style="font-weight: bold">2 hours
                                                                 ago</span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="d-flex flex-start mt-4">
-                                                        <a class="me-3" href="#">
-                                                            <img class="rounded-circle"
-                                                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
-                                                                alt="avatar" width="50" height="50" />
-                                                        </a>
-                                                        <div class="flex-grow-1 flex-shrink-1">
-                                                            <div
-                                                                style="
+                                                        <div class="d-flex flex-start mt-4">
+                                                            <a class="me-3" href="#">
+                                                                <img class="rounded-circle"
+                                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                                                                     alt="avatar" width="50" height="50" />
+                                                            </a>
+                                                            <div class="flex-grow-1 flex-shrink-1">
+                                                                <div
+                                                                    style="
                                                     background: #a6dbf8;
                                                     border-radius: 20px;
                                                     padding: 10px 10px 10px 10px;
                                                     ">
-                                                                <div
-                                                                    class="d-flex justify-content-between align-items-center">
-                                                                    <p class="mb-1">
-                                                                        <b>John Smith</b>
+                                                                    <div
+                                                                        class="d-flex justify-content-between align-items-center">
+                                                                        <p class="mb-1">
+                                                                            <b>John Smith</b>
+                                                                        </p>
+                                                                    </div>
+                                                                    <p class="small mb-0">
+                                                                        the majority have suffered alteration in
+                                                                        some form, by
+                                                                        injected humour, or randomised words.
                                                                     </p>
                                                                 </div>
-                                                                <p class="small mb-0">
-                                                                    the majority have suffered alteration in
-                                                                    some form, by
-                                                                    injected humour, or randomised words.
-                                                                </p>
-                                                            </div>
-                                                            <span class="small" style="font-weight: bold">2 hours
+                                                                <span class="small" style="font-weight: bold">2 hours
                                                                 ago</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -322,14 +324,11 @@
         toggleForm.classList.toggle('active')
         toggleButton.classList.toggle('active')
     }
+    function commentToggle(ideaId) {
+        const commentForm = document.querySelector('.gradient-custom'+ ideaId);
+        const commentButton = document.querySelector('.comment'+ ideaId);
+        commentForm.classList.toggle('active')
+        commentButton.classList.toggle('active')
+    }
 </script>
-@foreach ($ideas as $idea)
-    <script>
-        function commentToggle{{ $idea->id }}() {
-            const commentForm = document.querySelector('.gradient-custom{{ $idea->id }}');
-            const commentButton = document.querySelector('.comment{{ $idea->id }}');
-            commentForm.classList.toggle('active')
-            commentButton.classList.toggle('active')
-        }
-    </script>
-@endforeach
+

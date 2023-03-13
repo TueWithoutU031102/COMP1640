@@ -205,8 +205,6 @@
                         @endforeach
                     </section>
                 </div>
-
-
                 <div class="right-side">
                     <h6 class="display-6" style="text-align: center; font-weight: bold">SUBMISSION DETAIL</h6>
                     <div class="submission-index">
@@ -272,7 +270,6 @@
         </script>
 
         <script>
-            console.log("dd", {{ $submission->title }})
 
             function getTimeRemaining(dD, seft) {
                 let now = new Date();
