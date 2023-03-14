@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Idea;
 use App\Models\User;
 use App\Services\IdeaService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -13,9 +15,10 @@ class UserController extends Controller
 {
 
     protected IdeaService $ideaService;
+    protected UserService $userService;
     protected User $currentUser;
 
-    public function __construct(IdeaService $ideaService)
+    public function __construct(IdeaService $ideaService,UserService $userService)
     {
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
@@ -23,6 +26,7 @@ class UserController extends Controller
             }
             return $next($request);
         });
+        $this->userService = $userService;
         $this->ideaService = $ideaService;
     }
     public function index()
@@ -34,6 +38,8 @@ class UserController extends Controller
             ->with('listIdeas', $listIdeas)
             ->with('JWT', $JWT);
     }
+
+
     public function logout()
     {
         Auth::logout();
