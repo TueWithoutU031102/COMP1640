@@ -1,7 +1,6 @@
 @extends('Master.Master')
 
 @section('main')
-    <hr>
     {{-- <section class="banner">
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section><br> --}}
