@@ -45,11 +45,6 @@
     </div>
     <div>
         <p>Thông kê</p>
-        {{-- <form autocomplete="off">
-            @csrf
-            
-
-            </div>
-        </form> --}}
+        <script></script>
     </div>
 @endsection
