@@ -22,7 +22,7 @@
                 overflow: hidden;
             }
 
-            #view{{ $idea->id }}  {
+            #view{{ $idea->id }}    {
                 display: none;
             }
 
@@ -48,7 +48,7 @@
                 visibility: visible;
             }
 
-            .gradient-custom{{ $idea->id }}  {
+            .gradient-custom{{ $idea->id }}    {
                 height: 0;
                 visibility: hidden;
                 /* transition: 0.2s; */
@@ -191,7 +191,7 @@
                                 @endif
                                 <h6>{{ $idea->dislikes->count() }}</h6>
 
-                                <button onclick="commentToggle({{ $idea->id }});"
+                                <button onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }})"
                                         class="comment{{ $idea->id }}"><i
                                         class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
                                 <h6>10</h6>
@@ -204,15 +204,15 @@
                                          style="gap: 10px">
                                         <img src="{{ asset(Auth::user()->image) }}" width="50"
                                              class="rounded-circle mr-10" alt="user avatar">
-                                        <input id="commentInput" type="text" class="form-control"
-                                               placeholder="Enter your comment...">
+                                        <input type="text" class="form-control"
+                                               placeholder="Enter your comment..." id="commentContent{{$idea->id}}">
                                         <button
-                                            onclick="sentComment({{ $idea->id }}, {{ Auth::user()->id }}, {{ session()->get('jwt') }})">
+                                            onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }})">
                                             sent
                                         </button>
                                     </div>
                                     <div class="row">
-                                        <div class="col" id="commentContent{{$idea->id}}">
+                                        <div class="col">
                                             @foreach($idea->comments as $comment)
                                                 <div class="d-flex flex-start mt-4" style="gap: 10px">
                                                     <img class="rounded-circle"
@@ -274,35 +274,6 @@
                                                                 ago</span>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex flex-start mt-4">
-                                                            <a class="me-3" href="#">
-                                                                <img class="rounded-circle"
-                                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
-                                                                     alt="avatar" width="50" height="50"/>
-                                                            </a>
-                                                            <div class="flex-grow-1 flex-shrink-1">
-                                                                <div
-                                                                    style="
-                                                    background: #a6dbf8;
-                                                    border-radius: 20px;
-                                                    padding: 10px 10px 10px 10px;
-                                                    ">
-                                                                    <div
-                                                                        class="d-flex justify-content-between align-items-center">
-                                                                        <p class="mb-1">
-                                                                            <b>John Smith</b>
-                                                                        </p>
-                                                                    </div>
-                                                                    <p class="small mb-0">
-                                                                        the majority have suffered alteration in
-                                                                        some form, by
-                                                                        injected humour, or randomised words.
-                                                                    </p>
-                                                                </div>
-                                                                <span class="small" style="font-weight: bold">2 hours
-                                                                ago</span>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -320,10 +291,17 @@
             </div>
         </div>
     </section>
-    <button onclick="getUserByid()">Get user</button>
+    <hr>
+    <h1 id="userEmail"></h1>
+    <h1>
+        <img id="userImg" src="" alt="">
+    </h1>
+    <hr>
+    <button onclick="showuser({{Auth::user()->id}})">Get user</button>
     <button id="btn-api" onclick="showCommentByIdea(1)">Call API</button>
     <script src="{{ asset('js/ideaIndex.js') }}"></script>
     <script src="{{ asset('js/api/userApi.js') }}"></script>
+    <script src="{{ asset('js/api/commentApi.js') }}"></script>
     <script>
         function formToggle() {
             const toggleForm = document.querySelector('.create-idea');
@@ -339,17 +317,45 @@
             commentButton.classList.toggle('active')
         }
 
-        function showCommentByIdea(ideaId) {
+        async function showCommentByIdea(ideaId) {
             let url = "{{ url('/api/comments') }}";
-            let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            let jwt = window.localStorage.getItem('jwt');
+            console.log('f',jwt)
 
-            let commentContent = document.getElementById('commentContent' + ideaId);
-            console.log(token)
+            let commentService = new CommentApi();
+            let comments = await commentService.findCommentsByIdeaId(ideaId)
+
+            console.log("comments index idea: ", comments);
+
+        };
+
+       async function showuser(id) {
+           console.log('id:', id)
+            let user = await getUserByid(id);
+            console.log("show user: ", user)
+            let src = '{{ asset('_imgSrc') }}'
+            src = src.replace('_imgSrc', user.image);
+            document.getElementById('userEmail').innerHTML = src;
+            document.getElementById('userImg').src = src;
         }
 
-        function getUserByid(){
-            let user = new UserApi();
-            console.log("idea index: ",user.findById(1))
+        async function getUserByid(userID) {
+            let userService = new UserApi();
+            let user = await userService.findById(userID);
+            return user;
+        };
+
+        function commentOnIdea(ideaId, userId) {
+            let jwt = window.localStorage.getItem('jwt');
+            console.log(ideaId,"|uId - ", userId, "|token - ", jwt)
+
+            let commentContent = document.getElementById('commentContent' + ideaId).value;
+            console.log("comment: ", commentContent)
+
+            let contents =
+                `
+                `
         }
     </script>
 @endsection

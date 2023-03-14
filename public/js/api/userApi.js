@@ -1,28 +1,29 @@
 class UserApi {
 
-    constructor(id, name, email, phone_number, dob, image, role_id) {
+    constructor(id, name, email, phone_number, DoB, image, role_id) {
         this.id = id;
         this.name = name;
+        this.email = email;
         this.phone_number = phone_number;
-        this.dob = dob;
+        this.DoB = DoB;
         this.image = image;
         this.role_id = role_id;
     }
 
 
-    findById(userId) {
-        window.axios.get('/api/users/' + userId)
-            .then(function (response) {
-                const obj = response.data.user
+    async findById(userId) {
+        let result = new UserApi();
 
-                console.log(obj);
-                let user = new UserApi(obj.id, obj.name, obj.phone_number,
-                                        obj.dob, obj.image, obj.role_id);
-                console.log("user class ",user)
-                return user;
+        await window.axios.get('/api/users/' + userId)
+            .then(function (response) {
+                const userData = response.data.user
+                let user = new UserApi(userData.id, userData.name, userData.email, userData.phone_number,
+                    userData.DoB, userData.image, userData.role_id);
+                result = user;
             })
             .catch(function (error) {
                 console.log(error);
             });
+        return result;
     }
 }

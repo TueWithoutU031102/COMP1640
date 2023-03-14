@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Comment;
+use App\Models\Idea;
 use Illuminate\Database\Eloquent\Collection;
 
 class CommentService
@@ -16,7 +17,10 @@ class CommentService
         return $comment->save();
     }
 
-    public function finByid(int $commentId){
+    public function findByid(int $commentId){
         return Comment::find($commentId);
+    }
+    public function findByIdeaid(Idea $idea){
+        return $idea->comments;
     }
 }

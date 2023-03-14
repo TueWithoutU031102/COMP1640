@@ -9,6 +9,7 @@ class StoreCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     * @requires Authorization: Bearer <token> in header
      *
      * @return bool
      */

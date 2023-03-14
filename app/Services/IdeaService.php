@@ -14,9 +14,9 @@ class IdeaService
     {
         return Idea::all();
     }
-    public function find($id)
+    public function findById($id)
     {
-
+        return Idea::find($id);
     }
     public function findBySubmission($submission)
     {

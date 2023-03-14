@@ -7,7 +7,7 @@
         }
     </style>
 
-    <h1>{{ session()->pull('jwt') }}</h1>
+    <h1 id="jwt" hidden="true">{{ session()->pull('jwt') }}</h1>
     <section class="banner">
         @include('Goodi.nav_bar')
 
@@ -93,4 +93,11 @@
         </div>
         </div>
     </section>
+    <script>
+        let jwt = document.getElementById('jwt').textContent;
+        if (window.localStorage.getItem('jwt') == ''){
+            console.log('set jwt');
+            window.localStorage.setItem('jwt', jwt);
+        }
+    </script>
 @endsection

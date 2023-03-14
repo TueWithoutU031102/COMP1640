@@ -21,6 +21,13 @@
 </head>
 <body>
 {{-- <div id="preloader"></div> --}}
+@if(!(\Illuminate\Support\Facades\Auth::user()))
+    <script>
+        console.log("not log in")
+        localStorage.setItem('jwt', '');
+    </script>
+@endif
+
 
 <main role="main">
         @yield('main')
