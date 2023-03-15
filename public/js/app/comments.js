@@ -107,35 +107,38 @@ async function showCommentByIdea(ideaId, commentContentElementId) {
                   style="font-weight: bold">${created_at}</span>
         </div>
 
-        <div class="d-flex flex-start mt-4">
-            <a class="me-3" href="#">
-                <img class="rounded-circle"
-                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
-                     alt="avatar" width="50" height="50"/>
-            </a>
-            <div class="flex-grow-1 flex-shrink-1">
-                <div
-                    style="
-                                                    background: #a6dbf8;
-                                                    border-radius: 20px;
-                                                    padding: 10px 10px 10px 10px;
-                                                    ">
-                    <div
-                        class="d-flex justify-content-between align-items-center">
-                        <p class="mb-1">
-                            <b>Simona Disa</b>
-                        </p>
-                    </div>
-                    <p class="small mb-0">
-                        letters, as opposed to using 'Content
-                        here, content here',
-                        making it look like readable English.
-                    </p>
-                </div>
-                <span class="small" style="font-weight: bold">2 hours
-                                                                ago</span>
-            </div>
+        <div id="sub-comment${comment.id}">
+        <!--<div class="d-flex flex-start mt-4">-->
+        <!--            <a class="me-3" href="#">-->
+        <!--                <img class="rounded-circle"-->
+        <!--                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"-->
+        <!--                     alt="avatar" width="50" height="50"/>-->
+        <!--            </a>-->
+        <!--            <div class="flex-grow-1 flex-shrink-1">-->
+        <!--                <div-->
+        <!--                    style="-->
+        <!--                                                    background: #a6dbf8;-->
+        <!--                                                    border-radius: 20px;-->
+        <!--                                                    padding: 10px 10px 10px 10px;-->
+        <!--                                                    ">-->
+        <!--                    <div-->
+        <!--                        class="d-flex justify-content-between align-items-center">-->
+        <!--                        <p class="mb-1">-->
+        <!--                            <b>Simona Disa</b>-->
+        <!--                        </p>-->
+        <!--                    </div>-->
+        <!--                    <p class="small mb-0">-->
+        <!--                        letters, as opposed to using 'Content-->
+        <!--                        here, content here',-->
+        <!--                        making it look like readable English.-->
+        <!--                    </p>-->
+        <!--                </div>-->
+        <!--                <span class="small" style="font-weight: bold">2 hours-->
+        <!--                                                                ago</span>-->
+        <!--            </div>-->
+        <!--        </div>-->
         </div>
+
     </div>
 </div>
         `
