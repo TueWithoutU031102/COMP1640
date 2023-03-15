@@ -30,3 +30,7 @@ Route::group([], function () {
     // ... other routes ...
     require __DIR__ . '/api/commentRoutes.php';
 });
+Route::group([], function () {
+    // ... other routes ...
+    require __DIR__ . '/api/userRoutes.php';
+});

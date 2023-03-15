@@ -1,27 +1,19 @@
 <?php
 
-namespace App\Http\Requests\Comment;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
-class StoreCommentRequest extends FormRequest
+class StoreSubCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     * @requires Authorization: Bearer <token> in header
      *
      * @return bool
      */
     public function authorize()
     {
-        try {
-            $token = JWTAuth::parseToken();
-            $user = $token->authenticate();
-            return $user ? true : false;
-        } catch (\Exception $e) {
-            return false;
-        }
+        return false;
     }
 
     /**

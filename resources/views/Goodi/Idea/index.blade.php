@@ -1,7 +1,6 @@
 @extends('Master.Master')
 
 @section('main')
-    <hr>
     {{-- <section class="banner">
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section><br> --}}
@@ -22,7 +21,7 @@
                 overflow: hidden;
             }
 
-            #view{{ $idea->id }} {
+            #view{{ $idea->id }}    {
                 display: none;
             }
 
@@ -34,21 +33,21 @@
             }
 
 
-            #view:{{ $idea->id }}:checked~.des {
+            #view:{{ $idea->id }}:checked ~ .des {
                 --max-line: 0;
             }
 
-            #view:{{ $idea->id }}:checked~label {
+            #view:{{ $idea->id }}:checked ~ label {
                 visibility: hidden;
             }
 
-            #view:{{ $idea->id }}:checked~label:after {
+            #view:{{ $idea->id }}:checked ~ label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
             }
 
-            .gradient-custom{{ $idea->id }} {
+            .gradient-custom{{ $idea->id }}    {
                 height: 0;
                 visibility: hidden;
                 /* transition: 0.2s; */
@@ -77,7 +76,7 @@
             <div class="left-side">
                 <div class="profile-display">
                     <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                        class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                         class="rounded-circle" style="object-fit: cover; object-position: center center;">
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
                 <div class="imp-link">
@@ -113,13 +112,14 @@
                         <div class="">
                             <label for="title" class="font-weight-bold">Title</label>
                             <input type="title" name="title" class="form-control" id="title"
-                                aria-describedby="title">
+                                   aria-describedby="title">
                         </div>
                         <div class="form-group">
                             <label for="category_id" class="font-weight-bold">Category</label>
 
-                            <select name="category_id" value="{{ old('category_id') }}" class="form-select" id="category"
-                                aria-label="Category">
+                            <select name="category_id" value="{{ old('category_id') }}" class="form-select"
+                                    id="category"
+                                    aria-label="Category">
                                 @foreach ($listCategories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
@@ -127,8 +127,9 @@
                         </div>
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Discussion</label>
-                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
-                                aria-describedby="discussion" rows="7"></textarea>
+                            <textarea style="resize: none;" type="description" name="description" class="form-control"
+                                      id="discussion"
+                                      aria-describedby="discussion" rows="7"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="file" id="files" name="files[]" multiple>
@@ -144,8 +145,8 @@
                         <div class="post-container">
                             <div class="user-detail">
                                 <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                    class="rounded-circle" alt=""
-                                    style="object-fit: cover; object-position: center center;">
+                                     class="rounded-circle" alt=""
+                                     style="object-fit: cover; object-position: center center;">
                                 <div class="post-content">
                                     <h4>{{ $idea->title }}</h4>
                                     <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
@@ -189,8 +190,8 @@
                                 @endif
                                 <h6>{{ $idea->dislikes->count() }}</h6>
 
-                                <button onclick="commentToggle({{ $idea->id }});"
-                                    class="comment{{ $idea->id }}"><i
+                                <button onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }})"
+                                        class="comment{{ $idea->id }}"><i
                                         class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
                                 <h6>10</h6>
                             </div>
@@ -199,13 +200,15 @@
                             <section class="gradient-custom{{ $idea->id }}">
                                 <div class="card-body p-4">
                                     <div class="mt-3  d-flex flex-row align-items-center p-3 form-color"
-                                        style="gap: 10px">
+                                         style="gap: 10px">
                                         <img src="{{ asset(Auth::user()->image) }}" width="50"
-                                            class="rounded-circle mr-10" alt="user avatar">
-                                        <input id="commentInput" type="text" class="form-control"
-                                            placeholder="Enter your comment...">
+                                             class="rounded-circle mr-10" alt="user avatar">
+                                        <input type="text" class="form-control"
+                                               placeholder="Enter your comment..." id="commentContent{{$idea->id}}">
                                         <button
-                                            onclick="sentComment({{ $idea->id }}, {{ Auth::user()->id }}, {{ session()->get('jwt') }})">sent</button>
+                                            onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }})">
+                                            sent
+                                        </button>
                                     </div>
                                     <div class="row">
                                         <div class="col">
@@ -213,7 +216,7 @@
                                                 <div class="d-flex flex-start mt-4" style="gap: 10px">
                                                     <img class="rounded-circle"
                                                          src="{{asset($idea->user->image)}}"
-                                                         alt="avatar" width="50" height="50" />
+                                                         alt="avatar" width="50" height="50"/>
                                                     <div class="flex-grow-1 flex-shrink-1">
                                                         <div
                                                             style="
@@ -221,8 +224,9 @@
                                                     border-radius: 20px;
                                                     padding: 10px 10px 10px 10px;
                                                     ">
-                                                            <div class="d-flex justify-content-between align-items-center"
-                                                                 style="gap: 10px
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center"
+                                                                style="gap: 10px
                                                             ">
                                                                 <p class="mb-1">
                                                                     <b>{{$comment->user->name}}</b>
@@ -230,22 +234,21 @@
 
                                                             </div>
                                                             <p class="small mb-0">
-                                                                It is a long established fact that a reader will
-                                                                be distracted by
-                                                                the readable content of a page.
+                                                                {{$comment->content}}
                                                             </p>
                                                         </div>
                                                         <div style="gap: 20px; display: flex">
                                                             <a href="#!"><i class="fas fa-reply fa-xs"></i><span
                                                                     class="small"> reply</span></a>
-                                                            <span class="small" style="font-weight: bold">2 hours ago</span>
+                                                            <span class="small"
+                                                                  style="font-weight: bold">2 hours ago</span>
                                                         </div>
 
                                                         <div class="d-flex flex-start mt-4">
                                                             <a class="me-3" href="#">
                                                                 <img class="rounded-circle"
                                                                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
-                                                                     alt="avatar" width="50" height="50" />
+                                                                     alt="avatar" width="50" height="50"/>
                                                             </a>
                                                             <div class="flex-grow-1 flex-shrink-1">
                                                                 <div
@@ -270,35 +273,6 @@
                                                                 ago</span>
                                                             </div>
                                                         </div>
-                                                        <div class="d-flex flex-start mt-4">
-                                                            <a class="me-3" href="#">
-                                                                <img class="rounded-circle"
-                                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
-                                                                     alt="avatar" width="50" height="50" />
-                                                            </a>
-                                                            <div class="flex-grow-1 flex-shrink-1">
-                                                                <div
-                                                                    style="
-                                                    background: #a6dbf8;
-                                                    border-radius: 20px;
-                                                    padding: 10px 10px 10px 10px;
-                                                    ">
-                                                                    <div
-                                                                        class="d-flex justify-content-between align-items-center">
-                                                                        <p class="mb-1">
-                                                                            <b>John Smith</b>
-                                                                        </p>
-                                                                    </div>
-                                                                    <p class="small mb-0">
-                                                                        the majority have suffered alteration in
-                                                                        some form, by
-                                                                        injected humour, or randomised words.
-                                                                    </p>
-                                                                </div>
-                                                                <span class="small" style="font-weight: bold">2 hours
-                                                                ago</span>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -316,19 +290,75 @@
             </div>
         </div>
     </section>
+    <hr>
+    <h1 id="userEmail"></h1>
+    <h1>
+        <img id="userImg" src="" alt="">
+    </h1>
+    <hr>
+    <button onclick="showuser({{Auth::user()->id}})">Get user</button>
+    <button id="btn-api" onclick="showCommentByIdea(1)">Call API</button>
+    <script src="{{ asset('js/ideaIndex.js') }}"></script>
+    <script src="{{ asset('js/api/userApi.js') }}"></script>
+    <script src="{{ asset('js/api/commentApi.js') }}"></script>
+    <script>
+        function formToggle() {
+            const toggleForm = document.querySelector('.create-idea');
+            const toggleButton = document.querySelector('.button-idea');
+            toggleForm.classList.toggle('active')
+            toggleButton.classList.toggle('active')
+        }
+
+        function commentToggle(ideaId) {
+            const commentForm = document.querySelector('.gradient-custom' + ideaId);
+            const commentButton = document.querySelector('.comment' + ideaId);
+            commentForm.classList.toggle('active')
+            commentButton.classList.toggle('active')
+        }
+
+        async function showCommentByIdea(ideaId) {
+            let url = "{{ url('/api/comments') }}";
+            let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            let jwt = window.localStorage.getItem('jwt');
+            console.log('f',jwt)
+
+            let commentService = new CommentApi();
+            let comments = await commentService.findCommentsByIdeaId(ideaId)
+
+            console.log("comments index idea: ", comments);
+
+        };
+
+       async function showuser(id) {
+           console.log('id:', id)
+            let user = await getUserByid(id);
+            console.log("show user: ", user)
+            let src = '{{ asset('_imgSrc') }}'
+            src = src.replace('_imgSrc', user.image);
+            document.getElementById('userEmail').innerHTML = src;
+            document.getElementById('userImg').src = src;
+        }
+
+        async function getUserByid(userID) {
+            let userService = new UserApi();
+            let user = await userService.findById(userID);
+            return user;
+        };
+
+        function commentOnIdea(ideaId, userId) {
+            let jwt = window.localStorage.getItem('jwt');
+            console.log(ideaId,"|uId - ", userId, "|token - ", jwt)
+
+            let commentContent = document.getElementById('commentContent' + ideaId).value;
+            console.log("comment: ", commentContent)
+
+            let contents =
+                `
+                `
+            let commentService = new CommentApi();
+            commentService.commentOnIdea(ideaId, jwt, commentContent);
+        }
+    </script>
 @endsection
-<script>
-    function formToggle() {
-        const toggleForm = document.querySelector('.create-idea');
-        const toggleButton = document.querySelector('.button-idea');
-        toggleForm.classList.toggle('active')
-        toggleButton.classList.toggle('active')
-    }
-    function commentToggle(ideaId) {
-        const commentForm = document.querySelector('.gradient-custom'+ ideaId);
-        const commentButton = document.querySelector('.comment'+ ideaId);
-        commentForm.classList.toggle('active')
-        commentButton.classList.toggle('active')
-    }
-</script>
+
 

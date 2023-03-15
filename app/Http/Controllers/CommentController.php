@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Services\CommentService;
 use App\Services\IdeaService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -58,7 +59,7 @@ class CommentController extends Controller
      *
      * @param  \App\Http\Requests\Comment\StoreCommentRequest  $request
      *          include idea_id & user_id(author)
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     * @return JsonResponse|\Illuminate\Http\Response
      */
     public function store(StoreCommentRequest $request)
     {
@@ -72,8 +73,24 @@ class CommentController extends Controller
 
         return response()->json([
             'message' => 'Comment created',
-            'data' => $comment,
+            'comment' => $comment,
         ], 201);
+    }
+
+    /**
+     * get comments by ideaId
+     *
+     * @param  int $ideaId
+     * @return JsonResponse list comments on specific idea
+     */
+    public function findCommentsByIdeaId(int $ideaId): JsonResponse
+    {
+        $idea = $this->ideaService->findById($ideaId);
+        $comments = $idea->comments;
+
+        return response()->json([
+        'comments' => $comments,
+    ], 201);
     }
 
     /**
