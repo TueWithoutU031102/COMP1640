@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -28,15 +29,20 @@ class AdminController extends Controller
     function showFormCreateAccount()
     {
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
-        return view('Goodi/Account/createAcc')->with('listRoles', $listRoles);
+        $listDepartments = Department::all();
+        return view('Goodi/Account/createAcc')->with('listRoles', $listRoles)->with('listDepartments', $listDepartments);
     }
 
     public function createAcc(createAcc $request)
     {
         $user = new User($request->all());
+
         $user->password = Hash::make($request->password);
 
         $user->image = $this->saveImage($request->file('image'));
+        if ($request->input('role_id') == '4') {
+            $user['department_id'] = NULL;
+        }
 
         $user->save();
         return redirect()->route('admin.acc')->with('errors', 'Create Successful!!!!!')
@@ -48,6 +54,7 @@ class AdminController extends Controller
     {
         if ($id == 1) return redirect('admin/acc')->with('success', 'You must not see this Account');
         $account = User::find($id);
+        dd($account->department_id);
         return view('Goodi/Account/showAcc')->with('account', $account);
     }
 
