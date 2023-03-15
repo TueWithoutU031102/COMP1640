@@ -9,7 +9,11 @@
             <h2>{{ $account->name }}</h2>
             <p><span>User ID: </span>{{ $account->id }}</p>
             <p><span>Email: </span>{{ $account->email }}</p>
-            <p><span>Department: </span>{{ $nameDepart->name}}</p>
+            @if ($nameDepart == null)
+                <p><span>Department: NULL </span></p>
+            @else
+                <p><span>Department: </span>{{ $nameDepart->name }}</p>
+            @endif
             <p><span>Phone Number: </span>{{ $account->phone_number }}</p>
             <p><span>DOB: </span>{{ $account->DoB }}</p>
             <p><span>Role: </span>{{ $account->role->name }}</p>

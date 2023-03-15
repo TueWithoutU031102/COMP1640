@@ -31,7 +31,7 @@ class createAcc extends FormRequest
             'DoB' => ['required', 'before_or_equal:today'],
             'image' => ['image', 'required'],
             'role_id' => ['required'],
-            'department_id',
+            'department_id' => ['required'],
         ];
     }
 
@@ -48,7 +48,7 @@ class createAcc extends FormRequest
             'image.image' => 'The file under validation must be an image (jpg, jpeg, png, bmp, gif, svg, or webp).',
             'image.required' => 'Image cannot be empty',
             'role_id.required' => 'The role cannot be empty',
-            //'department_id.required' => 'Only admin and QAM are allowed to null department',
+            'department_id.required' => 'Only admin and QAM are allowed to null department',
         ];
     }
 }
