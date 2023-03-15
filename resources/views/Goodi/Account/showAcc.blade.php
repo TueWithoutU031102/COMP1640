@@ -9,6 +9,7 @@
             <h2>{{ $account->name }}</h2>
             <p><span>User ID: </span>{{ $account->id }}</p>
             <p><span>Email: </span>{{ $account->email }}</p>
+            <p><span>Role: </span>{{ $account->role->name }}</p>
             @if ($nameDepart == null)
                 <p><span>Department: NULL </span></p>
             @else
@@ -16,7 +17,6 @@
             @endif
             <p><span>Phone Number: </span>{{ $account->phone_number }}</p>
             <p><span>DOB: </span>{{ $account->DoB }}</p>
-            <p><span>Role: </span>{{ $account->role->name }}</p>
             <a href="/admin/acc">
                 <button class="btn btn-primary">Back</button>
             </a>

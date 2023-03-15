@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\File;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
@@ -52,7 +53,7 @@ class User extends Authenticatable implements JWTSubject
                 if (!File::exists("public_path($this->image)"))
                     return;
                 else
-                    return unlink(public_path($this->image));
+                    return File::delete(public_path($this->image));
     }
 
     public function role()

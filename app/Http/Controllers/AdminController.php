@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Account\createAcc;
 use App\Http\Requests\Account\updateAcc;
-use Symfony\Component\HttpFoundation\File\File;
 
 class AdminController extends Controller
 {
@@ -49,7 +48,6 @@ class AdminController extends Controller
         return redirect()->route('admin.acc')->with('errors', 'Create Successful!!!!!')
             ->with('listRole');
     }
-
 
     public function showAcc($id)
     {
