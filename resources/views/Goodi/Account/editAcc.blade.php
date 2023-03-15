@@ -45,19 +45,47 @@
                 <img style="width:100%; object-fit: cover; object-position: center center; height: 100px; width: 100px;;"
                     src="{{ asset($account->image) }}">
             </div>
-        </div><br>
+        </div>
         <div class="form-group">
             <label for="role" class="font-weight-bold">Role</label>
-
-            <select value="{{ $account->role }}" name="role_id" class="form-select" id="role" aria-label="Role">
+            <select onchange="isQAM(this)" value="{{ $account->role->id }}" name="role_id" class="form-select"
+                id="role" aria-label="Role">
                 @foreach ($listRoles as $role)
-                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @if ($role->id == $account->role->id)
+                        <option selected value="{{ $role->id }}">{{ $role->name }}</option>
+                    @else
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
+        <div class="form-group">
+            <label for="department" class="font-weight-bold" id="department-label">Department</label>
+            <select name="department_id" value="{{ $account->department }}" selected class="form-select" id="department"
+                aria-label="Department">
+                @foreach ($listDepartments as $department)
+                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                @endforeach
+            </select>
+        </div><br>
         <button type="submit" class="btn btn-success">Submit</button>
         <a class="btn btn-danger" href="/admin/acc">Back</a>
     </form>
+    <script>
+        function isQAM(ele) {
+
+            if (ele.value == 4) {
+                document.getElementById('department').hidden = true;
+                document.getElementById('department-label').hidden = true;
+
+            } else {
+                console.log(ele.value);
+                document.getElementById('department').hidden = false;
+                document.getElementById('department-label').hidden = false;
+
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>

@@ -62,9 +62,12 @@ class AdminController extends Controller
     {
         $account = User::find($id);
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
+        $listDepartments = Department::all();
+        //dd($account->department_id);
         return view('Goodi/Account/editAcc')
             ->with('account', $account)
-            ->with('listRoles', $listRoles);
+            ->with('listRoles', $listRoles)
+            ->with('listDepartments', $listDepartments);
     }
 
     public function updateAcc(updateAcc $request)
@@ -74,7 +77,9 @@ class AdminController extends Controller
         if ($request->hasFile('image')) {
             $input['image'] = $this->saveImage($request->file('image'));
         }
-
+        if ($request->input('role_id') == '4') {
+            $input['department_id'] = NULL;
+        }
         $input['password'] = Hash::make($request->password);
         $id = $request->id;
         User::find($id)->removeImage();
