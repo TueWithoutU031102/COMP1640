@@ -21,17 +21,20 @@ class CommentApi{
         return result;
     }
 
-    async commentOnIdea(ideaId, jwt){
+    async commentOnIdea(ideaId, jwt, commentContent){
         let body = new CommentApi()
+        body.idea_id = ideaId;
+        body.content = commentContent;
         let config = {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + jwt
             },
         }
-        await window.axios.get('/api/comments')
+        await window.axios.post('/api/comments', body, config)
             .then(function (response) {
-                const commentsData = response.data.comments
+                const commentsData = response.data.comment;
+                console.log("response add comment: ", commentsData);
             })
             .catch(function (error) {
                 console.log(error);

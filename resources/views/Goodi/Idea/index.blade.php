@@ -355,6 +355,8 @@
             let contents =
                 `
                 `
+            let commentService = new CommentApi();
+            commentService.commentOnIdea(ideaId, jwt, commentContent);
         }
     </script>
 @endsection
