@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Account\createAcc;
 use App\Http\Requests\Account\updateAcc;
+use Symfony\Component\HttpFoundation\File\File;
 
 class AdminController extends Controller
 {
