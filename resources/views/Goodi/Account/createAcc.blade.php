@@ -57,8 +57,8 @@
 
             <select name="department_id" value="{{ old('department_id') }}" selected class="form-select" id="department"
                 aria-label="Department">
-                @foreach ($listDepartments as $departments)
-                    <option value="{{ $departments->id }}">{{ $departments->name }}</option>
+                @foreach ($listDepartments as $department)
+                    <option value="{{ $department->id }}">{{ $department->name }}</option>
                 @endforeach
             </select>
         </div><br>

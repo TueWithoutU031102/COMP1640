@@ -54,8 +54,8 @@ class AdminController extends Controller
     {
         if ($id == 1) return redirect('admin/acc')->with('success', 'You must not see this Account');
         $account = User::find($id);
-        dd($account->department_id);
-        return view('Goodi/Account/showAcc')->with('account', $account);
+        $nameDepart = Department::find(User::find($id)->department_id);
+        return view('Goodi/Account/showAcc')->with('account', $account)->with('nameDepart', $nameDepart);
     }
 
     public function showFormEditAccount($id)
