@@ -32,14 +32,17 @@ Route::post('/send-email', function (Request $request) {
         'body' => $request->input('body')
     ];
 
-    $email = new \App\Mail\EmailNotify();
-    $email->from('vietdq2412@gmail.com', 'Sender Name');
-    $email->to('phucchua1002@gmail.com', 'Recipient Name');
-    $email->subject('Email Notify');
+//    $email = new \App\Mail\EmailNotify();
+//    $email->from('vietdq2412@gmail.com', 'Sender Name');
+//    $email->to('phucchua1002@gmail.com', 'Recipient Name');
+//    $email->subject('Email Notify');
 
-    Mail::send($email);
+    Mail::send('emails',['details'=>"haha"], function ($mail){
+        $mail->subject('Goodi-Notification');
+        $mail->to('phucchua1002@gmail.com', 'na');
+    });
 
-    return response()->json(['message' => $email]);
+    return response()->json(['details' => $details]);
 });
 
 Route::group([], function () {
