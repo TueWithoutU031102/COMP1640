@@ -82,13 +82,26 @@
                 <div class="main-content">
                     <section class="idea-action">
                         <div class="sort-idea">
-                            <select id="sort">
-                                <option value="{{ Request::url() }}?field=idea?sort=none">Sort</option>
-                                <option value="{{ Request::url() }}?field=idea?sort=asc">Most Popular Ideas </option>
-                                <option value="">Most Viewed Ideas</option>
-                                <option value="">Latest Ideas</option>
-                                <option value="">Latest Comments</option>
-                            </select>
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                    $('#sort').on('change', function() {
+                                        var url = $(this).val();
+                                        if (url)
+                                            window.location = url;
+                                        return false;
+                                    });
+                                });
+                            </script>
+                            <form>
+                                @csrf
+                                <select id="sort">
+                                    <option value="{{ Request::url() }}sort_by=none">Sort</option>
+                                    <option value="{{ Request::url() }}sort_by=popular">Most Popular Ideas </option>
+                                    <option value="">Most Viewed Ideas</option>
+                                    <option value="">Latest Ideas</option>
+                                    <option value="">Latest Comments</option>
+                                </select>
+                            </form>
                         </div>
                         <form action="" class="form-inline">
                             <div class="form-group">

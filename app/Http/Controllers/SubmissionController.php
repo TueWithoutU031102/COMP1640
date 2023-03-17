@@ -90,6 +90,12 @@ class SubmissionController extends Controller
             $data['timeRemaining'] = $this->submissionService->getTimeRemaining($submission->dueDate);
             $data['ideas'] = $this->ideaService->findBySubmission($submission);;
         }
+        if (isset($_GET['sort_by'])) {
+            $sort_by = $_GET['sort_by'];
+            // if($sort_by=='popular')
+
+
+        }
 
         return view('Goodi/Submission/show', $data)
             ->with('listCategories', Category::all())
@@ -131,5 +137,4 @@ class SubmissionController extends Controller
     {
         //
     }
-
 }
