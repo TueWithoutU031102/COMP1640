@@ -29,6 +29,16 @@
             <input type="password" value="123456" name="password" class="form-control" id="password">
         </div>
         <div class="form-group">
+            <label for="role" class="font-weight-bold">Role</label>
+
+            <select onchange="isQAM(this)" name="role_id" value="{{ old('role_id') }}" class="form-select" id="role"
+                aria-label="Role">
+                @foreach ($listRoles as $role)
+                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="phone_number" class="font-weight-bold">Phone Number</label>
             <input type="phone_number" name="phone_number" value="{{ old('phone_number') }}" class="form-control"
                 id="phone_number" aria-describedby="phone_number">
@@ -43,17 +53,33 @@
             <input type="file" name="image" class="form-control" id="image">
         </div>
         <div class="form-group">
-            <label for="role" class="font-weight-bold">Role</label>
+            <label for="department" class="font-weight-bold" id="department-label">Department</label>
 
-            <select name="role_id" value="{{ old('role_id') }}" class="form-select" id="role" aria-label="Role">
-                @foreach ($listRoles as $role)
-                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+            <select name="department_id" value="{{ old('department_id') }}" selected class="form-select" id="department"
+                aria-label="Department">
+                @foreach ($listDepartments as $department)
+                    <option value="{{ $department->id }}">{{ $department->name }}</option>
                 @endforeach
             </select>
         </div><br>
         <button type="submit" class="btn btn-primary">Submit</button>
         <a class="btn btn-danger" href='/admin/acc'>Back</a>
     </form>
+    <script>
+        function isQAM(ele) {
+
+            if (ele.value == 4) {
+                document.getElementById('department').hidden = true;
+                document.getElementById('department-label').hidden = true;
+
+            } else {
+                console.log(ele.value);
+                document.getElementById('department').hidden = false;
+                document.getElementById('department-label').hidden = false;
+
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>

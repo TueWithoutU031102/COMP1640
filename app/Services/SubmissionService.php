@@ -19,14 +19,16 @@ class SubmissionService
 
     function getTimeRemaining($dD)
     {
-        $now = Carbon::now();
-        $dD = new Carbon($dD);
-
+        $timezone = 'Asia/Ho_Chi_Minh';
+        $now = Carbon::now($timezone);
+        $dD = new Carbon($dD, $timezone);
         $days = $now->diffInDays($dD);
         $hours = $now->diffInHours($dD);
         $minutes = $now->diffInMinutes($dD) % 60;
 
+//        dd($now, $dD, $hours);
 
-        return $days . " days |" . ($hours % 24) . " hours |" . ($minutes % 60) . " minutes";
+
+        return $days . " days |" . ($hours % 24) . " hours |" . $minutes %60 . " minutes";
     }
 }

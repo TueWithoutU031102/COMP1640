@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\File;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
@@ -26,6 +27,7 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'phone_number',
+        'department_id',
         'DoB',
         'role_id',
         'image',
@@ -47,8 +49,11 @@ class User extends Authenticatable implements JWTSubject
     public function removeImage()
     {
         if ($this->image != null)
-            return unlink(public_path($this->image));
-        else return;
+            if (public_path($this->image) != null)
+                if (!File::exists("public_path($this->image)"))
+                    return;
+                else
+                    return File::delete(public_path($this->image));
     }
 
     public function role()

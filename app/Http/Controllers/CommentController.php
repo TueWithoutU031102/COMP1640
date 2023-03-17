@@ -73,7 +73,7 @@ class CommentController extends Controller
 
         return response()->json([
             'message' => 'Comment created',
-            'data' => $comment,
+            'comment' => $comment,
         ], 201);
     }
 

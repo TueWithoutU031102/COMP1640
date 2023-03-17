@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -28,36 +29,44 @@ class AdminController extends Controller
     function showFormCreateAccount()
     {
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
-        return view('Goodi/Account/createAcc')->with('listRoles', $listRoles);
+        $listDepartments = Department::all();
+        return view('Goodi/Account/createAcc')->with('listRoles', $listRoles)->with('listDepartments', $listDepartments);
     }
 
     public function createAcc(createAcc $request)
     {
         $user = new User($request->all());
+
         $user->password = Hash::make($request->password);
 
         $user->image = $this->saveImage($request->file('image'));
+        if ($request->input('role_id') == '4') {
+            $user['department_id'] = NULL;
+        }
 
         $user->save();
         return redirect()->route('admin.acc')->with('errors', 'Create Successful!!!!!')
             ->with('listRole');
     }
 
-
     public function showAcc($id)
     {
         if ($id == 1) return redirect('admin/acc')->with('success', 'You must not see this Account');
         $account = User::find($id);
-        return view('Goodi/Account/showAcc')->with('account', $account);
+        $nameDepart = Department::find(User::find($id)->department_id);
+        return view('Goodi/Account/showAcc')->with('account', $account)->with('nameDepart', $nameDepart);
     }
 
     public function showFormEditAccount($id)
     {
         $account = User::find($id);
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
+        $listDepartments = Department::all();
+        //dd($account->department_id);
         return view('Goodi/Account/editAcc')
             ->with('account', $account)
-            ->with('listRoles', $listRoles);
+            ->with('listRoles', $listRoles)
+            ->with('listDepartments', $listDepartments);
     }
 
     public function updateAcc(updateAcc $request)
@@ -67,7 +76,9 @@ class AdminController extends Controller
         if ($request->hasFile('image')) {
             $input['image'] = $this->saveImage($request->file('image'));
         }
-
+        if ($request->input('role_id') == '4') {
+            $input['department_id'] = NULL;
+        }
         $input['password'] = Hash::make($request->password);
         $id = $request->id;
         User::find($id)->removeImage();
