@@ -21,7 +21,7 @@
                 overflow: hidden;
             }
 
-            #view{{ $idea->id }}    {
+            #view{{ $idea->id }} {
                 display: none;
             }
 
@@ -35,21 +35,21 @@
             
 
 
-            #view:{{ $idea->id }}:checked ~ .des {
+            #view:{{ $idea->id }}:checked~.des {
                 --max-line: 0;
             }
 
-            #view:{{ $idea->id }}:checked ~ label {
+            #view:{{ $idea->id }}:checked~label {
                 visibility: hidden;
             }
 
-            #view:{{ $idea->id }}:checked ~ label:after {
+            #view:{{ $idea->id }}:checked~label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
             }
 
-            .gradient-custom{{ $idea->id }}    {
+            .gradient-custom{{ $idea->id }} {
                 height: 0;
                 visibility: hidden;
                 /* transition: 0.2s; */
@@ -78,7 +78,7 @@
             <div class="left-side">
                 <div class="profile-display">
                     <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                         class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                        class="rounded-circle" style="object-fit: cover; object-position: center center;">
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
                 <div class="imp-link">
@@ -93,10 +93,12 @@
             </div>
             <div class="main-content">
                 <section class="idea-action">
-                    <div class="sort-idea">
+                    <div class="sort-idea" id="sort-idea" name="sort-idea">
                         <select>
-                            <option>test</option>
-                            <option>test</option>
+                            <option value="">Most Popular Ideas </option>
+                            <option value="">Most Viewed Ideas</option>
+                            <option value="">Latest Ideas</option>
+                            <option value="">Latest Comments</option>
                         </select>
                     </div>
                     <form action="" class="form-inline">
@@ -114,14 +116,13 @@
                         <div class="">
                             <label for="title" class="font-weight-bold">Title</label>
                             <input type="title" name="title" class="form-control" id="title"
-                                   aria-describedby="title">
+                                aria-describedby="title">
                         </div>
                         <div class="form-group">
                             <label for="category_id" class="font-weight-bold">Category</label>
 
-                            <select name="category_id" value="{{ old('category_id') }}" class="form-select"
-                                    id="category"
-                                    aria-label="Category">
+                            <select name="category_id" value="{{ old('category_id') }}" class="form-select" id="category"
+                                aria-label="Category">
                                 @foreach ($listCategories as $category)
                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
@@ -129,9 +130,8 @@
                         </div>
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Discussion</label>
-                            <textarea style="resize: none;" type="description" name="description" class="form-control"
-                                      id="discussion"
-                                      aria-describedby="discussion" rows="7"></textarea>
+                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="discussion"
+                                aria-describedby="discussion" rows="7"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="file" id="files" name="files[]" multiple>
@@ -141,14 +141,15 @@
                         </div>
                     </form>
                 </section>
+
                 <section class="post">
                     @foreach ($ideas as $idea)
                         <br>
                         <div class="post-container">
                             <div class="user-detail">
                                 <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                     class="rounded-circle" alt=""
-                                     style="object-fit: cover; object-position: center center;">
+                                    class="rounded-circle" alt=""
+                                    style="object-fit: cover; object-position: center center;">
                                 <div class="post-content">
                                     <h4>{{ $idea->title }}</h4>
                                     <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
@@ -192,8 +193,9 @@
                                 @endif
                                 <h6>{{ $idea->dislikes->count() }}</h6>
 
-                                <button onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{$idea->id}}')"
-                                        class="comment{{ $idea->id }}"><i
+                                <button
+                                    onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
+                                    class="comment{{ $idea->id }}"><i
                                         class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
                                 <h6>10</h6>
                             </div>
@@ -202,23 +204,21 @@
                             <section class="gradient-custom{{ $idea->id }}">
                                 <div class="card-body p-4">
                                     <div class="mt-3  d-flex flex-row align-items-center p-3 form-color"
-                                         style="gap: 10px">
+                                        style="gap: 10px">
                                         <img src="{{ asset(Auth::user()->image) }}" width="50"
-                                             class="rounded-circle mr-10" alt="user avatar">
-                                        <input type="text" class="form-control"
-                                               placeholder="Enter your comment..." id="commentContentInput{{$idea->id}}">
-                                        <button
-                                            onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }})">
+                                            class="rounded-circle mr-10" alt="user avatar">
+                                        <input type="text" class="form-control" placeholder="Enter your comment..."
+                                            id="commentContentInput{{ $idea->id }}">
+                                        <button onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }})">
                                             sent
                                         </button>
                                     </div>
                                     <div class="row">
-                                        <div class="col" id="commentContentEle{{$idea->id}}">
-                                            @foreach($idea->comments as $comment)
+                                        <div class="col" id="commentContentEle{{ $idea->id }}">
+                                            @foreach ($idea->comments as $comment)
                                                 <div class="d-flex flex-start mt-4" style="gap: 10px">
-                                                    <img class="rounded-circle"
-                                                         src="{{asset($comment->user->image)}}"
-                                                         alt="avatar" width="50" height="50"/>
+                                                    <img class="rounded-circle" src="{{ asset($comment->user->image) }}"
+                                                        alt="avatar" width="50" height="50" />
                                                     <div class="flex-grow-1 flex-shrink-1">
                                                         <div
                                                             style="
@@ -226,31 +226,30 @@
                                                     border-radius: 20px;
                                                     padding: 10px 10px 10px 10px;
                                                     ">
-                                                            <div
-                                                                class="d-flex justify-content-between align-items-center"
+                                                            <div class="d-flex justify-content-between align-items-center"
                                                                 style="gap: 10px
                                                             ">
                                                                 <p class="mb-1">
-                                                                    <b>{{$comment->user->name}}</b>
+                                                                    <b>{{ $comment->user->name }}</b>
                                                                 </p>
 
                                                             </div>
                                                             <p class="small mb-0">
-                                                                {{$comment->content}}
+                                                                {{ $comment->content }}
                                                             </p>
                                                         </div>
                                                         <div style="gap: 20px; display: flex">
                                                             <a href="#!"><i class="fas fa-reply fa-xs"></i><span
                                                                     class="small"> reply</span></a>
-                                                            <span class="small"
-                                                                  style="font-weight: bold">2 hours ago</span>
+                                                            <span class="small" style="font-weight: bold">2 hours
+                                                                ago</span>
                                                         </div>
 
                                                         <div class="d-flex flex-start mt-4">
                                                             <a class="me-3" href="#">
                                                                 <img class="rounded-circle"
-                                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
-                                                                     alt="avatar" width="50" height="50"/>
+                                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
+                                                                    alt="avatar" width="50" height="50" />
                                                             </a>
                                                             <div class="flex-grow-1 flex-shrink-1">
                                                                 <div
@@ -272,7 +271,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <span class="small" style="font-weight: bold">2 hours
-                                                                ago</span>
+                                                                    ago</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -286,6 +285,7 @@
                         <br>
                     @endforeach
                 </section>
+
             </div>
             <div class="right-side">
 
@@ -318,9 +318,5 @@
             commentForm.classList.toggle('active')
             commentButton.classList.toggle('active')
         }
-
-
     </script>
 @endsection
-
-

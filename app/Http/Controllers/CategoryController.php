@@ -6,6 +6,8 @@ use App\Http\Requests\Category\createCategory;
 use App\Http\Requests\Category\editCategory;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use App\Models\Idea;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -14,7 +16,18 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('Goodi/Category/index', ['categories' => $categories]);
+        $amountIdea = Idea::select(DB::raw("COUNT(*) as count"), DB::raw("YEAR(created_at) as year"))
+            ->groupBy(DB::raw("Year(created_at)"))
+            ->pluck('count', 'year');
+        $labels = $amountIdea->keys();
+        $data = $amountIdea->values();
+        //dd($amountIdea);
+        $amountAuthor = Idea::select(DB::raw("author_id"))->pluck('author_id');
+        // Idea::select(DB::raw("author_id"), DB::raw("COUNT(*) as count"))
+        //     ->groupBy(DB::raw("author_id"))
+        //     ->pluck('count', 'author_id');
+        $so = $amountAuthor->values();
+        return view('Goodi/Category/index', compact('labels', 'data'), ['categories' => $categories]);
     }
 
     public function formCreateCategory()
@@ -36,7 +49,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $name = User::find($category->author_id)->name;
-        return view('Goodi/Category/show', ['category' => $category,'name' => $name]);
+        return view('Goodi/Category/show', ['category' => $category, 'name' => $name]);
     }
 
     public function formEditCategory($id)
