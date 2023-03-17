@@ -58,8 +58,9 @@ class SubmissionController extends Controller
         $submission = new Submission($request->all());
         $submission['author_id'] = $authorId;
 
-        $startDate = new Carbon($submission['startDate']);
-        $dueDate = new Carbon($submission['dueDate']);
+        $timezone = 'Asia/Ho_Chi_Minh';
+        $startDate = new Carbon($submission['startDate'], $timezone);
+        $dueDate = new Carbon($submission['dueDate'], $timezone);
 
         $isStartDateLessThanDueDate = $startDate->lt($dueDate);
         if ($isStartDateLessThanDueDate) {
