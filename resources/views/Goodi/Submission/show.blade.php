@@ -82,9 +82,12 @@
                 <div class="main-content">
                     <section class="idea-action">
                         <div class="sort-idea">
-                            <select>
-                                <option>test</option>
-                                <option>test</option>
+                            <select id="sort">
+                                <option value="{{ Request::url() }}?field=idea?sort=none">Sort</option>
+                                <option value="{{ Request::url() }}?field=idea?sort=asc">Most Popular Ideas </option>
+                                <option value="">Most Viewed Ideas</option>
+                                <option value="">Latest Ideas</option>
+                                <option value="">Latest Comments</option>
                             </select>
                         </div>
                         <form action="" class="form-inline">
@@ -270,7 +273,6 @@
         </script>
 
         <script>
-
             function getTimeRemaining(dD, seft) {
                 let now = new Date();
                 let dueDate = new Date(dD);

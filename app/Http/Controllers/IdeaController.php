@@ -36,7 +36,6 @@ class IdeaController extends Controller
     {
         $categories = Category::all();
         $ideas = $this->ideaService->findAll();
-
         return view('Goodi/Idea/index')
             ->with('listCategories', $categories)
             ->with("ideas", $ideas);
@@ -66,6 +65,10 @@ class IdeaController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
+    public function softMostPopular ()
+    {
+        
+    }
     public function store(StoreFileRequest $request)
     {
         if ($this->ideaService->checkDueDate($request->input('dueDate'))) {
