@@ -24,7 +24,7 @@
     @else
         <div class="res_profile">
             <div class="action">
-                <div class="res_profile" onclick="menuProfileToggle();">
+                <div class="res_profile">
                     <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
                         class="rounded-circle" style="object-fit: cover; object-position: center center;">
                 </div>
@@ -69,9 +69,13 @@
                 <li><a href="/department">DEPARTMENT</a></li>
                 <li>
                     <div class="action">
-                        <div class="profile" onclick="profileToggle();">
+                        <div class="profile">
                             <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
                                 class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                            {{-- <div>
+                                <h5>{{ Auth::user()->name }}</h5>
+                                <p>{{ Auth::user()->role->name }}</p>
+                            </div> --}}
                         </div>
                         <div class="menu_pro">
                             <div class="info">
@@ -100,16 +104,32 @@
     function menuToggle() {
         const toggleMenu = document.querySelector('.menu');
         toggleMenu.classList.toggle('active')
+        docu
     }
 
-    function profileToggle() {
+    document.onclick = function(event){
         const toggleMenu = document.querySelector('.menu_pro');
-        toggleMenu.classList.toggle('active')
+        if (event.target.closest(".profile")){
+            toggleMenu.classList.toggle('active')
+        }
+        else{
+            toggleMenu.classList.remove('active')
+        }
     }
 
-    function menuProfileToggle() {
+    // function menuProfileToggle() {
+    //     const resToggleMenu = document.querySelector('.res_menu_pro');
+    //     resToggleMenu.classList.toggle('active')
+    // }
+
+    document.onclick = function(res){
         const resToggleMenu = document.querySelector('.res_menu_pro');
-        resToggleMenu.classList.toggle('active')
+        if (res.target.closest(".res_profile")){
+            resToggleMenu.classList.toggle('active')
+        }
+        else{
+            resToggleMenu.classList.remove('active')
+        }
     }
 
     function menuDisplay() {
@@ -118,4 +138,16 @@
         bar.classList.toggle('active')
         menu.classList.toggle('active')
     }
+
+    // function profileToggle() {
+    //     const toggleMenu = document.querySelector('.menu_pro');
+    //     const pro = document.querySelector(".menu_pro")
+    //     document.addEvenListener("click", function(event) {
+    //         if (event.target.closest(".profile")) {
+    //             toggleMenu.classList.toggle('active')
+    //         } else {
+    //             pro.classList.add("close_menu")
+    //         }
+    //     })
+    // }
 </script>
