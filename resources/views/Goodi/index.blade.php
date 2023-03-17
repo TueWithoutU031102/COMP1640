@@ -56,5 +56,5 @@
         </div>
     </a>
 </section>
-
+@include('Goodi.footer')
 @endsection

@@ -12,4 +12,5 @@
         <input type="file" name="pdf[]" multiple>
         <button type="submit">Upload</button>
     </form>
+    @include('Goodi.footer')
 @endsection

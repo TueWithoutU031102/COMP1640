@@ -4,7 +4,7 @@
     {{-- <section class="banner">
     <br><br><br><br><br><br><br><br><br><br><br><br><br>
     </section><br> --}}
-    <<section class="banner">
+    <section class="banner">
         @include('Goodi.nav_bar')
         <div class="text-box">
             <h1>
@@ -20,8 +20,8 @@
         <div class="idea-container">
             <div class="col-3 left-side" style="border: #FF9900 solid 2px;">
                 <div class="profile-display">
-                    <img src="{{ asset( Auth::user()->image )}}" alt="mdo" width="50" height="50"
-                         class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                    <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
+                        class="rounded-circle" style="object-fit: cover; object-position: center center;">
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
                 <div class="imp-link">
@@ -58,31 +58,30 @@
                         @csrf
                         <div class="form-group">
                             <label for="title" class="font-weight-bold">Title</label>
-                            <input type="title" name="title" class="form-control" id="title" aria-describedby="title">
+                            <input type="title" name="title" class="form-control" id="title"
+                                aria-describedby="title">
                         </div>
                         <div class="submission-date">
                             <div class="form-group">
                                 <label for="startDate" class="font-weight-bold">Date Started</label>
                                 <input type="datetime-local" name="startDate" class="form-control" id="startDateInput"
-                                       aria-describedby="startDate" style="width: 300px"
-                                       onchange="limitDueDate(this.value)">
+                                    aria-describedby="startDate" style="width: 300px" onchange="limitDueDate(this.value)">
                             </div>
                             <div class="form-group">
                                 <label for="dueDate" class="font-weight-bold">Date Finished</label>
                                 <input type="datetime-local" name="dueDate" class="form-control" id="dueDateInput"
-                                       aria-describedby="dueDate"
-                                       style="width: 300px" onchange="checkDueDate(this)">
+                                    aria-describedby="dueDate" style="width: 300px" onchange="checkDueDate(this)">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Description</label>
-                            <textarea type="description" name="description" class="form-control" id="description"
-                                      aria-describedby="description" rows="5"></textarea>
+                            <textarea type="description" name="description" class="form-control" id="description" aria-describedby="description"
+                                rows="5"></textarea>
                         </div>
                         <br>
                         <div class="button-idea">
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit"
-                                    id="submitCreate">Submit
+                                id="submitCreate">Submit
                             </button>
                         </div>
                     </form>
@@ -99,7 +98,8 @@
                                         <h4>{{ $tit->title }}</h4>
                                         <small>Create by: </small><br>
                                         <p>{{ $tit->description }}</p>
-                                        <span class="due-date"><i class="fa-solid fa-triangle-exclamation"></i>  Due {{ $tit->dueDate }}</span>
+                                        <span class="due-date"><i class="fa-solid fa-triangle-exclamation"></i> Due
+                                            {{ $tit->dueDate }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
             </div>
         </div>
     </section>
-
+    @include('Goodi.footer')
 @endsection
 
 <script>

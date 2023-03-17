@@ -262,7 +262,7 @@
                 </div>
             </section>
         </section>
-
+        @include('Goodi.footer')
         <script>
             function formToggle() {
                 const toggleForm = document.querySelector('.create-idea');

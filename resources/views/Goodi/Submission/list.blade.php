@@ -121,7 +121,7 @@
             </div>
         </div>
     </section>
-
+    @include('Goodi.footer')
 @endsection
 
 <script>
