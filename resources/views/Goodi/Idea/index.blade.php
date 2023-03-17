@@ -32,6 +32,8 @@
                 cursor: pointer;
             }
 
+            
+
 
             #view:{{ $idea->id }}:checked ~ .des {
                 --max-line: 0;
@@ -290,12 +292,11 @@
             </div>
         </div>
     </section>
-    <hr>
     <h1 id="userEmail"></h1>
     <h1>
         <img id="userImg" src="" alt="">
     </h1>
-    <hr>
+    @include('Goodi.footer')
     <button onclick="showuser({{Auth::user()->id}})">Get user</button>
     <button id="btn-api" onclick="showCommentByIdea(1)">Call API</button>
     <script src="{{ asset('js/ideaIndex.js') }}"></script>

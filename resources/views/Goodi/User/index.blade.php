@@ -56,9 +56,11 @@
                 </div>
                 <div class="idea-interact">
                     <br>
-                    @foreach($listIdeas as $idea)
+                    @foreach ($listIdeas as $idea)
                         <ul>
-                            <li><h1>{{$idea->title}}</h1></li>
+                            <li>
+                                <h1>{{ $idea->title }}</h1>
+                            </li>
                         </ul>
                     @endforeach
                     {{-- @if (!$idea->likedBy(auth()->user()))
@@ -93,9 +95,10 @@
         </div>
         </div>
     </section>
+    @include('Goodi.footer')
     <script>
         let jwt = document.getElementById('jwt').textContent;
-        if (window.localStorage.getItem('jwt') == ''){
+        if (window.localStorage.getItem('jwt') == '') {
             console.log('set jwt');
             window.localStorage.setItem('jwt', jwt);
         }

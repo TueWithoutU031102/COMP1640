@@ -259,7 +259,7 @@
                 </div>
             </section>
         </section>
-
+        @include('Goodi.footer')
         <script>
             function formToggle() {
                 const toggleForm = document.querySelector('.create-idea');
@@ -270,7 +270,6 @@
         </script>
 
         <script>
-
             function getTimeRemaining(dD, seft) {
                 let now = new Date();
                 let dueDate = new Date(dD);

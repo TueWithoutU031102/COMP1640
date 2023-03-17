@@ -60,4 +60,5 @@
             }
         }
     </script>
+    @include('Goodi.footer')
 @endsection

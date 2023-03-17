@@ -108,4 +108,5 @@
         </table>
 
     </div>
+    @include('Goodi.footer')
 @endsection
