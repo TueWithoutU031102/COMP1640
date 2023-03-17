@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone_number')->default("");
             $table->date('DoB')->default("2023-02-13T10:10");
-            $table->longText('image');
+            $table->longText('image')->nullable();
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')
                 ->references('id')

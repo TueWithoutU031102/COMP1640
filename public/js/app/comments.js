@@ -64,9 +64,9 @@ const commentContent =
 
 
 async function showCommentByIdea(ideaId, commentContentElementId) {
-    let commentService = new CommentApi();
+    let ideaService = new IdeaApi(ideaId);
     let userService = new UserApi();
-    let comments = await commentService.findCommentsByIdeaId(ideaId)
+    let comments = await ideaService.findCommentsByIdeaId()
     let commentContentEle = document.getElementById(commentContentElementId);
     let commentContent = '';
     let commentAuthor = new UserApi();
