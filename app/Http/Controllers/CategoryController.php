@@ -23,13 +23,27 @@ class CategoryController extends Controller
         $labels = $amountIdea->keys();
         $data = $amountIdea->values();
 
-        $amountIdeaDepartment = DB::table('ideas')
-            ->join('users', 'ideas.author_id', '=', 'users.id')
-            ->join('departments', 'users.department_id', '=', 'departments.id')
-            ->select('departments.name')
-            ->get();
-        dd($amountIdeaDepartment->values());
-        return view('Goodi/Category/index', compact('labels', 'data'), ['categories' => $categories]);
+        $activeIT = User::select('id')
+            ->where('department_id', '=', '1')
+            ->groupBy('id');
+        $amountIdeaIT = Idea::select(DB::raw("YEAR(created_at) as year"), DB::raw("COUNT(*) as count"))
+            ->groupBy(DB::raw("YEAR(created_at)"))
+            ->whereIn('author_id', $activeIT)
+            ->pluck('count', 'year');
+        $labelsIT = $amountIdeaIT->keys();
+        $dataIT = $amountIdeaIT->values();
+
+        $activeBusiness = User::select('id')
+            ->where('department_id', '=', '2')
+            ->groupBy('id');
+        $amountIdeaBusiness = Idea::select(DB::raw("YEAR(created_at) as year"), DB::raw("COUNT(*) as count"))
+            ->groupBy(DB::raw("YEAR(created_at)"))
+            ->whereIn('author_id', $activeIT)
+            ->pluck('count', 'year');
+
+        $labelsBusiness = $amountIdeaIT->keys();
+        $dataBusiness = $amountIdeaIT->values();
+        return view('Goodi/Category/index', compact('labels', 'data', 'labelsIT', 'dataIT', 'labelsBusiness', 'dataBusiness'), ['categories' => $categories]);
     }
 
     public function formCreateCategory()
