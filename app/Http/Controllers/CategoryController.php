@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\Idea;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -21,12 +22,13 @@ class CategoryController extends Controller
             ->pluck('count', 'year');
         $labels = $amountIdea->keys();
         $data = $amountIdea->values();
-        //dd($amountIdea);
-        $amountAuthor = Idea::select(DB::raw("author_id"))->pluck('author_id');
-        // Idea::select(DB::raw("author_id"), DB::raw("COUNT(*) as count"))
-        //     ->groupBy(DB::raw("author_id"))
-        //     ->pluck('count', 'author_id');
-        $so = $amountAuthor->values();
+
+        $amountIdeaDepartment = DB::table('ideas')
+            ->join('users', 'ideas.author_id', '=', 'users.id')
+            ->join('departments', 'users.department_id', '=', 'departments.id')
+            ->select('departments.name')
+            ->get();
+        dd($amountIdeaDepartment->values());
         return view('Goodi/Category/index', compact('labels', 'data'), ['categories' => $categories]);
     }
 

@@ -60,7 +60,7 @@
                         const data = {
                             labels: labels,
                             datasets: [{
-                                label: "Amount",
+                                label: "Total",
                                 backgroundColor: 'rgb(255,160,122)',
                                 borderColor: 'rgb(255,0,0)',
                                 borderWidth: 2,
@@ -70,7 +70,7 @@
                         };
 
                         const config = {
-                            type: 'bar',
+                            type: 'line',
                             data: data,
                             options: {
                                 responsive: true,
