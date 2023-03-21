@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
+use App\Models\Submission;
 use App\Models\User;
+use App\Services\EmailService;
 use App\Services\IdeaService;
+use App\Services\SubmissionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,9 +17,10 @@ use Illuminate\Support\Facades\Auth;
 class IdeaController extends Controller
 {
     protected IdeaService $ideaService;
+    protected EmailService $mailService;
     protected User $currentUser;
 
-    public function __construct(IdeaService $ideaService)
+    public function __construct(IdeaService $ideaService, EmailService $mailService)
     {
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
@@ -25,17 +29,20 @@ class IdeaController extends Controller
             return $next($request);
         });
         $this->ideaService = $ideaService;
+        $this->mailService = $mailService;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
         $categories = Category::all();
         $ideas = $this->ideaService->findAll();
+
+        dd($this->currentUser['email']);
         return view('Goodi/Idea/index')
             ->with('listCategories', $categories)
             ->with("ideas", $ideas);
@@ -65,10 +72,11 @@ class IdeaController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function softMostPopular ()
+    public function softMostPopular()
     {
-        
+
     }
+
     public function store(StoreFileRequest $request)
     {
         if ($this->ideaService->checkDueDate($request->input('dueDate'))) {
@@ -83,6 +91,11 @@ class IdeaController extends Controller
             $ideaId = $idea->id;
             $fileController = new FileController();
             $fileController->store($request, $ideaId);
+            $data = [
+                'from' => $this->currentUser['name'],
+                'submission_id' => $idea['submission_id'],
+            ];
+            $this->mailService->submitIdeaNotify($data);
             return redirect(route("showSpecifiedSubmission", ['id' => $request->submission_id]))->with('message', 'Submit idea successfully');
         };
         return redirect()->back()->with('message', 'Submit idea fail!');

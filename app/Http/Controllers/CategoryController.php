@@ -20,15 +20,30 @@ class CategoryController extends Controller
         $amountIdea = Idea::select(DB::raw("COUNT(*) as count"), DB::raw("YEAR(created_at) as year"))
             ->groupBy(DB::raw("Year(created_at)"))
             ->pluck('count', 'year');
-        $labels = $amountIdea->keys();
-        $data = $amountIdea->values();
-
+//        $labels = $amountIdea->keys();
+//        $data = $amountIdea->values();
         $amountIdeaDepartment = DB::table('ideas')
             ->join('users', 'ideas.author_id', '=', 'users.id')
             ->join('departments', 'users.department_id', '=', 'departments.id')
             ->select('departments.name')
-            ->get();
-        dd($amountIdeaDepartment->values());
+            ->pluck('departments.name')
+            ->countBy();
+
+        $amountIdeaDepartment = DB::statement("select year(ideas.created_at) as year, count('year')
+from ideas
+where author_id in (select id from users where department_id = 1 group by id)
+group by year
+;");
+        $amountIdeaDepartment = DB::table('ideas')
+            ->select('year(created_at) as year', 'count(year)')
+            ->where('author_id', '=', '1' )
+            ->groupBy('year');
+        dd($amountIdeaDepartment);
+
+        $labels = $amountIdeaDepartment->keys();
+        $data = $amountIdeaDepartment->values();
+
+        dd($amountIdea,$amountIdeaDepartment,$data, $labels);
         return view('Goodi/Category/index', compact('labels', 'data'), ['categories' => $categories]);
     }
 

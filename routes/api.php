@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -23,27 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('csrfToken', [AuthenController::class, 'getCsrfToken'])->name('api.csrfToken');
 
-Route::post('/login', [LoginController::class, 'getJWT']);
+Route::post('/send-email', [EmailController::class, 'sentEmail'])->middleware('authJWT');
 
-Route::post('/send-email', function (Request $request) {
-    $details = [
-        'to' => $request->input('to'),
-        'subject' => $request->input('subject'),
-        'body' => $request->input('body')
-    ];
-
-//    $email = new \App\Mail\EmailNotify();
-//    $email->from('vietdq2412@gmail.com', 'Sender Name');
-//    $email->to('phucchua1002@gmail.com', 'Recipient Name');
-//    $email->subject('Email Notify');
-
-    Mail::send('emails',['details'=>"haha"], function ($mail){
-        $mail->subject('Goodi-Notification');
-        $mail->to('phucchua1002@gmail.com', 'na');
-    });
-
-    return response()->json(['details' => $details]);
-});
 
 Route::group([], function () {
     // ... other routes ...
@@ -52,4 +34,8 @@ Route::group([], function () {
 Route::group([], function () {
     // ... other routes ...
     require __DIR__ . '/api/userRoutes.php';
+});
+Route::group([], function () {
+    // ... other routes ...
+    require __DIR__ . '/api/authRoutes.php';
 });

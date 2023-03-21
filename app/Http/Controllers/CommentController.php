@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Services\CommentService;
 use App\Services\IdeaService;
+use App\Services\EmailService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,10 @@ class CommentController extends Controller
 {
     protected IdeaService $ideaService;
     protected CommentService $commentService;
+    protected EmailService $mailService;
     protected User $currentUser;
 
-    public function __construct(IdeaService $ideaService, CommentService $commentService)
+    public function __construct(IdeaService $ideaService, CommentService $commentService, EmailService $mailService)
     {
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
@@ -29,6 +31,7 @@ class CommentController extends Controller
         });
         $this->commentService = $commentService;
         $this->ideaService = $ideaService;
+        $this->mailService = $mailService;
     }
 
     /**

@@ -13,14 +13,15 @@ class EmailNotify extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $data = [];
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -31,7 +32,7 @@ class EmailNotify extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Email Notify',
+            subject: $this->data['subject'].' - '.now(),
         );
     }
 
@@ -43,7 +44,7 @@ class EmailNotify extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails',
         );
     }
 

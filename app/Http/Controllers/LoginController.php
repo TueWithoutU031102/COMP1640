@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Token;
 
 class LoginController extends Controller
 {
@@ -28,7 +29,7 @@ class LoginController extends Controller
         }
     }
 
-    public function getJWT(Request $request): \Illuminate\Http\JsonResponse
+    public function generateJWT(Request $request): \Illuminate\Http\JsonResponse
     {
         $this->validate($request, [
             'email' => ['email'],
@@ -43,5 +44,13 @@ class LoginController extends Controller
             Session::put('JWT', $token);
             return response()->json(['token' => $token], 200);
         }
+    }
+
+    public function getCurrentUserFromJWT(Request $request)
+    {
+        $token = new Token( $request->bearerToken());
+        $payload = JWTAuth::decode($token);
+        return response()->json(['payload' => $payload], 200);
+
     }
 }
