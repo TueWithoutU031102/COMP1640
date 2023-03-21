@@ -34,13 +34,12 @@ class EmailController extends Controller
         $jwt = $request->bearerToken();
         $data = [
             'from' => $this->userService->findUserByToken($jwt)->name,
-            'submission_id' => 3,
+            'submission_id' => 5,
         ];
 
-        $this->emailService->submitIdeaNotify($data);
         return response()->json([
-            'message' => 'Email sent',
-            'comment' => $data,
+            'message' => $this->emailService->submitIdeaNotify($data),
+            'data' => $data,
         ], 200);
     }
 }

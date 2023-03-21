@@ -7,7 +7,6 @@ use App\Models\Submission;
 use App\Models\User;
 use Illuminate\Mail\SentMessage;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Request;
 
 class EmailService
 {
@@ -15,17 +14,17 @@ class EmailService
     {
         $submission = Submission::find($dataInput['submission_id']);
         $from = $dataInput['from'];
-        $subject = $from . ' has submitted an idea for submission ' .$submission->title;
-        $link = env('MEMCACHED_HOST', '127.0.0.1') . ':8000/submission/show/' .$submission->id;
-        $content = $from.' had submitted an idea! You can see your idea submission: ';
+        $subject = $from . ' has submitted an idea for submission ' . $submission->title;
+        $link = env('MEMCACHED_HOST', '127.0.0.1') . ':8000/submission/show/' . $submission->id;
+        $content = $from . ' had submitted an idea! You can see your idea submission: ';
         $to = User::find($submission->author_id)->email;
 
         $data = [
-            'from'=>$from,
+            'from' => $from,
             'to' => $to,
             'subject' => $subject,
             'link' => $link,
-            'content'=>$content
+            'content' => $content
         ];
 
         $email = new EmailNotify($data);
