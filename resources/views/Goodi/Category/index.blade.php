@@ -56,21 +56,34 @@
                     <script type="text/javascript">
                         var labels = {{ Js::from($labels) }};
                         var amountIdea = {{ Js::from($data) }};
+                        var amountIdeaIT = {{ Js::from($dataIT) }};
+                        var amountIdeaBusiness = {{ Js::from($dataBusiness) }};
 
                         const data = {
                             labels: labels,
                             datasets: [{
-                                label: "Amount",
-                                backgroundColor: 'rgb(255,160,122)',
-                                borderColor: 'rgb(255,0,0)',
-                                borderWidth: 2,
-                                borderSkipped: false,
-                                data: amountIdea,
-                            }, ]
+                                    label: "Total",
+                                    backgroundColor: 'rgb(255,160,122)',
+                                    borderColor: 'rgb(255,0,0)',
+                                    data: amountIdea,
+                                },
+                                {
+                                    label: "IT",
+                                    backgroundColor: 'rgb(222,122,122)',
+                                    borderColor: 'rgb(222,0,0)',
+                                    data: amountIdeaIT,
+                                },
+                                {
+                                    label: "Business",
+                                    backgroundColor: 'rgb(100,100,100)',
+                                    borderColor: 'rgb(100,0,0)',
+                                    data: amountIdeaBusiness,
+                                },
+                            ]
                         };
 
                         const config = {
-                            type: 'bar',
+                            type: 'line',
                             data: data,
                             options: {
                                 responsive: true,
