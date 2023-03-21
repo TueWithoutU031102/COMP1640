@@ -69,7 +69,7 @@
                 <li><a href="/department">DEPARTMENT</a></li>
                 <li>
                     <div class="action">
-                        <div class="profile">
+                        <div class="profile" onclick="profileToggle()">
                             <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
                                 class="rounded-circle" style="object-fit: cover; object-position: center center;">
                             {{-- <div>
@@ -104,32 +104,16 @@
     function menuToggle() {
         const toggleMenu = document.querySelector('.menu');
         toggleMenu.classList.toggle('active')
-        docu
     }
-
-    document.onclick = function(event){
-        const toggleMenu = document.querySelector('.menu_pro');
-        if (event.target.closest(".profile")){
-            toggleMenu.classList.toggle('active')
-        }
-        else{
-            toggleMenu.classList.remove('active')
-        }
-    }
-
-    // function menuProfileToggle() {
-    //     const resToggleMenu = document.querySelector('.res_menu_pro');
-    //     resToggleMenu.classList.toggle('active')
-    // }
 
     document.onclick = function(res){
         const resToggleMenu = document.querySelector('.res_menu_pro');
-        if (res.target.closest(".res_profile")){
-            resToggleMenu.classList.toggle('active')
-        }
-        else{
-            resToggleMenu.classList.remove('active')
-        }
+        const proToggleMenu = document.querySelector('.menu_pro');
+        if (res.target.closest(".res_profile")) resToggleMenu.classList.toggle('active')
+        else resToggleMenu.classList.remove('active')
+
+        if (event.target.closest(".profile")) proToggleMenu.classList.toggle('active')
+        else proToggleMenu.classList.remove('active')
     }
 
     function menuDisplay() {
@@ -138,16 +122,4 @@
         bar.classList.toggle('active')
         menu.classList.toggle('active')
     }
-
-    // function profileToggle() {
-    //     const toggleMenu = document.querySelector('.menu_pro');
-    //     const pro = document.querySelector(".menu_pro")
-    //     document.addEvenListener("click", function(event) {
-    //         if (event.target.closest(".profile")) {
-    //             toggleMenu.classList.toggle('active')
-    //         } else {
-    //             pro.classList.add("close_menu")
-    //         }
-    //     })
-    // }
 </script>
