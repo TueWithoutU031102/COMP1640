@@ -32,7 +32,7 @@
                 cursor: pointer;
             }
 
-            
+
 
 
             #view:{{ $idea->id }}:checked~.des {
@@ -205,8 +205,8 @@
                                 <div class="card-body p-4">
                                     <div class="mt-3  d-flex flex-row align-items-center p-3 form-color"
                                         style="gap: 10px">
-                                        <img src="{{ asset(Auth::user()->image) }}" width="50"
-                                            class="rounded-circle mr-10" alt="user avatar">
+                                        <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50" alt="user avatar"
+                                            class="rounded-circle" style="object-fit: cover; object-position: center center;">
                                         <input type="text" class="form-control" placeholder="Enter your comment..."
                                             id="commentContentInput{{ $idea->id }}">
                                         <button onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }})">
