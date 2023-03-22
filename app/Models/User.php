@@ -14,8 +14,6 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-
     /**
      * The attributes that are mass assignable.
      *
@@ -48,12 +46,8 @@ class User extends Authenticatable implements JWTSubject
 
     public function removeImage()
     {
-        if ($this->image != null)
-            if (public_path($this->image) != null)
-                if (!File::exists("public_path($this->image)"))
-                    return;
-                else
-                    return File::delete(public_path($this->image));
+        if (File::exists(public_path($this->image)))
+            return File::delete(public_path($this->image));
     }
 
     public function role()
@@ -63,37 +57,27 @@ class User extends Authenticatable implements JWTSubject
 
     public function isUser(): bool
     {
-        if ($this->role_id != null)
-            return true;
-        return false;
+        return $this->role_id != null;
     }
 
     public function isAdmin(): bool
     {
-        if ($this->role_id == '1')
-            return true;
-        return false;
+        return $this->role_id == '1';
     }
 
     public function isStaff(): bool
     {
-        if ($this->role_id == '2')
-            return true;
-        return false;
+        return $this->role_id == '2';
     }
 
     public function isQAC(): bool
     {
-        if ($this->role_id == '3')
-            return true;
-        return false;
+        return $this->role_id == '3';
     }
 
     public function isQAM(): bool
     {
-        if ($this->role_id == '4')
-            return true;
-        return false;
+        return $this->role_id == '4';
     }
 
     public function submissions()
@@ -134,14 +118,14 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'email'=>$this->email,
-            'phone_number'=>$this->phone_number,
-            'department_id'=>$this->department_id,
-            'DoB'=>$this->DoB,
-            'role_id'=>$this->role->id,
-            'image'=>$this->image,
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone_number' => $this->phone_number,
+            'department_id' => $this->department_id,
+            'DoB' => $this->DoB,
+            'role_id' => $this->role->id,
+            'image' => $this->image,
         ];
     }
 }
