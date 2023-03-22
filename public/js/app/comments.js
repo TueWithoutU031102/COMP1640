@@ -1,3 +1,6 @@
+console.log(new UserApi())
+console.log(new IdeaApi())
+
 const commentContent =
     `<div className="d-flex flex-start mt-4" style="gap: 10px">
         <img className="rounded-circle"
@@ -64,9 +67,10 @@ const commentContent =
 
 
 async function showCommentByIdea(ideaId, commentContentElementId) {
-    let ideaService = new IdeaApi(ideaId);
-    let userService = new UserApi();
-    let comments = await ideaService.findCommentsByIdeaId()
+    ideaService = new IdeaApi(ideaId);
+    userService = new UserApi();
+    let jwt = window.localStorage.getItem('jwt');
+    let comments = await ideaService.findCommentsByIdeaId(jwt);
     let commentContentEle = document.getElementById(commentContentElementId);
     let commentContent = '';
     let commentAuthor = new UserApi();
@@ -159,8 +163,7 @@ async function showuser(id) {
 
 async function getUserByid(userID) {
     let userService = new UserApi();
-    let user = await userService.findById(userID);
-    return user;
+    return await userService.findById(userID);
 };
 
 async function commentOnIdea(ideaId, userId) {

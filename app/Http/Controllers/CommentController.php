@@ -74,6 +74,11 @@ class CommentController extends Controller
         $comment['author_id'] = $user_id;
         $this->commentService->store($comment);
 
+        $mailData = [
+            'from'=>$user->name,
+            'idea_id'=>$comment->idea->id
+            ];
+        $this->mailService->commentNotify($mailData);
         return response()->json([
             'message' => 'Comment created',
             'comment' => $comment,
