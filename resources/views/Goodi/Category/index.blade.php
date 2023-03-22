@@ -119,11 +119,11 @@
                             let dataCountBusiness = {{ Js::from($dataCountBusiness) }};
                             let dataCountIT = {{ Js::from($dataCountIT) }};
                             const data = {
-                                labels: 'Department',
+                                labels: ' ',
                                 datasets: [{
                                         label: 'IT',
                                         data: dataCountIT,
-                                        backgroundColor: 'rgb(255,255,255)',
+                                        backgroundColor: 'rgb(100,100,100)',
                                     },
                                     {
                                         label: 'Business',
