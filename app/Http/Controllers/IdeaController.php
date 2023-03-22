@@ -42,7 +42,6 @@ class IdeaController extends Controller
         $categories = Category::all();
         $ideas = $this->ideaService->findAll();
 
-        dd($this->currentUser['email']);
         return view('Goodi/Idea/index')
             ->with('listCategories', $categories)
             ->with("ideas", $ideas);
@@ -74,7 +73,6 @@ class IdeaController extends Controller
      */
     public function softMostPopular()
     {
-
     }
 
     public function store(StoreFileRequest $request)

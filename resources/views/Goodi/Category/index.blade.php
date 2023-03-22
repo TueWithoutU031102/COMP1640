@@ -49,10 +49,10 @@
                 </div>
             </div>
             <div class="dashboard">
+                <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <div class="post-container">
-                    <canvas id="myChart" height="100"></canvas>
-                    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <canvas id="Chart1" height="100"></canvas>
                     <script type="text/javascript">
                         var labels = {{ Js::from($labels) }};
                         var amountIdea = {{ Js::from($data) }};
@@ -98,14 +98,50 @@
                                 }
                             },
                         };
-
-                        const myChart = new Chart(
-                            document.getElementById('myChart'),
+                        const Chart1 = new Chart(
+                            document.getElementById('Chart1'),
                             config);
                     </script>
                 </div>
                 <div class="post-container">
-
+                    <canvas id="Chart2" height="100"></canvas>
+                    <script type="text/javascript">
+                        var dataCountBusiness = {{ JS::from($dataCountBusiness) }};
+                        var dataCountIT = {{ JS::from($dataCountIT) }};
+                        const data = {
+                            labels: 'Department',
+                            datasets: [{
+                                    label: 'IT',
+                                    data: dataCountIT,
+                                    backgroundColor: 'rgb(255,255,255)',
+                                },
+                                {
+                                    label: 'Business',
+                                    data: dataCountBusiness,
+                                    backgroundColor: 'rgb(255,160,255)',
+                                }
+                            ]
+                        };
+                        const config = {
+                            type: 'bar',
+                            data: data,
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        position: 'top',
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Numbers of contributors (staffs with idea submission) per departments'
+                                    }
+                                }
+                            },
+                        };
+                        const Chart2 = new Chart(
+                            document.getElementById('Chart2'),
+                            config);
+                    </script>
                 </div>
             </div>
         </div>
