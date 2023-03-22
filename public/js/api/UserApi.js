@@ -17,9 +17,8 @@ class UserApi {
         await window.axios.get('/api/users/' + this.id)
             .then(function (response) {
                 const userData = response.data.user
-                let user = new UserApi(userData.id, userData.name, userData.email, userData.phone_number,
+                result = new UserApi(userData.id, userData.name, userData.email, userData.phone_number,
                     userData.DoB, userData.image, userData.role_id);
-                result = user;
             })
             .catch(function (error) {
                 console.log(error);

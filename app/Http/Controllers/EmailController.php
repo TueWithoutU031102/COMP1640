@@ -42,4 +42,17 @@ class EmailController extends Controller
             'data' => $data,
         ], 200);
     }
+    public function sentCommentNotify(Request $request): JsonResponse
+    {
+        $jwt = $request->bearerToken();
+        $data = [
+            'from' => $this->userService->findUserByToken($jwt)->name,
+            'idea_id' => 1,
+        ];
+
+        return response()->json([
+            'message' => $this->emailService->commentNotify($data),
+            'data' => $data,
+        ], 200);
+    }
 }

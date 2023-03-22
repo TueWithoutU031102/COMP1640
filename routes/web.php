@@ -29,6 +29,10 @@ Route::get('/forbiddenPage', function () {
     return view('403');
 })->name("forbidden");
 
+Route::get('/about', function () {
+    return view('Goodi.about');
+});
+
 Route::get('/login', function () {
     return view('Goodi.login');
 })->name('user.login');

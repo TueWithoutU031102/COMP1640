@@ -35,15 +35,15 @@
 
 
 
-            #view:{{ $idea->id }}:checked~.des {
+            #view{{ $idea->id }}:checked~.des {
                 --max-line: 0;
             }
 
-            #view:{{ $idea->id }}:checked~label {
+            #view{{ $idea->id }}:checked~label {
                 visibility: hidden;
             }
 
-            #view:{{ $idea->id }}:checked~label:after {
+            #view{{ $idea->id }}:checked~label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
@@ -194,7 +194,7 @@
                                 <h6>{{ $idea->dislikes->count() }}</h6>
 
                                 <button
-                                    onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
+                                    onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{$idea->id }}, 'commentContentEle{{ $idea->id }}')"
                                     class="comment{{ $idea->id }}"><i
                                         class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
                                 <h6>10</h6>
@@ -301,7 +301,8 @@
     <button id="btn-api" onclick="showCommentByIdea(1)">Call API</button>
     <script src="{{ asset('js/const.js') }}"></script>
     <script src="{{ asset('js/ideaIndex.js') }}"></script>
-    <script src="{{ asset('js/api/userApi.js') }}"></script>
+    <script src="{{ asset('js/api/IdeaApi.js') }}"></script>
+    <script src="{{ asset('js/api/UserApi.js') }}"></script>
     <script src="{{ asset('js/api/commentApi.js') }}"></script>
     <script src="{{ asset('js/app/comments.js') }}"></script>
     <script>
