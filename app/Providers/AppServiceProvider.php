@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\CategoryService;
 use App\Services\IdeaService;
+use App\Services\MailService;
 use App\Services\SubmissionService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(SubmissionService::class, function ($app) {
             return new SubmissionService();
+        });
+        $this->app->bind(MailService::class, function ($app) {
+            return new MailService();
         });
 
     }

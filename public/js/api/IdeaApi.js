@@ -11,9 +11,16 @@ class IdeaApi {
         this.id = id
     }
 
-    async findCommentsByIdeaId(){
-        let result = new Array();
-        await window.axios.get('/api/comments/findCommentsByIdeaId/' + this.id)
+    async findCommentsByIdeaId(jwt){
+        let result = [];
+        console.log("find comment by idea jwt: ", jwt)
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + jwt
+            },
+        }
+        await window.axios.get('/api/comments/findCommentsByIdeaId/' + this.id, config)
             .then(function (response) {
                 const commentsData = response.data.comments;
                 commentsData.forEach(function(data) {
@@ -26,23 +33,4 @@ class IdeaApi {
         return result;
     }
 
-    async commentOnIdea(ideaId, jwt, commentContent){
-        let body = new CommentApi()
-        body.idea_id = ideaId;
-        body.content = commentContent;
-        let config = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + jwt
-            },
-        }
-        await window.axios.post('/api/comments', body, config)
-            .then(function (response) {
-                const commentsData = response.data.comment;
-                console.log("response add comment: ", commentsData);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
 }
