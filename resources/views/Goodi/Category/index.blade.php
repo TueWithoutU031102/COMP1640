@@ -49,10 +49,11 @@
                 </div>
             </div>
             <div class="dashboard">
-                <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
                 <div class="post-container">
                     <canvas id="Chart1" height="100"></canvas>
+                    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script type="text/javascript">
                         var labels = {{ Js::from($labels) }};
                         var amountIdea = {{ Js::from($data) }};
@@ -105,42 +106,52 @@
                 </div>
                 <div class="post-container">
                     <canvas id="Chart2" height="100"></canvas>
+                    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script type="text/javascript">
-                        var dataCountBusiness = {{ JS::from($dataCountBusiness) }};
-                        var dataCountIT = {{ JS::from($dataCountIT) }};
-                        const data = {
-                            labels: 'Department',
-                            datasets: [{
-                                    label: 'IT',
-                                    data: dataCountIT,
-                                    backgroundColor: 'rgb(255,255,255)',
-                                },
-                                {
-                                    label: 'Business',
-                                    data: dataCountBusiness,
-                                    backgroundColor: 'rgb(255,160,255)',
-                                }
-                            ]
-                        };
-                        const config = {
-                            type: 'bar',
-                            data: data,
-                            options: {
-                                responsive: true,
-                                plugins: {
-                                    legend: {
-                                        position: 'top',
+                        (() => {
+                            //(()=>{})()
+                            //
+                            //() đầu tiền là tham số suy ra {} : định nghĩa 1 hàm
+                            //bên trong {} là code thực thi của hàm
+                            //ngoặc tròn bao quanh 2 ngoặc đầu là định nghĩa hàm không tên
+                            //ngoặc cuối là thực thi nội dung bên trong
+                            let dataCountBusiness = {{ Js::from($dataCountBusiness) }};
+                            let dataCountIT = {{ Js::from($dataCountIT) }};
+                            const data = {
+                                labels: 'Department',
+                                datasets: [{
+                                        label: 'IT',
+                                        data: dataCountIT,
+                                        backgroundColor: 'rgb(255,255,255)',
                                     },
-                                    title: {
-                                        display: true,
-                                        text: 'Numbers of contributors (staffs with idea submission) per departments'
+                                    {
+                                        label: 'Business',
+                                        data: dataCountBusiness,
+                                        backgroundColor: 'rgb(255,160,255)',
                                     }
-                                }
-                            },
-                        };
-                        const Chart2 = new Chart(
-                            document.getElementById('Chart2'),
-                            config);
+                                ]
+                            };
+                            const config = {
+                                type: 'bar',
+                                data: data,
+                                options: {
+                                    responsive: true,
+                                    plugins: {
+                                        legend: {
+                                            position: 'top',
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: 'Numbers of contributors (staffs with idea submission) per departments'
+                                        }
+                                    }
+                                },
+                            };
+                            const Chart2 = new Chart(
+                                document.getElementById('Chart2'),
+                                config);
+                        })()
                     </script>
                 </div>
             </div>
