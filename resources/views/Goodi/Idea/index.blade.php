@@ -35,15 +35,15 @@
 
 
 
-            #view:{{ $idea->id }}:checked~.des {
+            #view{{ $idea->id }}:checked~.des {
                 --max-line: 0;
             }
 
-            #view:{{ $idea->id }}:checked~label {
+            #view{{ $idea->id }}:checked~label {
                 visibility: hidden;
             }
 
-            #view:{{ $idea->id }}:checked~label:after {
+            #view{{ $idea->id }}:checked~label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
