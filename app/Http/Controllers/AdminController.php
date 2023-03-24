@@ -47,7 +47,7 @@ class AdminController extends Controller
 
         $checkPhone = $this->userService->checkDuplicatePhone($request->phone_number);
         if ($checkPhone) return back()->with('checkPhone', 'This phone already exists');
-        
+
         $user->password = Hash::make($request->password);
 
         $user->image = $this->saveImage($request->file('image'));
@@ -83,7 +83,12 @@ class AdminController extends Controller
     public function updateAcc(updateAcc $request)
     {
         $input = $request->all();
+        $checkEmail = $this->userService->checkDuplicateEmail($request->email);
+        if ($checkEmail) return back()->with('checkMail', 'This email already exists');
 
+        $checkPhone = $this->userService->checkDuplicatePhone($request->phone_number);
+        if ($checkPhone) return back()->with('checkPhone', 'This phone already exists');
+        
         if ($request->hasFile('image')) {
             $input['image'] = $this->saveImage($request->file('image'));
         }

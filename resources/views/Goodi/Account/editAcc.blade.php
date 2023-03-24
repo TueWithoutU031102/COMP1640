@@ -5,6 +5,12 @@
     <form action="/admin/editAcc/{id}" class="create-form" method="POST" enctype="multipart/form-data">
         <h2>Edit Account</h2><br><br>
         @csrf
+        @if (Session::has('checkMail'))
+            <div class="alert alert-danger" role="alert"><strong>{{ Session::get('checkMail') }}</strong></div>
+        @endif
+        @if (Session::has('checkPhone'))
+            <div class="alert alert-danger" role="alert"><strong>{{ Session::get('checkPhone') }}</strong></div>
+        @endif
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
