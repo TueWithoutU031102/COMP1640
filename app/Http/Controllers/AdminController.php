@@ -10,10 +10,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Account\createAcc;
 use App\Http\Requests\Account\updateAcc;
+use App\Services\UserService;
 
 class AdminController extends Controller
 {
-
+    protected UserService $userService;
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
     public function logout()
     {
         Auth::logout();
@@ -37,6 +42,12 @@ class AdminController extends Controller
     {
         $user = new User($request->all());
 
+        $checkEmail = $this->userService->checkDuplicateEmail($request->email);
+        if ($checkEmail) return back()->with('checkMail', 'This email already exists');
+
+        $checkPhone = $this->userService->checkDuplicatePhone($request->phone_number);
+        if ($checkPhone) return back()->with('checkPhone', 'This phone already exists');
+        
         $user->password = Hash::make($request->password);
 
         $user->image = $this->saveImage($request->file('image'));
@@ -45,7 +56,7 @@ class AdminController extends Controller
         }
 
         $user->save();
-        return redirect()->route('admin.acc')->with('errors', 'Create Successful!!!!!')
+        return redirect()->route('admin.acc')->with('success', 'Create Successful!!!!!')
             ->with('listRole');
     }
 
