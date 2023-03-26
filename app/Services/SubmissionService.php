@@ -12,6 +12,7 @@ class SubmissionService
     {
         return Submission::all();
     }
+
     public function findById($id)
     {
         return Submission::find($id);
@@ -22,13 +23,14 @@ class SubmissionService
         $timezone = 'Asia/Ho_Chi_Minh';
         $now = Carbon::now($timezone);
         $dD = new Carbon($dD, $timezone);
-        $days = $now->diffInDays($dD);
-        $hours = $now->diffInHours($dD);
-        $minutes = $now->diffInMinutes($dD) % 60;
-
-//        dd($now, $dD, $hours);
 
 
-        return $days . " days |" . ($hours % 24) . " hours |" . $minutes %60 . " minutes";
+        $nowInMilliseconds = $now->valueOf();
+        $dDInMilliseconds = $dD->valueOf();
+        $diffMilliseconds = $dDInMilliseconds - $nowInMilliseconds;
+        $days = floor( $diffMilliseconds / 86400000);
+        $hours = floor( ($diffMilliseconds % 86400000) / 3600000);
+        $minutes = round((($diffMilliseconds % 86400000) % 3600000) / 60000);
+        return $days . " days |" . $hours . " hours |" . $minutes . " minutes";
     }
 }

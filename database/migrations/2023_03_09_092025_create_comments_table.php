@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('author_id')
                 ->references('id')
                 ->on('users');
+            $table->boolean('isAnonymous');
             $table->unsignedBigInteger('idea_id');
             $table->foreign('idea_id')
                 ->references('id')

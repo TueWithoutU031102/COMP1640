@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('ideas', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->boolean('isAnonymous');
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')

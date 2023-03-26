@@ -28,15 +28,15 @@
             }
 
 
-            #view{{ $idea->id }}:checked~.des {
+            #view:{{ $idea->id }}:checked~.des {
                 --max-line: 0;
             }
 
-            #view{{ $idea->id }}:checked~label {
+            #view:{{ $idea->id }}:checked~label {
                 visibility: hidden;
             }
 
-            #view{{ $idea->id }}:checked~label:after {
+            #view:{{ $idea->id }}:checked~label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
@@ -109,7 +109,7 @@
                             </div>
                         </form>
                         <div class="btn-idea">
-                            @if (\Illuminate\Support\Facades\Auth::user())
+                            @if (\Illuminate\Support\Facades\Auth::user() && !$isDue)
                                 <button class="add-idea" onclick="formToggle();">Post Idea</button>
                             @endif
                             {{-- <button class="refresh-idea">Refresh</button> --}}
@@ -257,7 +257,7 @@
                             {{-- <p
                                 onclick="getTimeRemaining('{{ $submission->startDate }}', '{{ $submission->dueDate }}', this)">
                                 ||</p> --}}
-                            <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)">{{ $timeRemaining }}</p>
+                            <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)" @if($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
                             <p><span>Description: </span>{{ $submission->title }}</p>
                             <button class="btn btn-danger"
                                 onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
@@ -289,19 +289,19 @@
             function getTimeRemaining(dD, seft) {
                 let now = new Date();
                 let dueDate = new Date(dD);
-                let diffMs = (dueDate - now); // milliseconds between now & Christmas
+                let diffMs = (dueDate - now); // m
                 let diffDays = Math.floor(diffMs / 86400000); // days
                 let diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
                 let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
 
-                let timeRemaining = diffDays + " days, " + diffHrs + " hours, " + diffMins + " minutes";
+                let timeRemaining = diffDays + " days |" + diffHrs + " hours |" + diffMins + " minutes";
                 console.log(timeRemaining);
 
                 seft.innerHTML = timeRemaining;
                 if (now > dueDate) {
                     seft.style.color = "red"
                 }
-                return timeRemaining;
+                    return timeRemaining;
             }
 
             function updateDate(dateType) {
