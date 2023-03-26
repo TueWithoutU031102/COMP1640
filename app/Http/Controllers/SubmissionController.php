@@ -83,22 +83,27 @@ class SubmissionController extends Controller
     {
         $submission = $this->submissionService->findById($id);
         $message = "";
-        $data = ['submission' => $submission,];
+        $data = [
+            'submission' => $submission,
+            'timeRemaining' => '',
+            'ideas' => []
+        ];
+        $isDue = true;
         if (!$submission) {
             $message = 'Not found!';
         } else {
             $data['timeRemaining'] = $this->submissionService->getTimeRemaining($submission->dueDate);
             $data['ideas'] = $this->ideaService->findBySubmission($submission);;
+            $isDue = $submission->dueDate < now('Asia/Ho_Chi_Minh');
         }
         if (isset($_GET['sort_by'])) {
             $sort_by = $_GET['sort_by'];
             // if($sort_by=='popular')
-
-
         }
 
         return view('Goodi/Submission/show', $data)
             ->with('listCategories', Category::all())
+            ->with('isDue', $isDue)
             ->with('message', $message);
     }
 
