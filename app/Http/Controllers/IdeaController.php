@@ -48,11 +48,13 @@ class IdeaController extends Controller
             if ($sort_by = 'Like') {
                 $countLike = Like::select(DB::raw("COUNT(idea_id) as count"), 'idea_id')
                     ->groupBy('idea_id')
-                    ->pluck('count', 'idea_id')
-                    ->sortDesc();
-                $sortLike = $countLike->keys();
-                $ideas = $this->ideaService->findById(($sortLike));
-                dd($sortLike);
+                    ->get('count','idea_id')
+                    ->sortByDesc('count')
+                    ->pluck('idea_id');
+                //dd($countLike);
+                $ideas = $this->ideaService->findById($countLike);
+                dd($ideas);
+
             }
         } else $ideas = $this->ideaService->findAll();
         // $sortDislike = Dislike::select(DB::raw("COUNT(idea_id) as count"), 'idea_id')
