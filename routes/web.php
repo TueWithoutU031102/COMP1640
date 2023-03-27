@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -41,7 +42,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/showFile', [IdeaController::class, 'download']);
 
-Route::get('index', [UserController::class, 'index'])->name('user.index');
+Route::get('index', [AuthenController::class, 'index'])->name('user.index');
 
 
 Route::group([], function () {
@@ -65,4 +66,4 @@ Route::group([], function () {
     require __DIR__ . '/web/userRoutes.php'; // include the new admin routes
 });
 
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthenController::class, 'logout'])->name('logout');

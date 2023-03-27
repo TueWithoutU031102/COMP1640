@@ -20,6 +20,8 @@ class Admin
         $user = Auth::user(); // lay thong tin khi dang nhap
         $route = $request->route()->getName();
         if (!$request->user()->isAdmin($request))
+            dd('admin');
+
             return redirect()->route("forbidden");
         return $next($request);
     }

@@ -42,16 +42,18 @@
         </form>
     </div>
     </div>
+    <button onclick="login()">ádaadds</button>
     <script>
         function login() {
             let data = {
                 email: $("#email").val(),
                 password: $("#password").val()
             }
+            console.log(data)
              window.axios.post('/api/login', data)
                 .then(function (response) {
                     localStorage.setItem('jwt', response.data.token)
-                    localStorage.setItem('user', response.data.token)
+                    localStorage.setItem('user', JSON.stringify(response.data.user))
                 })
                 .catch(function (error) {
                     console.log(error);
