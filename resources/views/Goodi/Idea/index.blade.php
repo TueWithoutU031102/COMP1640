@@ -299,12 +299,7 @@
     @include('Goodi.footer')
     <button onclick="showuser({{Auth::user()->id}})">Get user</button>
     <button id="btn-api" onclick="showCommentByIdea(1)">Call API</button>
-    <script src="{{ asset('js/const.js') }}"></script>
-    <script src="{{ asset('js/ideaIndex.js') }}"></script>
-    <script src="{{ asset('js/api/IdeaApi.js') }}"></script>
-    <script src="{{ asset('js/api/UserApi.js') }}"></script>
-    <script src="{{ asset('js/api/commentApi.js') }}"></script>
-    <script src="{{ asset('js/app/comments.js') }}"></script>
+
     <script>
         function formToggle() {
             const toggleForm = document.querySelector('.create-idea');

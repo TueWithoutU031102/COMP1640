@@ -31,13 +31,34 @@
 
 
 <main role="main">
-        @yield('main')
+    @yield('main')
 </main>
+<script src="{{ asset('js/const.js') }}"></script>
+<script src="{{ asset('js/ideaIndex.js') }}"></script>
+<script src="{{ asset('js/api/IdeaApi.js') }}"></script>
+<script src="{{ asset('js/api/UserApi.js') }}"></script>
+<script src="{{ asset('js/api/commentApi.js') }}"></script>
+<script src="{{ asset('js/app/comments.js') }}"></script>
 <script>
     var loader = document.getElementById("preloader");
     window.addEventListener("load", function () {
         loader.style.display = "none";
     });
+
+    setUser();
+
+    async function setUser() {
+        let userService = new UserApi();
+        let jwtToken = localStorage.getItem('jwt');
+        console.log(jwtToken)
+        if (jwtToken) {
+            let user = await userService.findUserByJWT(jwtToken);
+            console.log("u", user)
+            localStorage.setItem('user', JSON.parse(user))
+        } else {
+            console.log('not login!')
+        }
+    }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

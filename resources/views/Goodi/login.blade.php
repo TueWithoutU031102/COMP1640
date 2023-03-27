@@ -5,7 +5,7 @@
         *{
             margin: 0;
             padding: 0;
-            box-sizing: 0;
+            box-sizing: unset;
         }
     </style>
     <div class="login">
@@ -23,12 +23,12 @@
                     </div>
                 @endif
                 <div class="input_box">
-                    <input type="text" name="email" required="required">
+                    <input type="text" id="email" name="email" required="required">
                     <span>Email</span>
                     <i></i>
                 </div>
                 <div class="input_box">
-                    <input type="password" name="password" required="required">
+                    <input type="password" id="password" name="password" required="required">
                     <span>Password</span>
                     <i></i>
                 </div>
@@ -46,4 +46,15 @@
             </form>
         </div>
     </div>
+    <script>
+        await window.axios.get('/api/getUserByToken',config)
+            .then(function (response) {
+                const userData = response.data.user
+                result = new UserApi(userData.id, userData.name, userData.email, userData.phone_number,
+                    userData.DoB, userData.image, userData.role_id);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    </script>
 @endsection
