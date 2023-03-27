@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
+use App\Models\Like;
 use App\Models\Submission;
 use App\Models\User;
 use App\Services\EmailService;
@@ -12,6 +13,8 @@ use App\Services\IdeaService;
 use App\Services\SubmissionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Dislike;
 
 
 class IdeaController extends Controller
@@ -40,13 +43,24 @@ class IdeaController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $ideas = $this->ideaService->findAll();
-
         if (isset($_GET['sort_by'])) {
             $sort_by = $_GET['sort_by'];
-            if($sort_by = 'likeDislike')
-                $ideas = Idea::select();
-        }
+            if ($sort_by = 'Like') {
+                $countLike = Like::select(DB::raw("COUNT(idea_id) as count"), 'idea_id')
+                    ->groupBy('idea_id')
+                    ->get('count','idea_id')
+                    ->sortByDesc('count')
+                    ->pluck('idea_id');
+                //dd($countLike);
+                $ideas = $this->ideaService->findById($countLike);
+                dd($ideas);
+
+            }
+        } else $ideas = $this->ideaService->findAll();
+        // $sortDislike = Dislike::select(DB::raw("COUNT(idea_id) as count"), 'idea_id')
+        //     ->groupBy('idea_id')
+        //     ->pluck('idea_id');
+
 
         return view('Goodi/Idea/index')
             ->with('listCategories', $categories)
@@ -77,9 +91,6 @@ class IdeaController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function softMostPopular()
-    {
-    }
 
     public function store(StoreFileRequest $request)
     {

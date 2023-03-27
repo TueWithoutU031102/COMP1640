@@ -97,9 +97,7 @@
                         $(document).ready(function() {
                             $('#sort').on('change', function() {
                                 var url = $(this).val();
-                                if (url) {
-                                    window.location = url;
-                                }
+                                if (url) window.location = url;
                                 return false;
                             });
                         });
@@ -107,8 +105,8 @@
                     <form>
                         @csrf
                         <select class="form-control" id="sort" name="sort">
-                            <option value="{{ Request::url() }}?sort_by=none">---Lọc theo---</option>
-                            <option value="{{ Request::url() }}?sort_by=likeDislike">Most Popular Ideas </option>
+                            <option value="{{ Request::url() }}?sort_by=none">---Filter by---</option>
+                            <option value="{{ Request::url() }}?sort_by=Like">Most Like Ideas </option>
                             <option value="{{ Request::url() }}?sort_by=lastestIdeas">Latest Ideas</option>
                             <option value="{{ Request::url() }}?sort_by=lastestComments">Latest Comments</option>
                         </select>
