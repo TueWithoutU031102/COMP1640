@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Token;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +29,18 @@ class UserService
         return User::find($payload['sub']);
     }
 
+    public function generateJWT(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (!$token = JWTAuth::attempt($credentials)) {
+            return null;
+        } else {
+            Auth::attempt($credentials);
+            Session::put('JWT', $token);
+            return $token;
+        }
+    }
     public function checkDuplicateEmail($email)
     {
         $checkEmail = DB::table('users')->where('email', '=', $email)->exists();

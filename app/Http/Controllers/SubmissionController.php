@@ -61,8 +61,8 @@ class SubmissionController extends Controller
         $timezone = 'Asia/Ho_Chi_Minh';
         $startDate = new Carbon($submission['startDate'], $timezone);
         $dueDate = new Carbon($submission['dueDate'], $timezone);
-
         $isStartDateLessThanDueDate = $startDate->lt($dueDate);
+
         if ($isStartDateLessThanDueDate) {
             $submission->save();
             return redirect(route('indexSubmission'))
