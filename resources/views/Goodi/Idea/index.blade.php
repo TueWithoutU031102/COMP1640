@@ -93,21 +93,33 @@
             </div>
             <div class="main-content">
                 <section class="idea-action">
-                    <div class="sort-idea" id="sort-idea" name="sort-idea">
-                        <select>
-                            <option value="">Most Popular Ideas </option>
-                            <option value="">Most Viewed Ideas</option>
-                            <option value="">Latest Ideas</option>
-                            <option value="">Latest Comments</option>
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('#sort').on('change', function() {
+                                var url = $(this).val();
+                                if (url) {
+                                    window.location = url;
+                                }
+                                return false;
+                            });
+                        });
+                    </script>
+                    <form>
+                        @csrf
+                        <select class="form-control" id="sort" name="sort">
+                            <option value="{{ Request::url() }}?sort_by=none">---Lọc theo---</option>
+                            <option value="{{ Request::url() }}?sort_by=likeDislike">Most Popular Ideas </option>
+                            <option value="{{ Request::url() }}?sort_by=lastestIdeas">Latest Ideas</option>
+                            <option value="{{ Request::url() }}?sort_by=lastestComments">Latest Comments</option>
                         </select>
-                    </div>
+                    </form>
                     <form action="" class="form-inline">
                         <div class="form-group">
                             <input class="search_bar" placeholder="Search Idea">
                         </div>
                     </form>
-
                 </section>
+
                 <section class="create-idea">
                     <h2>New Idea</h2>
                     <i></i>
@@ -194,7 +206,7 @@
                                 <h6>{{ $idea->dislikes->count() }}</h6>
 
                                 <button
-                                    onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{$idea->id }}, 'commentContentEle{{ $idea->id }}')"
+                                    onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
                                     class="comment{{ $idea->id }}"><i
                                         class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
                                 <h6>10</h6>
@@ -205,8 +217,9 @@
                                 <div class="card-body p-4">
                                     <div class="mt-3  d-flex flex-row align-items-center p-3 form-color"
                                         style="gap: 10px">
-                                        <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50" alt="user avatar"
-                                            class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                                        <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50"
+                                            height="50" alt="user avatar" class="rounded-circle"
+                                            style="object-fit: cover; object-position: center center;">
                                         <input type="text" class="form-control" placeholder="Enter your comment..."
                                             id="commentContentInput{{ $idea->id }}">
                                         <button onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }})">
@@ -297,7 +310,7 @@
         <img id="userImg" src="" alt="">
     </h1>
     @include('Goodi.footer')
-    <button onclick="showuser({{Auth::user()->id}})">Get user</button>
+    <button onclick="showuser({{ Auth::user()->id }})">Get user</button>
     <button id="btn-api" onclick="showCommentByIdea(1)">Call API</button>
     <script src="{{ asset('js/const.js') }}"></script>
     <script src="{{ asset('js/ideaIndex.js') }}"></script>

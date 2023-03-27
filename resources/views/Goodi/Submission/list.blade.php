@@ -31,14 +31,14 @@
             </div>
             <div class="main-content">
                 <section class="idea-action">
-                    <div class="sort-idea">
+                    {{-- <div class="sort-idea">
                         <select>
                             <option value="">Most Popular Ideas </option>
                             <option value="">Most Viewed Ideas</option>
                             <option value="">Latest Ideas</option>
                             <option value="">Latest Comments</option>
                         </select>
-                    </div>
+                    </div> --}}
                     <form action="" class="form-inline">
                         <div class="form-group">
                             <input class="search_bar" placeholder="Search Idea">

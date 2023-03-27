@@ -92,7 +92,7 @@
                                     });
                                 });
                             </script>
-                            <form>
+                            {{-- <form>
                                 @csrf
                                 <select id="sort">
                                     <option value="{{ Request::url() }}sort_by=none">Sort</option>
@@ -101,7 +101,7 @@
                                     <option value="">Latest Ideas</option>
                                     <option value="">Latest Comments</option>
                                 </select>
-                            </form>
+                            </form> --}}
                         </div>
                         <form action="" class="form-inline">
                             <div class="form-group">
@@ -257,7 +257,8 @@
                             {{-- <p
                                 onclick="getTimeRemaining('{{ $submission->startDate }}', '{{ $submission->dueDate }}', this)">
                                 ||</p> --}}
-                            <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)" @if($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
+                            <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)"
+                                @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
                             <p><span>Description: </span>{{ $submission->title }}</p>
                             <button class="btn btn-danger"
                                 onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
@@ -301,7 +302,7 @@
                 if (now > dueDate) {
                     seft.style.color = "red"
                 }
-                    return timeRemaining;
+                return timeRemaining;
             }
 
             function updateDate(dateType) {
