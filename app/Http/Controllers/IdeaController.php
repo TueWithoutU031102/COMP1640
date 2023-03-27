@@ -42,6 +42,12 @@ class IdeaController extends Controller
         $categories = Category::all();
         $ideas = $this->ideaService->findAll();
 
+        if (isset($_GET['sort_by'])) {
+            $sort_by = $_GET['sort_by'];
+            if($sort_by = 'likeDislike')
+                $ideas = Idea::select();
+        }
+
         return view('Goodi/Idea/index')
             ->with('listCategories', $categories)
             ->with("ideas", $ideas);

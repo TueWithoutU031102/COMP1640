@@ -12,7 +12,7 @@ class LikeController extends Controller
     {
         if ($idea->likedBy($request->user()))
             return response(null, 409);
-
+        $request->user()->dislikes()->where('idea_id', $idea->id)->delete();
         $idea->likes()->create([
             'author_id' => $request->user()->id,
         ]);

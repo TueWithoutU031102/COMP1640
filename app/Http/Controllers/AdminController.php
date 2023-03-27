@@ -73,7 +73,6 @@ class AdminController extends Controller
         $account = User::find($id);
         $listRoles = Role::where('name', '!=', 'ADMIN')->get();
         $listDepartments = Department::all();
-        //dd($account->department_id);
         return view('Goodi/Account/editAcc')
             ->with('account', $account)
             ->with('listRoles', $listRoles)

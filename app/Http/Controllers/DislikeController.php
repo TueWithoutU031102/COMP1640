@@ -12,7 +12,7 @@ class DislikeController extends Controller
     {
         if ($idea->dislikedBy($request->user()))
             return response(null, 409);
-
+        $request->user()->likes()->where('idea_id', $idea->id)->delete();
         $idea->dislikes()->create([
             'author_id' => $request->user()->id,
         ]);
