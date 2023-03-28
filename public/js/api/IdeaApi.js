@@ -23,7 +23,7 @@ class IdeaApi {
             .then(function (response) {
                 const commentsData = response.data.comments;
                 commentsData.forEach(function(data) {
-                    result.push(new CommentApi(data.id, data.content, data.author_id, data.idea_id, data.created_at, data.updated_at ));
+                    result.push(new CommentApi(data.id, data.content, data.author_id, data.idea_id,data.isAnonymous, data.created_at, data.updated_at ));
                 });
             })
             .catch(function (error) {

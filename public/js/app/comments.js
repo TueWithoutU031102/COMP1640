@@ -1,18 +1,24 @@
 async function showCommentByIdea(ideaId, commentContentElementId) {
     let ideaService = new IdeaApi(ideaId);
+    let userService = new UserApi();
     let jwt = window.localStorage.getItem('jwt');
     let comments = await ideaService.findCommentsByIdeaId(jwt);
     let commentContentEle = document.getElementById(commentContentElementId);
     let commentContent = '';
-    let commentAuthor = JSON.parse(localStorage.getItem('user'));
 
     for (const comment of comments) {
-        console.log(comment)
+        userService.id = comment.author_id;
+        let commentAuthor = await userService.findById();
+        let imgSrc = '/'+commentAuthor.image;
+        if (comment.isAnonymous){
+            imgSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Anonymous_emblem.svg/2048px-Anonymous_emblem.svg.png';
+            commentAuthor.name = "Anonymous";
+        }
         let created_at = comment.created_at.slice(0, 19);
         commentContent += `
         <div class="d-flex flex-start mt-4" style="gap: 10px">
     <img class="rounded-circle"
-         src="/${commentAuthor.image}"
+         src="${imgSrc}"
          alt="avatar" width="50" height="50"/>
     <div class="flex-grow-1 flex-shrink-1">
         <div

@@ -37,21 +37,6 @@
     window.addEventListener("load", function () {
         loader.style.display = "none";
     });
-
-    setUser();
-
-    async function setUser() {
-        let userService = new UserApi();
-        let jwtToken = localStorage.getItem('jwt');
-        console.log(jwtToken)
-        if (jwtToken) {
-            let user = await userService.findUserByJWT(jwtToken);
-            console.log("u", user)
-            localStorage.setItem('user', JSON.parse(user))
-        } else {
-            console.log('not login!')
-        }
-    }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

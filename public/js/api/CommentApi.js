@@ -14,7 +14,7 @@ class CommentApi {
         comment.idea_id = ideaId;
         comment.content = commentContent;
         comment.isAnonymous = isAnonymous;
-        console.log(comment)
+        console.log("save: ", comment)
         let config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -23,13 +23,13 @@ class CommentApi {
         }
         window.axios.post('/api/comments', comment, config)
             .then(function (response) {
-                const commentsData = response.data.comment;
-                comment.sentNotify(JSON.parse(localStorage.getItem('user')).name, ideaId, jwt);
+                const commentsData = response.data;
                 console.log("response add comment: ", commentsData);
             })
             .catch(function (error) {
                 console.log(error);
             });
+        comment.sentNotify(JSON.parse(localStorage.getItem('user')).name, ideaId, jwt);
     }
 
     sentNotify(from, ideaId, jwt) {

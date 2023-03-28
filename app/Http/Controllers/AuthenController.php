@@ -35,6 +35,11 @@ class AuthenController extends Controller
         return view('Goodi/User/index')
             ->with('listIdeas', $listIdeas);
     }
+
+    public function findUserById($userId): JsonResponse
+    {
+        return response()->json(['user'=>User::find($userId)]);
+    }
     public function getCsrfToken(Request $request): string
     {
         $token = csrf_token();

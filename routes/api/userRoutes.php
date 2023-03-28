@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\UserAPIController;
+use App\Http\Controllers\AuthenController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("users")->group(function (){
-    Route::get('/', [UserAPIController::class, 'index']);
-    Route::get('/{userId}', [UserAPIController::class, 'findByid']);
-    Route::post('/', [UserAPIController::class, 'store']);
-    Route::put('/{id}', [UserAPIController::class, 'update']);
-    Route::delete('/{id}', [UserAPIController::class, 'destroy']);
+    Route::get('/', [AuthenController::class, 'index']);
+    Route::get('/{userId}', [AuthenController::class, 'findUserById']);
+    Route::post('/', [AuthenController::class, 'store']);
+    Route::put('/{id}', [AuthenController::class, 'update']);
+    Route::delete('/{id}', [AuthenController::class, 'destroy']);
 });

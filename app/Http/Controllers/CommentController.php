@@ -58,6 +58,7 @@ class CommentController extends Controller
         return response()->json([
             'message' => 'Comment created',
             'comment' => $comment,
+            'an' => $request->get('isAnonymous'),
         ], 201);
     }
 
