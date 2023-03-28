@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +20,10 @@ class IdeaController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-
         $ideas = match ($request->sort_by) {
             'Like' => Idea::withCount('likes')->orderByDesc('likes_count')->limit(5)->get(),
             'lastestIdeas' => Idea::latest()->limit(5)->get(),
+            'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
             default => $this->ideaService->findAll()
         };
 
