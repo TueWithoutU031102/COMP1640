@@ -1,6 +1,7 @@
-@extends('Goodi.nav_bar')
+@extends('Master.Master')
 
 @section('main')
+    @include('Goodi.nav_bar')
     <style>
         .img li {
             position: absolute;
@@ -41,11 +42,12 @@
                 height: 1100%;
                 width: 1100%;
             }
-            table{
+
+            table {
                 margin-left: 100px
             }
         }
-        }
+
     </style>
 
     <br><br>

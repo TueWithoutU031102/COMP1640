@@ -94,14 +94,6 @@
             <div class="main-content">
                 <section class="idea-action">
                     <script type="text/javascript">
-                        // $(document).ready(function() {
-                        //     $('#sort').on('change', function() {
-                        //         var url = $(this).val();
-                        //         if (url) window.location = url;
-                        //         return false;
-                        //     });
-                        // });
-
                         window.addEventListener('load', () => {
                             const sort = document.querySelector('#sort')
                             sort.addEventListener('change', () => window.location.href = sort.value)
@@ -117,7 +109,7 @@
                         @csrf
                         <select class="form-control" id="sort" name="sort">
                             <option value="{{ Request::url() }}?sort_by=none">---Filter by---</option>
-                            <option value="{{ Request::url() }}?sort_by=Like">Most Like Ideas </option>
+                            <option value="{{ Request::url() }}?sort_by=mostPopular">Most Popular Ideas </option>
                             <option value="{{ Request::url() }}?sort_by=lastestIdeas">Latest Ideas</option>
                             <option value="{{ Request::url() }}?sort_by=lastestComments">Latest Comments</option>
                         </select>

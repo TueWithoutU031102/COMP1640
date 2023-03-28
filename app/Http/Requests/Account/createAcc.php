@@ -25,9 +25,9 @@ class createAcc extends FormRequest
     {
         return [
             'name' => ['required'],
-            'email' => ['email'],
+            'email' => ['email', 'unique:users,email'],
             'password' => ['gt:1'],
-            'phone_number' => ['digits:10', 'starts_with:0'],
+            'phone_number' => ['digits:10', 'starts_with:0' , 'unique:users,phone_number'],
             'DoB' => ['required', 'before_or_equal:today'],
             'image' => ['image', 'required'],
             'role_id' => ['required'],

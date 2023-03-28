@@ -49,7 +49,7 @@ class CategoryController extends Controller
             ->where('department_id', '=', '1')
             ->pluck('count');
         $dataCountIT = $countContributorIT->values();
-        
+
         $countContributorBusiness = Idea::select(DB::raw("COUNT(*) as count"))
             ->join('users', 'ideas.author_id', '=', 'users.id')
             ->where('department_id', '=', '2')

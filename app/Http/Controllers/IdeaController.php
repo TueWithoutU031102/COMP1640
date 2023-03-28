@@ -54,16 +54,18 @@ class IdeaController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-
         $ideas = match ($request->sort_by) {
-            'Like' => Idea::withCount('likes')->orderByDesc('likes_count')->limit(5)->get(),
+            'mostPopular' => Idea::withCount('likes', 'dislikes')->orderByDesc('likes_count', 'dislikes_count')->limit(5)->get(),
             'lastestIdeas' => Idea::latest()->limit(5)->get(),
+            'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
             default => $this->ideaService->findAll()
         };
+
 
         // $sortDislike = Dislike::select(DB::raw("COUNT(idea_id) as count"), 'idea_id')
         //     ->groupBy('idea_id')
         //     ->pluck('idea_id');
+
 
         return view('Goodi/Idea/index', ['listCategories' => $categories, 'ideas' => $ideas]);
     }

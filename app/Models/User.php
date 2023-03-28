@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Enums\UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,8 +48,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function removeImage()
     {
-        if (File::exists(public_path($this->image)))
-            return File::delete(public_path($this->image));
+        if (File::exists(public_path($this->image))) return File::delete(public_path($this->image));
     }
 
     public function role()
@@ -62,22 +63,22 @@ class User extends Authenticatable implements JWTSubject
 
     public function isAdmin(): bool
     {
-        return $this->role_id == '1';
+        return $this->role_id == 1;
     }
 
     public function isStaff(): bool
     {
-        return $this->role_id == '2';
+        return $this->role_id == 2;
     }
 
     public function isQAC(): bool
     {
-        return $this->role_id == '3';
+        return $this->role_id == 3;
     }
 
     public function isQAM(): bool
     {
-        return $this->role_id == '4';
+        return $this->role_id == 4;
     }
 
     public function submissions()

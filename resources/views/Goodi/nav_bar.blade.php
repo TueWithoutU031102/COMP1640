@@ -55,11 +55,13 @@
                         <div class="menu">
                             <ul>
                                 <li><a href="/submission/index">Submissions</a></li>
-                                @if (Auth::user()->id == '1')
+                                @if (Auth::user()->role_id == 1)
                                     <li><a href="/admin/acc">Accounts</a></li>
                                 @endif
                                 <li><a href="/idea/index">Ideas</a></li>
-                                <li><a href="/category/index">Categories</a></li>
+                                @if (Auth::user()->role_id == 4 || Auth::user()->role_id == 1)
+                                    <li><a href="/category/index">Categories</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -100,16 +102,17 @@
 </nav>
 
 <script>
-    function logout(){
+    function logout() {
         console.log("log out!")
         localStorage.setItem('jwt', '');
     }
+
     function menuToggle() {
         const toggleMenu = document.querySelector('.menu');
         toggleMenu.classList.toggle('active')
     }
 
-    document.onclick = function(res){
+    document.onclick = function(res) {
         const resToggleMenu = document.querySelector('.res_menu_pro');
         const proToggleMenu = document.querySelector('.menu_pro');
         if (res.target.closest(".res_profile")) resToggleMenu.classList.toggle('active')

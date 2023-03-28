@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Account;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Models\User;
 
 class updateAcc extends FormRequest
 {
@@ -23,11 +25,14 @@ class updateAcc extends FormRequest
      */
     public function rules()
     {
+
         return [
             'name' => ['required'],
             'DoB' => ['required', 'before_or_equal:today'],
             'role_id' => ['required'],
             'department_id' => ['required'],
+            'email' => ['email'],
+            'phone_number' => ['digits:10', 'starts_with:0'],
         ];
     }
     public function messages()
