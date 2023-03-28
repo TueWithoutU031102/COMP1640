@@ -24,26 +24,15 @@ class IdeaController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::all();
-        if (isset($_GET['sort_by'])) {
-            $sort_by = $_GET['sort_by'];
-            if ($sort_by == 'Like') {
-                $ideas = Idea::withCount('likes')
-                    ->orderByDesc('likes_count')
-                    ->limit(5)
-                    ->get();
-            }
-            if ($sort_by == 'lastestIdeas') {
-                $ideas = Idea::latest()
-                    ->limit(5)
-                    ->get();
-            }
-        } else $ideas = $this->ideaService->findAll();
 
-
-
+        $ideas = match ($request->sort_by) {
+            'Like' => Idea::withCount('likes')->orderByDesc('likes_count')->limit(5)->get(),
+            'lastestIdeas' => Idea::latest()->limit(5)->get(),
+            default => $this->ideaService->findAll()
+        };
 
 
         // $sortDislike = Dislike::select(DB::raw("COUNT(idea_id) as count"), 'idea_id')
@@ -51,9 +40,7 @@ class IdeaController extends Controller
         //     ->pluck('idea_id');
 
 
-        return view('Goodi/Idea/index')
-            ->with('listCategories', $categories)
-            ->with("ideas", $ideas);
+        return view('Goodi/Idea/index', ['listCategories' => $categories, 'ideas' => $ideas]);
     }
 
     public function findIdeasByUserId()

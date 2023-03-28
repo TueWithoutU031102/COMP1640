@@ -94,13 +94,24 @@
             <div class="main-content">
                 <section class="idea-action">
                     <script type="text/javascript">
-                        $(document).ready(function() {
-                            $('#sort').on('change', function() {
-                                var url = $(this).val();
-                                if (url) window.location = url;
-                                return false;
-                            });
-                        });
+                        // $(document).ready(function() {
+                        //     $('#sort').on('change', function() {
+                        //         var url = $(this).val();
+                        //         if (url) window.location = url;
+                        //         return false;
+                        //     });
+                        // });
+
+                        window.addEventListener('load', () => {
+                            const sort = document.querySelector('#sort')
+                            sort.addEventListener('change', () => window.location.href = sort.value)
+
+                            for (const child of sort.children) {
+                                if (child.value === window.location.toString()) {
+                                    child.setAttribute('selected', true)
+                                }
+                            }
+                        })
                     </script>
                     <form>
                         @csrf
