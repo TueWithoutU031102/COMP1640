@@ -1,6 +1,7 @@
-@extends('Goodi.nav_bar')
+@extends('Master.Master')
 
 @section('main')
+    @include('Goodi.nav_bar')
     <br><br>
     <form action="/admin/createAcc" class="create-form" method="POST" enctype="multipart/form-data">
         <h2>Create Account</h2><br><br>

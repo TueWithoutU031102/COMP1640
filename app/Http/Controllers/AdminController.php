@@ -71,25 +71,27 @@ class AdminController extends Controller
 
     public function updateAcc(updateAcc $request)
     {
-
-
         $input = $request->all();
+
 
         $this->validate($request, [
             'email' => [Rule::unique('users')->ignore($request->id)],
             'phone_number' => [Rule::unique('users')->ignore($request->id)]
         ]);
-
-        if ($request->hasFile('image')) $input['image'] = $this->saveImage($request->file('image'));
-
+        //dd(User::find($input['id'])->image);
+        if ($request->hasFile('image') == true) {
+            User::find($request->id)->removeImage();
+            $input['image'] = $this->saveImage($request->file('image'));
+        } else {
+            $input['image'] = User::find($input['id'])->image;
+        }
         if ($request->input('role_id') == '4') $input['department_id'] = NULL;
 
         if ($input['password'] == null) $input['password'] = User::find($input['id'])->password;
         else $input['password'] = Hash::make($request->password);
 
-        $id = $request->id;
-        User::find($id)->removeImage();
-        User::find($id)->update($input);
+        User::find($request->id)->update($input);
+
         return redirect('admin/acc')->with('success', 'Account updated successfully');
     }
 
