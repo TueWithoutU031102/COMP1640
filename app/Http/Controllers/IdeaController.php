@@ -80,7 +80,7 @@ class IdeaController extends Controller
 
         if ($idea->save()) {
             $ideaId = $idea->id;
-            $fileController = new FileController();
+            $fileController = app(FileController::class);
             $fileController->store($request, $ideaId);
             $data = [
                 'from' => $this->currentUser['name'],
