@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class IdeaController extends Controller
@@ -21,7 +22,7 @@ class IdeaController extends Controller
     {
         $categories = Category::all();
         $ideas = match ($request->sort_by) {
-            'Like' => Idea::withCount('likes')->orderByDesc('likes_count')->limit(5)->get(),
+            'mostPopular' => Idea::withCount('likes', 'dislikes')->orderByDesc('likes_count', 'dislikes_count')->limit(5)->get(),
             'lastestIdeas' => Idea::latest()->limit(5)->get(),
             'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
             default => $this->ideaService->findAll()
