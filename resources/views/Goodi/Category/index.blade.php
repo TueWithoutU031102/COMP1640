@@ -1,4 +1,4 @@
-@extends('Goodi.nav_bar')
+@extends('Master.Master')
 
 @section('main')
     <section class="banner">

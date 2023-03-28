@@ -1,6 +1,7 @@
-@extends('Goodi.nav_bar')
+@extends('Master.Master')
 
 @section('main')
+@include('Goodi.nav_bar')
     <style>
         .img li {
             position: absolute;
