@@ -41,17 +41,6 @@ class UserService
             return $token;
         }
     }
-    public function checkDuplicateEmail($email): bool
-    {
-        $checkEmail = DB::table('users')->where('email', '=', $email)->exists();
-        return $checkEmail;
-    }
-
-    public function checkDuplicatePhone($phone)
-    {
-        $checkPhone = DB::table('users')->where('phone_number', '=', $phone)->exists();
-        return $checkPhone;
-    }
     public function save()
     {
     }

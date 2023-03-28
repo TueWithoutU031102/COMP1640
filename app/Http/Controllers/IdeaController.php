@@ -5,16 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
-use App\Models\Like;
-use App\Models\Submission;
-use App\Models\User;
-use App\Services\EmailService;
-use App\Services\IdeaService;
-use App\Services\SubmissionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\Models\Dislike;
 
 
 class IdeaController extends Controller

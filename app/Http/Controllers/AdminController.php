@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Account\createAcc;
 use App\Http\Requests\Account\updateAcc;
 use App\Services\UserService;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -36,12 +37,6 @@ class AdminController extends Controller
     public function createAcc(createAcc $request)
     {
         $user = new User($request->all());
-
-        $checkEmail = $this->userService->checkDuplicateEmail($request->email);
-        if ($checkEmail) return back()->with('checkMail', 'This email already exists');
-
-        $checkPhone = $this->userService->checkDuplicatePhone($request->phone_number);
-        if ($checkPhone) return back()->with('checkPhone', 'This phone already exists');
 
         $user->password = Hash::make($request->password);
 
@@ -76,18 +71,14 @@ class AdminController extends Controller
 
     public function updateAcc(updateAcc $request)
     {
+
+
         $input = $request->all();
 
-        if ($input['email'] == null) $input['email'] = User::find($input['id'])->email;
-        else {
-            $checkEmail = $this->userService->checkDuplicateEmail($request->email);
-            if ($checkEmail) return back()->with('checkMail', 'This email already exists');
-        }
-        if ($input['phone_number'] == null) $input['phone_number'] = User::find($input['id'])->phone_number;
-        else {
-            $checkPhone = $this->userService->checkDuplicatePhone($request->phone_number);
-            if ($checkPhone) return back()->with('checkPhone', 'This phone already exists');
-        }
+        $this->validate($request, [
+            'email' => [Rule::unique('users')->ignore($request->id)],
+            'phone_number' => [Rule::unique('users')->ignore($request->id)]
+        ]);
 
         if ($request->hasFile('image')) $input['image'] = $this->saveImage($request->file('image'));
 
