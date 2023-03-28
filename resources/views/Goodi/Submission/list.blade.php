@@ -45,8 +45,8 @@
                         </div>
                     </form>
                     <div class="btn-idea">
-                        @if (\Illuminate\Support\Facades\Auth::user()->role->name == 'ADMIN')
-                            <button class="add-idea" onclick="formToggle();">+</button>
+                        @if (in_array(Auth::user()->role->name, ['QAM', 'ADMIN']))
+                            <button class="add-idea" onclick="formToggle();">Create submission event</button>
                         @endif
                         {{-- <button class="refresh-idea">Refresh</button> --}}
                     </div>

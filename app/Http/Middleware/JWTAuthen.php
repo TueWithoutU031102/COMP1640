@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Token;
@@ -14,21 +16,36 @@ class JWTAuthen
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return string|null
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->bearerToken() == null){
-            return response()->json(['error' => 'unauthenticated!'], 403);
-        }
+//        if ($request->bearerToken() == null){
+//            return response()->json(['error' => 'unauthenticated!'], 403);
+//        }
         try {
-            $token = new Token( $request->bearerToken());
-            $payload = JWTAuth::decode($token);
-            $user = \App\Models\User::find($payload['sub']);
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+
+            return response()->json(
+                [
+                    'error' => $e->getMessage(),
+                    'token' => $request->bearerToken(),
+                    'code' => $e->getMessage()
+                ], 403);
+
         } catch (TokenInvalidException $e) {
-            // handle the exception here, for example:
-            return response()->json(['error' => 'invalid_token'], 401);
+
+            return response()->json(['error' => 'token_invalid', 'token' => $request->bearerToken()], 403);
+
+        } catch (JWTException $e) {
+
+            return response()->json(['error' => 'token_absent', 'code' => $e->getCode()], 403);
+
         }
         return $next($request);
     }

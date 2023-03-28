@@ -19,22 +19,6 @@ use App\Models\Dislike;
 
 class IdeaController extends Controller
 {
-    protected IdeaService $ideaService;
-    protected EmailService $mailService;
-    protected User $currentUser;
-
-    public function __construct(IdeaService $ideaService, EmailService $mailService)
-    {
-        $this->middleware(function ($request, $next) {
-            if (Auth::check()) {
-                $this->currentUser = Auth::user();
-            }
-            return $next($request);
-        });
-        $this->ideaService = $ideaService;
-        $this->mailService = $mailService;
-    }
-
     /**
      * Display a listing of the resource.
      *

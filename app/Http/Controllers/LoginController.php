@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Token;
+use function Symfony\Component\Translation\t;
 
 class LoginController extends Controller
 {
+
     public function authenticate(Request $request)
     {
         $this->validate($request, [
@@ -17,7 +23,6 @@ class LoginController extends Controller
             'password' => ['gt:1'],
         ]);
         $credentials = $request->only('email', 'password');
-
 
         if (Auth::guard('user')->attempt($credentials)) {
             Auth::attempt($credentials);
@@ -29,28 +34,11 @@ class LoginController extends Controller
         }
     }
 
-    public function generateJWT(Request $request): \Illuminate\Http\JsonResponse
+    public function loginAPI(Request $request): JsonResponse
     {
-        $this->validate($request, [
-            'email' => ['email'],
-            'password' => ['gt:1'],
-        ]);
-        $credentials = $request->only('email', 'password');
-
-        if (!$token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        } else {
-            Auth::attempt($credentials);
-            Session::put('JWT', $token);
-            return response()->json(['token' => $token], 200);
-        }
+        $token = $this->userService->generateJWT($request);
+        $user = $this->userService->findUserByToken($token);
+        return response()->json(['user' => $user, 'token'=>$token], 200);
     }
 
-    public function getCurrentUserFromJWT(Request $request)
-    {
-        $token = new Token( $request->bearerToken());
-        $payload = JWTAuth::decode($token);
-        return response()->json(['payload' => $payload], 200);
-
-    }
 }

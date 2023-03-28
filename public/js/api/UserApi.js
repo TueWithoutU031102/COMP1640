@@ -25,4 +25,23 @@ class UserApi {
             });
         return result;
     }
+    async findUserByJWT(jwt) {
+        let result;
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + jwt
+            },
+        }
+        await window.axios.get('/api/getUserByToken',config)
+            .then(function (response) {
+                const userData = response.data.user
+                result = new UserApi(userData.id, userData.name, userData.email, userData.phone_number,
+                    userData.DoB, userData.image, userData.role_id);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        return result;
+    }
 }

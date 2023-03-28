@@ -96,11 +96,4 @@
         </div>
     </section>
     @include('Goodi.footer')
-    <script>
-        let jwt = document.getElementById('jwt').textContent;
-        if (window.localStorage.getItem('jwt') == '') {
-            console.log('set jwt');
-            window.localStorage.setItem('jwt', jwt);
-        }
-    </script>
 @endsection

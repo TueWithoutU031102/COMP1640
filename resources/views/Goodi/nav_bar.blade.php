@@ -1,4 +1,3 @@
-@extends('Master.Master')
 <nav>
     <div class="nav-logo">
         <a href="/"><img class="logo" src="/css/images/logo_transparent.png"></a>
@@ -86,7 +85,7 @@
                             <ul>
                                 <li><a href="/user/index">My Profile</a></li>
                                 <li><a href="#">Edit Profile</a></li>
-                                <li><a href="{{ route('logout') }}">Logout</a></li>
+                                <li><a href="{{ route('logout') }}" onclick="logout()">Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -101,6 +100,10 @@
 </nav>
 
 <script>
+    function logout(){
+        console.log("log out!")
+        localStorage.setItem('jwt', '');
+    }
     function menuToggle() {
         const toggleMenu = document.querySelector('.menu');
         toggleMenu.classList.toggle('active')
