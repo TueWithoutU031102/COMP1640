@@ -13,7 +13,6 @@ class IdeaApi {
 
     async findCommentsByIdeaId(jwt){
         let result = [];
-        console.log("find comment by idea jwt: ", jwt)
         let config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -31,6 +30,26 @@ class IdeaApi {
                 console.log(error);
             });
         return result;
-    }
+    };
 
+    sentSubmitIdeaNotify(from, submissionId, jwt){
+        let body = {
+            from:from,
+            submissionId:submissionId
+        };
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + jwt
+            },
+        };
+        window.axios.post('/api/send-email-submitIdea', body, config)
+            .then(function (response) {
+                const submitIdeaResponse = response.data;
+                console.log("response send-email-submitIdea: ", submitIdeaResponse);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 }

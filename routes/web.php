@@ -1,15 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthenController;
-use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\IdeaController;
-use App\Http\Controllers\LikeController;
-use Illuminate\Support\Carbon;
 
 /*
 |--------------------------------------------------------------------------

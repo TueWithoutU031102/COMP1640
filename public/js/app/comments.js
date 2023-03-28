@@ -1,16 +1,14 @@
 async function showCommentByIdea(ideaId, commentContentElementId) {
     let ideaService = new IdeaApi(ideaId);
-    let userService = new UserApi();
     let jwt = window.localStorage.getItem('jwt');
     let comments = await ideaService.findCommentsByIdeaId(jwt);
     let commentContentEle = document.getElementById(commentContentElementId);
     let commentContent = '';
-    let commentAuthor = new UserApi();
+    let commentAuthor = JSON.parse(localStorage.getItem('user'));
 
     for (const comment of comments) {
         console.log(comment)
-        let created_at = comment.created_at.slice(0,19);
-        commentAuthor = await userService.findById(comment.author_id);
+        let created_at = comment.created_at.slice(0, 19);
         commentContent += `
         <div class="d-flex flex-start mt-4" style="gap: 10px">
     <img class="rounded-circle"
@@ -79,34 +77,28 @@ async function showCommentByIdea(ideaId, commentContentElementId) {
 </div>
         `
     }
-    console.log('id:', commentContentElementId)
-    console.log(commentContentEle)
     commentContentEle.innerHTML = commentContent;
 };
 
 async function showuser(id) {
     console.log('id:', id)
-    let user = await getUserByid(id);
+    let user = await getUserById(id);
     console.log("show user: ", user)
     let src = '/' + user.image;
     document.getElementById('userEmail').innerHTML = src;
     document.getElementById('userImg').src = src;
 }
 
-async function getUserByid(userID) {
+async function getUserById(userID) {
     let userService = new UserApi();
     return await userService.findById(userID);
 };
 
 async function commentOnIdea(ideaId, userId) {
     let jwt = window.localStorage.getItem('jwt');
-    console.log(ideaId, "|uId - ", userId, "|token - ", jwt)
-
     let commentContent = document.getElementById(commentContentInput_prefix + ideaId).value;
-    console.log("comment: ", commentContent)
-
+    let isAnonymous = document.getElementById(commentAnonymous_prefix + ideaId).checked;
     let commentService = new CommentApi();
-    await commentService.commentOnIdea(ideaId, jwt, commentContent);
-
-    await showCommentByIdea(ideaId, commentContentEleId_prefix+ideaId);
+    commentService.commentOnIdea(ideaId, jwt, commentContent, isAnonymous);
+    await showCommentByIdea(ideaId, commentContentEleId_prefix + ideaId);
 }

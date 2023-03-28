@@ -157,6 +157,9 @@
                         <div class="form-group">
                             <input type="file" id="files" name="files[]" multiple>
                         </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="isAnonymous" name="isAnonymous">
+                        </div>
                         <div class="button-idea">
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit</button>
                         </div>
@@ -231,6 +234,7 @@
                                             style="object-fit: cover; object-position: center center;">
                                         <input type="text" class="form-control" placeholder="Enter your comment..."
                                             id="commentContentInput{{ $idea->id }}">
+                                        <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
                                         <button onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }})">
                                             sent
                                         </button>

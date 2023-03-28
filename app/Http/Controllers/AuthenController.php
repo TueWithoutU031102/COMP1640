@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Services\IdeaService;
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +16,19 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthenController extends Controller
 {
+    protected IdeaService $ideaService;
+    protected User $currentUser;
+
+    public function __construct(IdeaService $ideaService)
+    {
+        $this->ideaService = $ideaService;
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $this->currentUser = Auth::user();
+            }
+            return $next($request);
+        });
+    }
     public function index()
     {
         $listIdeas = $this->ideaService->findIdeasByUserId($this->currentUser);

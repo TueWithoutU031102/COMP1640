@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\CommentService;
 use App\Services\EmailService;
 use App\Services\IdeaService;
 use App\Services\UserService;
@@ -12,46 +13,37 @@ use Illuminate\Support\Facades\Auth;
 
 class EmailController extends Controller
 {
-    protected User $currentUser;
-    protected EmailService $emailService;
     protected UserService $userService;
-
-    public function __construct(EmailService $emailService, UserService $userService)
+    protected EmailService $mailService;
+    public function __construct(UserService  $userService,
+                                EmailService $mailService)
     {
-        $this->middleware(function ($request, $next) {
-            if (Auth::check()) {
-                $this->currentUser = Auth::user();
-            }
-            return $next($request);
-        });
-        $this->emailService = $emailService;
         $this->userService = $userService;
+        $this->mailService = $mailService;
     }
 
-
-    public function sentEmail(Request $request): JsonResponse
+    public function sentIdeaSubmitNotifyEmail(Request $request): JsonResponse
     {
-        $jwt = $request->bearerToken();
         $data = [
-            'from' => $this->userService->findUserByToken($jwt)->name,
-            'submission_id' => 5,
+            'from' => $request->get('from'),
+            'submission_id' => $request->get('submission_id'),
         ];
 
         return response()->json([
-            'message' => $this->emailService->submitIdeaNotify($data),
+            'message' => $this->mailService->submitIdeaNotify($data),
             'data' => $data,
         ], 200);
     }
-    public function sentCommentNotify(Request $request): JsonResponse
+
+    public function sentCommentNotifyEmail(Request $request): JsonResponse
     {
-        $jwt = $request->bearerToken();
         $data = [
-            'from' => $this->userService->findUserByToken($jwt)->name,
-            'idea_id' => 1,
+            'from' => $request->get('from'),
+            'idea_id' => $request->get('idea_id'),
         ];
 
         return response()->json([
-            'message' => $this->emailService->commentNotify($data),
+            'message' => $this->mailService->commentNotify($data),
             'data' => $data,
         ], 200);
     }

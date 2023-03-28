@@ -24,9 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('csrfToken', [AuthenController::class, 'getCsrfToken'])->name('api.csrfToken');
 
-Route::post('/send-email', [EmailController::class, 'sentEmail'])->middleware('authJWT');
-Route::post('/send-email-comment', [EmailController::class, 'sentCommentNotify'])->middleware('authJWT');
-
 
 Route::group([], function () {
     // ... other routes ...
@@ -39,4 +36,8 @@ Route::group([], function () {
 Route::group([], function () {
     // ... other routes ...
     require __DIR__ . '/api/authRoutes.php';
+});
+Route::group([], function () {
+    // ... other routes ...
+    require __DIR__ . '/api/emailRoutes.php';
 });
