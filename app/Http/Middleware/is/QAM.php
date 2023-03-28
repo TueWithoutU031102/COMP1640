@@ -4,7 +4,6 @@ namespace App\Http\Middleware\is;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 
 class QAM
@@ -18,8 +17,6 @@ class QAM
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user(); // lay thong tin khi dang nhap
-        $route = $request->route()->getName();
         if (!($request->user()->isQAM() || $request->user()->isAdmin($request)))
             return redirect()->route("forbidden");
         return $next($request);
