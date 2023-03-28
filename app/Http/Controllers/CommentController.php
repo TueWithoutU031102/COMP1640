@@ -16,23 +16,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CommentController extends Controller
 {
-    protected IdeaService $ideaService;
-    protected CommentService $commentService;
-    protected EmailService $mailService;
-    protected User $currentUser;
-
-    public function __construct(IdeaService $ideaService, CommentService $commentService, EmailService $mailService)
-    {
-        $this->middleware(function ($request, $next) {
-            if (Auth::check()) {
-                $this->currentUser = Auth::user();
-            }
-            return $next($request);
-        });
-        $this->commentService = $commentService;
-        $this->ideaService = $ideaService;
-        $this->mailService = $mailService;
-    }
 
     /**
      * Display a listing of the resource.
