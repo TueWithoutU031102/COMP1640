@@ -33,9 +33,12 @@
         <div class="profile-container">
             <div class="left-profile" style="background: #b0b0b048">
                 <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>{{ Auth::user()->email }}</p>
-                <p><i class="fa-solid fa-phone"></i> <span>Phone Number: </span>{{ Auth::user()->phonenumber }}</p>
+                <p><i class="fa-solid fa-phone"></i> <span>Phone Number: </span>{{ Auth::user()->phone_number }}</p>
                 <p><i class="fa-solid fa-calendar-days"></i> <span>DOB: </span>{{ Auth::user()->DoB }}</p>
-                <p><i class="fa-solid fa-building"></i> <span>Department </span>IT Department</p>
+                <p><i class="fa-solid fa-building"></i>
+                    <span>Department:
+                    </span>{{ App\Models\Department::where('id', Auth::user()->department_id)->value('name') }}
+                </p>
             </div>
             <div class="right-profile">
                 <div class="post-container">

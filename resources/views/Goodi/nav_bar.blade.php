@@ -34,7 +34,7 @@
                         <p>{{ Auth::user()->role->name }}</p>
                     </div>
                     <ul>
-                        <li><a href="/user/index">My Profile</a></li>
+                        <li><a href="/index">My Profile</a></li>
                         <li><a href="#">Edit Profile</a></li>
                         <li><a href="{{ route('logout') }}">Logout</a></li>
                     </ul>
@@ -46,26 +46,16 @@
                 <a href="/"><img class="logo" src="/css/images/logo_transparent.png"></a>
             </div>
             <ul style="display: flex;">
-                <li><a href="/forum">FORUM</a></li>
-                <li>
-                    <div class="action">
-                        <div onclick="menuToggle();">
-                            <a style="cursor: default">MENU</a>
-                        </div>
-                        <div class="menu">
-                            <ul>
-                                <li><a href="/submission/index">Submissions</a></li>
-                                @if (Auth::user()->role_id == 1)
-                                    <li><a href="/admin/acc">Accounts</a></li>
-                                @endif
-                                <li><a href="/idea/index">Ideas</a></li>
-                                @if (Auth::user()->role_id == 4 || Auth::user()->role_id == 1)
-                                    <li><a href="/category/index">Categories</a></li>
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-                </li>
+                <li><a href="/idea/index">FORUM</a></li>
+                @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                    <li><a href="/submission/index">EVENT</a></li>
+                @endif
+                @if (Auth::user()->role_id == 1)
+                    <li><a href="/admin/acc">ACCOUNT</a></li>
+                @endif
+                @if (Auth::user()->role_id == 4)
+                    <li><a href="/category/index">CATEGORY</a></li>
+                @endif
                 <li><a href="/about">ABOUT</a></li>
                 <li><a href="/department">DEPARTMENT</a></li>
                 <li>
@@ -85,7 +75,7 @@
                                 <p>{{ Auth::user()->role->name }}</p>
                             </div>
                             <ul>
-                                <li><a href="/user/index">My Profile</a></li>
+                                <li><a href="/index">My Profile</a></li>
                                 <li><a href="#">Edit Profile</a></li>
                                 <li><a href="{{ route('logout') }}" onclick="logout()">Logout</a></li>
                             </ul>
@@ -95,11 +85,12 @@
                 <li><a href="/FAQ">FAQs</a></li>
             </ul>
         </div>
-        <div class="home-btn">
-            <a href="#"><i class="fa-solid fa-angles-up"></i></a>
-        </div>
     @endif
 </nav>
+
+<div class="home-btn">
+    <a href="#"><i class="fa-solid fa-angles-up"></i></a>
+</div>
 
 <script>
     function logout() {
@@ -107,10 +98,10 @@
         localStorage.setItem('jwt', '');
     }
 
-    function menuToggle() {
-        const toggleMenu = document.querySelector('.menu');
-        toggleMenu.classList.toggle('active')
-    }
+    // function menuToggle() {
+    //     const toggleMenu = document.querySelector('.menu');
+    //     toggleMenu.classList.toggle('active')
+    // }
 
     document.onclick = function(res) {
         const resToggleMenu = document.querySelector('.res_menu_pro');
@@ -128,4 +119,9 @@
         bar.classList.toggle('active')
         menu.classList.toggle('active')
     }
+
+    window.addEventListener('scroll', function() {
+        var nav = document.querySelector("nav");
+        nav.classList.toggle("sticky", window.scrollY > 0);
+    })
 </script>

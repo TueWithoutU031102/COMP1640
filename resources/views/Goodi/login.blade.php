@@ -50,8 +50,8 @@
                 password: $("#password").val()
             }
             console.log(data)
-            window.axios.post('/api/login', data)
-                .then(function(response) {
+             window.axios.post('/api/login', data)
+                .then(function (response) {
                     localStorage.setItem('jwt', response.data.token)
                     localStorage.setItem('user', JSON.stringify(response.data.user))
                 })

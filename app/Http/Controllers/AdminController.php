@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Account\createAcc;
 use App\Http\Requests\Account\updateAcc;
-use App\Services\UserService;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -55,7 +54,7 @@ class AdminController extends Controller
         if ($id == 1) return redirect('admin/acc')->with('success', 'You must not see this Account');
         $account = User::find($id);
         $nameDepart = Department::find(User::find($id)->department_id);
-        return view('Goodi/Account/showAcc')->with('account', $account)->with('nameDepart', $nameDepart);
+        return view('Goodi/Account/showAcc', ['account' => $account, 'nameDepart' => $nameDepart]);
     }
 
     public function showFormEditAccount($id)
