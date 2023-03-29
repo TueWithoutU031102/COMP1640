@@ -28,13 +28,18 @@
 nav {
     width: 100%;
     display: flex;
-    background: rgba(255, 255, 255, 0.347);
+    background: rgba(255, 255, 255, 0.125);
     padding: 0px 40px;
     justify-content: space-between;
     align-items: center;
     position: fixed;
     top: 0;
     z-index: 100;
+    transition: 0.5s;
+}
+
+nav.sticky{
+    background: rgba(255, 255, 255, 0.825);
 }
 
 .logo {
