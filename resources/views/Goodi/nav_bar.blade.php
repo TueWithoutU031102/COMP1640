@@ -111,12 +111,12 @@
         else proToggleMenu.classList.remove('active')
     }
 
-    // function menuDisplay() {
-    //     const bar = document.querySelector('.menu_bar');
-    //     const menu = document.querySelector('.black-nav-link');
-    //     bar.classList.toggle('active')
-    //     menu.classList.toggle('active')
-    // }
+    function menuDisplay() {
+        const bar = document.querySelector('.menu_bar');
+        const menu = document.querySelector('.black-nav-link');
+        bar.classList.toggle('active')
+        menu.classList.toggle('active')
+    }
 
     window.addEventListener('scroll', function() {
         var nav = document.querySelector("nav");
