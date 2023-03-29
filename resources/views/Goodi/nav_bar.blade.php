@@ -34,7 +34,7 @@
                         <p>{{ Auth::user()->role->name }}</p>
                     </div>
                     <ul>
-                        <li><a href="/user/index">My Profile</a></li>
+                        <li><a href="/index">My Profile</a></li>
                         <li><a href="#">Edit Profile</a></li>
                         <li><a href="{{ route('logout') }}">Logout</a></li>
                     </ul>
@@ -47,8 +47,10 @@
             </div>
             <ul style="display: flex;">
                 <li><a href="/idea/index">FORUM</a></li>
-                @if (Auth::user()->role_id == 1)
+                @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                     <li><a href="/submission/index">EVENT</a></li>
+                @endif
+                @if (Auth::user()->role_id == 1)
                     <li><a href="/admin/acc">ACCOUNT</a></li>
                 @endif
                 @if (Auth::user()->role_id == 4)
@@ -73,7 +75,7 @@
                                 <p>{{ Auth::user()->role->name }}</p>
                             </div>
                             <ul>
-                                <li><a href="/user/index">My Profile</a></li>
+                                <li><a href="/index">My Profile</a></li>
                                 <li><a href="#">Edit Profile</a></li>
                                 <li><a href="{{ route('logout') }}" onclick="logout()">Logout</a></li>
                             </ul>

@@ -10,6 +10,25 @@
             <br>
         </div>
     </section><br><br>
+    <div class="Our-history">
+        <div class="history-content">
+            <h3>Our History</h3>
+            <p>
+                We began collaborating on a project as a group of Greenwich School Vietnam students, and from there we
+                decided to create both our own product and the school's application. With the intention of creating a forum
+                page where school staff members can interact and share their own personal contributions and ideas for making
+                the school even more successful than it already is. It is also a location where new employees can work
+                without experiencing difficulty transitioning to the work environment. Goodi was established as a direct
+                result of this.
+            </p><br>
+            <p>
+                Goodi is currently being integrated into the Vietnamese university network to make it more accessible to
+                employees. Goodi has already been implemented within the university. Such as providing support for the
+                institution and its employees' working environment. In addition, Goodi intends to make an effort in the near
+                future to establish a second forum dedicated solely to the business network.
+            </p>
+        </div>
+    </div>
     <div class="about-card">
         <div class="about-content">
             <h3>General introduction</h3>
@@ -53,7 +72,7 @@
 
     <script>
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) =>{
+            entries.forEach((entry) => {
                 console.log(entry)
                 if (entry.isIntersecting) {
                     entry.target.classList.add('show');
