@@ -22,7 +22,7 @@
             <div class="cate_list">
                 <div class="imp-link">
                     <a type="button" href="/category/create" class="btn btn-success"
-                        style="font-weight: bold; font-size: 20px; text-align:center; color: #white;">Create New
+                        style="font-weight: bold; font-size: 20px; text-align:center; color: white;">Create New
                         Category</a>
                     <div class="category">
                         <p>Category</p>
@@ -33,14 +33,14 @@
                                 </a>
                                 <a href="/category/edit/{{ $category->id }}" title="Edit Account"><button
                                         class="btn btn-primary btn-sm"><i aria-hidden="true"><i
-                                                class="fa-solid fa-pen"></i></button>
+                                                class="fa-solid fa-pen"></i></i></button>
                                 </a>
                                 <form action="/category/delete/{{ $category->id }}" method="POST" class="d-inline"
                                     style="margin-right: 10px"
                                     onsubmit="return confirm('Are you sure to delete {{ $category->title }} !!!???')">
                                     @csrf
                                     <button class="btn btn-danger btn-sm"><i aria-hidden="true"><i
-                                                class="fa-solid fa-trash"></i></button>
+                                                class="fa-solid fa-trash"></i></i></button>
                                 </form>
                             </div>
                             <br>

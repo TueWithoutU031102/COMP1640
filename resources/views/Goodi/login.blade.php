@@ -23,12 +23,12 @@
                     </div>
                 @endif
                 <div class="input_box">
-                    <input type="text" id="email" name="email" required="required">
+                    <input type="text" id="email" name="email">
                     <span>Email</span>
                     <i></i>
                 </div>
                 <div class="input_box">
-                    <input type="password" id="password" name="password" required="required">
+                    <input type="password" id="password" name="password">
                     <span>Password</span>
                     <i></i>
                 </div>
@@ -50,12 +50,12 @@
                 password: $("#password").val()
             }
             console.log(data)
-            window.axios.post('/api/login', data)
+             window.axios.post('/api/login', data)
                 .then(function (response) {
                     localStorage.setItem('jwt', response.data.token)
                     localStorage.setItem('user', JSON.stringify(response.data.user))
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.log(error);
                 });
         }

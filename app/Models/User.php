@@ -48,8 +48,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function removeImage()
     {
-        if (File::exists(public_path($this->image)))
-            return File::delete(public_path($this->image));
+        if (File::exists(public_path($this->image))) return File::delete(public_path($this->image));
     }
 
     public function role()

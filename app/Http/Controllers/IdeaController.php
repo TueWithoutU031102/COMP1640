@@ -5,12 +5,47 @@ namespace App\Http\Controllers;
 use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
+use App\Models\Like;
+use App\Models\Submission;
+use App\Models\User;
+use App\Services\CommentService;
+use App\Services\EmailService;
+use App\Services\IdeaService;
+use App\Services\SubmissionService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Dislike;
 
 
 class IdeaController extends Controller
 {
+    protected UserService $userService;
+    protected IdeaService $ideaService;
+    protected EmailService $mailService;
+    protected CommentService $commentService;
+
+
+    protected User $currentUser;
+
+    public function __construct(UserService  $userService,
+                                EmailService $mailService,
+                                IdeaService  $ideaService,
+                                CommentService $commentService)
+    {
+        $this->userService = $userService;
+        $this->ideaService = $ideaService;
+        $this->mailService = $mailService;
+        $this->commentService = $commentService;
+
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $this->currentUser = Auth::user();
+            }
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,10 +54,10 @@ class IdeaController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-
         $ideas = match ($request->sort_by) {
-            'Like' => Idea::withCount('likes')->orderByDesc('likes_count')->limit(5)->get(),
+            'mostPopular' => Idea::withCount('likes', 'dislikes')->orderByDesc('likes_count', 'dislikes_count')->limit(5)->get(),
             'lastestIdeas' => Idea::latest()->limit(5)->get(),
+            'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
             default => $this->ideaService->findAll()
         };
 
@@ -72,13 +107,8 @@ class IdeaController extends Controller
 
         if ($idea->save()) {
             $ideaId = $idea->id;
-            $fileController = app(FileController::class);
+            $fileController = new FileController();
             $fileController->store($request, $ideaId);
-            $data = [
-                'from' => $this->currentUser['name'],
-                'submission_id' => $idea['submission_id'],
-            ];
-            $this->mailService->submitIdeaNotify($data);
             return redirect(route("showSpecifiedSubmission", ['id' => $request->submission_id]))->with('message', 'Submit idea successfully');
         };
         return redirect()->back()->with('message', 'Submit idea fail!');

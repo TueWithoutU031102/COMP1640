@@ -94,14 +94,6 @@
             <div class="main-content">
                 <section class="idea-action">
                     <script type="text/javascript">
-                        // $(document).ready(function() {
-                        //     $('#sort').on('change', function() {
-                        //         var url = $(this).val();
-                        //         if (url) window.location = url;
-                        //         return false;
-                        //     });
-                        // });
-
                         window.addEventListener('load', () => {
                             const sort = document.querySelector('#sort')
                             sort.addEventListener('change', () => window.location.href = sort.value)
@@ -117,7 +109,7 @@
                         @csrf
                         <select class="form-control" id="sort" name="sort">
                             <option value="{{ Request::url() }}?sort_by=none">---Filter by---</option>
-                            <option value="{{ Request::url() }}?sort_by=Like">Most Like Ideas </option>
+                            <option value="{{ Request::url() }}?sort_by=mostPopular">Most Popular Ideas </option>
                             <option value="{{ Request::url() }}?sort_by=lastestIdeas">Latest Ideas</option>
                             <option value="{{ Request::url() }}?sort_by=lastestComments">Latest Comments</option>
                         </select>
@@ -156,6 +148,9 @@
                         </div>
                         <div class="form-group">
                             <input type="file" id="files" name="files[]" multiple>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="isAnonymous" name="isAnonymous">
                         </div>
                         <div class="button-idea">
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit</button>
@@ -231,6 +226,7 @@
                                             style="object-fit: cover; object-position: center center;">
                                         <input type="text" class="form-control" placeholder="Enter your comment..."
                                             id="commentContentInput{{ $idea->id }}">
+                                        <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
                                         <button onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }})">
                                             sent
                                         </button>

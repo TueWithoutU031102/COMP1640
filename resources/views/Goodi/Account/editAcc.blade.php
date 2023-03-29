@@ -1,16 +1,11 @@
-@extends('Goodi.nav_bar')
+@extends('Master.Master')
 
 @section('main')
+    @include('Goodi.nav_bar')
     <br><br>
     <form action="/admin/editAcc/{id}" class="create-form" method="POST" enctype="multipart/form-data">
         <h2>Edit Account</h2><br><br>
         @csrf
-        @if (Session::has('checkMail'))
-            <div class="alert alert-danger" role="alert"><strong>{{ Session::get('checkMail') }}</strong></div>
-        @endif
-        @if (Session::has('checkPhone'))
-            <div class="alert alert-danger" role="alert"><strong>{{ Session::get('checkPhone') }}</strong></div>
-        @endif
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -28,7 +23,7 @@
         </div>
         <div class="form-group">
             <label for="email" class="font-weight-bold">Email address</label>
-            <input type="email" name="email" class="form-control" id="email" aria-describedby="email">
+            <input type="email" value="{{ $account->email }}" name="email" class="form-control" id="email" aria-describedby="email">
         </div>
         <div class="form-group">
             <label for="password" class="font-weight-bold">Password</label>
@@ -36,7 +31,7 @@
         </div>
         <div class="form-group">
             <label for="phone_number" class="font-weight-bold">Phone Number</label>
-            <input type="text" name="phone_number" class="form-control" id="phone_number">
+            <input type="text" value="{{ $account->phone_number }}" name="phone_number" class="form-control" id="phone_number">
         </div>
         <div class="form-group">
             <label for="DoB" class="font-weight-bold">Date of Birth</label>

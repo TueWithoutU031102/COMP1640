@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,12 @@ use function Symfony\Component\Translation\t;
 
 class LoginController extends Controller
 {
+
+    private UserService $userService;
+    public function __construct(UserService $userService)
+    {
+        $this->userService=$userService;
+    }
 
     public function authenticate(Request $request)
     {
