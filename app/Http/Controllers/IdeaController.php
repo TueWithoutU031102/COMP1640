@@ -13,6 +13,7 @@ use App\Services\EmailService;
 use App\Services\IdeaService;
 use App\Services\SubmissionService;
 use App\Services\UserService;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,9 +30,9 @@ class IdeaController extends Controller
 
     protected User $currentUser;
 
-    public function __construct(UserService  $userService,
-                                EmailService $mailService,
-                                IdeaService  $ideaService,
+    public function __construct(UserService    $userService,
+                                EmailService   $mailService,
+                                IdeaService    $ideaService,
                                 CommentService $commentService)
     {
         $this->userService = $userService;
@@ -46,6 +47,7 @@ class IdeaController extends Controller
             return $next($request);
         });
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -159,8 +161,45 @@ class IdeaController extends Controller
         //
     }
 
-    public function download()
+    public function downloadData(): Response
     {
-        return view('Goodi/Idea/show');
+        $results = Idea::withCount(['likes', 'dislikes', 'comments'])
+            ->with(['category', 'submission', 'author'])
+            ->get(['id', 'title', 'description', 'category_id', 'submission_id', 'author_id', 'created_at']);
+
+        $filename = 'ideas.csv'; // Name of the CSV file
+
+// Convert the $results to an array
+        $data = $results->toArray();
+
+// Create a new file handle and write the CSV headers
+        $handle = fopen('php://temp', 'w');
+        fputcsv($handle, [
+            'ID', 'Title', 'Description', 'Category', 'Submission', 'Author', 'Likes', 'Dislikes', 'Comments', 'Created At'
+        ]);
+
+// Loop through the $data array and write each row to the CSV file
+        foreach ($data as $row) {
+            fputcsv($handle, [
+                $row['id'], $row['title'], $row['description'],
+                $row['category']['title'], $row['submission']['title'], $row['author']['name'],
+                $row['likes_count'], $row['dislikes_count'], $row['comments_count'], $row['created_at']
+            ]);
+        }
+
+// Reset the file pointer
+        rewind($handle);
+
+// Create a new response with the CSV file data
+        $response = new Response(stream_get_contents($handle), 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '";',
+        ]);
+
+// Close the file handle
+        fclose($handle);
+
+// Return the response to download the CSV file
+        return $response;
     }
 }
