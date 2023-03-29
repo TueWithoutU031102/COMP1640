@@ -34,6 +34,11 @@ Route::get('/about', function () {
     return view('Goodi.about');
 });
 
+Route::get('/FAQ', function () {
+    return view('Goodi.faq');
+});
+
+
 Route::get('/login', function () {
     return view('Goodi.login');
 })->name('user.login');
