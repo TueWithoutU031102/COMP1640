@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('csrfToken', [AuthenController::class, 'getCsrfToken'])->name('api.csrfToken');
+Route::get('downloadData', [IdeaController::class, 'downloadData'])->name('api.downloadData');
 
 
 Route::group([], function () {
