@@ -29,12 +29,6 @@ class AuthenController extends Controller
             return $next($request);
         });
     }
-    public function index()
-    {
-        $listIdeas = $this->ideaService->findIdeasByUserId($this->currentUser);
-        return view('Goodi/User/index')
-            ->with('listIdeas', $listIdeas);
-    }
 
     public function findUserById($userId): JsonResponse
     {
