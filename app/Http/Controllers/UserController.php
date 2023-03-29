@@ -28,4 +28,6 @@ class UserController extends Controller
         return view('Goodi/User/index')
             ->with('listIdeas', $listIdeas);
     }
+
+    
 }
