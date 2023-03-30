@@ -5,19 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
-use App\Models\Like;
-use App\Models\Submission;
 use App\Models\User;
+use App\Models\Comment;
 use App\Services\CommentService;
 use App\Services\EmailService;
 use App\Services\IdeaService;
-use App\Services\SubmissionService;
 use App\Services\UserService;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\Models\Dislike;
 
 
 class IdeaController extends Controller
@@ -30,11 +26,12 @@ class IdeaController extends Controller
 
     protected User $currentUser;
 
-    public function __construct(UserService    $userService,
-                                EmailService   $mailService,
-                                IdeaService    $ideaService,
-                                CommentService $commentService)
-    {
+    public function __construct(
+        UserService    $userService,
+        EmailService   $mailService,
+        IdeaService    $ideaService,
+        CommentService $commentService
+    ) {
         $this->userService = $userService;
         $this->ideaService = $ideaService;
         $this->mailService = $mailService;
@@ -169,16 +166,16 @@ class IdeaController extends Controller
 
         $filename = 'ideas.csv'; // Name of the CSV file
 
-// Convert the $results to an array
+        // Convert the $results to an array
         $data = $results->toArray();
 
-// Create a new file handle and write the CSV headers
+        // Create a new file handle and write the CSV headers
         $handle = fopen('php://temp', 'w');
         fputcsv($handle, [
             'ID', 'Title', 'Description', 'Category', 'Submission', 'Author', 'Likes', 'Dislikes', 'Comments', 'Created At'
         ]);
 
-// Loop through the $data array and write each row to the CSV file
+        // Loop through the $data array and write each row to the CSV file
         foreach ($data as $row) {
             fputcsv($handle, [
                 $row['id'], $row['title'], $row['description'],
@@ -187,19 +184,19 @@ class IdeaController extends Controller
             ]);
         }
 
-// Reset the file pointer
+        // Reset the file pointer
         rewind($handle);
 
-// Create a new response with the CSV file data
+        // Create a new response with the CSV file data
         $response = new Response(stream_get_contents($handle), 200, [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment; filename="' . $filename . '";',
         ]);
 
-// Close the file handle
+        // Close the file handle
         fclose($handle);
 
-// Return the response to download the CSV file
+        // Return the response to download the CSV file
         return $response;
     }
 }
