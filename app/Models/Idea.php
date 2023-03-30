@@ -15,6 +15,8 @@ class Idea extends Model
     protected $fillable = [
         'title',
         'description',
+        'views',
+        'isAnonymous',
         'submission_id',
         'category_id',
         'author_id',

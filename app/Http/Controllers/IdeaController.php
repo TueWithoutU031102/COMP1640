@@ -31,7 +31,8 @@ class IdeaController extends Controller
         EmailService   $mailService,
         IdeaService    $ideaService,
         CommentService $commentService
-    ) {
+    )
+    {
         $this->userService = $userService;
         $this->ideaService = $ideaService;
         $this->mailService = $mailService;
@@ -117,11 +118,15 @@ class IdeaController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Idea $idea
-     * @return \Illuminate\Http\Response
+     * @return
      */
-    public function show(Idea $idea)
+    public function show($id)
     {
-        //
+        $idea = $this->ideaService->findById($id);
+        $idea->views +=1;
+        $idea->save();
+        return view('Goodi/Idea/show')
+            ->with('idea', $idea);
     }
 
     /**
@@ -163,11 +168,8 @@ class IdeaController extends Controller
         $results = Idea::withCount(['likes', 'dislikes', 'comments'])
             ->with(['category', 'submission', 'author'])
             ->get(['id', 'title', 'description', 'category_id', 'submission_id', 'author_id', 'created_at']);
-
-        $filename = 'ideas.csv'; // Name of the CSV file
-
-        // Convert the $results to an array
         $data = $results->toArray();
+        $filename = 'ideas.csv';
 
         // Create a new file handle and write the CSV headers
         $handle = fopen('php://temp', 'w');
@@ -175,7 +177,6 @@ class IdeaController extends Controller
             'ID', 'Title', 'Description', 'Category', 'Submission', 'Author', 'Likes', 'Dislikes', 'Comments', 'Created At'
         ]);
 
-        // Loop through the $data array and write each row to the CSV file
         foreach ($data as $row) {
             fputcsv($handle, [
                 $row['id'], $row['title'], $row['description'],
@@ -183,7 +184,6 @@ class IdeaController extends Controller
                 $row['likes_count'], $row['dislikes_count'], $row['comments_count'], $row['created_at']
             ]);
         }
-
         // Reset the file pointer
         rewind($handle);
 
@@ -192,11 +192,8 @@ class IdeaController extends Controller
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment; filename="' . $filename . '";',
         ]);
-
-        // Close the file handle
         fclose($handle);
 
-        // Return the response to download the CSV file
         return $response;
     }
 }
