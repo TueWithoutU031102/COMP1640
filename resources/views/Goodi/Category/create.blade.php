@@ -1,6 +1,7 @@
-@extends('Goodi.nav_bar')
+@extends('Master.Master')
 
 @section('main')
+@include('Goodi.nav_bar')
     <br><br>
     <form action="/category/create" class="create-form" method="POST">
         <h2>Create Category</h2><br><br>
