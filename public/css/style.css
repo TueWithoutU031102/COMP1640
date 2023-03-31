@@ -1066,9 +1066,27 @@ footer {
 
 .about-content h3{
     font-weight: bold;
+    color: #ff9900;
 }
 
 .about-card img{
+    width: 700px;
+}
+
+.our-history{
+    display: flex;
+    margin-left: 200px;
+    justify-content: space-evenly;
+}
+
+.history-header h3{
+    font-size: 50px;
+    font-weight: bold;
+    color: #ff9900;
+    border-bottom: 5px solid #ff9900;
+}
+
+.history-content{
     width: 700px;
 }
 
@@ -1180,6 +1198,46 @@ footer {
     font-size: 1rem;
     font-weight: 300;
     margin: 2em 0;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+}
+
+.modify-profile button{
+    border: none;
+    outline: none;
+}
+
+.modal-header{
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.modal-header .title{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.modal-header .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
 }
 
 /* 25% */
