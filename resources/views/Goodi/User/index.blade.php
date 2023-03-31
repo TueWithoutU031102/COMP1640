@@ -24,30 +24,63 @@
             </div>
         </div>
         <div class="modify-profile">
-            <button>
-                <i class="fa-solid fa-gear fa-2xl"></i>
-            </button>
-            <div class="modal" id="modal">
-                <div class="modal-header">
-                    <div class="title">Example</div>
-                    <button class="close-button">&times;</button>
-                </div>
-                <div class="modal-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis eleifend felis, non
-                    elementum
-                    dolor tristique accumsan. Sed volutpat, sem in suscipit viverra, purus metus malesuada metus, in
-                    fringilla enim metus vitae quam. Sed sagittis, erat auctor finibus scelerisque, risus nisl dictum
-                    risus,
-                    vel sodales ante sapien eget justo. Quisque fringilla placerat sem tempor lobortis. Interdum et
-                    malesuada fames ac ante ipsum primis in faucibus. Aliquam ultricies non quam ac efficitur.
-                    Vestibulum
-                    ornare magna dolor, vel mollis risus vestibulum eget. Integer lectus nisi, bibendum at dictum vitae,
-                    elementum at mi. Pellentesque tempor lacus in quam gravida dignissim. Sed vel metus sapien. Donec
-                    vehicula lorem placerat est aliquet tempus. Aenean elit dolor, dignissim et metus non, luctus
-                    ullamcorper est. Praesent vehicula accumsan lorem ut luctus.
-                </div>
+            <button id="button"><i class="fa-solid fa-gear fa-2xl"></i></button>
+        </div>
+    </section>
+    <section>
+        <div class="popup">
+            <div class="popup-content">
+                <button class="close">&times;</button>
+                <form action="" class="create-form" method="POST" enctype="multipart/form-data">
+                    <h2>Account Setting</h2><br><br>
+                    @csrf
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <input type="hidden" name="id" value="" name="id" class="form-control"
+                        id="id">
+                    <div class="form-group">
+                        <label for="name" class="font-weight-bold">Name</label>
+                        <input type="text" value="" name="name" class="form-control"
+                            id="name" aria-describedby="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="font-weight-bold">Email address</label>
+                        <input type="email" value="" name="email" class="form-control"
+                            id="email" aria-describedby="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="font-weight-bold">Password</label>
+                        <input type="password" name="password" class="form-control" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number" class="font-weight-bold">Phone Number</label>
+                        <input type="text" value="" name="phone_number" class="form-control"
+                            id="phone_number">
+                    </div>
+                    <div class="form-group">
+                        <label for="DoB" class="font-weight-bold">Date of Birth</label>
+                        <input type="date" value="" name="DoB" class="form-control"
+                            id="DoB">
+                    </div>
+                    <div class="form-group">
+                        <label for="image" class="font-weight-bold">Image</label>
+                        <div style="display: flex">
+                            <input type="file" value="" name="image" class="form-control"
+                                id="image"><br>
+                            <img style="width:100%; object-fit: cover; object-position: center center; height: 100px; width: 100px;;"
+                                src="">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
             </div>
-            <div id="overlay"></div>
         </div>
     </section>
     <section class="profile-content">
@@ -63,7 +96,7 @@
             </div>
             <div class="right-profile">
                 <div class="post-container">
-                    {{-- <div class="user-detail">
+            {{-- <div class="user-detail">
                         <img src="" width="50" height="50" class="rounded-circle" alt=""
                             style="object-fit: cover; object-position: center center;">
                         <div class="post-content">
@@ -77,7 +110,7 @@
                             <p class="des">{{ $idea->description }}</p>
                             <label for="view{{ $idea->id }}">View More</label>
                         </div> --}}
-                </div>
+            {{-- </div>
                 <div class="idea-interact">
                     <br>
                     @foreach ($listIdeas as $idea)
@@ -86,8 +119,8 @@
                                 <h1>{{ $idea->title }}</h1>
                             </li>
                         </ul>
-                    @endforeach
-                    {{-- @if (!$idea->likedBy(auth()->user()))
+                    @endforeach --}}
+            {{-- @if (!$idea->likedBy(auth()->user()))
                             <form action="{{ route('postLike', $idea->id) }}" method="POST">
                                 @csrf
                                 <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
@@ -114,10 +147,20 @@
                             </form>
                         @endif
                         <h6>{{ $idea->dislikes->count() }}</h6> --}}
-                </div>
+            </div>
             </div>
         </div>
         </div>
     </section>
     @include('Goodi.footer')
+
+    <script>
+        document.getElementById("button").addEventListener("click", function() {
+            document.querySelector(".popup").style.display = "flex";
+        })
+
+        document.querySelector(".close").addEventListener("click", function() {
+            document.querySelector(".popup").style.display = "none";
+        })
+    </script>
 @endsection
