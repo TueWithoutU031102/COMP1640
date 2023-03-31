@@ -100,11 +100,22 @@ async function getUserById(userID) {
     return await userService.findById(userID);
 };
 
-async function commentOnIdea(ideaId, userId) {
+async function commentOnIdea(ideaId, userId, commentContentInput_Id) {
     let jwt = window.localStorage.getItem('jwt');
-    let commentContent = document.getElementById(commentContentInput_prefix + ideaId).value;
+    let commentInput = document.getElementById(commentContentInput_Id);
     let isAnonymous = document.getElementById(commentAnonymous_prefix + ideaId).checked;
     let commentService = new CommentApi();
-    commentService.commentOnIdea(ideaId, jwt, commentContent, isAnonymous);
+
+    if (commentInput.value == ''){
+        alert('comment empty!');
+        return;
+    }
+
+    commentService.commentOnIdea(ideaId, jwt, commentInput.value, isAnonymous);
+    commentInput.value = '';
     await showCommentByIdea(ideaId, commentContentEleId_prefix + ideaId);
+
+    let name = JSON.parse(localStorage.getItem('user')).name;
+    if (isAnonymous) name = 'Someone'
+    commentService.sentNotify(name, ideaId, jwt);
 }

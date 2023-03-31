@@ -28,12 +28,12 @@ return new class extends Migration {
 
         DB::table('categories')->insert([
                 [
-                    'title' => 'CAT1',
+                    'title' => 'CAT2',
                     'description' => 'Cat1',
                     'author_id' => 3
                 ],
                 [
-                    'title' => 'CAT1',
+                    'title' => 'CAT3',
                     'description' => 'Cat1',
                     'author_id' => 3
                 ],

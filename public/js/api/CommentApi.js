@@ -29,7 +29,6 @@ class CommentApi {
             .catch(function (error) {
                 console.log(error);
             });
-        comment.sentNotify(JSON.parse(localStorage.getItem('user')).name, ideaId, jwt);
     }
 
     sentNotify(from, ideaId, jwt) {
@@ -43,7 +42,6 @@ class CommentApi {
                 'Authorization': 'Bearer ' + jwt
             },
         };
-        console.log('sentNotify comment: ', body)
         window.axios.post('/api/send-email-comment', body, config)
             .then(function (response) {
                 const commentsData = response.data;
