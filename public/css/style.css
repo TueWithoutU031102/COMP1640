@@ -28,7 +28,7 @@
 nav {
     width: 100%;
     display: flex;
-    background: rgba(255, 255, 255, 0.125);
+    background: rgba(255, 255, 255, 0.432);
     padding: 0px 40px;
     justify-content: space-between;
     align-items: center;
@@ -39,7 +39,7 @@ nav {
 }
 
 nav.sticky {
-    background: rgba(255, 255, 255, 0.825);
+    background: rgba(255, 139, 72, 0.825);
 }
 
 .logo {
@@ -700,6 +700,13 @@ nav.sticky {
     padding: 13px 5%;
 }
 
+.profile-detail{
+    padding: 40px;
+    border-radius: 20px;
+    background: #b0b0b048;
+    margin-bottom: 50px;
+}
+
 .left-profile {
     padding: 40px 40px 40px 40px;
     margin-left: 40px;
@@ -1071,6 +1078,8 @@ footer {
 
 .about-card img {
     width: 700px;
+    object-fit: cover;
+    object-position: center center;
 }
 
 .our-history {
@@ -1083,7 +1092,18 @@ footer {
     font-size: 50px;
     font-weight: bold;
     color: #ff9900;
-    border-bottom: 5px solid #ff9900;
+    position: relative;
+    /* border-bottom: 5px solid #ff9900; */
+}
+
+.history-header h3::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 30%;
+    background: linear-gradient(135deg, #ff9900, #9b59b6);
 }
 
 .history-content {
@@ -1229,7 +1249,7 @@ footer {
 
 .close{
     position: absolute;
-    top: 0;
+    top: 200px;
     right: 0 ;
     background: #fff;
     height: 50px;
@@ -1238,6 +1258,118 @@ footer {
     text-align: center;
     font-size: 30px;
 }
+
+.form-body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+.form-container{
+    max-width: 700px;
+    width: 100%;
+    background: #d5cfcf;
+    padding: 25px 30px;
+    border-radius: 10px;
+}
+
+.form-title{
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.form-title::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: linear-gradient(135deg, #ff9900, #9b59b6);
+}
+
+.form-container form .form-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
+form .form-content .input-box{
+    margin-bottom: 15px;
+    width: calc(100% / 2 -20px);
+}
+
+.form-content .input-box label{
+    display: block;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.form-content .input-box input{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    border-color: #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.form-content .input-box input:hover,
+.form-content .input-box input:focus{
+    border-color: #ff9900;
+}
+
+.button-action button,
+.button-action a{
+    height: 45px;
+    margin: 45px 0;
+}
+
+.button-action{
+    display: flex;
+    gap: 30px;
+}
+
+.button-action button{
+    height: 100%;
+    width: 100%;
+    margin: 45px 0;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #a8ea86, #41e0a8);
+}
+
+
+.button-action a{
+    height: 100%;
+    width: 100%;
+    margin: 45px 0;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #ff9900, #cb4a23);
+}
+
+
+
+
 
 /* 25% */
 @media(max-width: 5400px) {}

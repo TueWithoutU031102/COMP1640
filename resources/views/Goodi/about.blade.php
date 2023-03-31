@@ -97,18 +97,12 @@
     @include('Goodi.footer')
 
     <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                console.log(entry)
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                } else {
-                    entry.target.classList.remove('show');
-                }
-            });
-        });
+        const img = document.getElementByClass("about-card img");
 
-        const hiddenElements = document.querySelectorAll('.about-card');
-        hiddenElements.forEach((el) => observer.observer(el))
+        window.addEventListener('scroll', function(){
+            let value = window.scrollY;
+            console.log(value);
+            img.style.objectPosition = 'center' + ' ' + value * 0.25 + '%';
+        })
     </script>
 @endsection

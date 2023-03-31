@@ -31,72 +31,89 @@
         <div class="popup">
             <div class="popup-content">
                 <button class="close">&times;</button>
-                <form action="" class="create-form" method="POST" enctype="multipart/form-data">
-                    <h2>Account Setting</h2><br><br>
-                    @csrf
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    <input type="hidden" name="id" value="" name="id" class="form-control"
-                        id="id">
-                    <div class="form-group">
-                        <label for="name" class="font-weight-bold">Name</label>
-                        <input type="text" value="" name="name" class="form-control"
-                            id="name" aria-describedby="name">
+                <section class="form-body">
+                    <div class="form-container">
+                        <div class="form-title">Create Account</div>
+                        <form action="/admin/createAcc" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <br>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <div class="form-content">
+                                <div class="input-box">
+                                    <label for="name" class="font-weight-bold">Name</label>
+                                    <input type="name" name="name" value="{{ old('name') }}" id="name"
+                                        aria-describedby="name">
+                                </div>
+                                <div class="input-box">
+                                    <label for="email" class="font-weight-bold">Email address</label>
+                                    <input type="email" name="email" value="{{ old('email') }}" class="form-control"
+                                        id="email" aria-describedby="email">
+                                </div>
+                                <div class="input-box">
+                                    <label for="password" class="font-weight-bold">Password</label>
+                                    <input type="password" value="123456" name="password" class="form-control"
+                                        id="password">
+                                </div>
+                                <div class="input-box">
+                                    <label for="phone_number" class="font-weight-bold">Phone Number</label>
+                                    <input type="phone_number" name="phone_number" value="{{ old('phone_number') }}"
+                                        class="form-control" id="phone_number" aria-describedby="phone_number">
+                                </div>
+                                <div class="input-box">
+                                    <label for="DoB" class="font-weight-bold">Date of Birth</label>
+                                    <input type="date" name="DoB" value="{{ old('DoB') }}" class="form-control"
+                                        id="DoB" aria-describedby="DoB">
+                                </div>
+                                <div class="input-box">
+                                    <label for="image" class="font-weight-bold">Image</label>
+                                    <div style="display: flex">
+                                        <input type="file" value="" name="image"
+                                            class="form-control" id="image"><br>
+                                        <img style="width:100%; object-fit: cover; object-position: center center; height: 100px; width: 100px;;"
+                                            src="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button-action">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="email" class="font-weight-bold">Email address</label>
-                        <input type="email" value="" name="email" class="form-control"
-                            id="email" aria-describedby="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="font-weight-bold">Password</label>
-                        <input type="password" name="password" class="form-control" id="password">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone_number" class="font-weight-bold">Phone Number</label>
-                        <input type="text" value="" name="phone_number" class="form-control"
-                            id="phone_number">
-                    </div>
-                    <div class="form-group">
-                        <label for="DoB" class="font-weight-bold">Date of Birth</label>
-                        <input type="date" value="" name="DoB" class="form-control"
-                            id="DoB">
-                    </div>
-                    <div class="form-group">
-                        <label for="image" class="font-weight-bold">Image</label>
-                        <div style="display: flex">
-                            <input type="file" value="" name="image" class="form-control"
-                                id="image"><br>
-                            <img style="width:100%; object-fit: cover; object-position: center center; height: 100px; width: 100px;;"
-                                src="">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </form>
+                </section>
             </div>
         </div>
     </section>
     <section class="profile-content">
         <div class="profile-container">
-            <div class="left-profile" style="background: #b0b0b048">
-                <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>{{ Auth::user()->email }}</p>
-                <p><i class="fa-solid fa-phone"></i> <span>Phone Number: </span>{{ Auth::user()->phone_number }}</p>
-                <p><i class="fa-solid fa-calendar-days"></i> <span>DOB: </span>{{ Auth::user()->DoB }}</p>
-                <p><i class="fa-solid fa-building"></i>
-                    <span>Department:
-                    </span>{{ App\Models\Department::where('id', Auth::user()->department_id)->value('name') }}
-                </p>
+            <div class="left-profile">
+                <div class="profile-detail">
+                    <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>{{ Auth::user()->email }}</p>
+                    <p><i class="fa-solid fa-phone"></i> <span>Phone Number: </span>{{ Auth::user()->phone_number }}</p>
+                    <p><i class="fa-solid fa-calendar-days"></i> <span>DOB: </span>{{ Auth::user()->DoB }}</p>
+                    <p><i class="fa-solid fa-building"></i> <span>Department:
+                        </span>{{ App\Models\Department::where('id', Auth::user()->department_id)->value('name') }}
+                    </p>
+                </div>
+                <div class="profile-detail">
+                    <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>{{ Auth::user()->email }}</p>
+                    <p><i class="fa-solid fa-phone"></i> <span>Phone Number: </span>{{ Auth::user()->phone_number }}</p>
+                    <p><i class="fa-solid fa-calendar-days"></i> <span>DOB: </span>{{ Auth::user()->DoB }}</p>
+                    <p><i class="fa-solid fa-building"></i> <span>Department:
+                        </span>{{ App\Models\Department::where('id', Auth::user()->department_id)->value('name') }}
+                    </p>
+                </div>
             </div>
             <div class="right-profile">
                 <div class="post-container">
-            {{-- <div class="user-detail">
+                    {{-- <div class="user-detail">
                         <img src="" width="50" height="50" class="rounded-circle" alt=""
                             style="object-fit: cover; object-position: center center;">
                         <div class="post-content">
@@ -110,7 +127,7 @@
                             <p class="des">{{ $idea->description }}</p>
                             <label for="view{{ $idea->id }}">View More</label>
                         </div> --}}
-            {{-- </div>
+                    {{-- </div>
                 <div class="idea-interact">
                     <br>
                     @foreach ($listIdeas as $idea)
@@ -120,7 +137,7 @@
                             </li>
                         </ul>
                     @endforeach --}}
-            {{-- @if (!$idea->likedBy(auth()->user()))
+                    {{-- @if (!$idea->likedBy(auth()->user()))
                             <form action="{{ route('postLike', $idea->id) }}" method="POST">
                                 @csrf
                                 <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
@@ -147,7 +164,7 @@
                             </form>
                         @endif
                         <h6>{{ $idea->dislikes->count() }}</h6> --}}
-            </div>
+                </div>
             </div>
         </div>
         </div>
