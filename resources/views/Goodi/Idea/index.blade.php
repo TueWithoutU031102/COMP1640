@@ -319,18 +319,18 @@
     <button id="btn-api" onclick="showCommentByIdea(1)">Call API</button>
 
     <script>
-        function formToggle() {
-            const toggleForm = document.querySelector('.create-idea');
-            const toggleButton = document.querySelector('.button-idea');
-            toggleForm.classList.toggle('active')
-            toggleButton.classList.toggle('active')
-        }
+            function formToggle() {
+                const toggleForm = document.querySelector('.create-idea');
+                const toggleButton = document.querySelector('.button-idea');
+                toggleForm.classList.toggle('active')
+                toggleButton.classList.toggle('active')
+            }
 
-        function commentToggle(ideaId) {
-            const commentForm = document.querySelector('.gradient-custom' + ideaId);
-            const commentButton = document.querySelector('.comment' + ideaId);
-            commentForm.classList.toggle('active')
-            commentButton.classList.toggle('active')
-        }
+            function commentToggle(ideaId) {
+                const commentForm = document.querySelector('.gradient-custom' + ideaId);
+                const commentButton = document.querySelector('.comment' + ideaId);
+                commentForm.classList.toggle('active')
+                commentButton.classList.toggle('active')
+            }
     </script>
 @endsection

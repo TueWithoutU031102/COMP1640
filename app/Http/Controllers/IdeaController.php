@@ -5,18 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
-use App\Models\Like;
-use App\Models\Submission;
 use App\Models\User;
+use App\Models\Comment;
 use App\Services\CommentService;
 use App\Services\EmailService;
 use App\Services\IdeaService;
-use App\Services\SubmissionService;
 use App\Services\UserService;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\Models\Dislike;
 
 
 class IdeaController extends Controller
@@ -29,10 +26,12 @@ class IdeaController extends Controller
 
     protected User $currentUser;
 
-    public function __construct(UserService  $userService,
-                                EmailService $mailService,
-                                IdeaService  $ideaService,
-                                CommentService $commentService)
+    public function __construct(
+        UserService    $userService,
+        EmailService   $mailService,
+        IdeaService    $ideaService,
+        CommentService $commentService
+    )
     {
         $this->userService = $userService;
         $this->ideaService = $ideaService;
@@ -46,6 +45,7 @@ class IdeaController extends Controller
             return $next($request);
         });
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -118,11 +118,15 @@ class IdeaController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Idea $idea
-     * @return \Illuminate\Http\Response
+     * @return
      */
-    public function show(Idea $idea)
+    public function show($id)
     {
-        //
+        $idea = $this->ideaService->findById($id);
+        $idea->views +=1;
+        $idea->save();
+        return view('Goodi/Idea/show')
+            ->with('idea', $idea);
     }
 
     /**
@@ -159,8 +163,37 @@ class IdeaController extends Controller
         //
     }
 
-    public function download()
+    public function downloadData(): Response
     {
-        return view('Goodi/Idea/show');
+        $results = Idea::withCount(['likes', 'dislikes', 'comments'])
+            ->with(['category', 'submission', 'author'])
+            ->get(['id', 'title', 'description', 'category_id', 'submission_id', 'author_id', 'created_at']);
+        $data = $results->toArray();
+        $filename = 'ideas.csv';
+
+        // Create a new file handle and write the CSV headers
+        $handle = fopen('php://temp', 'w');
+        fputcsv($handle, [
+            'ID', 'Title', 'Description', 'Category', 'Submission', 'Author', 'Likes', 'Dislikes', 'Comments', 'Created At'
+        ]);
+
+        foreach ($data as $row) {
+            fputcsv($handle, [
+                $row['id'], $row['title'], $row['description'],
+                $row['category']['title'], $row['submission']['title'], $row['author']['name'],
+                $row['likes_count'], $row['dislikes_count'], $row['comments_count'], $row['created_at']
+            ]);
+        }
+        // Reset the file pointer
+        rewind($handle);
+
+        // Create a new response with the CSV file data
+        $response = new Response(stream_get_contents($handle), 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '";',
+        ]);
+        fclose($handle);
+
+        return $response;
     }
 }

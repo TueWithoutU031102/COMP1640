@@ -13,6 +13,8 @@ Route::group(['prefix' => 'idea', 'middleware' => ['auth', 'user']], function ()
 
     Route::post("create", [IdeaController::class, 'create'])->name("createIdea");
 
+    Route::get("show/{id}", [IdeaController::class, 'show'])->name("showIdea");
+
     Route::post("{idea}/like", [LikeController::class, 'store'])->name('postLike');
 
     Route::delete("{idea}/like", [LikeController::class, 'destroy'])->name('destroyLike');

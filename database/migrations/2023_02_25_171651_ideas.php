@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->boolean('isAnonymous');
+            $table->bigInteger('views');
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')

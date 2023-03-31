@@ -80,6 +80,9 @@
                                 <label for="dueDate" class="font-weight-bold">Date Finished</label>
                                 <input type="datetime-local" name="dueDate" class="form-control" id="dueDateInput"
                                     aria-describedby="dueDate" style="width: 300px" onchange="checkDueDate(this)">
+                                <label for="select2weeks">2 weeks</label>
+                                <input type="checkbox" id="select2weeks" onclick="setDueDateLate2Weeks('startDateInput','dueDateInput')">
+
                             </div>
                         </div>
                         <div class="form-group">
@@ -131,43 +134,24 @@
         toggleForm.classList.toggle('active')
         toggleButton.classList.toggle('active')
 
-        getStartDateEqualToday("startDateInput");
+        setStartDateEqualToday("startDateInput");
     }
 
-    function getStartDateEqualToday(startDateInputId) {
+
+    function setDueDateLate2Weeks(startDateInputId, dueDateInputId) {
         let startDateInput = document.getElementById(startDateInputId);
-        console.log(startDateInput)
+        let dueDateInput = document.getElementById(dueDateInputId);
+
         let tzOffset = (new Date()).getTimezoneOffset() * 60000;
-        let today = new Date(Date.now() - tzOffset);
-        startDateInput.value = today.toISOString().slice(0, 16);
+        let sD = new Date(startDateInput.value);
+        let dD =  sD.setDate(sD.getDate()+14);
+        dD = new Date(dD - tzOffset)
+        dueDateInput.value = dD.toISOString().slice(0, 16);
 
-        console.log(startDateInput)
+
     }
-
-    limitDueDate(today.toISOString().slice(0, 16))
-
-    function limitDueDate(startDate) {
-        let dueDateInput = document.getElementById('dueDateInput');
-        dueDateInput.min = startDate;
-    }
-
-    function checkDueDate(seft) {
-        let submitCreate = document.getElementById('submitCreate');
-        let dueDate = new Date(seft.value);
-        let now = new Date();
-        if (dueDate < now) {
-            submitCreate.disabled = true;
-            alert("due date must be latter than " + startDateInput.value.replace('T', ' - '));
-        } else {
-            submitCreate.disabled = false;
-        }
-    }
-
-    getStartDateEqualToday("startDateInput");
-
-    function getStartDateEqualToday(startDateInputId) {
+    function setStartDateEqualToday(startDateInputId) {
         let startDateInput = document.getElementById(startDateInputId);
-        console.log(startDateInput)
         let tzOffset = (new Date()).getTimezoneOffset() * 60000;
         let today = new Date(Date.now() - tzOffset);
         startDateInput.value = today.toISOString().slice(0, 16);
@@ -180,7 +164,27 @@
         dueDateInput.min = startDate;
     }
 
+    setStartDateEqualToday("startDateInput");
+
+    function getStartDateEqualToday(startDateInputId) {
+        let startDateInput = document.getElementById(startDateInputId);
+        console.log(startDateInput)
+        let tzOffset = (new Date()).getTimezoneOffset() * 60000;
+        let today = new Date(Date.now() - tzOffset);
+        startDateInput.value = today.toISOString().slice(0, 16);
+    }
+
+    limitDueDate(today.toISOString().slice(0, 16))
+
+    function limitDueDate(startDate) {
+        let dueDateInput = document.getElementById('dueDateInput');
+        dueDateInput.min = startDate;
+    }
+
     function checkDueDate(seft) {
+        let select2weeksCheckbox = $('#select2weeks');
+        select2weeksCheckbox.prop( "checked", false );
+
         let submitCreate = document.getElementById('submitCreate');
         let dueDate = new Date(seft.value);
         let now = new Date();

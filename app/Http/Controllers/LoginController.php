@@ -7,12 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Token;
-use function Symfony\Component\Translation\t;
 
 class LoginController extends Controller
 {
@@ -35,7 +30,7 @@ class LoginController extends Controller
             Auth::attempt($credentials);
             $token = JWTAuth::attempt($credentials);
             Session::put('jwt', $token);
-            return redirect()->route('user.index');
+            return redirect()->route('userIndex');
         } else {
             return redirect()->route('user.login')->withErrors("Email or password is incorrect");
         }

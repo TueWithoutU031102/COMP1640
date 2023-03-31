@@ -42,7 +42,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/showFile', [IdeaController::class, 'download']);
 
-Route::get('index', [AuthenController::class, 'index'])->name('user.index');
+Route::get('index', [UserController::class, 'index'])->name('userIndex');
 
 
 Route::group([], function () {
