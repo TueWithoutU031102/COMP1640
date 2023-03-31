@@ -75,8 +75,8 @@
                                 <div class="input-box">
                                     <label for="image" class="font-weight-bold">Image</label>
                                     <div style="display: flex">
-                                        <input type="file" value="" name="image"
-                                            class="form-control" id="image"><br>
+                                        <input type="file" value="" name="image" class="form-control"
+                                            id="image"><br>
                                         <img style="width:100%; object-fit: cover; object-position: center center; height: 100px; width: 100px;;"
                                             src="">
                                     </div>
@@ -94,14 +94,6 @@
     <section class="profile-content">
         <div class="profile-container">
             <div class="left-profile">
-                <div class="profile-detail">
-                    <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>{{ Auth::user()->email }}</p>
-                    <p><i class="fa-solid fa-phone"></i> <span>Phone Number: </span>{{ Auth::user()->phone_number }}</p>
-                    <p><i class="fa-solid fa-calendar-days"></i> <span>DOB: </span>{{ Auth::user()->DoB }}</p>
-                    <p><i class="fa-solid fa-building"></i> <span>Department:
-                        </span>{{ App\Models\Department::where('id', Auth::user()->department_id)->value('name') }}
-                    </p>
-                </div>
                 <div class="profile-detail">
                     <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>{{ Auth::user()->email }}</p>
                     <p><i class="fa-solid fa-phone"></i> <span>Phone Number: </span>{{ Auth::user()->phone_number }}</p>

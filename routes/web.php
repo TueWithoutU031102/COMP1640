@@ -51,6 +51,10 @@ Route::group([], function () {
 });
 Route::group([], function () {
     // ... other routes ...
+    require __DIR__ . '/web/dashboard.php'; // include the new admin routes
+});
+Route::group([], function () {
+    // ... other routes ...
     require __DIR__ . '/web/ideaRoutes.php'; // include the new admin routes
 });
 Route::group([], function () {

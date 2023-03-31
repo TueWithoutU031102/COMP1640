@@ -53,8 +53,9 @@
                 @if (Auth::user()->role_id == 1)
                     <li><a href="/admin/acc">ACCOUNT</a></li>
                 @endif
-                @if (Auth::user()->role_id == 4)
+                @if (Auth::user()->role_id == 4 || Auth::user()->role_id == 1)
                     <li><a href="/category/index">CATEGORY</a></li>
+                    <li><a href="/dashboard/index">DASHBOARD</a></li>
                 @endif
                 <li><a href="/about">ABOUT</a></li>
                 <li><a href="/department">DEPARTMENT</a></li>
