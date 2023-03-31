@@ -227,7 +227,7 @@
                                         <input type="text" class="form-control" placeholder="Enter your comment..."
                                             id="commentContentInput{{ $idea->id }}">
                                         <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
-                                        <button onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }})">
+                                        <button onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
                                             sent
                                         </button>
                                     </div>
