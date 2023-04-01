@@ -88,6 +88,12 @@
                         @foreach ($listCategories as $category)
                             <a>{{ $category->title }}</a>
                         @endforeach
+                        <p>Department</p>
+                        @foreach ($departments as $department)
+                            <a id="sort" name="sort">
+                                <a href="{{ Request::url() }}?sort_by={{$department->name}}">{{ $department->name }} </option>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -227,7 +233,8 @@
                                         <input type="text" class="form-control" placeholder="Enter your comment..."
                                             id="commentContentInput{{ $idea->id }}">
                                         <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
-                                        <button onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
+                                        <button
+                                            onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
                                             sent
                                         </button>
                                     </div>
@@ -319,18 +326,18 @@
     <button id="btn-api" onclick="showCommentByIdea(1)">Call API</button>
 
     <script>
-            function formToggle() {
-                const toggleForm = document.querySelector('.create-idea');
-                const toggleButton = document.querySelector('.button-idea');
-                toggleForm.classList.toggle('active')
-                toggleButton.classList.toggle('active')
-            }
+        function formToggle() {
+            const toggleForm = document.querySelector('.create-idea');
+            const toggleButton = document.querySelector('.button-idea');
+            toggleForm.classList.toggle('active')
+            toggleButton.classList.toggle('active')
+        }
 
-            function commentToggle(ideaId) {
-                const commentForm = document.querySelector('.gradient-custom' + ideaId);
-                const commentButton = document.querySelector('.comment' + ideaId);
-                commentForm.classList.toggle('active')
-                commentButton.classList.toggle('active')
-            }
+        function commentToggle(ideaId) {
+            const commentForm = document.querySelector('.gradient-custom' + ideaId);
+            const commentButton = document.querySelector('.comment' + ideaId);
+            commentForm.classList.toggle('active')
+            commentButton.classList.toggle('active')
+        }
     </script>
 @endsection

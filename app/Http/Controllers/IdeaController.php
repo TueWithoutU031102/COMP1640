@@ -6,6 +6,7 @@ use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
 use App\Models\User;
+use App\Models\Department;
 use App\Models\Comment;
 use App\Services\CommentService;
 use App\Services\EmailService;
@@ -31,8 +32,7 @@ class IdeaController extends Controller
         EmailService   $mailService,
         IdeaService    $ideaService,
         CommentService $commentService
-    )
-    {
+    ) {
         $this->userService = $userService;
         $this->ideaService = $ideaService;
         $this->mailService = $mailService;
@@ -54,7 +54,14 @@ class IdeaController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
+
+        $departments = Department::all();
+
+
+        dd(User::where('department_id', '=', Department::where($request['sort_by'])->pluck('id'))
+            ->get());
         $ideas = match ($request->sort_by) {
+            $request['sort_by'] => User::find(Department::find($request['sort_by'])->pluck('id')),
             'mostPopular' => Idea::withCount('likes', 'dislikes')->orderByDesc('likes_count', 'dislikes_count')->limit(5)->get(),
             'lastestIdeas' => Idea::latest()->limit(5)->get(),
             'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
@@ -67,7 +74,7 @@ class IdeaController extends Controller
         //     ->pluck('idea_id');
 
 
-        return view('Goodi/Idea/index', ['listCategories' => $categories, 'ideas' => $ideas]);
+        return view('Goodi/Idea/index', ['listCategories' => $categories, 'ideas' => $ideas, 'departments' => $departments]);
     }
 
     public function findIdeasByUserId()
@@ -123,7 +130,7 @@ class IdeaController extends Controller
     public function show($id)
     {
         $idea = $this->ideaService->findById($id);
-        $idea->views +=1;
+        $idea->views += 1;
         $idea->save();
         return view('Goodi/Idea/show')
             ->with('idea', $idea);
