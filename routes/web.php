@@ -44,30 +44,31 @@ Route::get('/showFile', [IdeaController::class, 'download']);
 
 Route::get('index', [UserController::class, 'index'])->name('userIndex');
 
+Route::group(['middleware' => ['auth', 'user']], function () {
+    Route::group([], function () {
+        // ... other routes ...
+        require __DIR__ . '/web/submission.php'; // include the new admin routes
+    });
+    Route::group([], function () {
+        // ... other routes ...
+        require __DIR__ . '/web/dashboard.php'; // include the new admin routes
+    });
+    Route::group([], function () {
+        // ... other routes ...
+        require __DIR__ . '/web/ideaRoutes.php'; // include the new admin routes
+    });
+    Route::group([], function () {
+        // ... other routes ...
+        require __DIR__ . '/web/categoryRoutes.php'; // include the new admin routes
+    });
+    Route::group([], function () {
+        // ... other routes ...
+        require __DIR__ . '/web/adminRoutes.php'; // include the new admin routes
+    });
+    Route::group([], function () {
+        // ... other routes ...
+        require __DIR__ . '/web/userRoutes.php'; // include the new admin routes
+    });
 
-Route::group([], function () {
-    // ... other routes ...
-    require __DIR__ . '/web/submission.php'; // include the new admin routes
+    Route::get('/logout', [AuthenController::class, 'logout'])->name('logout');
 });
-Route::group([], function () {
-    // ... other routes ...
-    require __DIR__ . '/web/dashboard.php'; // include the new admin routes
-});
-Route::group([], function () {
-    // ... other routes ...
-    require __DIR__ . '/web/ideaRoutes.php'; // include the new admin routes
-});
-Route::group([], function () {
-    // ... other routes ...
-    require __DIR__ . '/web/categoryRoutes.php'; // include the new admin routes
-});
-Route::group([], function () {
-    // ... other routes ...
-    require __DIR__ . '/web/adminRoutes.php'; // include the new admin routes
-});
-Route::group([], function () {
-    // ... other routes ...
-    require __DIR__ . '/web/userRoutes.php'; // include the new admin routes
-});
-
-Route::get('/logout', [AuthenController::class, 'logout'])->name('logout');
