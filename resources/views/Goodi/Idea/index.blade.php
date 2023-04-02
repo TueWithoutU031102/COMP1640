@@ -90,11 +90,14 @@
                         @endforeach
                         <p>Department</p>
                         @foreach ($departments as $department)
-                            <a id="sort" name="sort">
-                                <a href="{{ Request::url() }}?sort_by={{$department->name}}">{{ $department->name }} </option>
-                            </a>
+                            <a id="sort_Department" name="sort_Department">
+                                <a href="{{ Request::url() }}?sort_by={{ $department->name }}">{{ $department->name }}
+                                    </option>
+                                </a>
                         @endforeach
                     </div>
+
+
                 </div>
             </div>
             <div class="main-content">
@@ -219,7 +222,7 @@
                                     onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
                                     class="comment{{ $idea->id }}"><i
                                         class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
-                                <h6>10</h6>
+                                <h6>{{$idea->comments->count()}}</h6>
                             </div>
                             <hr>
 

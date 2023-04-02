@@ -57,14 +57,21 @@ class IdeaController extends Controller
 
         $departments = Department::all();
 
+        if ($request->sort_by) {
+            $department = Department::where('name', $request->sort_by)->first();
+            // truoc ? la cau dieu kien if , sau : la else
+            $users = $department ? User::where('department_id', $department->id)->get(['id']) : null;
+            $ideas = $department && $users ? Idea::whereIn('author_id', $users->pluck('id'))->paginate(5) : null;
+        }
 
-        //dd(User::where('department_id', '=', Department::where($request['sort_by'])->pluck('id'))->get());
-        $ideas = match ($request->sort_by) {
-            //$request['sort_by'] => User::find(Department::find($request['sort_by'])->pluck('id')),
+        //??= la neu ideas khong co gia tri gi thi chay vao con neu ideas co gia tri thi k chay
+
+        $ideas ??= match ($request->sort_by) {
             'mostPopular' => Idea::withCount('likes', 'dislikes')->orderByDesc('likes_count', 'dislikes_count')->limit(5)->get(),
             'lastestIdeas' => Idea::latest()->limit(5)->get(),
             'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
             default => $this->ideaService->findAll()
+
         };
 
 
