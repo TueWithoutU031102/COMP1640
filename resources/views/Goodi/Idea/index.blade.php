@@ -51,13 +51,66 @@
 
             .gradient-custom{{ $idea->id }} {
                 height: 0;
-                visibility: hidden;
+                display: none;
                 /* transition: 0.2s; */
             }
 
             .gradient-custom{{ $idea->id }}.active {
                 height: auto;
-                visibility: visible;
+                display: block;
+            }
+
+            .idea-effect{{ $idea->id }} {
+                display: none;
+                letter-spacing: 0;
+                position: absolute;
+                margin-top: 0px;
+                right: -250px;
+                background: #bababa;
+                padding-right: 10px;
+                border-radius: 10px;
+            }
+
+            .idea-effect{{ $idea->id }}.active {
+                display: block;
+            }
+
+
+            .idea-change{{ $idea->id }} {
+                position: absolute;
+                right: 30px;
+                background: #fff;
+                border: none;
+                transition: 0.2s;
+                padding: 5px;
+                height: 40px;
+                border-radius: 20px;
+                font-size: 30px;
+            }
+
+            .idea-change{{ $idea->id }}:hover {
+                background: #8f8f8f;
+            }
+
+            .idea-effect{{ $idea->id }} ul li {
+                list-style: none;
+            }
+
+            .idea-effect{{ $idea->id }} ul li a {
+                text-decoration: none;
+                color: #000;
+                width: 200px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                border-radius: 10px;
+                padding: 5px;
+                margin-top: 5px;
+                transition: 0.2s;
+            }
+
+            .idea-effect{{ $idea->id }} ul li a:hover {
+                background: #8f8f8f;
             }
         </style>
     @endforeach
@@ -82,7 +135,7 @@
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
                 <div class="imp-link">
-                    <a href="#"><i class="fa-solid fa-comments"></i> All Discussion</a>
+                    <a href="/idea/index"><i class="fa-solid fa-comments"></i> All Discussion</a>
                     <div class="category">
                         <p>Category</p>
                         @foreach ($listCategories as $category)
@@ -91,8 +144,9 @@
                         <p>Department</p>
                         @foreach ($departments as $department)
                             <a id="sort" name="sort">
-                                <a href="{{ Request::url() }}?sort_by={{$department->name}}">{{ $department->name }} </option>
-                            </a>
+                                <a href="{{ Request::url() }}?sort_by={{ $department->name }}">{{ $department->name }}
+                                    </option>
+                                </a>
                         @endforeach
                     </div>
                 </div>
@@ -168,13 +222,26 @@
                     @foreach ($ideas as $idea)
                         <br>
                         <div class="post-container">
+                            <div class="change">
+                                <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
+                                    <p>&dot;&dot;&dot;</p>
+                                </button>
+                                <div class="idea-effect{{ $idea->id }}">
+                                    <ul>
+                                        <li><a href="">Open Idea</a></li>
+                                        <li><a href="">Change Content</a></li>
+                                        <li><a href="">Remove Post</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="user-detail">
                                 <img src="{{ asset($idea->user->image) }}" width="50" height="50"
                                     class="rounded-circle" alt=""
                                     style="object-fit: cover; object-position: center center;">
                                 <div class="post-content">
                                     <h4>{{ $idea->title }}</h4>
-                                    <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
+                                    <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small>
+                                    <br>
                                     @foreach ($idea->files as $file)
                                         <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
                                     @endforeach
@@ -233,7 +300,7 @@
                                         <input type="text" class="form-control" placeholder="Enter your comment..."
                                             id="commentContentInput{{ $idea->id }}">
                                         <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
-                                        <button
+                                        <button class="add-idea"
                                             onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
                                             sent
                                         </button>
@@ -270,7 +337,7 @@
                                                                 ago</span>
                                                         </div>
 
-                                                        <div class="d-flex flex-start mt-4">
+                                                        {{-- <div class="d-flex flex-start mt-4">
                                                             <a class="me-3" href="#">
                                                                 <img class="rounded-circle"
                                                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
@@ -298,7 +365,7 @@
                                                                 <span class="small" style="font-weight: bold">2 hours
                                                                     ago</span>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -338,6 +405,20 @@
             const commentButton = document.querySelector('.comment' + ideaId);
             commentForm.classList.toggle('active')
             commentButton.classList.toggle('active')
+        }
+
+        // document.onclick = function(idea) {
+        //     const ideaToggleMenu = document.querySelector('.idea-effect');
+        //     const ideaButtonMenu = document.querySelector('')
+        //     if (idea.target.closest(".idea-change")) ideaToggleMenu.classList.toggle('active')
+        //     else ideaToggleMenu.classList.remove('active')
+        // }
+
+        function ideaToggle(ideaId) {
+            const ideaToggleMenu = document.querySelector('.idea-effect' + ideaId);
+            const ideaButtonMenu = document.querySelector('.idea-change' + ideaId);
+            if (ideaButtonMenu) ideaToggleMenu.classList.toggle('active')
+            else ideaToggleMenu.classList.remove('active')
         }
     </script>
 @endsection
