@@ -13,6 +13,27 @@
             <br>
         </div>
     </section>
+    <div>
+        <h6>phần trăm số idea của từng department trên tổng số</h6>
+        <h1>IT</h1>
+        <h2></h2>
+        <h1>
+    </div>
+    <div>
+        <h6>trên tổng số các idea, thì idea nào không hay (dislike >like) và idea nào hay (like>dislike)</h6>
+        <h1>Tổng bài đã đăng</h1>
+        <h2>
+            {{ $totalIdea }}
+        </h2>
+        <h1>Hay (Like > Dislike)</h1>
+        <h2>
+            {{ $percentGoodIdea }}%
+        </h2>
+        <h1>Không hay (Dislike > Like)</h1>
+        <h2>
+            {{ $percentBadIdea }}%
+        </h2>
+    </div>
     <div class="dashboard">
         <div class="post-container">
             <canvas id="Chart1" height="100"></canvas>
