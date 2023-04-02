@@ -92,16 +92,16 @@
                         <td>{{ $user->role->name }}</td>
 
                         <td>
-                            <a href="/admin/showAcc/{{ $user->id }}" title="View Profile"><button
-                                    class="btn btn-info btn-sm"><i aria-hidden="true">View</button>
+                            <a href="/admin/showAcc/{{ $user->id }}" title="View Profile"
+                                    class="btn btn-info btn-sm"><i aria-hidden="true"><i class="fa-solid fa-eye"></i>
                             </a>
-                            <a href="/admin/editAcc/{{ $user->id }}" title="Edit Account"><button
-                                    class="btn btn-primary btn-sm"><i aria-hidden="true">Edit</button>
+                            <a href="/admin/editAcc/{{ $user->id }}" title="Edit Account"
+                                    class="btn btn-primary btn-sm"><i aria-hidden="true"><i class="fa-solid fa-pen"></i>
                             </a>
                             <form action="/admin/deleteAcc/{{ $user->id }}" method="POST" class="d-inline"
                                 onsubmit="return confirm('Are you sure to delete {{ $user->name }} !!!???')">
                                 @csrf
-                                <button class="btn btn-danger btn-sm"><i aria-hidden="true">Delete</button>
+                                <button class="btn btn-danger btn-sm"><i aria-hidden="true"><i class="fa-solid fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

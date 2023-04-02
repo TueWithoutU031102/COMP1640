@@ -1,35 +1,45 @@
 @extends('Master.Master')
 
 @section('main')
-@include('Goodi.nav_bar')
+    @include('Goodi.nav_bar')
     <br><br>
-    <form action="/category/create" class="create-form" method="POST">
-        <h2>Create Category</h2><br><br>
-        @csrf
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="mb-3">
-            <label for="title" class="font-weight-bold">Title</label>
-            <input type="text" name="title" value="{{ old('title') }}" class="form-control" id="title"
-                aria-describedby="title">
+    <section class="form-body">
+        <div class="form-container">
+            <div class="form-title">Create Category</div>
+            <form action="/category/create" method="POST">
+                @csrf
+                <br>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="form-content">
+                    <div class="input-box">
+                        <label for="title" class="font-weight-bold">Title</label>
+                        <input type="text" name="title" value="{{ old('title') }}"
+                        id="title" aria-describedby="title">
+                    </div>
+                    <div class="input-box">
+                        <label for="description" class="font-weight-bold">Description</label>
+                        <input type="longText" name="description" value="{{ old('description') }}"
+                            id="description" aria-describedby="description">
+                    </div>
+                </div>
+                <div class="button-action">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-danger" href='/category/index'>Back</a>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="description" class="font-weight-bold">Description</label>
-            <input type="longText" name="description" value="{{ old('description') }}" class="form-control" id="description"
-                aria-describedby="description">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <a href='/category/index'>
-        <button type="submit" class="btn btn-primary">Back</button>
-    </a>
+    </section>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>

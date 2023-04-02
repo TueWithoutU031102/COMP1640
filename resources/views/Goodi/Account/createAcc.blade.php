@@ -25,21 +25,21 @@
                     </div>
                     <div class="input-box">
                         <label for="email" class="font-weight-bold">Email address</label>
-                        <input type="email" name="email" value="{{ old('email') }}" class="form-control" id="email"
+                        <input type="email" name="email" value="{{ old('email') }}" id="email"
                             aria-describedby="email">
                     </div>
                     <div class="input-box">
                         <label for="password" class="font-weight-bold">Password</label>
-                        <input type="password" value="123456" name="password" class="form-control" id="password">
+                        <input type="password" value="123456" name="password" id="password">
                     </div>
                     <div class="input-box">
                         <label for="phone_number" class="font-weight-bold">Phone Number</label>
                         <input type="phone_number" name="phone_number" value="{{ old('phone_number') }}"
-                            class="form-control" id="phone_number" aria-describedby="phone_number">
+                            id="phone_number" aria-describedby="phone_number">
                     </div>
                     <div class="input-box">
                         <label for="DoB" class="font-weight-bold">Date of Birth</label>
-                        <input type="date" name="DoB" value="{{ old('DoB') }}" class="form-control" id="DoB"
+                        <input type="date" name="DoB" value="{{ old('DoB') }}" id="DoB"
                             aria-describedby="DoB">
                     </div>
                     <div class="input-box">

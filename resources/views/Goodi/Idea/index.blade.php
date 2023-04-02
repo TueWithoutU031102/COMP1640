@@ -86,7 +86,7 @@
                     <div class="category">
                         <p>Category</p>
                         @foreach ($listCategories as $category)
-                            <a>{{ $category->title }}</a>
+                            <a href="#">{{ $category->title }}</a>
                         @endforeach
                         <p>Department</p>
                         @foreach ($departments as $department)

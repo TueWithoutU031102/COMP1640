@@ -114,7 +114,7 @@
                             @endif
                             {{-- <button class="refresh-idea">Refresh</button> --}}
                         </div>
-                    </section>
+                    </section><br>
                     <section class="create-idea">
                         <h1>Submit idea</h1>
                         <i></i>
@@ -260,13 +260,13 @@
                             <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)"
                                 @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
                             <p><span>Description: </span>{{ $submission->title }}</p>
-                            <button class="btn btn-danger"
+                            <button class="btn btn-primary"
                                 onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
-                                <i aria-hidden="true">Edit</i></button>
+                                <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i></button>
                             <form action="{{ $submission->id }}" method="POST" class="d-inline"
                                 onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
                                 @csrf
-                                <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button>
+                                {{-- <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button> --}}
                             </form>
                         </div>
                     </div>

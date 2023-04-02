@@ -46,13 +46,13 @@
                     </form>
                     <div class="btn-idea">
                         @if (in_array(Auth::user()->role->name, ['QAM', 'ADMIN']))
-                            <button class="add-idea" onclick="formToggle();">Create submission event</button>
+                            <button class="add-idea" onclick="formToggle();">Create event</button>
                         @endif
                         {{-- <button class="refresh-idea">Refresh</button> --}}
                     </div>
-                </section>
+                </section><br>
                 <section class="create-idea">
-                    <h2>New Submission</h2>
+                    <h2>New Event</h2>
                     <i></i>
                     @if ($errors->any())
                         <div class="alert alert-danger">

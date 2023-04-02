@@ -539,7 +539,7 @@ nav.sticky {
     height: 0;
     background: #e6e6e6;
     border: solid #a7a7a7;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
     border-radius: 20px;
     transition: 0.2s;
     visibility: hidden;
@@ -599,8 +599,8 @@ nav.sticky {
     object-fit: cover;
     object-position: center center;
     border-radius: 20px;
-    height: 395px;
-    width: 395px;
+    height: 430px;
+    width: 430px;
 
     /* box-shadow: 0 0px 40px 20px rgba(0, 0, 0, 0.212); */
 }
@@ -1276,8 +1276,8 @@ footer {
 }
 
 .form-title{
-    font-size: 25px;
-    font-weight: 500;
+    font-size: 35px;
+    font-weight: 700;
     position: relative;
 }
 
@@ -1323,7 +1323,11 @@ form .form-content .input-box{
 }
 
 .form-content .input-box input:hover,
-.form-content .input-box input:focus{
+.form-content .input-box input:focus,
+.form-content .input-box textarea:hover,
+.form-content .input-box textarea:focus,
+.form-content .input-box select:hover,
+.form-content .input-box select:focus{
     border-color: #ff9900;
 }
 

@@ -1,7 +1,8 @@
-@extends('Goodi.nav_bar')
+@extends('Master.Master')
 
 @section('main')
-    <br>
+@include('Goodi.nav_bar')
+    <br><br><br><br><br><br><br>
     <h1 class="display-4" style="text-align: center; font-weight: bold">CATEGORY INFORMATION</h1><br>
     <div class="user-card">
         <div class="user-information">
