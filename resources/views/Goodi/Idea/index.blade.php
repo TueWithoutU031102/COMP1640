@@ -139,7 +139,7 @@
                     <div class="category">
                         <p>Category</p>
                         @foreach ($listCategories as $category)
-                            <a href="#">{{ $category->title }}</a>
+                            <a href="{{ Request::url() }}?sort_by={{ $category->title }}">{{ $category->title }}</a>
                         @endforeach
                         <p>Department</p>
                         @foreach ($departments as $department)
