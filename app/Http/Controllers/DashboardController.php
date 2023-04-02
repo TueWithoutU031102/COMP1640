@@ -50,19 +50,16 @@ class DashboardController extends Controller
         $dataCountBusiness = $countContributorBusiness->values();
 
         $goodIdea = Idea::withCount('likes', 'dislikes')
-            ->groupBy('likes_count', 'dislikes_count')
             ->having('likes_count', '>', 'dislikes_count')
             ->get()
             ->count();
-
         $badIdea = Idea::withCount('likes', 'dislikes')
-            ->groupBy('likes_count', 'dislikes_count')
             ->having('likes_count', '<', 'dislikes_count')
             ->get()
             ->count();
         $totalIdea = Idea::count();
         $percentGoodIdea = (float)($goodIdea / $totalIdea * 100);
-        $percentBadIdea = (float) ($badIdea / $totalIdea * 100);
+        $percentBadIdea = (float)($badIdea / $totalIdea * 100);
 
         return view('Goodi/Dashboard/index', compact(
             'labels',
