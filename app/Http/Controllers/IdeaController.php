@@ -59,12 +59,14 @@ class IdeaController extends Controller
 
         if ($request->sort_by) {
             $department = Department::where('name', $request->sort_by)->first();
-
             // truoc ? la cau dieu kien if , sau : la else
             $users = $department ? User::where('department_id', $department->id)->get(['id'])
-                : Category::where('title', $request->sort_by)->first();
-            if ($department && $users) Idea::whereIn('author_id', $users->pluck('id'))->paginate(5);
-            else if ($users) Idea::whereIn('category_id', $users->pluck('id'))->paginate(5);
+                : Category::where('title', $request->sort_by)->get('id');
+            //dd($users);
+            if ($department && $users)
+                $ideas = Idea::whereIn('author_id', $users->pluck('id'))->get();
+            else if ($users)
+                $ideas = Idea::whereIn('category_id', $users->pluck('id'))->get();
         }
 
         //??= la neu ideas khong co gia tri gi thi chay vao con neu ideas co gia tri thi k chay
