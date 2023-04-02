@@ -33,8 +33,8 @@
                 <button class="close">&times;</button>
                 <section class="form-body">
                     <div class="form-container">
-                        <div class="form-title">Create Account</div>
-                        <form action="/admin/createAcc" method="POST" enctype="multipart/form-data">
+                        <div class="form-title">Edit Account</div>
+                        <form action="/admin/editAcc/{id}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <br>
                             @if ($errors->any())
@@ -47,49 +47,52 @@
                                 </div>
                             @endif
                             <div class="form-content">
+                                <input type="hidden" name="id" value="{{ $account->id }}" name="id"
+                                    class="form-control" id="id">
                                 <div class="input-box">
                                     <label for="name" class="font-weight-bold">Name</label>
-                                    <input type="name" name="name" value="{{ old('name') }}" id="name"
+                                    <input type="text" value="{{ $account->name }}" name="name" id="name"
                                         aria-describedby="name">
                                 </div>
                                 <div class="input-box">
                                     <label for="email" class="font-weight-bold">Email address</label>
-                                    <input type="email" name="email" value="{{ old('email') }}" class="form-control"
-                                        id="email" aria-describedby="email">
+                                    <input type="email" value="{{ $account->email }}" name="email" id="email"
+                                        aria-describedby="email">
                                 </div>
                                 <div class="input-box">
                                     <label for="password" class="font-weight-bold">Password</label>
-                                    <input type="password" value="123456" name="password" class="form-control"
-                                        id="password">
+                                    <input type="password" name="password" id="password">
                                 </div>
                                 <div class="input-box">
                                     <label for="phone_number" class="font-weight-bold">Phone Number</label>
-                                    <input type="phone_number" name="phone_number" value="{{ old('phone_number') }}"
-                                        class="form-control" id="phone_number" aria-describedby="phone_number">
+                                    <input type="text" value="{{ $account->phone_number }}" name="phone_number"
+                                        id="phone_number">
                                 </div>
                                 <div class="input-box">
                                     <label for="DoB" class="font-weight-bold">Date of Birth</label>
-                                    <input type="date" name="DoB" value="{{ old('DoB') }}" class="form-control"
-                                        id="DoB" aria-describedby="DoB">
+                                    <input type="date" value="{{ $account->DoB }}" name="DoB" id="DoB">
                                 </div>
                                 <div class="input-box">
                                     <label for="image" class="font-weight-bold">Image</label>
                                     <div style="display: flex">
-                                        <input type="file" value="" name="image" class="form-control"
-                                            id="image"><br>
+                                        <input type="file" value="{{ $account->image }}" name="image"
+                                            class="form-control" id="image"><br>
                                         <img style="width:100%; object-fit: cover; object-position: center center; height: 100px; width: 100px;;"
-                                            src="">
+                                            src="{{ asset($account->image) }}">
                                     </div>
                                 </div>
+                                <br>
                             </div>
                             <div class="button-action">
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                <a class="btn btn-danger" href='/index'>Back</a>
                             </div>
                         </form>
                     </div>
-                </section>
             </div>
-        </div>
+    </section>
+    </div>
+    </div>
     </section>
     <section class="profile-content">
         <div class="profile-container">
