@@ -71,7 +71,6 @@ class IdeaController extends Controller
             'lastestIdeas' => Idea::latest()->limit(5)->get(),
             'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
             default => $this->ideaService->findAll()
-
         };
 
 
