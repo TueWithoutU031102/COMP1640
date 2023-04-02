@@ -60,7 +60,8 @@ class DashboardController extends Controller
         $totalIdea = Idea::count();
         $percentGoodIdea = (float)($goodIdea / $totalIdea * 100);
         $percentBadIdea = (float)($badIdea / $totalIdea * 100);
-
+        $percentITIdea = (float) ($amountIdeaIT->count() / $totalIdea * 100);
+        $percentBussinessIdea = (float) ($amountIdeaBusiness->count() / $totalIdea * 100);
         return view('Goodi/Dashboard/index', compact(
             'labels',
             'data',
@@ -73,6 +74,8 @@ class DashboardController extends Controller
             'totalIdea',
             'percentGoodIdea',
             'percentBadIdea',
+            'percentBussinessIdea',
+            'percentITIdea'
         ));
     }
 }

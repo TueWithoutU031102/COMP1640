@@ -16,8 +16,9 @@
     <div>
         <h6>phần trăm số idea của từng department trên tổng số</h6>
         <h1>IT</h1>
-        <h2></h2>
-        <h1>
+        <h2>{{ $percentITIdea }}%</h2>
+        <h1>Bussiness</h1>
+        <h2>{{ $percentBussinessIdea }}%</h2>
     </div>
     <div>
         <h6>trên tổng số các idea, thì idea nào không hay (dislike >like) và idea nào hay (like>dislike)</h6>
