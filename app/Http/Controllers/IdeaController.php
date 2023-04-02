@@ -58,10 +58,9 @@ class IdeaController extends Controller
         $departments = Department::all();
 
 
-        dd(User::where('department_id', '=', Department::where($request['sort_by'])->pluck('id'))
-            ->get());
+        //dd(User::where('department_id', '=', Department::where($request['sort_by'])->pluck('id'))->get());
         $ideas = match ($request->sort_by) {
-            $request['sort_by'] => User::find(Department::find($request['sort_by'])->pluck('id')),
+            //$request['sort_by'] => User::find(Department::find($request['sort_by'])->pluck('id')),
             'mostPopular' => Idea::withCount('likes', 'dislikes')->orderByDesc('likes_count', 'dislikes_count')->limit(5)->get(),
             'lastestIdeas' => Idea::latest()->limit(5)->get(),
             'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
