@@ -173,7 +173,7 @@
                                         class="rounded-circle" alt=""
                                         style="object-fit: cover; object-position: center center;">
                                     <div class="post-content">
-                                        <h4>{{ $idea->title }}</h4>
+                                        <a href="/idea/show/{{$idea->id}}"><h4>{{ $idea->title }}</h4></a
                                         <small>{{ $idea->user->name }} Has Posted on
                                             {{ $idea->created_at }}</small><br><br>
                                         @foreach ($idea->files as $file)
