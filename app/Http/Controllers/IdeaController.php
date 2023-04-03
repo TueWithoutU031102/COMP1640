@@ -6,6 +6,7 @@ use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
 use App\Models\User;
+use App\Models\Like;
 use App\Models\Department;
 use App\Models\Comment;
 use App\Services\CommentService;
@@ -15,7 +16,8 @@ use App\Services\UserService;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Continue_;
 
 class IdeaController extends Controller
 {
@@ -57,34 +59,36 @@ class IdeaController extends Controller
 
         $departments = Department::all();
 
-        if ($request->sort_by) {
-            $department = Department::where('name', $request->sort_by)->first();
-            // truoc ? la cau dieu kien if , sau : la else
-            $users = $department ? User::where('department_id', $department->id)->get(['id'])
-                : Category::where('title', $request->sort_by)->get('id');
-            //dd($users);
-            if ($department && $users)
-                $ideas = Idea::whereIn('author_id', $users->pluck('id'))->get();
-            else if ($users)
-                $ideas = Idea::whereIn('category_id', $users->pluck('id'))->get();
-        }
 
-        //??= la neu ideas khong co gia tri gi thi chay vao con neu ideas co gia tri thi k chay
-
+        //??= la neu ideas chua duoc dinh nghia thi chay vao con neu ideas co gia tri thi k chay
         $ideas ??= match ($request->sort_by) {
-            'mostPopular' => Idea::withCount('likes', 'dislikes')->orderByDesc('likes_count', 'dislikes_count')->limit(5)->get(),
+            'mostPopular' => Idea::withCount('likes', 'dislikes')
+                ->orderByRaw('(likes_count + dislikes_count) DESC')->limit(5)->get(),
             'lastestIdeas' => Idea::latest()->limit(5)->get(),
             'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
-            default => $this->ideaService->findAll()
+            'none' => $this->ideaService->findAll(),
+            default => null
         };
 
-
-        // $sortDislike = Dislike::select(DB::raw("COUNT(idea_id) as count"), 'idea_id')
-        //     ->groupBy('idea_id')
-        //     ->pluck('idea_id');
-
-
-        return view('Goodi/Idea/index', ['listCategories' => $categories, 'ideas' => $ideas, 'departments' => $departments]);
+        if ($request->sort_by && !$ideas) {
+            $department = Department::where('name', $request->sort_by)->first();
+            // truoc ? la cau dieu kien if , sau : la else
+            $users = $department != null ? User::where('department_id', $department->id)->get(['id'])
+                : Category::where('title', $request->sort_by)->get('id');
+            if ($department != null && $users != null)
+                $ideas = Idea::whereIn('author_id', $users->pluck('id'))->get();
+            else if ($users != null)
+                $ideas = Idea::whereIn('category_id', $users->pluck('id'))->get();
+        }
+        if ($ideas == null) $ideas = $this->ideaService->findAll();
+        return view(
+            'Goodi/Idea/index',
+            [
+                'listCategories' => $categories,
+                'ideas' => $ideas,
+                'departments' => $departments
+            ]
+        );
     }
 
     public function findIdeasByUserId()

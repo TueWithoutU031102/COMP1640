@@ -32,7 +32,7 @@ class SubmissionController extends Controller
      */
     public function index()
     {
-        $subs = Submission::all();
+        $subs = Submission::select('*')->orderByDesc('created_at')->get();
         return view('Goodi/Submission/list', ['subs' => $subs]);
     }
 
