@@ -102,7 +102,7 @@ class SubmissionController extends Controller
             'none' => $ideas = $this->ideaService->findAll(),
             default => null
         };
-
+        //dd($ideas);
         if ($request->sort_by && !$ideas) {
             $department = Department::where('name', $request->sort_by)->first();
 
@@ -114,8 +114,7 @@ class SubmissionController extends Controller
             else if ($users != null)
                 $ideas = Idea::where('submission_id', $id)->whereIn('category_id', $users->pluck('id'))->get();
         }
-
-        if ($ideas == null) $ideas = $ideas = $this->ideaService->findAll();
+        if ($ideas == null) $ideas = Idea::where('submission_id', $id)->get();
 
         $submission = $this->submissionService->findById($id);
         $message = "";
