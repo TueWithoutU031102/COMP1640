@@ -84,57 +84,61 @@ class SubmissionController extends Controller
      */
     public function show($id, Request $request)
     {
-        // $categories = Category::all();
+        $categories = Category::all();
 
-        // $departments = Department::all();
-        // //??= la neu ideas chua duoc dinh nghia thi chay vao con neu ideas co gia tri thi k chay
-        // $submission ??= match ($request->sort_by) {
-        //     'mostPopular' => Idea::withCount('likes', 'dislikes')
-        //         ->where('submission_id', $id)
-        //         ->orderByRaw('(likes_count + dislikes_count) DESC')
-        //         ->limit(5)
-        //         ->get(),
-        //     'lastestIdeas' => Idea::where('submission_id', $id)
-        //         ->latest()
-        //         ->limit(5)
-        //         ->get(),
-        //     'lastestComments' => Idea::find(Comment::where('idea_id', $id)->latest()->pluck('idea_id')),
-        //     'none' => $this->submissionService->findById($id),
-        //     default => null
-        // };
+        $departments = Department::all();
+        //??= la neu ideas chua duoc dinh nghia thi chay vao con neu ideas co gia tri thi k chay
+        $ideas ??= match ($request->sort_by) {
+            'mostPopular' => Idea::withCount('likes', 'dislikes')
+                ->where('submission_id', $id)
+                ->orderByRaw('(likes_count + dislikes_count) DESC')
+                ->limit(5)
+                ->get(),
+            'lastestIdeas' => Idea::where('submission_id', $id)
+                ->latest()
+                ->limit(5)
+                ->get(),
+            'lastestComments' => Idea::find(Comment::where('idea_id', $id)->latest()->pluck('idea_id')),
+            'none' => $ideas = $this->ideaService->findAll(),
+            default => null
+        };
 
-        // if ($request->sort_by && !$submission) {
-        //     $department = Department::where('name', $request->sort_by)->first();
-        //     // truoc ? la cau dieu kien if , sau : la else
-        //     $users = $department != null ? User::where('department_id', $department->id)->get(['id'])
-        //         : Category::where('title', $request->sort_by)->get('id');
-        //     if ($department != null && $users != null)
-        //         $submission = Idea::whereIn('author_id', $users->pluck('id'))->get();
-        //     else if ($users != null)
-        //         $submission = Idea::whereIn('category_id', $users->pluck('id'))->get();
-        // }
+        if ($request->sort_by && !$ideas) {
+            $department = Department::where('name', $request->sort_by)->first();
 
-        // if ($submission == null) $submission = $this->submissionService->findById($id);
+            // truoc ? la cau dieu kien if , sau : la else
+            $users = $department != null ? User::where('department_id', $department->id)->get(['id'])
+                : Category::where('title', $request->sort_by)->get('id');
+            if ($department != null && $users != null)
+                $ideas = Idea::where('submission_id', $id)->whereIn('author_id', $users->pluck('id'))->get();
+            else if ($users != null)
+                $ideas = Idea::where('submission_id', $id)->whereIn('category_id', $users->pluck('id'))->get();
+        }
+
+        if ($ideas == null) $ideas = $ideas = $this->ideaService->findAll();
+
         $submission = $this->submissionService->findById($id);
         $message = "";
         $data = [
             'submission' => $submission,
             'timeRemaining' => '',
-            'ideas' => []
+            'ideas' => $ideas,
         ];
         $isDue = true;
         if (!$submission) {
             $message = 'Not found!';
         } else {
             $data['timeRemaining'] = $this->submissionService->getTimeRemaining($submission->dueDate);
-            $data['ideas'] = $this->ideaService->findBySubmission($submission);;
+            $data['ideas'] = $ideas;
             $isDue = $submission->dueDate < now('Asia/Ho_Chi_Minh');
         }
 
         return view('Goodi/Submission/show', $data)
             ->with('listCategories', Category::all())
             ->with('isDue', $isDue)
-            ->with('message', $message);
+            ->with('message', $message)
+            ->with('categories', $categories)
+            ->with('departments', $departments);
     }
 
     /**
