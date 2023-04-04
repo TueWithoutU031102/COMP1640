@@ -54,7 +54,7 @@ class DashboardController extends Controller
             ->get()
             ->count();
         $badIdea = Idea::withCount('likes', 'dislikes')
-            ->having('likes_count', '<', 'dislikes_count')
+            ->having('dislikes_count', '>', 'likes_count')
             ->get()
             ->count();
         $totalIdea = Idea::count();
