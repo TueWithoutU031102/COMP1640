@@ -487,7 +487,7 @@ nav.sticky {
     width: fit-content;
 }
 
-.department{
+.department {
     display: flex;
     flex-direction: column;
     width: fit-content;
@@ -659,6 +659,16 @@ nav.sticky {
     width: 800px;
 }
 
+.show-post-container {
+    background: white;
+    border: #d1d1d1 solid;
+    border-radius: 20px;
+    padding: 20px 10px 20px 10px;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.2);
+    width: 1300px;
+    margin: auto;
+}
+
 /* .profile{
     display: flex;
     gap: 100px;
@@ -781,7 +791,7 @@ nav.sticky {
     gap: 20;
 }
 
-.dashboard-box{
+.dashboard-box {
     border: solid 1px #626262;
     padding: 30px;
     border-radius: 5px;
@@ -789,41 +799,41 @@ nav.sticky {
     width: 300px;
 }
 
-.chart{
+.chart {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-.chart .dashboard-box{
+.chart .dashboard-box {
     width: 800px;
 }
 
-.dashboard-box h4{
+.dashboard-box h4 {
     display: flex;
     justify-content: space-between;
     text-align: center;
     font-size: 25px;
 }
 
-.dashboard-box p{
+.dashboard-box p {
     text-align: center;
     font-size: 40px;
     font-weight: bold;
 }
 
-.dashboard-content{
+.dashboard-content {
     display: flex;
     justify-content: space-between;
     color: #fff;
 }
 
-.dashboard-content p{
+.dashboard-content p {
     font-size: 32px;
     font-weight: 700;
 }
 
-.dashboard-content span{
+.dashboard-content span {
     font-size: 25px;
     text-align: center;
 }
@@ -1451,15 +1461,15 @@ form .form-content .input-box {
     font-size: 30px;
 }
 
-.idea-change:hover{
+.idea-change:hover {
     background: #8f8f8f;
 }
 
-.idea-effect ul li{
+.idea-effect ul li {
     list-style: none;
 }
 
-.idea-effect ul li a{
+.idea-effect ul li a {
     text-decoration: none;
     color: #000;
     width: 200px;
@@ -1472,7 +1482,7 @@ form .form-content .input-box {
     transition: 0.2s;
 }
 
-.idea-effect ul li a:hover{
+.idea-effect ul li a:hover {
     background: #8f8f8f;
 }
 
