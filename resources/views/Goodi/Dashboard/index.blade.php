@@ -5,38 +5,49 @@
         @include('Goodi.nav_bar')
         <div class="text-box">
             <h1>
-                <p>IDEA <span class="text-highlight">CATEGORIES</span></p>
+                <p>GOODI <span class="text-highlight">DASHBOARD</span></p>
             </h1>
             <p>
-                Goodi Category, Place to sort idea into a group
+                Goodi Dashboard, Place to Analayze Data From the Website
             </p>
             <br>
         </div>
-    </section>
-    <div>
-        <h6>phần trăm số idea của từng department trên tổng số</h6>
-        <h1>IT</h1>
-        <h2>{{ $percentITIdea }}%</h2>
-        <h1>Bussiness</h1>
-        <h2>{{ $percentBussinessIdea }}%</h2>
-    </div>
-    <div>
-        <h6>trên tổng số các idea, thì idea nào không hay (dislike >like) và idea nào hay (like>dislike)</h6>
-        <h1>Tổng bài đã đăng</h1>
-        <h2>
-            {{ $totalIdea }}
-        </h2>
-        <h1>Hay (Like > Dislike)</h1>
-        <h2>
-            {{ $percentGoodIdea }}%
-        </h2>
-        <h1>Không hay (Dislike > Like)</h1>
-        <h2>
-            {{ $percentBadIdea }}%
-        </h2>
-    </div>
+    </section><br>
     <div class="dashboard">
-        <div class="post-container">
+        <div class="dashboard-box" style="background: #ff9900; border-left: solid 10px #000000;">
+            <h4>Department <i class="fa-solid fa-building"></i></h4>
+            <div class="dashboard-content">
+                <div>
+                    <p>IT</p>
+                    <span>{{ $percentITIdea }}%</span>
+                </div>
+                <div>
+                    <p>Bussiness</p>
+                    <span>{{ $percentBussinessIdea }}%</span>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-box" style="border-left: solid 10px #00c8e2;">
+            <h4>Total of Idea <i class="fa-solid fa-lightbulb"></i></h4>
+            <p>
+                {{ $totalIdea }}
+            </p>
+        </div>
+        <div class="dashboard-box" style="border-left: solid 10px #ef113d;">
+            <h4>Percent of Best Idea <i class="fa-solid fa-heart"></i></h4>
+            <p>
+                {{ $percentGoodIdea }}%
+            </p>
+        </div>
+        <div class="dashboard-box" style="border-left: solid 10px #57c14b;">
+            <h4>Percent of Worst Idea <i class="fa-solid fa-heart-crack"></i></h4>
+            <p>
+                {{ $percentBadIdea }}%
+            </p>
+        </div>
+    </div><br><br>
+    <div class="chart">
+        <div class="dashboard-box">
             <canvas id="Chart1" height="100"></canvas>
             <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -50,20 +61,20 @@
                     labels: labels,
                     datasets: [{
                             label: "Total",
-                            backgroundColor: 'rgb(255,160,122)',
-                            borderColor: 'rgb(255,0,0)',
+                            backgroundColor: 'rgba(245, 141, 21, 0.432)',
+                            borderColor: 'rgba(245, 103, 21, 0.432)',
                             data: amountIdea,
                         },
                         {
                             label: "IT",
-                            backgroundColor: 'rgb(222,122,122)',
-                            borderColor: 'rgb(222,0,0)',
+                            backgroundColor: 'rgba(21, 178, 245, 0.432)',
+                            borderColor: 'rgba(21, 70, 245, 0.432)',
                             data: amountIdeaIT,
                         },
                         {
                             label: "Business",
-                            backgroundColor: 'rgb(100,100,100)',
-                            borderColor: 'rgb(100,0,0)',
+                            backgroundColor: 'rgba(51, 196, 121, 0.432)',
+                            borderColor: 'rgba(2, 91, 45, 0.432)',
                             data: amountIdeaBusiness,
                         },
                     ]
@@ -90,7 +101,7 @@
                     config);
             </script>
         </div>
-        <div class="post-container">
+        <div class="dashboard-box">
             <canvas id="Chart2" height="100"></canvas>
             <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -109,12 +120,14 @@
                         datasets: [{
                                 label: 'IT',
                                 data: dataCountIT,
-                                backgroundColor: 'rgb(100,100,100)',
+                                backgroundColor: 'rgba(21, 178, 245, 0.432)',
+                                borderColor: 'rgba(21, 70, 245, 0.432)',
                             },
                             {
                                 label: 'Business',
                                 data: dataCountBusiness,
-                                backgroundColor: 'rgb(255,160,255)',
+                                backgroundColor: 'rgba(51, 196, 121, 0.432)',
+                                borderColor: 'rgba(2, 91, 45, 0.432)',
                             }
                         ]
                     };

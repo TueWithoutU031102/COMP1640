@@ -487,7 +487,13 @@ nav.sticky {
     width: fit-content;
 }
 
-.category p {
+.department{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.department p {
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -496,9 +502,29 @@ nav.sticky {
     color: #545454;
 }
 
-.category a {
+.category p {
+    text-align: left;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-right: 40px;
+    margin-left: 15px;
+    padding-left: 70px;
+    color: #545454;
+}
+
+.department a {
+    text-align: left;
     width: 250px;
     overflow-wrap: break-word;
+    margin-left: 70px;
+}
+
+.category a {
+    text-align: left;
+    width: 250px;
+    overflow-wrap: break-word;
+    margin-left: 70px;
 }
 
 .idea-action {
@@ -749,18 +775,60 @@ nav.sticky {
 }
 
 .dashboard {
-    margin-top: 60px;
-    border-radius: 20px;
-    background: white;
-    flex-basis: 65%;
-    position: sticky;
-    top: 70px;
-    align-self: flex-start;
-    /* height: 100vh; */
-    padding: 20px;
-    border-radius: 4px;
-    color: #626262;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20;
 }
+
+.dashboard-box{
+    border: solid 1px #626262;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+.chart{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.chart .dashboard-box{
+    width: 800px;
+}
+
+.dashboard-box h4{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 25px;
+}
+
+.dashboard-box p{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.dashboard-content{
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.dashboard-content p{
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.dashboard-content span{
+    font-size: 25px;
+    text-align: center;
+}
+
+
 
 
 /* .des{
@@ -830,7 +898,7 @@ nav.sticky {
 
 .submission-date {
     display: flex;
-    gap: 200px;
+    gap: 50px;
 }
 
 .submission-container {

@@ -25,8 +25,8 @@
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
                 <div class="imp-link">
-                    <a href="#">All Discussion</a>
-                    <a href="#">Category</a>
+                    {{-- <a href="#">All Discussion</a>
+                    <a href="#">Category</a> --}}
                 </div>
             </div>
             <div class="main-content">

@@ -11,7 +11,6 @@
         <div class="black-nav-link" id="navlink">
             <ul style="display: flex;">
                 <li><a href="/about">ABOUT</a></li>
-                <li><a href="/department">DEPARTMENT</a></li>
                 <li><a href="/FAQ">FAQs</a></li>
                 <li><a href="/login">LOGIN</a></li>
             </ul>
@@ -49,14 +48,13 @@
                     <li><a href="/submission/index">EVENT</a></li>
                 @endif
                 @if (Auth::user()->role_id == 1)
-                    <li><a href="/admin/acc">ACCOUNT</a></li>
+                    <li><a href="/admin/acc">ACCOUNTS</a></li>
                 @endif
                 @if (Auth::user()->role_id == 4 || Auth::user()->role_id == 1)
                     <li><a href="/category/index">CATEGORY</a></li>
                     <li><a href="/dashboard/index">DASHBOARD</a></li>
                 @endif
                 <li><a href="/about">ABOUT</a></li>
-                <li><a href="/department">DEPARTMENT</a></li>
                 <li>
                     <div class="action">
                         <div class="profile" onclick="profileToggle()">
@@ -119,8 +117,8 @@
         menu.classList.toggle('active')
     }
 
-    window.addEventListener('scroll', function() {
-        var nav = document.querySelector("nav");
-        nav.classList.toggle("sticky", window.scrollY > 0);
-    })
+    // window.addEventListener('scroll', function() {
+    //     var nav = document.querySelector("nav");
+    //     nav.classList.toggle("sticky", window.scrollY > 0);
+    // })
 </script>
