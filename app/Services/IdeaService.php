@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Idea;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use function Symfony\Component\String\u;
 
 class IdeaService
@@ -44,5 +45,25 @@ class IdeaService
 
     public function findIdeasByUserId(User $user){
         return $user->ideas;
+    }
+    public function findIdeasBySubmissionIdAndDepartmentId(int $submissionId, int $departmentId){
+        return $ideas = Idea::where('submission_id', $submissionId)
+            ->whereHas('department', function ($query) use ($departmentId) {
+                $query->where('id', $departmentId);
+            })
+            ->get();
+    }
+    public function findIdeasBySubmissionIdAndCategoryId(int $submissionId, int $categoryId){
+        return $ideas = Idea::where('submission_id', $submissionId)
+            ->whereHas('category', function ($query) use ($categoryId) {
+                $query->where('id', $categoryId);
+            })
+            ->get();
+    }
+    public function findMostViewsIdeasBySubmissionId(int $submissionId){
+        return 0;
+    }
+    public function findIdeasSortedNewestBySubmissionId(int $submissionId){
+        return 0;
     }
 }

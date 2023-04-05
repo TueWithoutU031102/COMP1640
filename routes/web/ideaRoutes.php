@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'idea', 'middleware' => ['auth', 'user']], function () {
 
-    Route::get('index', [IdeaController::class, 'index'])->name('indexIdea');
-
     Route::post('store', [IdeaController::class, 'store'])->name('storeIdea');
 
     Route::post("create", [IdeaController::class, 'create'])->name("createIdea");

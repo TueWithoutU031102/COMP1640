@@ -6,6 +6,7 @@ use App\Http\Requests\File\StoreFileRequest;
 use App\Models\Category;
 use App\Models\Idea;
 use App\Models\User;
+use App\Models\Like;
 use App\Models\Department;
 use App\Models\Comment;
 use App\Services\CommentService;
@@ -15,7 +16,8 @@ use App\Services\UserService;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Continue_;
 
 class IdeaController extends Controller
 {
@@ -51,37 +53,6 @@ class IdeaController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index(Request $request)
-    {
-        $categories = Category::all();
-
-        $departments = Department::all();
-
-        if ($request->sort_by) {
-            $department = Department::where('name', $request->sort_by)->first();
-            // truoc ? la cau dieu kien if , sau : la else
-            $users = $department ? User::where('department_id', $department->id)->get(['id']) : null;
-            $ideas = $department && $users ? Idea::whereIn('author_id', $users->pluck('id'))->paginate(5) : null;
-        }
-
-        //??= la neu ideas khong co gia tri gi thi chay vao con neu ideas co gia tri thi k chay
-
-        $ideas ??= match ($request->sort_by) {
-            'mostPopular' => Idea::withCount('likes', 'dislikes')->orderByDesc('likes_count', 'dislikes_count')->limit(5)->get(),
-            'lastestIdeas' => Idea::latest()->limit(5)->get(),
-            'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
-            default => $this->ideaService->findAll()
-
-        };
-
-
-        // $sortDislike = Dislike::select(DB::raw("COUNT(idea_id) as count"), 'idea_id')
-        //     ->groupBy('idea_id')
-        //     ->pluck('idea_id');
-
-
-        return view('Goodi/Idea/index', ['listCategories' => $categories, 'ideas' => $ideas, 'departments' => $departments]);
-    }
 
     public function findIdeasByUserId()
     {

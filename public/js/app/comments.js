@@ -106,6 +106,7 @@ async function commentOnIdea(ideaId, userId, commentContentInput_Id) {
     let isAnonymous = document.getElementById(commentAnonymous_prefix + ideaId).checked;
     let commentService = new CommentApi();
 
+    console.log(commentContentInput_Id)
     if (commentInput.value == ''){
         alert('comment empty!');
         return;

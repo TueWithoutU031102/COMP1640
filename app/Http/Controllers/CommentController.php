@@ -53,6 +53,8 @@ class CommentController extends Controller
 
         $comment = new Comment($request->all());
         $comment['author_id'] = $user_id;
+
+        dd($comment);
         $this->commentService->store($comment);
 
         return response()->json([

@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Submission\createSubmission;
 use App\Http\Requests\Submission\updateSubmission;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\User;
 use App\Models\Idea;
+use App\Models\Department;
 use App\Models\Submission;
 use App\Services\IdeaService;
 use App\Services\SubmissionService;
@@ -32,7 +35,7 @@ class SubmissionController extends Controller
      */
     public function index()
     {
-        $subs = Submission::all();
+        $subs = Submission::select('*')->orderByDesc('created_at')->get();
         return view('Goodi/Submission/list', ['subs' => $subs]);
     }
 
@@ -61,9 +64,9 @@ class SubmissionController extends Controller
         $timezone = 'Asia/Ho_Chi_Minh';
         $startDate = new Carbon($submission['startDate'], $timezone);
         $dueDate = new Carbon($submission['dueDate'], $timezone);
-        $isStartDateLessThanDueDate = $startDate->lt($dueDate);
+        $dueDateComment = new Carbon($submission['dueDateComment'], $timezone);
 
-        if ($isStartDateLessThanDueDate) {
+        if ($startDate->lt($dueDate) && $dueDate->lt($dueDateComment)) {
             $submission->save();
             return redirect(route('indexSubmission'))
                 ->with('success', 'Submission created successfully')
@@ -79,32 +82,62 @@ class SubmissionController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
+        $categories = Category::all();
+
+        $departments = Department::all();
+        //??= la neu ideas chua duoc dinh nghia thi chay vao con neu ideas co gia tri thi k chay
+        $ideas ??= match ($request->sort_by) {
+            'mostPopular' => Idea::withCount('likes', 'dislikes')
+                ->where('submission_id', $id)
+                ->orderByRaw('(likes_count + dislikes_count) DESC')
+                ->limit(5)
+                ->get(),
+            'lastestIdeas' => Idea::where('submission_id', $id)
+                ->latest()
+                ->limit(5)
+                ->get(),
+            'lastestComments' => Idea::find(Comment::where('idea_id', $id)->latest()->pluck('idea_id')),
+            'none' => $ideas = $this->ideaService->findAll(),
+            default => null
+        };
+        //dd($ideas);
+        if ($request->sort_by && !$ideas) {
+            $department = Department::where('name', $request->sort_by)->first();
+
+            // truoc ? la cau dieu kien if , sau : la else
+            $users = $department != null ? User::where('department_id', $department->id)->get(['id'])
+                : Category::where('title', $request->sort_by)->get('id');
+            if ($department != null && $users != null)
+                $ideas = Idea::where('submission_id', $id)->whereIn('author_id', $users->pluck('id'))->get();
+            else if ($users != null)
+                $ideas = Idea::where('submission_id', $id)->whereIn('category_id', $users->pluck('id'))->get();
+        }
+        if ($ideas == null) $ideas = Idea::where('submission_id', $id)->get();
+
         $submission = $this->submissionService->findById($id);
         $message = "";
         $data = [
             'submission' => $submission,
             'timeRemaining' => '',
-            'ideas' => []
+            'ideas' => $ideas,
         ];
         $isDue = true;
         if (!$submission) {
             $message = 'Not found!';
         } else {
             $data['timeRemaining'] = $this->submissionService->getTimeRemaining($submission->dueDate);
-            $data['ideas'] = $this->ideaService->findBySubmission($submission);;
+            $data['ideas'] = $ideas;
             $isDue = $submission->dueDate < now('Asia/Ho_Chi_Minh');
-        }
-        if (isset($_GET['sort_by'])) {
-            $sort_by = $_GET['sort_by'];
-            // if($sort_by=='popular')
         }
 
         return view('Goodi/Submission/show', $data)
             ->with('listCategories', Category::all())
             ->with('isDue', $isDue)
-            ->with('message', $message);
+            ->with('message', $message)
+            ->with('categories', $categories)
+            ->with('departments', $departments);
     }
 
     /**

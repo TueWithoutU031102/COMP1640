@@ -74,7 +74,15 @@
                         <div class="category">
                             <p>Category</p>
                             @foreach ($listCategories as $category)
-                                <a value="{{ $category->id }}">{{ $category->title }}</a>
+                                <a href="{{ Request::url() }}?sort_by={{ $category->title }}">{{ $category->title }}</a>
+                            @endforeach
+                        </div>
+                        <div class="department">
+                            <p>Department</p>
+                            @foreach ($departments as $department)
+                                <a href="{{ Request::url() }}?sort_by={{ $department->name }}">
+                                    {{ $department->name }}
+                                </a>
                             @endforeach
                         </div>
                     </div>
@@ -83,25 +91,26 @@
                     <section class="idea-action">
                         <div class="sort-idea">
                             <script type="text/javascript">
-                                $(document).ready(function() {
-                                    $('#sort').on('change', function() {
-                                        var url = $(this).val();
-                                        if (url)
-                                            window.location = url;
-                                        return false;
-                                    });
-                                });
+                                window.addEventListener('load', () => {
+                                    const sort = document.querySelector('#sort')
+                                    sort.addEventListener('change', () => window.location.href = sort.value)
+
+                                    for (const child of sort.children) {
+                                        if (child.value === window.location.toString()) {
+                                            child.setAttribute('selected', true)
+                                        }
+                                    }
+                                })
                             </script>
-                            {{-- <form>
+                            <form>
                                 @csrf
-                                <select id="sort">
-                                    <option value="{{ Request::url() }}sort_by=none">Sort</option>
-                                    <option value="{{ Request::url() }}sort_by=popular">Most Popular Ideas </option>
-                                    <option value="">Most Viewed Ideas</option>
-                                    <option value="">Latest Ideas</option>
-                                    <option value="">Latest Comments</option>
+                                <select class="form-control" id="sort" name="sort">
+                                    <option value="{{ Request::url() }}?sort_by=none">---Filter by---</option>
+                                    <option value="{{ Request::url() }}?sort_by=mostPopular">Most Popular Ideas </option>
+                                    <option value="{{ Request::url() }}?sort_by=lastestIdeas">Latest Ideas</option>
+                                    <option value="{{ Request::url() }}?sort_by=lastestComments">Latest Comments</option>
                                 </select>
-                            </form> --}}
+                            </form>
                         </div>
                         <form action="" class="form-inline">
                             <div class="form-group">
@@ -173,9 +182,10 @@
                                         class="rounded-circle" alt=""
                                         style="object-fit: cover; object-position: center center;">
                                     <div class="post-content">
-                                        <h4>{{ $idea->title }}</h4>
-                                        <small>{{ $idea->user->name }} Has Posted on
-                                            {{ $idea->created_at }}</small><br><br>
+                                        <a href="/idea/show/{{ $idea->id }}">
+                                            <h4>{{ $idea->title }}</h4>
+                                        </a <small>{{ $idea->user->name }} Has Posted on
+                                        {{ $idea->created_at }}</small><br><br>
                                         @foreach ($idea->files as $file)
                                             <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
                                         @endforeach

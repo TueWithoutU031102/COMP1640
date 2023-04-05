@@ -46,7 +46,7 @@ class FileController extends Controller
         $pdfs = $request->file('files');
         if (!$pdfs) return false;
         foreach ($pdfs as $pdf) {
-            $path = $this->saveImage($pdf);
+            $path = $this->saveFileIdeas($pdf);
             $file = new File(
                 [
                     "path" => $path,
@@ -103,7 +103,7 @@ class FileController extends Controller
         //
     }
 
-    protected function saveImage(UploadedFile $file)
+    protected function saveFileIdeas(UploadedFile $file)
     {
         $name = uniqid("idea_") . "." . $file->getClientOriginalExtension();
         move_uploaded_file($file->getPathname(), public_path('idea/' . $name));

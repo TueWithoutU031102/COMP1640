@@ -24,6 +24,7 @@ return new class extends Migration
         DB::table('departments')->insert([
             ['name' => 'IT'],
             ['name' => 'Business'],
+            ['name' => 'Graphic Design'],
         ]);
     }
 

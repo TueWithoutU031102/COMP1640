@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\IdeaService;
 use App\Models\User;
+use App\Models\Role;
+use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -24,10 +25,19 @@ class UserController extends Controller
     }
     public function index()
     {
-        $listIdeas = $this->ideaService->findIdeasByUserId($this->currentUser);
-        return view('Goodi/User/index')
-            ->with('listIdeas', $listIdeas);
-    }
 
-    
+        $account = User::find(Auth::user()->id);
+        $listRoles = Role::where('name', '!=', 'ADMIN')->get();
+        $listDepartments = Department::all();
+        $listIdeas = $this->ideaService->findIdeasByUserId($this->currentUser);
+        return view(
+            'Goodi/User/index',
+            [
+                'listIdeas' => $listIdeas,
+                'account' => $account,
+                'listRoles' => $listRoles,
+                'listDepartments' => $listDepartments
+            ]
+        );
+    }
 }

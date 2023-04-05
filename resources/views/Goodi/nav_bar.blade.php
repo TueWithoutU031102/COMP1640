@@ -10,7 +10,6 @@
     @if (!Auth::user())
         <div class="black-nav-link" id="navlink">
             <ul style="display: flex;">
-                <li><a href="/index">FORUM</a></li>
                 <li><a href="/about">ABOUT</a></li>
                 <li><a href="/department">DEPARTMENT</a></li>
                 <li><a href="/FAQ">FAQs</a></li>
@@ -46,7 +45,6 @@
                 <a href="/"><img class="logo" src="/css/images/logo_transparent.png"></a>
             </div>
             <ul style="display: flex;">
-                <li><a href="/idea/index">FORUM</a></li>
                 @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                     <li><a href="/submission/index">EVENT</a></li>
                 @endif

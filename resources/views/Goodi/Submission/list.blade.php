@@ -31,14 +31,6 @@
             </div>
             <div class="main-content">
                 <section class="idea-action">
-                    {{-- <div class="sort-idea">
-                        <select>
-                            <option value="">Most Popular Ideas </option>
-                            <option value="">Most Viewed Ideas</option>
-                            <option value="">Latest Ideas</option>
-                            <option value="">Latest Comments</option>
-                        </select>
-                    </div> --}}
                     <form action="" class="form-inline">
                         <div class="form-group">
                             <input class="search_bar" placeholder="Search Idea">
@@ -48,7 +40,6 @@
                         @if (in_array(Auth::user()->role->name, ['QAM', 'ADMIN']))
                             <button class="add-idea" onclick="formToggle();">Create event</button>
                         @endif
-                        {{-- <button class="refresh-idea">Refresh</button> --}}
                     </div>
                 </section><br>
                 <section class="create-idea">
@@ -81,8 +72,14 @@
                                 <input type="datetime-local" name="dueDate" class="form-control" id="dueDateInput"
                                     aria-describedby="dueDate" style="width: 300px" onchange="checkDueDate(this)">
                                 <label for="select2weeks">2 weeks</label>
-                                <input type="checkbox" id="select2weeks" onclick="setDueDateLate2Weeks('startDateInput','dueDateInput')">
-
+                                <input type="checkbox" id="select2weeks"
+                                    onclick="setDueDateLate2Weeks('startDateInput','dueDateInput')">
+                            </div>
+                            <div class="form-group">
+                                <label for="dueDateComment" class="font-weight-bold">Date Finished 2</label>
+                                <input type="datetime-local" name="dueDateComment" class="form-control" id="dueDateCommentInput"
+                                    aria-describedby="dueDateComment" style="width: 300px" onchange="checkDueDate(this)">
+                                <label for="select2weeks">2 weeks</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -109,8 +106,10 @@
                                         <h4>{{ $sub->title }}</h4>
                                         <small>Create by:</small><br>
                                         <p>{{ $sub->description }}</p>
-                                        <span class="due-date"><i class="fa-solid fa-triangle-exclamation"></i> Due
-                                            {{ $sub->dueDate }}</span>
+                                        <span class="due-date">
+                                            <i class="fa-solid fa-triangle-exclamation"></i> Due
+                                            {{ $sub->dueDate }}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -144,12 +143,13 @@
 
         let tzOffset = (new Date()).getTimezoneOffset() * 60000;
         let sD = new Date(startDateInput.value);
-        let dD =  sD.setDate(sD.getDate()+14);
+        let dD = sD.setDate(sD.getDate() + 14);
         dD = new Date(dD - tzOffset)
         dueDateInput.value = dD.toISOString().slice(0, 16);
 
 
     }
+
     function setStartDateEqualToday(startDateInputId) {
         let startDateInput = document.getElementById(startDateInputId);
         let tzOffset = (new Date()).getTimezoneOffset() * 60000;
@@ -166,24 +166,9 @@
 
     setStartDateEqualToday("startDateInput");
 
-    function getStartDateEqualToday(startDateInputId) {
-        let startDateInput = document.getElementById(startDateInputId);
-        console.log(startDateInput)
-        let tzOffset = (new Date()).getTimezoneOffset() * 60000;
-        let today = new Date(Date.now() - tzOffset);
-        startDateInput.value = today.toISOString().slice(0, 16);
-    }
-
-    limitDueDate(today.toISOString().slice(0, 16))
-
-    function limitDueDate(startDate) {
-        let dueDateInput = document.getElementById('dueDateInput');
-        dueDateInput.min = startDate;
-    }
-
     function checkDueDate(seft) {
         let select2weeksCheckbox = $('#select2weeks');
-        select2weeksCheckbox.prop( "checked", false );
+        select2weeksCheckbox.prop("checked", false);
 
         let submitCreate = document.getElementById('submitCreate');
         let dueDate = new Date(seft.value);

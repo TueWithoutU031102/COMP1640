@@ -48,6 +48,29 @@ class DashboardController extends Controller
             ->where('department_id', '=', '2')
             ->pluck('count');
         $dataCountBusiness = $countContributorBusiness->values();
+
+        $goodIdea = Idea::withCount('likes', 'dislikes')
+            ->having('likes_count', '>', 'dislikes_count')
+            ->get()
+            ->count();
+        $badIdea = Idea::withCount('likes', 'dislikes')
+            ->having('dislikes_count', '>', 'likes_count')
+            ->get()
+            ->count();
+        $totalIdea = Idea::count();
+
+        if ($totalIdea != 0) {
+            $percentGoodIdea = (float)($goodIdea / $totalIdea * 100);
+            $percentBadIdea = (float)($badIdea / $totalIdea * 100);
+            $percentITIdea = (float) ($amountIdeaIT->count() / $totalIdea * 100);
+            $percentBussinessIdea = (float) ($amountIdeaBusiness->count() / $totalIdea * 100);
+        } else {
+            $percentGoodIdea = 0;
+            $percentBadIdea = 0;
+            $percentITIdea = 0;
+            $percentBussinessIdea = 0;
+        }
+        
         return view('Goodi/Dashboard/index', compact(
             'labels',
             'data',
@@ -57,6 +80,11 @@ class DashboardController extends Controller
             'dataBusiness',
             'dataCountBusiness',
             'dataCountIT',
+            'totalIdea',
+            'percentGoodIdea',
+            'percentBadIdea',
+            'percentBussinessIdea',
+            'percentITIdea'
         ));
     }
 }
