@@ -139,13 +139,14 @@
                     <div class="category">
                         <p>Category</p>
                         @foreach ($listCategories as $category)
-                            <a href="{{ Request::url() }}?sort_by={{ $category->title }}">{{ $category->title }}</a>
+                            <a href="#">{{ $category->title }}</a>
                         @endforeach
                         <p>Department</p>
                         @foreach ($departments as $department)
-                            <a href="{{ Request::url() }}?sort_by={{ $department->name }}">
-                                {{ $department->name }}
-                            </a>
+                            <a id="sort_Department" name="sort_Department">
+                                <a href="{{ Request::url() }}?sort_by={{ $department->name }}">{{ $department->name }}
+                                    </option>
+                                </a>
                         @endforeach
                     </div>
 
@@ -229,7 +230,7 @@
                                 </button>
                                 <div class="idea-effect{{ $idea->id }}">
                                     <ul>
-                                        <li><a href="">Open Idea</a></li>
+                                        <li><a href="/idea/show/{{$idea->id}}">Open Idea</a></li>
                                         <li><a href="">Change Content</a></li>
                                         <li><a href="">Remove Post</a></li>
                                     </ul>
@@ -287,7 +288,7 @@
                                     onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
                                     class="comment{{ $idea->id }}"><i
                                         class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
-                                <h6>{{ $idea->comments->count() }}</h6>
+                                <h6>{{$idea->comments->count()}}</h6>
                             </div>
                             <hr>
 

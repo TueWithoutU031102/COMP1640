@@ -53,43 +53,6 @@ class IdeaController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index(Request $request)
-    {
-        $categories = Category::all();
-
-        $departments = Department::all();
-
-
-        //??= la neu ideas chua duoc dinh nghia thi chay vao con neu ideas co gia tri thi k chay
-        $ideas ??= match ($request->sort_by) {
-            'mostPopular' => Idea::withCount('likes', 'dislikes')
-                ->orderByRaw('(likes_count + dislikes_count) DESC')->limit(5)->get(),
-            'lastestIdeas' => Idea::latest()->limit(5)->get(),
-            'lastestComments' => Idea::find(Comment::latest()->pluck('idea_id')),
-            'none' => $this->ideaService->findAll(),
-            default => null
-        };
-
-        if ($request->sort_by && !$ideas) {
-            $department = Department::where('name', $request->sort_by)->first();
-            // truoc ? la cau dieu kien if , sau : la else
-            $users = $department != null ? User::where('department_id', $department->id)->get(['id'])
-                : Category::where('title', $request->sort_by)->get('id');
-            if ($department != null && $users != null)
-                $ideas = Idea::whereIn('author_id', $users->pluck('id'))->get();
-            else if ($users != null)
-                $ideas = Idea::whereIn('category_id', $users->pluck('id'))->get();
-        }
-        if ($ideas == null) $ideas = $this->ideaService->findAll();
-        return view(
-            'Goodi/Idea/index',
-            [
-                'listCategories' => $categories,
-                'ideas' => $ideas,
-                'departments' => $departments
-            ]
-        );
-    }
 
     public function findIdeasByUserId()
     {
