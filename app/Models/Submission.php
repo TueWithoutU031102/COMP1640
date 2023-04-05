@@ -16,6 +16,7 @@ class Submission extends Model
         'description',
         'startDate',
         'dueDate',
+        'dueDateComment',
         'author_id'
     ];
 
