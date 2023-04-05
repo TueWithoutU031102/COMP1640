@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Comment\StoreCommentRequest;
 use App\Http\Requests\Comment\UpdateCommentRequest;
 use App\Models\Comment;
+use App\Models\Idea;
 use App\Models\User;
 use App\Services\CommentService;
 use App\Services\IdeaService;
@@ -54,12 +55,12 @@ class CommentController extends Controller
         $comment = new Comment($request->all());
         $comment['author_id'] = $user_id;
 
-        dd($comment);
         $this->commentService->store($comment);
 
         return response()->json([
             'message' => 'Comment created',
             'comment' => $comment,
+            'commentCount' => Idea::find($comment->idea->id)->comments->count(),
             'an' => $request->get('isAnonymous'),
         ], 201);
     }

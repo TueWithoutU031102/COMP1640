@@ -412,6 +412,7 @@
                             <p><span>Create by:{{ $submission->user->name }} </span></p>
                             <p><span>Start date: </span>{{ $submission->startDate }}</p>
                             <p><span>Due date: </span>{{ $submission->dueDate }}</p>
+                            <p><span>Due date 2: </span>{{ $submission->dueDateComment }}</p>
                             <div class="row" id="editForm">
                                 <input type="text" id="submissionIdToUpdateDate" hidden>
                                 <div class="editStartDate popup col-4" id="editStartDate" hidden>

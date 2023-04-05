@@ -25,6 +25,12 @@ class CommentApi {
             .then(function (response) {
                 const commentsData = response.data;
                 console.log("response add comment: ", commentsData);
+                document.getElementById('commentCount').innerHTML = commentsData.commentCount;
+                console.log(commentsData.commentCount);
+
+                let name = JSON.parse(localStorage.getItem('user')).name;
+                if (isAnonymous) name = 'Someone'
+                new CommentApi().sentNotify(name, ideaId, jwt);
             })
             .catch(function (error) {
                 console.log(error);
