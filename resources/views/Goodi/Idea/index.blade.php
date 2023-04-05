@@ -230,7 +230,7 @@
                                 </button>
                                 <div class="idea-effect{{ $idea->id }}">
                                     <ul>
-                                        <li><a href="">Open Idea</a></li>
+                                        <li><a href="/idea/show/{{$idea->id}}">Open Idea</a></li>
                                         <li><a href="">Change Content</a></li>
                                         <li><a href="">Remove Post</a></li>
                                     </ul>
