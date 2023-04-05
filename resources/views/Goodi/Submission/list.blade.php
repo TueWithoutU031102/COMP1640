@@ -74,7 +74,12 @@
                                 <label for="select2weeks">2 weeks</label>
                                 <input type="checkbox" id="select2weeks"
                                     onclick="setDueDateLate2Weeks('startDateInput','dueDateInput')">
-
+                            </div>
+                            <div class="form-group">
+                                <label for="dueDateComment" class="font-weight-bold">Date Finished 2</label>
+                                <input type="datetime-local" name="dueDateComment" class="form-control" id="dueDateCommentInput"
+                                    aria-describedby="dueDateComment" style="width: 300px" onchange="checkDueDate(this)">
+                                <label for="select2weeks">2 weeks</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -160,21 +165,6 @@
     }
 
     setStartDateEqualToday("startDateInput");
-
-    function getStartDateEqualToday(startDateInputId) {
-        let startDateInput = document.getElementById(startDateInputId);
-        console.log(startDateInput)
-        let tzOffset = (new Date()).getTimezoneOffset() * 60000;
-        let today = new Date(Date.now() - tzOffset);
-        startDateInput.value = today.toISOString().slice(0, 16);
-    }
-
-    limitDueDate(today.toISOString().slice(0, 16))
-
-    function limitDueDate(startDate) {
-        let dueDateInput = document.getElementById('dueDateInput');
-        dueDateInput.min = startDate;
-    }
 
     function checkDueDate(seft) {
         let select2weeksCheckbox = $('#select2weeks');
