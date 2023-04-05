@@ -84,6 +84,18 @@
             font-size: 30px;
         }
 
+        .idea-back{{ $idea->id }} {
+            /* position: absolute; */
+            right: 350px;
+            background: #fff;
+            border: none;
+            transition: 0.2s;
+            padding: 5px;
+            height: 50px;
+            border-radius: 20px;
+            font-size: 39px;
+        }
+
         .idea-change{{ $idea->id }}:hover {
             background: #8f8f8f;
         }
@@ -117,14 +129,17 @@
             <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
                 <p>&dot;&dot;&dot;</p>
             </button>
+            <button class="idea-back{{ $idea->id }}" onclick="history.back()">
+                <p>&LeftArrow;</p>
+            </button>
             <div class="idea-effect{{ $idea->id }}">
                 <ul>
-                    <li><a style="cursor: pointer" onclick="history.back()">Back to List</a></li>
                     <li><a href="">Change Content</a></li>
                     <li><a href="">Remove Post</a></li>
                 </ul>
             </div>
         </div>
+        <br>
         <div class="user-detail">
             <img src="{{ asset($idea->user->image) }}" width="50" height="50" class="rounded-circle" alt=""
                 style="object-fit: cover; object-position: center center;">
