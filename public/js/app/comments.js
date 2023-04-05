@@ -114,9 +114,7 @@ async function commentOnIdea(ideaId, userId, commentContentInput_Id) {
 
     commentService.commentOnIdea(ideaId, jwt, commentInput.value, isAnonymous);
     commentInput.value = '';
-    await showCommentByIdea(ideaId, commentContentEleId_prefix + ideaId);
+   await showCommentByIdea(ideaId, commentContentEleId_prefix + ideaId, isAnonymous);
 
-    let name = JSON.parse(localStorage.getItem('user')).name;
-    if (isAnonymous) name = 'Someone'
-    commentService.sentNotify(name, ideaId, jwt);
+
 }

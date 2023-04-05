@@ -57,24 +57,36 @@
                 onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
                 class="comment{{ $idea->id }}"><i
                     class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
-            <h6>10</h6>
+            <h6 id="commentCount">{{ $idea->comments->count() }}</h6>
         </div>
         <hr>
 
         <section class="gradient-custom{{ $idea->id }}">
             <div class="card-body p-4">
-                <div class="mt-3  d-flex flex-row align-items-center p-3 form-color"
-                     style="gap: 10px">
-                    <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50"
-                         height="50" alt="user avatar" class="rounded-circle"
-                         style="object-fit: cover; object-position: center center;">
-                    <input type="text" class="form-control" placeholder="Enter your comment..."
-                           id="commentContentInput{{ $idea->id }}">
-                    <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
-                    <button onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
-                        sent
-                    </button>
-                </div>
+                @if($idea->submission->dueDateComment > now())
+                    <div class="mt-3  d-flex flex-row align-items-center p-3 form-color"
+                         style="gap: 10px">
+                        <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50"
+                             height="50" alt="user avatar" class="rounded-circle"
+                             style="object-fit: cover; object-position: center center;">
+                        <input type="text" class="form-control" placeholder="Enter your comment..."
+                               id="commentContentInput{{ $idea->id }}">
+                        <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
+                        <button onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
+                            sent
+                        </button>
+                    </div>
+                @else
+                    <div class="mt-3  d-flex flex-row align-items-center p-3 form-color"
+                         style="gap: 10px">
+                        <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50"
+                             height="50" alt="user avatar" class="rounded-circle"
+                             style="object-fit: cover; object-position: center center;">
+                        <input type="text" class="form-control" placeholder="Over due ..."
+                               id="commentContentInput{{ $idea->id }}" disabled>
+                    </div>
+                @endif
+
                 <div class="row">
                     <div class="col" id="commentContentEle{{ $idea->id }}">
                         @foreach ($idea->comments as $comment)
