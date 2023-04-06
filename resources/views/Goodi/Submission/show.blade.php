@@ -134,8 +134,8 @@
                         <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                     </div>
                     <div class="imp-link">
-                        <a href="/submission/index"><i class="fa-solid fa-comments"></i> All Events</a>
-                        <a href="#"><i class="fa-solid fa-file"></i> All Ideas</a>
+                        <a href="/submission/index"><i class="fa-solid fa-file"></i> All Events</a>
+                        <a href="#"><i class="fa-solid fa-comments"></i> All Ideas</a>
                         <div class="category">
                             <p>Category</p>
                             @foreach ($listCategories as $category)

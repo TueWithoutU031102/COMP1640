@@ -1,12 +1,112 @@
 @extends('Master.Master')
 
 @section('main')
-    <style>
-        span {
-            font-weight: bold
-        }
-    </style>
+    @foreach ($listIdeas as $idea)
+        <style>
+            .des {
+                --max-line: 3;
+                width: 700px;
+                overflow-wrap: break-word;
+                font-weight: unset;
+                font-size: 16px;
+                letter-spacing: 1px;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: var(--max-line);
+                overflow: hidden;
+            }
 
+            #view{{ $idea->id }} {
+                display: none;
+            }
+
+            .post-content label {
+                display: inline-block;
+                color: #3564fb;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+
+            #view{{ $idea->id }}:checked~.des {
+                --max-line: 0;
+            }
+
+            #view{{ $idea->id }}:checked~label {
+                visibility: hidden;
+            }
+
+            #view{{ $idea->id }}:checked~label:after {
+                content: 'Show Less';
+                display: block;
+                visibility: visible;
+            }
+
+            .gradient-custom{{ $idea->id }} {
+                height: 0;
+                display: none;
+                /* transition: 0.2s; */
+            }
+
+            .gradient-custom{{ $idea->id }}.active {
+                height: auto;
+                display: block;
+            }
+
+            .idea-effect{{ $idea->id }} {
+                display: none;
+                letter-spacing: 0;
+                position: absolute;
+                margin-top: 0px;
+                right: 200px;
+                background: #bababa;
+                padding-right: 10px;
+                border-radius: 10px;
+            }
+
+            .idea-effect{{ $idea->id }}.active {
+                display: block;
+            }
+
+
+            .idea-change{{ $idea->id }} {
+                position: absolute;
+                right: 150px;
+                background: #fff;
+                border: none;
+                transition: 0.2s;
+                padding: 5px;
+                height: 40px;
+                border-radius: 20px;
+                font-size: 30px;
+            }
+
+            .idea-change{{ $idea->id }}:hover {
+                background: #8f8f8f;
+            }
+
+            .idea-effect{{ $idea->id }} ul li {
+                list-style: none;
+            }
+
+            .idea-effect{{ $idea->id }} ul li a {
+                text-decoration: none;
+                color: #000;
+                width: 200px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                border-radius: 10px;
+                padding: 5px;
+                margin-top: 5px;
+                transition: 0.2s;
+            }
+
+            .idea-effect{{ $idea->id }} ul li a:hover {
+                background: #8f8f8f;
+            }
+        </style>
+    @endforeach
     <h1 id="jwt" hidden="true">{{ session()->pull('jwt') }}</h1>
     <section class="banner">
         @include('Goodi.nav_bar')
@@ -42,7 +142,8 @@
             <div class="left-profile">
                 <div class="profile-detail">
                     <p><i class="fa-solid fa-envelope"></i> <span>Email: </span>{{ Auth::user()->email }}</p>
-                    <p><i class="fa-solid fa-phone"></i> <span>Phone Number: </span>{{ Auth::user()->phone_number }}</p>
+                    <p><i class="fa-solid fa-phone"></i> <span>Phone Number: </span>{{ Auth::user()->phone_number }}
+                    </p>
                     <p><i class="fa-solid fa-calendar-days"></i> <span>DOB: </span>{{ Auth::user()->DoB }}</p>
                     <p><i class="fa-solid fa-building"></i> <span>Department:
                         </span>{{ App\Models\Department::where('id', Auth::user()->department_id)->value('name') }}
@@ -50,8 +151,7 @@
                 </div>
             </div>
             <div class="right-profile">
-                <div class="post-container">
-                    {{-- <div class="user-detail">
+                {{-- <div class="user-detail">
                         <img src="" width="50" height="50" class="rounded-circle" alt=""
                             style="object-fit: cover; object-position: center center;">
                         <div class="post-content">
@@ -65,7 +165,7 @@
                             <p class="des">{{ $idea->description }}</p>
                             <label for="view{{ $idea->id }}">View More</label>
                         </div> --}}
-                    {{-- </div>
+                {{-- </div>
                 <div class="idea-interact">
                     <br>
                     @foreach ($listIdeas as $idea)
@@ -75,7 +175,80 @@
                             </li>
                         </ul>
                     @endforeach --}}
-                    {{-- @if (!$idea->likedBy(auth()->user()))
+
+                @foreach ($listIdeas as $idea)
+                    <br>
+                    <div class="post-container">
+                        <div class="change">
+                            <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
+                                <p>&dot;&dot;&dot;</p>
+                            </button>
+                            <div class="idea-effect{{ $idea->id }}">
+                                <ul>
+                                    <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
+                                    <li><a href="">Change Content</a></li>
+                                    <li><a href="">Remove Post</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="user-detail">
+                            <img src="{{ asset($idea->user->image) }}" width="50" height="50" class="rounded-circle"
+                                alt="" style="object-fit: cover; object-position: center center;">
+                            <div class="post-content">
+                                <h4>{{ $idea->title }}</h4>
+                                <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small>
+                                <br>
+                                @foreach ($idea->files as $file)
+                                    <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
+                                @endforeach
+                                <br>
+                                <input type="checkbox" id="view{{ $idea->id }}">
+                                <p class="des">{{ $idea->description }}</p>
+                                <label for="view{{ $idea->id }}">View More</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="idea-interact">
+                            <br>
+                            @if (!$idea->likedBy(auth()->user()))
+                                <form action="{{ route('postLike', $idea->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
+                                </form>
+                            @else
+                                <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"><i class="fa-solid fa-thumbs-up fa-2x"></i></button>
+                                </form>
+                            @endif
+                            <h6>{{ $idea->likes->count() }}</h6>
+
+                            @if (!$idea->dislikedBy(auth()->user()))
+                                <form action="{{ route('postDislike', $idea->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
+                                </form>
+                            @else
+                                <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
+                                </form>
+                            @endif
+                            <h6>{{ $idea->dislikes->count() }}</h6>
+
+                            <button
+                                onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
+                                class="comment{{ $idea->id }}"><i
+                                    class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
+                            <h6>{{ $idea->comments->count() }}</h6>
+                        </div>
+                        <hr>
+                    </div>
+                    <br>
+                @endforeach
+                {{-- @if (!$idea->likedBy(auth()->user()))
                             <form action="{{ route('postLike', $idea->id) }}" method="POST">
                                 @csrf
                                 <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
@@ -102,7 +275,6 @@
                             </form>
                         @endif
                         <h6>{{ $idea->dislikes->count() }}</h6> --}}
-                </div>
             </div>
         </div>
         </div>
@@ -117,5 +289,12 @@
         document.querySelector(".close").addEventListener("click", function() {
             document.querySelector(".popup").style.display = "none";
         })
+
+        function ideaToggle(ideaId) {
+            const ideaToggleMenu = document.querySelector('.idea-effect' + ideaId);
+            const ideaButtonMenu = document.querySelector('.idea-change' + ideaId);
+            if (ideaButtonMenu) ideaToggleMenu.classList.toggle('active')
+            else ideaToggleMenu.classList.remove('active')
+        }
     </script>
 @endsection
