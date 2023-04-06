@@ -26,7 +26,7 @@ class UpdateUser extends FormRequest
 
         return [
             'name' => ['required'],
-            'DoB' => ['required', 'before_or_equal:today'],
+            'DoB' => ['required', 'before:' . now()->subYears(18)->toDateString()],
             'email' => ['email'],
             'phone_number' => ['digits:10', 'starts_with:0'],
         ];
@@ -36,7 +36,7 @@ class UpdateUser extends FormRequest
         return [
             'name.required' => 'Name cannot be empty',
             'DoB.required' => 'The date of birth cannot be empty',
-            'DoB.before_or_equal' => 'Please declare the correct date of birth',
+            'DoB.before' => 'Please declare the correct date of birth',
         ];
     }
 }

@@ -28,7 +28,7 @@ class updateAcc extends FormRequest
 
         return [
             'name' => ['required'],
-            'DoB' => ['required', 'before_or_equal:today'],
+            'DoB' => ['required', 'before:' .now()->subYears(18)->toDateString()],
             'role_id' => ['required'],
             'department_id' => ['required'],
             'email' => ['email'],
@@ -40,7 +40,7 @@ class updateAcc extends FormRequest
         return [
             'name.required' => 'Name cannot be empty',
             'DoB.required' => 'The date of birth cannot be empty',
-            'DoB.before_or_equal' => 'Please declare the correct date of birth',
+            'DoB.before' => 'Please declare the correct date of birth',
             'role_id.required' => 'The role cannot be empty',
             'department_id.required' => 'Only admin and QAM are allowed to null department',
         ];

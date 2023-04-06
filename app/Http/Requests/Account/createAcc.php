@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Account;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Carbon;
 
 class createAcc extends FormRequest
 {
@@ -27,8 +28,8 @@ class createAcc extends FormRequest
             'name' => ['required'],
             'email' => ['email', 'unique:users,email'],
             'password' => ['gt:1'],
-            'phone_number' => ['digits:10', 'starts_with:0' , 'unique:users,phone_number'],
-            'DoB' => ['required', 'before_or_equal:today'],
+            'phone_number' => ['digits:10', 'starts_with:0', 'unique:users,phone_number'],
+            'DoB' => ['required', 'before:' .now()->subYears(18)->toDateString()],
             'image' => ['image', 'required'],
             'role_id' => ['required'],
             'department_id' => ['required'],
@@ -44,7 +45,7 @@ class createAcc extends FormRequest
             'phone_number.digits' => 'Phone number must be numeric and 10 characters long',
             'phone_number.starts_with' => 'Phone number must start with 0',
             'DoB.required' => 'The date of birth cannot be empty',
-            'DoB.before_or_equal' => 'Please declare the correct date of birth',
+            'DoB.before' => 'Please declare the correct date of birth',
             'image.image' => 'The file under validation must be an image (jpg, jpeg, png, bmp, gif, svg, or webp).',
             'image.required' => 'Image cannot be empty',
             'role_id.required' => 'The role cannot be empty',
