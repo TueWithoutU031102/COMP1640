@@ -37,6 +37,16 @@ class DashboardController extends Controller
         $labelsBusiness = $amountIdeaBusiness->keys();
         $dataBusiness = $amountIdeaBusiness->values();
 
+        $activeDesign = User::select('id')
+            ->where('department_id', '=', '3')
+            ->groupBy('id');
+        $amountIdeaDesign = Idea::select(DB::raw("YEAR(created_at) as year"), DB::raw("COUNT(*) as count"))
+            ->groupBy(DB::raw("YEAR(created_at)"))
+            ->whereIn('author_id', $activeBusiness)
+            ->pluck('count', 'year');
+        $labelsDesign = $amountIdeaDesign->keys();
+        $dataDesign = $amountIdeaDesign->values();
+
         $countContributorIT = Idea::select(DB::raw("COUNT(*) as count"))
             ->join('users', 'ideas.author_id', '=', 'users.id')
             ->where('department_id', '=', '1')
@@ -48,6 +58,12 @@ class DashboardController extends Controller
             ->where('department_id', '=', '2')
             ->pluck('count');
         $dataCountBusiness = $countContributorBusiness->values();
+
+        $countContributorDesign = Idea::select(DB::raw("COUNT(*) as count"))
+            ->join('users', 'ideas.author_id', '=', 'users.id')
+            ->where('department_id', '=', '3')
+            ->pluck('count');
+        $dataCountDesign = $countContributorDesign->values();
 
         $goodIdea = Idea::withCount('likes', 'dislikes')
             ->having('likes_count', '>', 'dislikes_count')
@@ -64,11 +80,13 @@ class DashboardController extends Controller
             $percentBadIdea = number_format(($badIdea / $totalIdea * 100), 2, '.', '');
             $percentITIdea = number_format(($amountIdeaIT->count() / $totalIdea * 100), 2, '.', '');
             $percentBussinessIdea = number_format(($amountIdeaBusiness->count() / $totalIdea * 100), 2, '.', '');
+            $percentDesignIdea = number_format(($amountIdeaDesign->count() / $totalIdea * 100), 2, '.', '');
         } else {
             $percentGoodIdea = 0;
             $percentBadIdea = 0;
             $percentITIdea = 0;
             $percentBussinessIdea = 0;
+            $percentDesignIdea = 0;
         }
         return view('Goodi/Dashboard/index', compact(
             'labels',
@@ -77,13 +95,17 @@ class DashboardController extends Controller
             'dataIT',
             'labelsBusiness',
             'dataBusiness',
+            'dataDesign',
+            'labelsDesign',
             'dataCountBusiness',
             'dataCountIT',
+            'dataCountDesign',
             'totalIdea',
             'percentGoodIdea',
             'percentBadIdea',
             'percentBussinessIdea',
-            'percentITIdea'
+            'percentITIdea',
+            'percentDesignIdea'
         ));
     }
 }

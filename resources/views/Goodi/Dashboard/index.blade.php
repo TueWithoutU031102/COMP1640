@@ -25,6 +25,10 @@
                     <p>Bussiness</p>
                     <span>{{ $percentBussinessIdea }}%</span>
                 </div>
+                <div>
+                    <p>Graphic Design</p>
+                    <span>{{ $percentDesignIdea }}%</span>
+                </div>
             </div>
         </div>
         <div class="dashboard-box" style="border-left: solid 10px #00c8e2;">
@@ -56,6 +60,7 @@
                 var amountIdea = {{ Js::from($data) }};
                 var amountIdeaIT = {{ Js::from($dataIT) }};
                 var amountIdeaBusiness = {{ Js::from($dataBusiness) }};
+                var amountIdeaDesign = {{ Js::from($dataDesign) }};
 
                 const data = {
                     labels: labels,
@@ -77,6 +82,13 @@
                             borderColor: 'rgba(2, 91, 45, 0.432)',
                             data: amountIdeaBusiness,
                         },
+                        {
+                            label: "Graphic Design",
+                            backgroundColor: 'rgba(1, 1, 1, 1)',
+                            borderColor: 'rgba(2, 2, 2, 2)',
+                            data: amountIdeaDesign,
+                        },
+
                     ]
                 };
 
@@ -115,6 +127,7 @@
                     //ngoặc cuối là thực thi nội dung bên trong
                     let dataCountBusiness = {{ Js::from($dataCountBusiness) }};
                     let dataCountIT = {{ Js::from($dataCountIT) }};
+                    let dataCountDesign = {{ Js::from($dataCountDesign) }};
                     const data = {
                         labels: ' ',
                         datasets: [{
@@ -128,6 +141,12 @@
                                 data: dataCountBusiness,
                                 backgroundColor: 'rgba(51, 196, 121, 0.432)',
                                 borderColor: 'rgba(2, 91, 45, 0.432)',
+                            },
+                            {
+                                label: 'Graphic Design',
+                                data: dataCountDesign,
+                                backgroundColor: 'rgba(1, 1, 1, 1)',
+                                borderColor: 'rgba(2, 2, 2, 2)',
                             }
                         ]
                     };
