@@ -34,13 +34,13 @@
             </p>
         </div>
         <div class="dashboard-box" style="border-left: solid 10px #ef113d;">
-            <h4>Percent of Best Idea <i class="fa-solid fa-heart"></i></h4>
+            <h4>Percent of GOOD Idea <i class="fa-solid fa-heart"></i></h4>
             <p>
                 {{ $percentGoodIdea }}%
             </p>
         </div>
         <div class="dashboard-box" style="border-left: solid 10px #57c14b;">
-            <h4>Percent of Worst Idea <i class="fa-solid fa-heart-crack"></i></h4>
+            <h4>Percent of BAD Idea <i class="fa-solid fa-heart-crack"></i></h4>
             <p>
                 {{ $percentBadIdea }}%
             </p>
