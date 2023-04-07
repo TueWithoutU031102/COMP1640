@@ -5,7 +5,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -26,21 +27,28 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        DB::table('categories')->insert([
+        DB::table('categories')->insert(
+            [
                 [
-                    'title' => 'CAT2',
-                    'description' => 'Cat1',
-                    'author_id' => 3
+                    'title' => 'Teaching',
+                    'description' => 'About instructors overall teaching skills and experience',
+                    'author_id' => 4,
+                    'created_at' => '2023-07-04',
+                    'updated_at' => '2023-07-04',
                 ],
                 [
-                    'title' => 'CAT3',
-                    'description' => 'Cat1',
-                    'author_id' => 3
+                    'title' => 'Activity',
+                    'description' => 'About the universitys extra activities outside study periods',
+                    'author_id' => 3,
+                    'created_at' => '2023-07-04',
+                    'updated_at' => '2023-07-04',
                 ],
                 [
-                    'title' => 'CAT1',
-                    'description' => 'Cat1',
-                    'author_id' => 3
+                    'title' => 'Facility',
+                    'description' => 'About school facilities provided for staff and students',
+                    'author_id' => 5,
+                    'created_at' => '2023-07-04',
+                    'updated_at' => '2023-07-04',
                 ]
             ]
         );

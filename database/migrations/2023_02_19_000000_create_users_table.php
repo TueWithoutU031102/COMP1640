@@ -26,7 +26,7 @@ return new class extends Migration
                 ->on('departments');
             $table->string('password');
             $table->string('phone_number')->default("");
-            $table->date('DoB')->default("2023-02-13T10:10");
+            $table->date('DoB')->default("2002-02-13");
             $table->longText('image')->nullable();
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')
@@ -37,30 +37,88 @@ return new class extends Migration
 
         DB::table('users')->insert([
             [
-                'name' => 'admin',
-                'email' => 'email@gmail.com',
+                'name' => 'Vu Nguyen Duc Tue',
+                'email' => 'tuevndgch200058@fpt.edu.vn.com',
                 'password' => Hash::make("123456"),
                 'image' => "images/default-avatar.jpg",
                 'role_id' => '1',
+                'DoB' => '2002-03-11',
+                'phone_number' => '03932608622',
                 'department_id' => NULL,
-
+                'created_at' => '2023-07-04',
+                'updated_at' => '2023-07-04',
             ],
             [
-                'name' => 'staff account',
-                'email' => 'staff@gmail.com',
+                'name' => 'Do Quoc Viet',
+                'email' => 'vietdqgch18237@fpt.edu.vn.com',
                 'password' => Hash::make("123456"),
                 'image' => "images/default-avatar.jpg",
-                'role_id' => '2',
-                'department_id' => '1',
+                'role_id' => '1',
+                'DoB' => '2000-03-11',
+                'phone_number' => '0123456789',
+                'department_id' => NULL,
+                'created_at' => '2023-07-04',
+                'updated_at' => '2023-07-04',
             ],
             [
-                'name' => 'QAM account',
-                'email' => 'qam@gmail.com',
+                'name' => 'Nguyen Minh Quang',
+                'email' => 'quangnmgch200003@fpt.edu.vn',
+                'password' => Hash::make("123456"),
+                'image' => "images/default-avatar.jpg",
+                'role_id' => '3',
+                'DoB' => '2002-03-01',
+                'phone_number' => '0213456789',
+                'department_id' => '1',
+                'created_at' => '2023-07-04',
+                'updated_at' => '2023-07-04',
+            ],
+            [
+                'name' => 'Nguyen Minh Hieu',
+                'email' => 'hieunmgch200329@fpt.edu.vn',
+                'password' => Hash::make("123456"),
+                'image' => "images/default-avatar.jpg",
+                'role_id' => '3',
+                'DoB' => '2002-07-08',
+                'phone_number' => '0369782002',
+                'department_id' => '2',
+                'created_at' => '2023-07-04',
+                'updated_at' => '2023-07-04',
+            ],
+            [
+                'name' => 'Vu Hien Vinh',
+                'email' => 'vinhvhgch200196@fpt.edu.vn',
                 'password' => Hash::make("123456"),
                 'image' => "images/default-avatar.jpg",
                 'role_id' => '4',
-                'department_id' => '1',
-
+                'DoB' => '2002-12-30',
+                'phone_number' => '0869662310',
+                'department_id' => NULL,
+                'created_at' => '2023-07-04',
+                'updated_at' => '2023-07-04',
+            ],
+            [
+                'name' => 'Nguyen Nghi Binh',
+                'email' => 'binh312@gmail.com',
+                'password' => Hash::make("a1233"),
+                'image' => "images/default-avatar.jpg",
+                'role_id' => '2',
+                'DoB' => '1999-10-26',
+                'phone_number' => '0934231166',
+                'department_id' => '2',
+                'created_at' => '2023-07-04',
+                'updated_at' => '2023-07-04',
+            ],
+            [
+                'name' => 'Luu The Chien',
+                'email' => 'ltchien123@gmail.com',
+                'password' => Hash::make("ltchien2311"),
+                'image' => "images/default-avatar.jpg",
+                'role_id' => '2',
+                'DoB' => '2000-01-13',
+                'phone_number' => '0948516358',
+                'department_id' => '2',
+                'created_at' => '2023-07-04',
+                'updated_at' => '2023-07-04',
             ],
         ]);
     }
