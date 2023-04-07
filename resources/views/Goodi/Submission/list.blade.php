@@ -31,11 +31,11 @@
             </div>
             <div class="main-content">
                 <section class="idea-action">
-                    <form action="" class="form-inline">
+                    {{-- <form action="" class="form-inline">
                         <div class="form-group">
                             <input class="search_bar" placeholder="Search Idea">
                         </div>
-                    </form>
+                    </form> --}}
                     <div class="btn-idea">
                         @if (in_array(Auth::user()->role->name, ['QAM', 'ADMIN']))
                             <button class="add-idea" onclick="formToggle();">Create event</button>

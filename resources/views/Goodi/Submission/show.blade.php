@@ -105,6 +105,16 @@
             .idea-effect{{ $idea->id }} ul li a:hover {
                 background: #8f8f8f;
             }
+
+            @media(width <= 800px) {
+                .des {
+                    width: auto;
+                    --max-line: 3;
+                    width: 300px;
+                    overflow-wrap: break-word;
+                    -webkit-line-clamp: var(--max-line);
+                }
+            }
         </style>
     @endforeach
     <section class="banner">
@@ -153,6 +163,56 @@
                     </div>
                 </div>
                 <div class="main-content">
+                    <section>
+                        <div class="submission-index-res">
+                            <div class="user-information">
+                                <h2>{{ $submission->title }}</h2>
+                                <p><span>ID: </span>{{ $submission->id }}</p>
+                                <p><span>Create by:{{ $submission->user->name }} </span></p>
+                                <p><span>Start date: </span>{{ $submission->startDate }}</p>
+                                <p><span>Due date: </span>{{ $submission->dueDate }}</p>
+                                <p><span>Due date 2: </span>{{ $submission->dueDateComment }}</p>
+                                <div class="row" id="editForm">
+                                    <input type="text" id="submissionIdToUpdateDate" hidden>
+                                    <div class="editStartDate popup col-4" id="editStartDate" hidden>
+                                        <h1>StartDate</h1>
+                                        <input type="datetime-local" id="inputEditStartDate">
+                                        <button onclick="updateDate('startDate')">Ok</button>
+                                        <button onclick="closeForm('editStartDate')">close</button>
+                                    </div>
+
+                                    <div class="editDueDate popup col-4" id="editDueDate" hidden>
+                                        <h1>DueDate</h1>
+                                        <input type="datetime-local" id="inputEditDueDate">
+                                        <button onclick="closeForm('editDueDate')">close</button>
+                                        <button onclick="updateDate('dueDate')">Ok</button>
+                                    </div>
+                                </div>
+                                <div class="editDueDate" id="editDueDate" hidden>
+                                    <h1>DueDate</h1>
+                                    <input type="datetime-local" id="inputEditDueDate">
+                                    <button onclick="closeForm('editDueDate')">close</button>
+                                    <button onclick="updateDate('dueDate')">Ok</button>
+                                </div>
+
+                                <span>Time remaining: </span>
+                                {{-- <p
+                                    onclick="getTimeRemaining('{{ $submission->startDate }}', '{{ $submission->dueDate }}', this)">
+                                    ||</p> --}}
+                                <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)"
+                                    @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
+                                <p><span>Description: </span>{{ $submission->title }}</p>
+                                <button class="btn btn-primary"
+                                    onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
+                                    <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i></button>
+                                <form action="{{ $submission->id }}" method="POST" class="d-inline"
+                                    onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
+                                    @csrf
+                                    {{-- <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button> --}}
+                                </form>
+                            </div>
+                        </div>
+                    </section><br><br>
                     <section class="idea-action">
                         <div class="sort-idea">
                             <script type="text/javascript">
@@ -169,7 +229,7 @@
                             </script>
                             <form>
                                 @csrf
-                                <select class="form-control" id="sort" name="sort">
+                                <select id="sort" name="sort">
                                     <option value="{{ Request::url() }}?sort_by=none">---Filter by---</option>
                                     <option value="{{ Request::url() }}?sort_by=mostPopular">Most Popular Ideas </option>
                                     <option value="{{ Request::url() }}?sort_by=lastestIdeas">Latest Ideas</option>
