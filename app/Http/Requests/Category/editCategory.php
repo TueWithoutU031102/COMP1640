@@ -25,7 +25,7 @@ class editCategory extends FormRequest
     {
         return [
             //
-            'title' => ['required'],
+            'title' => ['required', 'unique:categories,title'],
             'description' => ['required'],
         ];
     }

@@ -24,10 +24,11 @@ class createSubmission extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required'],
+            'title' => ['required', 'unique:submissions,title'],
             'description' => ['required'],
             'startDate' => ['after_or_equal:today'],
             'dueDate' => ['after_or_equal:startDate'],
+            'dueDateComment' => ['after_or_equal:startDate'],
         ];
     }
     public function messages()
