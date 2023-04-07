@@ -79,7 +79,6 @@
                                 <label for="dueDateComment" class="font-weight-bold">Date Finished 2</label>
                                 <input type="datetime-local" name="dueDateComment" class="form-control" id="dueDateCommentInput"
                                     aria-describedby="dueDateComment" style="width: 300px" onchange="checkDueDate(this)">
-                                <label for="select2weeks">2 weeks</label>
                             </div>
                         </div>
                         <div class="form-group">
