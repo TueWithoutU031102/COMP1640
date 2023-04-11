@@ -43,3 +43,7 @@ Route::group([], function () {
     // ... other routes ...
     require __DIR__ . '/api/emailRoutes.php';
 });
+Route::group([], function () {
+    // ... other routes ...
+    require __DIR__ . '/api/likeRoutes.php';
+});

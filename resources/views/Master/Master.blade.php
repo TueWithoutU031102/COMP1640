@@ -33,6 +33,7 @@
 <script src="{{ asset('js/api/UserApi.js') }}"></script>
 <script src="{{ asset('js/api/CommentApi.js') }}"></script>
 <script src="{{ asset('js/app/comments.js') }}"></script>
+<script src="{{ asset('js/app/likes.js') }}"></script>
 <script>
     var loader = document.getElementById("preloader");
     window.addEventListener("load", function () {
