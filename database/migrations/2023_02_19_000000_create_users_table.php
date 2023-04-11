@@ -38,7 +38,7 @@ return new class extends Migration
         DB::table('users')->insert([
             [
                 'name' => 'Vu Nguyen Duc Tue',
-                'email' => 'tuevndgch200058@fpt.edu.vn.com',
+                'email' => 'tuevndgch200058@fpt.edu.vn',
                 'password' => Hash::make("123456"),
                 'image' => "images/default-avatar.jpg",
                 'role_id' => '1',
@@ -50,7 +50,7 @@ return new class extends Migration
             ],
             [
                 'name' => 'Do Quoc Viet',
-                'email' => 'vietdqgch18237@fpt.edu.vn.com',
+                'email' => 'vietdqgch18237@fpt.edu.vn',
                 'password' => Hash::make("123456"),
                 'image' => "images/default-avatar.jpg",
                 'role_id' => '1',
