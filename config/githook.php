@@ -50,7 +50,10 @@ return [
     | 'before_pull' => ['php artisan down'],
     |
     */
-    'before_pull' => ['php artisan down'],
+    'before_pull' => [
+        'git reset --hard HEAD', 
+        'php artisan down',
+    ],
 
     /*
     |--------------------------------------------------------------------------
