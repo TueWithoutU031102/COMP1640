@@ -1,20 +1,23 @@
-FROM richarvey/nginx-php-fpm:1.9.1
+FROM php:8.1-alpine
 
-COPY . .
+# Install php extensions
+RUN docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl
 
-# Image config
-ENV SKIP_COMPOSER 1
-ENV WEBROOT /var/www/html/public
-ENV PHP_ERRORS_STDERR 1
-ENV RUN_SCRIPTS 1
-ENV REAL_IP_HEADER 1
+# Install dependencies
+ADD composer.json /tmp/composer.json
+ADD composer.lock /tmp/composer.lock
 
-# Laravel config
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
+RUN cd /tmp && composer install --no-dev --no-scripts --no-autoloader
+RUN cp -a -R /tmp /app
 
-# Allow composer to run as root
-ENV COMPOSER_ALLOW_SUPERUSER 1
+WORKDIR /app
 
-CMD ["/start.sh"]
+# Install laravel
+RUN composer install --no-dev --no-scripts --no-autoloader
+
+# Copy source code
+ADD . /app
+
+EXPOSE 3000
+
+CMD [ "php", "artisan", "serve", "--host=0.0.0.0", "--port=3000" ]
