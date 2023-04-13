@@ -35,20 +35,16 @@ RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/
 
 
 # Install dependencies
-ADD composer.json /tmp/composer.json
-ADD composer.lock /tmp/composer.lock
-
-RUN cd /tmp && composer install --no-dev --no-scripts --no-autoloader
+ADD . /tmp
+RUN cd /tmp && composer install --no-dev
 RUN cp -a -R /tmp /app
 
 WORKDIR /app
 
-# Install laravel
-RUN composer install --no-dev --no-scripts --no-autoloader
-
 # Copy source code
-ADD . /app
+
 
 EXPOSE 3000
 
 CMD [ "php", "artisan", "serve", "--host=0.0.0.0", "--port=3000" ]
+# ENTRYPOINT ["tail", "-f", "/dev/null"]
