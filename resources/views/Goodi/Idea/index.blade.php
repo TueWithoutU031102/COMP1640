@@ -230,7 +230,7 @@
                                 </button>
                                 <div class="idea-effect{{ $idea->id }}">
                                     <ul>
-                                        <li><a href="/idea/show/{{$idea->id}}">Open Idea</a></li>
+                                        <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
                                         <li><a href="">Change Content</a></li>
                                         <li><a href="">Remove Post</a></li>
                                     </ul>
@@ -288,7 +288,7 @@
                                     onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
                                     class="comment{{ $idea->id }}"><i
                                         class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
-                                <h6>{{$idea->comments->count()}}</h6>
+                                <h6>{{ $idea->comments->count() }}</h6>
                             </div>
                             <hr>
 
@@ -338,36 +338,6 @@
                                                             <span class="small" style="font-weight: bold">2 hours
                                                                 ago</span>
                                                         </div>
-
-                                                        {{-- <div class="d-flex flex-start mt-4">
-                                                            <a class="me-3" href="#">
-                                                                <img class="rounded-circle"
-                                                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp"
-                                                                    alt="avatar" width="50" height="50" />
-                                                            </a>
-                                                            <div class="flex-grow-1 flex-shrink-1">
-                                                                <div
-                                                                    style="
-                                                    background: #a6dbf8;
-                                                    border-radius: 20px;
-                                                    padding: 10px 10px 10px 10px;
-                                                    ">
-                                                                    <div
-                                                                        class="d-flex justify-content-between align-items-center">
-                                                                        <p class="mb-1">
-                                                                            <b>Simona Disa</b>
-                                                                        </p>
-                                                                    </div>
-                                                                    <p class="small mb-0">
-                                                                        letters, as opposed to using 'Content
-                                                                        here, content here',
-                                                                        making it look like readable English.
-                                                                    </p>
-                                                                </div>
-                                                                <span class="small" style="font-weight: bold">2 hours
-                                                                    ago</span>
-                                                            </div>
-                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             @endforeach

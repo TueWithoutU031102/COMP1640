@@ -234,7 +234,7 @@
                                                     padding: 10px 10px 10px 10px;
                                                     ">
                                         <div class="d-flex justify-content-between align-items-center"
-                                             style="gap: 10px
+                                            style="gap: 10px
                                                             ">
                                             <p class="mb-1">
                                                 <b>{{ $comment->user->name }}</b>
