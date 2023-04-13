@@ -4,25 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Idea;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class DislikeController extends Controller
 {
     //
-    public function store(Idea $idea, Request $request)
+    public function store(Idea $idea)
     {
-        if ($idea->dislikedBy($request->user()))
-            return response(null, 409);
-        $request->user()->likes()->where('idea_id', $idea->id)->delete();
-        $idea->dislikes()->create([
-            'author_id' => $request->user()->id,
-        ]);
+        $user = JWTAuth::parseToken()->authenticate();
 
-        return back();
-    }
-
-    public function destroy(Idea $idea, Request $request)
-    {
-        $request->user()->dislikes()->where('idea_id', $idea->id)->delete();
-        return back();
+        if ($idea->dislikedBy($user)){
+            $user->dislikes()->where('idea_id', $idea->id)->delete();
+        } else {
+            $user->likes()->where('idea_id', $idea->id)->delete();
+            $idea->dislikes()->create([
+                'author_id' => $user->id,
+            ]);
+        }
+        return response()->json([
+            'likes' => $idea->likes()->count(),
+            'dislikes' => $idea->dislikes()->count(),
+            'isLiked' => false,
+        ], 200);
     }
 }

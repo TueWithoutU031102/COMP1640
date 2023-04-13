@@ -6,13 +6,10 @@ use App\Http\Requests\Comment\StoreCommentRequest;
 use App\Http\Requests\Comment\UpdateCommentRequest;
 use App\Models\Comment;
 use App\Models\Idea;
-use App\Models\User;
 use App\Services\CommentService;
 use App\Services\IdeaService;
-use App\Services\EmailService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CommentController extends Controller
