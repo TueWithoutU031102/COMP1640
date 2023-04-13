@@ -36,7 +36,7 @@ return new class extends Migration
                     'description' => 'For the upcoming Hackathon, we would like you to submit your own ideas for the event to ensure the participants interest and competitiveness.',
                     'startDate' => "2023-01-06 00:00:00",
                     'dueDate' => "2023-01-10 00:00:00",
-                    'dueDateComment' => "2023-01-11",
+                    'dueDateComment' => "2023-01-11 00:00:00",
                     'author_id' => 3,
                     'created_at' => '2023-07-04 00:00:00',
                     'updated_at' => '2023-07-04 00:00:00',
