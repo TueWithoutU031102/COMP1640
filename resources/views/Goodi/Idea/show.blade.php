@@ -160,12 +160,12 @@
                 @if (!$idea->likedBy(auth()->user()))
                     <button type="submit"
                             onclick="likeIdea({{$idea->id}}, 'likesCount{{$idea->id}}', 'dislikesCount{{$idea->id}}')">
-                        <i class="fa-regular fa-thumbs-up fa-2x" id="likes-interact"></i>
+                        <i class="fa-regular fa-thumbs-up fa-2x" id="likes-interact{{$idea->id}}"></i>
                     </button>
                 @else
                     <button type="submit"
                             onclick="likeIdea({{$idea->id}}, 'likesCount{{$idea->id}}', 'dislikesCount{{$idea->id}}')">
-                        <i class="fa-solid fa-thumbs-up fa-2x" id="likes-interact"></i>
+                        <i class="fa-solid fa-thumbs-up fa-2x" id="likes-interact{{$idea->id}}"></i>
                     </button>
                 @endif
                 <h6 id="likesCount{{$idea->id}}">{{ $idea->likes->count() }}</h6>
@@ -174,12 +174,12 @@
                 @if (!$idea->dislikedBy(auth()->user()))
                     <button type="submit"
                             onclick="dislikeIdea({{$idea->id}}, 'likesCount{{$idea->id}}', 'dislikesCount{{$idea->id}}')">
-                        <i class="fa-regular fa-thumbs-down fa-2x" id="dislikes-interact"></i>
+                        <i class="fa-regular fa-thumbs-down fa-2x" id="dislikes-interact{{$idea->id}}"></i>
                     </button>
                 @else
                     <button type="submit"
                             onclick="dislikeIdea({{$idea->id}}, 'likesCount{{$idea->id}}', 'dislikesCount{{$idea->id}}')">
-                        <i class="fa-solid fa-thumbs-down fa-2x" id="dislikes-interact"></i>
+                        <i class="fa-solid fa-thumbs-down fa-2x" id="dislikes-interact{{$idea->id}}"></i>
                     </button>
                 @endif
                 <h6 id="dislikesCount{{$idea->id}}">{{ $idea->dislikes->count() }}</h6>
