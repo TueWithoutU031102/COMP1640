@@ -27,6 +27,12 @@ RUN apk add --no-cache \
 # Install php extensions
 RUN docker-php-ext-install pdo pdo_mysql pcntl exif zip
 
+# Install pgsql
+RUN apk add --no-cache libpq-dev
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pgsql pdo_pgsql
+
+
 # Install composer
 ENV COMPOSER_HOME /composer
 ENV PATH ./vendor/bin:/composer/vendor/bin:$PATH
