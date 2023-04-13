@@ -934,7 +934,7 @@ nav.sticky {
 
 .submission-index {}
 
-.submission-index-res{
+.submission-index-res {
     display: none;
 }
 
@@ -1494,7 +1494,7 @@ form .form-content .input-box {
 }
 
 /* 100% */
-@media(width <=1000px) {
+@media screen and (width <=1000px) {
     .menu-bar {
         display: block;
         cursor: pointer;
@@ -1582,8 +1582,8 @@ form .form-content .input-box {
 
 }
 
-@media(width <=1100px) {
-    .submission-index-res{
+@media screen and (width <=1100px) {
+    .submission-index-res {
         width: auto;
         margin-left: -20px;
         display: block;
@@ -1610,7 +1610,7 @@ form .form-content .input-box {
         font-size: 12px;
     }
 
-    .idea-action{
+    .idea-action {
         margin-left: 20px;
         width: 300px
     }
