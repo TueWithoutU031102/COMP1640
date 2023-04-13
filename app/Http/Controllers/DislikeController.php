@@ -12,7 +12,7 @@ class DislikeController extends Controller
     public function store(Idea $idea)
     {
         $user = JWTAuth::parseToken()->authenticate();
-
+        $isDisliked = false;
         if ($idea->dislikedBy($user)){
             $user->dislikes()->where('idea_id', $idea->id)->delete();
         } else {
@@ -20,11 +20,14 @@ class DislikeController extends Controller
             $idea->dislikes()->create([
                 'author_id' => $user->id,
             ]);
+            $isDisliked = true;
         }
         return response()->json([
             'likes' => $idea->likes()->count(),
             'dislikes' => $idea->dislikes()->count(),
-            'isLiked' => false,
+            'isLiked' => $idea->likedBy($user),
+            'isDisliked' => $isDisliked,
+
         ], 200);
     }
 }
