@@ -43,7 +43,7 @@ return new class extends Migration
                 'image' => "images/default-avatar.jpg",
                 'role_id' => '1',
                 'DoB' => '2002-03-11',
-                'phone_number' => '03932608622',
+                'phone_number' => '0393608622',
                 'department_id' => NULL,
                 'created_at' => '2023-07-04',
                 'updated_at' => '2023-07-04',
