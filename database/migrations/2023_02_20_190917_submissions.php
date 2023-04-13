@@ -45,7 +45,7 @@ return new class extends Migration
                     'title' => 'Library renovation',
                     'description' => 'Since there were many complaints about the library, we would like to gather more ideas on how we should renovate the library before opening for business again without much delay.',
                     'startDate' => "2023-01-06 00:00:00",
-                    'dueDate' => "2023-15-06 00:00:00",
+                    'dueDate' => "2023-06-06 00:00:00",
                     'dueDateComment' => "2023-20-06 00:00:00",
                     'author_id' => 5,
                     'created_at' => '2023-07-04 00:00:00',
