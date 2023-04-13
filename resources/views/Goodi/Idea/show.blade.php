@@ -17,7 +17,7 @@
             overflow: hidden;
         }
 
-        #view{{ $idea->id }} {
+        #view{{ $idea->id }}  {
             display: none;
         }
 
@@ -29,23 +29,21 @@
         }
 
 
-
-
-        #view{{ $idea->id }}:checked~.des {
+        #view{{ $idea->id }}:checked ~ .des {
             --max-line: 0;
         }
 
-        #view{{ $idea->id }}:checked~label {
+        #view{{ $idea->id }}:checked ~ label {
             visibility: hidden;
         }
 
-        #view{{ $idea->id }}:checked~label:after {
+        #view{{ $idea->id }}:checked ~ label:after {
             content: 'Show Less';
             display: block;
             visibility: visible;
         }
 
-        .gradient-custom{{ $idea->id }} {
+        .gradient-custom{{ $idea->id }}  {
             height: 0;
             display: none;
             /* transition: 0.2s; */
@@ -56,7 +54,7 @@
             display: block;
         }
 
-        .idea-effect{{ $idea->id }} {
+        .idea-effect{{ $idea->id }}  {
             display: none;
             letter-spacing: 0;
             position: absolute;
@@ -72,7 +70,7 @@
         }
 
 
-        .idea-change{{ $idea->id }} {
+        .idea-change{{ $idea->id }}  {
             position: absolute;
             right: 350px;
             background: #fff;
@@ -84,7 +82,7 @@
             font-size: 30px;
         }
 
-        .idea-back{{ $idea->id }} {
+        .idea-back{{ $idea->id }}  {
             /* position: absolute; */
             right: 350px;
             background: #fff;
@@ -142,7 +140,7 @@
         <br>
         <div class="user-detail">
             <img src="{{ asset($idea->user->image) }}" width="50" height="50" class="rounded-circle" alt=""
-                style="object-fit: cover; object-position: center center;">
+                 style="object-fit: cover; object-position: center center;">
             <div class="post-content">
                 <h4>{{ $idea->title }}</h4>
                 <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
@@ -158,38 +156,42 @@
         <br>
         <div class="idea-interact">
             <br>
-            @if (!$idea->likedBy(auth()->user()))
-                <form action="{{ route('postLike', $idea->id) }}" method="POST">
-                    @csrf
-                    <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
-                </form>
-            @else
-                <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit"><i class="fa-solid fa-thumbs-up fa-2x"></i></button>
-                </form>
-            @endif
-            <h6>{{ $idea->likes->count() }}</h6>
+            <div>
+                @if (!$idea->likedBy(auth()->user()))
+                    <button type="submit"
+                            onclick="likeIdea({{$idea->id}}, 'likesCount{{$idea->id}}', 'dislikesCount{{$idea->id}}')">
+                        <i class="fa-regular fa-thumbs-up fa-2x" id="likes-interact"></i>
+                    </button>
+                @else
+                    <button type="submit"
+                            onclick="likeIdea({{$idea->id}}, 'likesCount{{$idea->id}}', 'dislikesCount{{$idea->id}}')">
+                        <i class="fa-solid fa-thumbs-up fa-2x" id="likes-interact"></i>
+                    </button>
+                @endif
+                <h6 id="likesCount{{$idea->id}}">{{ $idea->likes->count() }}</h6>
+            </div>
+            <div>
+                @if (!$idea->dislikedBy(auth()->user()))
+                    <button type="submit"
+                            onclick="dislikeIdea({{$idea->id}}, 'likesCount{{$idea->id}}', 'dislikesCount{{$idea->id}}')">
+                        <i class="fa-regular fa-thumbs-down fa-2x" id="dislikes-interact"></i>
+                    </button>
+                @else
+                    <button type="submit"
+                            onclick="dislikeIdea({{$idea->id}}, 'likesCount{{$idea->id}}', 'dislikesCount{{$idea->id}}')">
+                        <i class="fa-solid fa-thumbs-down fa-2x" id="dislikes-interact"></i>
+                    </button>
+                @endif
+                <h6 id="dislikesCount{{$idea->id}}">{{ $idea->dislikes->count() }}</h6>
+            </div>
 
-            @if (!$idea->dislikedBy(auth()->user()))
-                <form action="{{ route('postDislike', $idea->id) }}" method="POST">
-                    @csrf
-                    <button type="submit"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
-                </form>
-            @else
-                <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
-                </form>
-            @endif
-            <h6>{{ $idea->dislikes->count() }}</h6>
-
-            <button
-                onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
-                class="comment{{ $idea->id }}"><i class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
-            <h6 id="commentCount">{{ $idea->comments->count() }}</h6>
+            <div>
+                <button
+                    onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
+                    class="comment{{ $idea->id }}"><i
+                        class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
+                <h6>{{ $idea->comments->count() }}</h6>
+            </div>
         </div>
         <hr>
 
@@ -198,10 +200,10 @@
                 @if ($idea->submission->dueDateComment > now())
                     <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
                         <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                            alt="user avatar" class="rounded-circle"
-                            style="object-fit: cover; object-position: center center;">
+                             alt="user avatar" class="rounded-circle"
+                             style="object-fit: cover; object-position: center center;">
                         <input type="text" class="form-control" placeholder="Enter your comment..."
-                            id="commentContentInput{{ $idea->id }}">
+                               id="commentContentInput{{ $idea->id }}">
                         <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
                         <button
                             onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
@@ -211,10 +213,10 @@
                 @else
                     <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
                         <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                            alt="user avatar" class="rounded-circle"
-                            style="object-fit: cover; object-position: center center;">
+                             alt="user avatar" class="rounded-circle"
+                             style="object-fit: cover; object-position: center center;">
                         <input type="text" class="form-control" placeholder="Over due ..."
-                            id="commentContentInput{{ $idea->id }}" disabled>
+                               id="commentContentInput{{ $idea->id }}" disabled>
                     </div>
                 @endif
 
@@ -223,7 +225,7 @@
                         @foreach ($idea->comments as $comment)
                             <div class="d-flex flex-start mt-4" style="gap: 10px">
                                 <img class="rounded-circle" src="{{ asset($comment->user->image) }}" alt="avatar"
-                                    width="50" height="50" />
+                                     width="50" height="50"/>
                                 <div class="flex-grow-1 flex-shrink-1">
                                     <div
                                         style="
@@ -232,7 +234,7 @@
                                                     padding: 10px 10px 10px 10px;
                                                     ">
                                         <div class="d-flex justify-content-between align-items-center"
-                                            style="gap: 10px
+                                             style="gap: 10px
                                                             ">
                                             <p class="mb-1">
                                                 <b>{{ $comment->user->name }}</b>

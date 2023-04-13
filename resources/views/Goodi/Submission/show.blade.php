@@ -16,7 +16,7 @@
                 overflow: hidden;
             }
 
-            #view{{ $idea->id }}  {
+            #view{{ $idea->id }}   {
                 display: none;
             }
 
@@ -42,7 +42,7 @@
                 visibility: visible;
             }
 
-            .gradient-custom{{ $idea->id }}  {
+            .gradient-custom{{ $idea->id }}   {
                 height: 0;
                 display: none;
                 /* transition: 0.2s; */
@@ -53,7 +53,7 @@
                 display: block;
             }
 
-            .idea-effect{{ $idea->id }}  {
+            .idea-effect{{ $idea->id }}   {
                 display: none;
                 letter-spacing: 0;
                 position: absolute;
@@ -69,7 +69,7 @@
             }
 
 
-            .idea-change{{ $idea->id }}  {
+            .idea-change{{ $idea->id }}   {
                 position: absolute;
                 right: 30px;
                 background: #fff;
@@ -172,28 +172,6 @@
                                 <p><span>Start date: </span>{{ $submission->startDate }}</p>
                                 <p><span>Due date: </span>{{ $submission->dueDate }}</p>
                                 <p><span>Due date 2: </span>{{ $submission->dueDateComment }}</p>
-                                <div class="row" id="editForm">
-                                    <input type="text" id="submissionIdToUpdateDate" hidden>
-                                    <div class="editStartDate popup col-4" id="editStartDate" hidden>
-                                        <h1>StartDate</h1>
-                                        <input type="datetime-local" id="inputEditStartDate">
-                                        <button onclick="updateDate('startDate')">Ok</button>
-                                        <button onclick="closeForm('editStartDate')">close</button>
-                                    </div>
-
-                                    <div class="editDueDate popup col-4" id="editDueDate" hidden>
-                                        <h1>DueDate</h1>
-                                        <input type="datetime-local" id="inputEditDueDate">
-                                        <button onclick="closeForm('editDueDate')">close</button>
-                                        <button onclick="updateDate('dueDate')">Ok</button>
-                                    </div>
-                                </div>
-                                <div class="editDueDate" id="editDueDate" hidden>
-                                    <h1>DueDate</h1>
-                                    <input type="datetime-local" id="inputEditDueDate">
-                                    <button onclick="closeForm('editDueDate')">close</button>
-                                    <button onclick="updateDate('dueDate')">Ok</button>
-                                </div>
 
                                 <span>Time remaining: </span>
                                 {{-- <p
@@ -324,7 +302,7 @@
                                          class="rounded-circle" alt=""
                                          style="object-fit: cover; object-position: center center;">
                                     <div class="post-content">
-                                        <h4>{{ $idea->title }}</h4>
+                                        <a href="/idea/show/{{$idea->id}}"><h4>{{ $idea->title }}</h4></a>
                                         <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small>
                                         <br>
                                         @foreach ($idea->files as $file)
@@ -382,6 +360,7 @@
                         @endforeach
                     </section>
                 </div>
+
                 <div class="right-side">
                     <h6 class="display-6" style="text-align: center; font-weight: bold">SUBMISSION DETAIL</h6>
                     <div class="submission-index">
@@ -392,28 +371,6 @@
                             <p><span>Start date: </span>{{ $submission->startDate }}</p>
                             <p><span>Due date: </span>{{ $submission->dueDate }}</p>
                             <p><span>Due date 2: </span>{{ $submission->dueDateComment }}</p>
-                            <div class="row" id="editForm">
-                                <input type="text" id="submissionIdToUpdateDate" hidden>
-                                <div class="editStartDate popup col-4" id="editStartDate" hidden>
-                                    <h1>StartDate</h1>
-                                    <input type="datetime-local" id="inputEditStartDate">
-                                    <button onclick="updateDate('startDate')">Ok</button>
-                                    <button onclick="closeForm('editStartDate')">close</button>
-                                </div>
-
-                                <div class="editDueDate popup col-4" id="editDueDate" hidden>
-                                    <h1>DueDate</h1>
-                                    <input type="datetime-local" id="inputEditDueDate">
-                                    <button onclick="closeForm('editDueDate')">close</button>
-                                    <button onclick="updateDate('dueDate')">Ok</button>
-                                </div>
-                            </div>
-                            <div class="editDueDate" id="editDueDate" hidden>
-                                <h1>DueDate</h1>
-                                <input type="datetime-local" id="inputEditDueDate">
-                                <button onclick="closeForm('editDueDate')">close</button>
-                                <button onclick="updateDate('dueDate')">Ok</button>
-                            </div>
 
                             <span>Time remaining: </span>
                             {{-- <p
@@ -424,16 +381,34 @@
                             <p><span>Description: </span>{{ $submission->title }}</p>
                             <button class="btn btn-primary"
                                     onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
-                                <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i></button>
+                                <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i>
+                            </button>
                             <form action="{{ $submission->id }}" method="POST" class="d-inline"
                                   onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
                                 @csrf
                                 {{-- <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button> --}}
                             </form>
+
+                            <div class="editStartDate popup col-4" id="editStartDate" hidden>
+                                <h1>StartDate</h1>
+                                <input type="datetime-local" id="inputEditStartDate">
+                                <button onclick="updateDate('startDate')">Ok</button>
+                                <button onclick="closeForm('editStartDate')">close</button>
+                            </div>
+
+                            <div class="editDueDate popup col-4" id="editDueDate">
+                                <h1>DueDate</h1>
+                                <input type="datetime-local" id="inputEditDueDate">
+                                <button onclick="closeForm('editDueDate')">close</button>
+                                <button onclick="updateDate('dueDate')">Ok</button>
+                            </div>
                         </div>
+
                     </div>
                     {{--                          edit date form --}}
+
                 </div>
+
                 </div>
                 </div>
             </section>
@@ -509,6 +484,7 @@
             }
 
             function showForm(formId, submissionId, dueDate, startDate) {
+                console.log(document.getElementById(formId))
                 document.getElementById(formId).hidden = false;
                 document.getElementById('submissionIdToUpdateDate').value = submissionId;
                 console.log(dueDate)
