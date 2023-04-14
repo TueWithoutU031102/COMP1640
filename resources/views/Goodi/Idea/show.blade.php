@@ -130,12 +130,6 @@
             <button class="idea-back{{ $idea->id }}" onclick="history.back()">
                 <p>&LeftArrow;</p>
             </button>
-            <div class="idea-effect{{ $idea->id }}">
-                <ul>
-                    <li><a href="">Change Content</a></li>
-                    <li><a href="">Remove Post</a></li>
-                </ul>
-            </div>
         </div>
         <br>
         <div class="user-detail">
