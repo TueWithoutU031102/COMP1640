@@ -133,6 +133,7 @@
                 <button class="close">&times;</button>
                 @include('Goodi.User.update')
             </div>
+        </div>
     </section>
     </div>
     </div>
