@@ -1494,7 +1494,7 @@ form .form-content .input-box {
 }
 
 /* 100% */
-@media screen and (width <=1000px) {
+@media screen and (max-width: 1000px) {
     .menu-bar {
         display: block;
         cursor: pointer;
@@ -1582,7 +1582,7 @@ form .form-content .input-box {
 
 }
 
-@media screen and (width <=1100px) {
+@media screen and (max-width: 1100px) {
     .submission-index-res {
         width: auto;
         margin-left: -20px;
