@@ -248,11 +248,6 @@
                                        aria-describedby="title">
                             </div>
                             <div class="form-group">
-                                <label for="filename" class="font-weight-bold">Save as:</label>
-                                <input type="text" name="filename" class="form-control" id="title"
-                                       aria-describedby="title">
-                            </div>
-                            <div class="form-group">
                                 <label for="category_id" class="font-weight-bold">Category:</label>
 
                                 <select name="category_id" value="{{ old('category_id') }}" class="form-select"
