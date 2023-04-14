@@ -74,7 +74,8 @@ class AdminController extends Controller
 
         $this->validate($request, [
             'email' => [Rule::unique('users')->ignore($request->id)],
-            'phone_number' => [Rule::unique('users')->ignore($request->id)]
+            'phone_number' => [Rule::unique('users')->ignore($request->id)],
+            'iamge' => ['image'],
         ]);
 
         if ($request->hasFile('image')) {
