@@ -111,6 +111,11 @@
 }
 
 @media screen and (max-width: 1100px) {
+    .left-profile {
+        display: none;
+        flex-basis: 0%;
+    }
+
     .submission-index-res {
         width: auto;
         margin-left: -20px;
@@ -187,10 +192,6 @@
         width: auto;
     }
 
-    .post-container {
-        margin-left: 50px;
-    }
-
     .post-content h4 {
         font-size: 18px;
     }
@@ -200,6 +201,7 @@
     }
 
     .post-content .des {
+        margin-left: -20px;
         font-size: 14px;
     }
 
@@ -207,15 +209,34 @@
         /* height: 500px; */
         width: auto;
         /* overflow: hidden; */
-        margin-left: 0;
-        margin-right: 10px;
     }
 
     .idea-container {
         padding: 10px 10px;
     }
 
-    .post-container {
+    .our-history{
+        display: block;
+    }
+
+    .history-header{
+        margin-bottom: 50px;
+    }
+
+    .history-content{
+        width: fit-content;
+    }
+
+    .about-card img {
+        display: none;
+    }
+
+    .faq-container{
+        width: auto;
+        margin-left: 0;
+    }
+
+    .show-post-container{
         width: auto;
     }
 

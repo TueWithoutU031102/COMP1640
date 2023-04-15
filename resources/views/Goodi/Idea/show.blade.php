@@ -3,10 +3,8 @@
 @section('main')
     <style>
         .des {
-
             --max-line: 3;
-
-            width: 1150px;
+            width: 1200px;
             overflow-wrap: break-word;
             font-weight: unset;
             font-size: 16px;
@@ -72,7 +70,7 @@
 
         .idea-change{{ $idea->id }} {
             position: absolute;
-            right: 350px;
+            right: 30px;
             background: #fff;
             border: none;
             transition: 0.2s;
@@ -80,18 +78,6 @@
             height: 40px;
             border-radius: 20px;
             font-size: 30px;
-        }
-
-        .idea-back{{ $idea->id }} {
-            /* position: absolute; */
-            right: 350px;
-            background: #fff;
-            border: none;
-            transition: 0.2s;
-            padding: 5px;
-            height: 50px;
-            border-radius: 20px;
-            font-size: 39px;
         }
 
         .idea-change{{ $idea->id }}:hover {
@@ -117,6 +103,34 @@
 
         .idea-effect{{ $idea->id }} ul li a:hover {
             background: #8f8f8f;
+        }
+
+        @media (width <=1024px) {
+            .des {
+                width: auto;
+                --max-line: 3;
+                width: 700px;
+                overflow-wrap: break-word;
+                -webkit-line-clamp: var(--max-line);
+            }
+
+            .cmt p {
+                width: 700px;
+            }
+        }
+
+        @media (width <=700px) {
+            .des {
+                width: auto;
+                --max-line: 3;
+                width: 300px;
+                overflow-wrap: break-word;
+                -webkit-line-clamp: var(--max-line);
+            }
+
+            .cmt p {
+                width: 300px;
+            }
         }
     </style>
 
@@ -183,13 +197,13 @@
         <section class="gradient-custom{{ $idea->id }} active">
             <div class="card-body p-4">
                 @if ($idea->submission->dueDateComment > now())
+                    <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
                     <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
                         <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
                             alt="user avatar" class="rounded-circle"
                             style="object-fit: cover; object-position: center center;">
                         <input type="text" class="form-control" placeholder="Enter your comment..."
                             id="commentContentInput{{ $idea->id }}">
-                        <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
                         <button
                             onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
                             sent
@@ -209,26 +223,29 @@
                     <div class="col" id="commentContentEle{{ $idea->id }}">
                         @foreach ($idea->comments as $comment)
                             <div class="d-flex flex-start mt-4" style="gap: 10px">
-                                <img class="rounded-circle" src="{{ asset($comment->user->image) }}" alt="avatar"
-                                    width="50" height="50" />
                                 <div class="flex-grow-1 flex-shrink-1">
                                     <div
                                         style="
-                                                    background: #a6dbf8;
+                                                    background: #c2ebff;
                                                     border-radius: 20px;
-                                                    padding: 10px 10px 10px 10px;
+                                                    padding: 10px;
+                                                    width: auto;
                                                     ">
-                                        <div class="d-flex justify-content-between align-items-center"
+                                        <div class="d-flex "
                                             style="gap: 10px
                                                             ">
+                                            <img class="rounded-circle" src="{{ asset($comment->user->image) }}"
+                                                alt="avatar" width="50" height="50" />
                                             <p class="mb-1">
                                                 <b>{{ $comment->user->name }}</b>
                                             </p>
 
                                         </div>
-                                        <p class="small mb-0" style="width: 1150px; overflow-wrap: break-word;">
-                                            {{ $comment->content }}
-                                        </p>
+                                        <div class="cmt">
+                                            <p class="small mb-0">
+                                                {{ $comment->content }}
+                                            </p>
+                                        </div>
                                     </div>
                                     <div style="gap: 20px; display: flex">
                                         <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small">

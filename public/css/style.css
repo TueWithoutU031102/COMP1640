@@ -450,7 +450,7 @@ nav.sticky {
 }
 
 .cate_box {
-    display: flex;
+    /* display: flex; */
     align-items: center;
     text-align: center;
     border-radius: 10px;
@@ -502,7 +502,7 @@ nav.sticky {
 
 .category a {
     text-align: left;
-    width: 250px;
+    /* width: 250px; */
     overflow-wrap: break-word;
     margin-left: 70px;
 }
@@ -723,6 +723,14 @@ nav.sticky {
     margin-bottom: 50px;
 }
 
+.res_profile-detail {
+    margin-left: -30px;
+    padding: 40px;
+    border-radius: 20px;
+    background: #b0b0b048;
+    margin-bottom: 50px;
+}
+
 .left-profile {
     padding: 40px 40px 40px 40px;
     margin-left: 40px;
@@ -787,6 +795,7 @@ nav.sticky {
 
 .chart .dashboard-box {
     width: 800px;
+    height: 400px;
 }
 
 .dashboard-box h4 {
@@ -803,7 +812,7 @@ nav.sticky {
 }
 
 .dashboard-content {
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
     color: #fff;
 }
@@ -816,6 +825,10 @@ nav.sticky {
 .dashboard-content span {
     font-size: 25px;
     text-align: center;
+}
+
+.dashboard-card {
+    width: auto;
 }
 
 
@@ -1171,6 +1184,11 @@ footer {
 
 .history-content {
     width: 700px;
+}
+
+.cmt p {
+    width: 1200px;
+    overflow-wrap: break-word;
 }
 
 .faq-container {

@@ -14,19 +14,19 @@
         </div>
     </section><br>
     <div class="dashboard">
-        <div class="dashboard-box" style="background: #ff9900; border-left: solid 10px #000000;">
+        <div class="dashboard-box" style="background: #ff9900; border-left: solid 10px #000000; width: auto">
             <h4>Department <i class="fa-solid fa-building"></i></h4>
             <div class="dashboard-content">
-                <div>
+                <div style="display: flex; justify-content: space-around">
                     <p>IT</p>
                     <span>{{ $percentITIdea }}%</span>
                 </div>
-                <div>
-                    <p>Bussiness</p>
+                <div style="display: flex; justify-content: space-around">
+                    <p>Business</p>
                     <span>{{ $percentBussinessIdea }}%</span>
                 </div>
-                <div>
-                    <p>Graphic Design</p>
+                <div style="display: flex; justify-content: space-around">
+                    <p>Design</p>
                     <span>{{ $percentDesignIdea }}%</span>
                 </div>
             </div>

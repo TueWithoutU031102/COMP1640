@@ -28,7 +28,7 @@
             object-position: center center;
             background: rgba(44, 181, 137, 0.3);
             margin-left: 100px;
-            transform: translateX(-170%) translateY(-70%);
+            transform: translateX(-5%) translateY(-105%);
         }
 
         .img li:hover img {
@@ -38,13 +38,8 @@
 
         @media(width < 1800px) {
             .img li img {
-                transform: translateX(-180%) translateY(-70%);
                 height: 1100%;
                 width: 1100%;
-            }
-
-            table {
-                margin-left: 100px
             }
         }
 
