@@ -47,24 +47,30 @@ class DashboardController extends Controller
         $labelsDesign = $amountIdeaDesign->keys();
         $dataDesign = $amountIdeaDesign->values();
 
-        $countContributorIT = Idea::select(DB::raw("COUNT(*) as count"))
+        $dataCountIT = Idea::select(DB::raw("COUNT(*) as count"))
             ->join('users', 'ideas.author_id', '=', 'users.id')
             ->where('department_id', '=', '1')
             ->pluck('count');
-        $dataCountIT = $countContributorIT->values();
 
-        $countContributorBusiness = Idea::select(DB::raw("COUNT(*) as count"))
+        $dataCountBusiness = Idea::select(DB::raw("COUNT(*) as count"))
             ->join('users', 'ideas.author_id', '=', 'users.id')
             ->where('department_id', '=', '2')
             ->pluck('count');
-        $dataCountBusiness = $countContributorBusiness->values();
 
-        $countContributorDesign = Idea::select(DB::raw("COUNT(*) as count"))
-            ->join('users', 'ideas.author_id', '=', 'users.id')
+
+        $countContributorDesign = Idea::join('users', 'ideas.author_id', '=', 'users.id')
             ->where('department_id', '=', '3')
-            ->pluck('count');
+            ->select('author_id')
+            ->distinct()
+            ->get();
+        // ->count();
         $dataCountDesign = $countContributorDesign->values();
 
+        dd(Idea::join('users', 'ideas.author_id', '=', 'users.id')
+            ->where('department_id', '=', '3')
+            ->select('author_id')
+            ->distinct()
+            ->get() );
         $goodIdea = Idea::withCount('likes', 'dislikes')
             ->having('likes_count', '>', 'dislikes_count')
             ->get()
