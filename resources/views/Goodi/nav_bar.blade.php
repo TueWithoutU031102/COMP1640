@@ -43,9 +43,7 @@
                 <a href="/"><img class="logo" src="/css/images/logo_transparent.png"></a>
             </div>
             <ul style="display: flex;">
-                @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                    <li><a href="/submission/index">EVENT</a></li>
-                @endif
+                <li><a href="/submission/index">EVENT</a></li>
                 @if (Auth::user()->role_id == 1)
                     <li><a href="/admin/acc">ACCOUNTS</a></li>
                 @endif

@@ -58,12 +58,6 @@
             <div class="alert alert-success" role="alert"><strong>{{ Session::get('success') }}</strong></div>
         @endif
         <div class="create-btn">
-            <form action="" class="form-inline">
-                <div class="form-group">
-                    <input class="search_bar" placeholder="Search by name">
-                </div>
-                {{-- <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button> --}}
-            </form>
             <a type="button" href="createAcc" class="btn btn-primary" style="font-weight: bold; font-size: 20px;">+</a>
         </div>
         <br><br>

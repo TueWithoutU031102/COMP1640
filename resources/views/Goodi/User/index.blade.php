@@ -133,6 +133,7 @@
                 <button class="close">&times;</button>
                 @include('Goodi.User.update')
             </div>
+        </div>
     </section>
     </div>
     </div>
@@ -151,103 +152,78 @@
                 </div>
             </div>
             <div class="right-profile">
-                {{-- <div class="user-detail">
-                        <img src="" width="50" height="50" class="rounded-circle" alt=""
-                            style="object-fit: cover; object-position: center center;">
-                        <div class="post-content">
-                            <h4>{{ $idea->title }}</h4>
-                            <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
-                            @foreach ($idea->files as $file)
-                                <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
-                            @endforeach
-                            <br>
-                            <input type="checkbox" id="view{{ $idea->id }}">
-                            <p class="des">{{ $idea->description }}</p>
-                            <label for="view{{ $idea->id }}">View More</label>
-                        </div> --}}
-                {{-- </div>
-                <div class="idea-interact">
-                    <br>
+                <section class="post">
                     @foreach ($listIdeas as $idea)
-                        <ul>
-                            <li>
-                                <h1>{{ $idea->title }}</h1>
-                            </li>
-                        </ul>
-                    @endforeach --}}
+                        <br>
+                        <div class="post-container">
+                            <div class="user-detail">
+                                <img src="{{ asset($idea->user->image) }}" width="50" height="50"
+                                    class="rounded-circle" alt=""
+                                    style="object-fit: cover; object-position: center center;">
+                                <div class="post-content">
+                                    <a href="/idea/show/{{ $idea->id }}">
+                                        <h4>{{ $idea->title }}</h4>
+                                    </a>
+                                    <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small>
+                                    <br>
+                                    @foreach ($idea->files as $file)
+                                        <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
+                                    @endforeach
+                                    <br>
+                                    <input type="checkbox" id="view{{ $idea->id }}">
+                                    <p class="des">{{ $idea->description }}</p>
+                                    <label for="view{{ $idea->id }}">View More</label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="idea-interact">
+                                <br>
+                                <div>
+                                    @if (!$idea->likedBy(auth()->user()))
+                                        <button type="submit"
+                                            onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                            <i class="fa-regular fa-thumbs-up fa-2x"
+                                                id="likes-interact{{ $idea->id }}"></i>
+                                        </button>
+                                    @else
+                                        <button type="submit"
+                                            onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                            <i class="fa-solid fa-thumbs-up fa-2x"
+                                                id="likes-interact{{ $idea->id }}"></i>
+                                        </button>
+                                    @endif
+                                    <h6 id="likesCount{{ $idea->id }}">{{ $idea->likes->count() }}</h6>
+                                </div>
+                                <div>
+                                    @if (!$idea->dislikedBy(auth()->user()))
+                                        <button type="submit"
+                                            onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                            <i class="fa-regular fa-thumbs-down fa-2x"
+                                                id="dislikes-interact{{ $idea->id }}"></i>
+                                        </button>
+                                    @else
+                                        <button type="submit"
+                                            onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                            <i class="fa-solid fa-thumbs-down fa-2x"
+                                                id="dislikes-interact{{ $idea->id }}"></i>
+                                        </button>
+                                    @endif
+                                    <h6 id="dislikesCount{{ $idea->id }}">{{ $idea->dislikes->count() }}</h6>
+                                </div>
 
-                @foreach ($listIdeas as $idea)
-                    <br>
-                    <div class="post-container">
-                        <div class="change">
-                            <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
-                                <p>&dot;&dot;&dot;</p>
-                            </button>
-                            <div class="idea-effect{{ $idea->id }}">
-                                <ul>
-                                    <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
-                                    <li><a href="">Change Content</a></li>
-                                    <li><a href="">Remove Post</a></li>
-                                </ul>
+                                <div>
+                                    <button
+                                        onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
+                                        class="comment{{ $idea->id }}"><i
+                                            class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
+                                    <h6>{{ $idea->comments->count() }}</h6>
+                                </div>
                             </div>
-                        </div>
-                        <div class="user-detail">
-                            <img src="{{ asset($idea->user->image) }}" width="50" height="50" class="rounded-circle"
-                                alt="" style="object-fit: cover; object-position: center center;">
-                            <div class="post-content">
-                                <h4>{{ $idea->title }}</h4>
-                                <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small>
-                                <br>
-                                @foreach ($idea->files as $file)
-                                    <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
-                                @endforeach
-                                <br>
-                                <input type="checkbox" id="view{{ $idea->id }}">
-                                <p class="des">{{ $idea->description }}</p>
-                                <label for="view{{ $idea->id }}">View More</label>
-                            </div>
+                            <hr>
                         </div>
                         <br>
-                        <div class="idea-interact">
-                            <br>
-                            @if (!$idea->likedBy(auth()->user()))
-                                <form action="{{ route('postLike', $idea->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
-                                </form>
-                            @else
-                                <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"><i class="fa-solid fa-thumbs-up fa-2x"></i></button>
-                                </form>
-                            @endif
-                            <h6>{{ $idea->likes->count() }}</h6>
-
-                            @if (!$idea->dislikedBy(auth()->user()))
-                                <form action="{{ route('postDislike', $idea->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
-                                </form>
-                            @else
-                                <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
-                                </form>
-                            @endif
-                            <h6>{{ $idea->dislikes->count() }}</h6>
-
-                            <button
-                                onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
-                                class="comment{{ $idea->id }}"><i
-                                    class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
-                            <h6>{{ $idea->comments->count() }}</h6>
-                        </div>
-                        <hr>
-                    </div>
-                    <br>
-                @endforeach
+                    @endforeach
+                </section>
                 {{-- @if (!$idea->likedBy(auth()->user()))
                             <form action="{{ route('postLike', $idea->id) }}" method="POST">
                                 @csrf
