@@ -21,7 +21,7 @@
         <div class="profile-container">
             <div class="cate_list">
                 <div class="imp-link">
-                    <a type="button" href="/category/create" class=""
+                    <a type="button" href="/category/create" class="btn btn-success"
                         style="font-weight: bold; font-size: 20px; text-align:center; color: white;">Create New
                         Category</a>
                     <div class="category">
