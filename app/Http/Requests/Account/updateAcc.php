@@ -43,6 +43,7 @@ class updateAcc extends FormRequest
             'DoB.before' => 'Please declare the correct date of birth',
             'role_id.required' => 'The role cannot be empty',
             'department_id.required' => 'Only admin and QAM are allowed to null department',
+            'image.image' => 'The file under validation must be an image (jpg, jpeg, png, bmp, gif, svg, or webp).',
         ];
     }
 }

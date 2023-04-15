@@ -37,6 +37,7 @@ class UpdateUser extends FormRequest
             'name.required' => 'Name cannot be empty',
             'DoB.required' => 'The date of birth cannot be empty',
             'DoB.before' => 'Please declare the correct date of birth',
+            'image.image' => 'The file under validation must be an image (jpg, jpeg, png, bmp, gif, svg, or webp).',
         ];
     }
 }

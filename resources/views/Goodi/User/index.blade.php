@@ -152,52 +152,14 @@
                 </div>
             </div>
             <div class="right-profile">
-                {{-- <div class="user-detail">
-                        <img src="" width="50" height="50" class="rounded-circle" alt=""
-                            style="object-fit: cover; object-position: center center;">
-                        <div class="post-content">
-                            <h4>{{ $idea->title }}</h4>
-                            <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
-                            @foreach ($idea->files as $file)
-                                <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
-                            @endforeach
-                            <br>
-                            <input type="checkbox" id="view{{ $idea->id }}">
-                            <p class="des">{{ $idea->description }}</p>
-                            <label for="view{{ $idea->id }}">View More</label>
-                        </div> --}}
-                {{-- </div>
-                <div class="idea-interact">
-                    <br>
-                    @foreach ($listIdeas as $idea)
-                        <ul>
-                            <li>
-                                <h1>{{ $idea->title }}</h1>
-                            </li>
-                        </ul>
-                    @endforeach --}}
-
                 <section class="post">
                     @foreach ($listIdeas as $idea)
                         <br>
                         <div class="post-container">
-                            <div class="change">
-                                <button class="idea-change{{ $idea->id }}"
-                                        onclick="ideaToggle({{ $idea->id }});">
-                                    <p>&dot;&dot;&dot;</p>
-                                </button>
-                                <div class="idea-effect{{ $idea->id }}">
-                                    <ul>
-                                        <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
-                                        <li><a href="">Change Content</a></li>
-                                        <li><a href="">Remove Post</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                             <div class="user-detail">
                                 <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                     class="rounded-circle" alt=""
-                                     style="object-fit: cover; object-position: center center;">
+                                    class="rounded-circle" alt=""
+                                    style="object-fit: cover; object-position: center center;">
                                 <div class="post-content">
                                     <a href="/idea/show/{{ $idea->id }}">
                                         <h4>{{ $idea->title }}</h4>
@@ -219,15 +181,15 @@
                                 <div>
                                     @if (!$idea->likedBy(auth()->user()))
                                         <button type="submit"
-                                                onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                            onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
                                             <i class="fa-regular fa-thumbs-up fa-2x"
-                                               id="likes-interact{{ $idea->id }}"></i>
+                                                id="likes-interact{{ $idea->id }}"></i>
                                         </button>
                                     @else
                                         <button type="submit"
-                                                onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                            onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
                                             <i class="fa-solid fa-thumbs-up fa-2x"
-                                               id="likes-interact{{ $idea->id }}"></i>
+                                                id="likes-interact{{ $idea->id }}"></i>
                                         </button>
                                     @endif
                                     <h6 id="likesCount{{ $idea->id }}">{{ $idea->likes->count() }}</h6>
@@ -235,15 +197,15 @@
                                 <div>
                                     @if (!$idea->dislikedBy(auth()->user()))
                                         <button type="submit"
-                                                onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                            onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
                                             <i class="fa-regular fa-thumbs-down fa-2x"
-                                               id="dislikes-interact{{ $idea->id }}"></i>
+                                                id="dislikes-interact{{ $idea->id }}"></i>
                                         </button>
                                     @else
                                         <button type="submit"
-                                                onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                            onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
                                             <i class="fa-solid fa-thumbs-down fa-2x"
-                                               id="dislikes-interact{{ $idea->id }}"></i>
+                                                id="dislikes-interact{{ $idea->id }}"></i>
                                         </button>
                                     @endif
                                     <h6 id="dislikesCount{{ $idea->id }}">{{ $idea->dislikes->count() }}</h6>

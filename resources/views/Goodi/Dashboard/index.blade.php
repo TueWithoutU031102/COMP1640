@@ -88,7 +88,6 @@
                             borderColor: 'rgba(2, 2, 2, 2)',
                             data: amountIdeaDesign,
                         },
-
                     ]
                 };
 
