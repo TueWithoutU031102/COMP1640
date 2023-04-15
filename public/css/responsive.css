@@ -227,6 +227,10 @@
         width: fit-content;
     }
 
+    .cate_box{
+        display: block;
+    }
+
     .about-card img {
         display: none;
     }
