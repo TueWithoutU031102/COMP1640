@@ -14,17 +14,6 @@
     z-index: 100;
 }
 
-.header {
-    height: 100vh;
-    width: 100%;
-    background-image: linear-gradient(rgba(26, 6, 44, 0.7), rgba(7, 15, 44, 0.7)),
-        url(images/banner.png);
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    overflow: hidden;
-}
-
 nav {
     width: 100%;
     display: flex;
@@ -382,17 +371,6 @@ nav.sticky {
 
 .search_bar[type=text]:focus {
     width: 73%;
-}
-
-.banner {
-    min-height: 60vh;
-    width: auto;
-    background-image: linear-gradient(rgba(26, 6, 44, 0.7), rgba(7, 15, 44, 0.7)),
-        url(images/banner.png);
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    overflow: hidden;
 }
 
 /* .main_idea{
