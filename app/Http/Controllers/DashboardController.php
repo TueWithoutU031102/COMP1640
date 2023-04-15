@@ -42,35 +42,27 @@ class DashboardController extends Controller
             ->groupBy('id');
         $amountIdeaDesign = Idea::select(DB::raw("YEAR(created_at) as year"), DB::raw("COUNT(*) as count"))
             ->groupBy(DB::raw("YEAR(created_at)"))
-            ->whereIn('author_id', $activeBusiness)
+            ->whereIn('author_id', $activeDesign)
             ->pluck('count', 'year');
         $labelsDesign = $amountIdeaDesign->keys();
         $dataDesign = $amountIdeaDesign->values();
 
-        $dataCountIT = Idea::select(DB::raw("COUNT(*) as count"))
-            ->join('users', 'ideas.author_id', '=', 'users.id')
-            ->where('department_id', '=', '1')
-            ->pluck('count');
+        $dataCountIT = User::join('ideas', 'ideas.author_id', 'users.id')
+            ->where('department_id', '1')
+            ->select(DB::raw('count(DISTINCT author_id) as author_count'))
+            ->pluck('author_count');
 
-        $dataCountBusiness = Idea::select(DB::raw("COUNT(*) as count"))
-            ->join('users', 'ideas.author_id', '=', 'users.id')
-            ->where('department_id', '=', '2')
-            ->pluck('count');
+        $dataCountBusiness = User::join('ideas', 'ideas.author_id', 'users.id')
+            ->where('department_id', '2')
+            ->select(DB::raw('count(DISTINCT author_id) as author_count'))
+            ->pluck('author_count');
+
+        $dataCountDesign = User::join('ideas', 'ideas.author_id', 'users.id')
+            ->where('department_id', '3')
+            ->select(DB::raw('count(DISTINCT author_id) as author_count'))
+            ->pluck('author_count');
 
 
-        $countContributorDesign = Idea::join('users', 'ideas.author_id', '=', 'users.id')
-            ->where('department_id', '=', '3')
-            ->select('author_id')
-            ->distinct()
-            ->get();
-        // ->count();
-        $dataCountDesign = $countContributorDesign->values();
-
-        dd(Idea::join('users', 'ideas.author_id', '=', 'users.id')
-            ->where('department_id', '=', '3')
-            ->select('author_id')
-            ->distinct()
-            ->get() );
         $goodIdea = Idea::withCount('likes', 'dislikes')
             ->having('likes_count', '>', 'dislikes_count')
             ->get()
