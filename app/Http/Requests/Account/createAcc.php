@@ -30,7 +30,7 @@ class createAcc extends FormRequest
             'password' => ['gt:1'],
             'phone_number' => ['digits:10', 'starts_with:0', 'unique:users,phone_number'],
             'DoB' => ['required', 'before:' .now()->subYears(18)->toDateString()],
-            'image' => ['image', 'required'],
+            'image' => ['image'],
             'role_id' => ['required'],
             'department_id' => ['required'],
         ];
