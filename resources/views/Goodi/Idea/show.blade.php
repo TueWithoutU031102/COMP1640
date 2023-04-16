@@ -253,9 +253,9 @@
                             style="object-fit: cover; object-position: center center;">
                         <input type="text" class="form-control" placeholder="Enter your comment..."
                             id="commentContentInput{{ $idea->id }}">
-                        <button
+                        <button class="cmt-btn"
                             onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
-                            sent
+                            <i class="fa-solid fa-paper-plane fa-2xl"></i>
                         </button>
                     </div>
                 @else

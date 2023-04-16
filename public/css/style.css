@@ -1564,6 +1564,11 @@ form .form-content .input-box {
     color: #fff;
 }
 
+.cmt-btn{
+    border: none;
+    background: transparent;
+}
+
 .login_form input {
     outline: none;
     height: 20px;
