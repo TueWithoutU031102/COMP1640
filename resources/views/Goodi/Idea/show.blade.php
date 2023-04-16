@@ -174,21 +174,11 @@
     <div class="show-post-container">
         <br>
         <div class="change">
-            <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
-                <p>&dot;&dot;&dot;</p>
-            </button>
             <button class="idea-back{{ $idea->id }}">
                 <a href="/submission/show/{{$idea->submission_id}}">
                     <p>&LeftArrow;</p>
                 </a>
             </button>
-            <div class="idea-effect{{ $idea->id }}">
-                <ul>
-                    <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
-                    <li><a href="">Change Content</a></li>
-                    <li><a href="">Remove Post</a></li>
-                </ul>
-            </div>
         </div>
         <div class="user-detail">
             <img src="{{ asset($idea->user->image) }}" width="50" height="50" class="rounded-circle" alt=""
