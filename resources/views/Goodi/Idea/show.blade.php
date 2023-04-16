@@ -1,7 +1,7 @@
 @extends('Master.Master')
 
 @section('main')
-<div id="preloader"></div>
+    <div id="preloader"></div>
     <style>
         .des {
 
@@ -174,19 +174,11 @@
     <div class="show-post-container">
         <br>
         <div class="change">
-            <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
-                <p>&dot;&dot;&dot;</p>
+            <button class="idea-back{{ $idea->id }}">
+                <a href="/submission/show/{{$idea->submission_id}}">
+                    <p>&LeftArrow;</p>
+                </a>
             </button>
-            <button class="idea-back{{ $idea->id }}" onclick="history.back()">
-                <p>&LeftArrow;</p>
-            </button>
-            <div class="idea-effect{{ $idea->id }}">
-                <ul>
-                    <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
-                    <li><a href="">Change Content</a></li>
-                    <li><a href="">Remove Post</a></li>
-                </ul>
-            </div>
         </div>
         <div class="user-detail">
             <img src="{{ asset($idea->user->image) }}" width="50" height="50" class="rounded-circle" alt=""
@@ -243,9 +235,10 @@
             </div>
             <div>
                 <button>
-                    <a style="text-decoration: none; color:#000" href="/idea/show/{{ $idea->id }}"><i class="fa-solid fa-eye fa-2x"></i></a>
+                    <a style="text-decoration: none; color:#000" href="/idea/show/{{ $idea->id }}"><i
+                            class="fa-solid fa-eye fa-2x"></i></a>
                 </button>
-                <h6>{{$idea->views}}</h6>
+                <h6>{{ $idea->views }}</h6>
             </div>
         </div>
         <hr>

@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\File\StoreFileRequest;
-use App\Models\Category;
 use App\Models\Idea;
 use App\Models\User;
-use App\Models\Like;
-use App\Models\Department;
-use App\Models\Comment;
 use App\Services\CommentService;
 use App\Services\EmailService;
 use App\Services\IdeaService;
@@ -16,8 +12,6 @@ use App\Services\UserService;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\Continue_;
 
 class IdeaController extends Controller
 {
@@ -142,9 +136,11 @@ class IdeaController extends Controller
      * @param \App\Models\Idea $idea
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Idea $idea)
+    public function destroy($id)
     {
         //
+        $idea = Idea::find($id);
+        $idea->removeFile();
         $idea->delete();
         return redirect(route("showSpecifiedSubmission", ['id' => $idea->submission_id]));
     }
