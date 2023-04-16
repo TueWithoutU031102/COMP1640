@@ -9,7 +9,7 @@
     height: 100vh;
     width: 100%;
     background-image: linear-gradient(rgba(26, 6, 44, 0.7), rgba(7, 15, 44, 0.7)),
-        url(/css/images/banner.png);
+        url(/css/images/Banner.png);
     background-position: center;
     background-size: cover;
     position: relative;
@@ -20,7 +20,7 @@
     min-height: 60vh;
     width: auto;
     background-image: linear-gradient(rgba(26, 6, 44, 0.7), rgba(7, 15, 44, 0.7)),
-        url(/css/images/banner.png);
+        url(/css/images/Banner.png);
     background-position: center;
     background-size: cover;
     position: relative;
