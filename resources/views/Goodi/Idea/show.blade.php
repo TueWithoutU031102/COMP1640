@@ -137,129 +137,136 @@
     @include('Goodi.nav_bar')
     <br><br><br><br><br><br><br>
     <div class="show-post-container">
-        <br>
-        <div class="user-detail">
-            <img src="{{ asset($idea->user->image) }}" width="50" height="50" class="rounded-circle" alt=""
-                style="object-fit: cover; object-position: center center;">
-            <div class="post-content">
-                <h4>{{ $idea->title }}</h4>
-                <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
-                @foreach ($idea->files as $file)
-                    <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
-                @endforeach
-                <br>
-                <input type="checkbox" id="view{{ $idea->id }}">
-                <p class="des">{{ $idea->description }}</p>
-                <label for="view{{ $idea->id }}">View More</label>
-            </div>
-        </div>
-        <br>
-        <div class="idea-interact">
+        @if ($idea->author_id == Auth::user()->id || Auth::user()->role_id == 1)
+            <form action="/delete/{{ $idea->id }}" method="POST" class="d-inline"
+                onsubmit="return confirm('Are you sure to delete {{ $idea->title }} !!!???')">
+                @csrf
+                <button class="btn btn-danger btn-sm"><i aria-hidden="true"><i class="fa-solid fa-trash"></i></button>
+            </form>
+        @endif
             <br>
-            <div>
-                @if (!$idea->likedBy(auth()->user()))
-                    <button type="submit"
-                        onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
-                        <i class="fa-regular fa-thumbs-up fa-2x" id="likes-interact{{ $idea->id }}"></i>
-                    </button>
-                @else
-                    <button type="submit"
-                        onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
-                        <i class="fa-solid fa-thumbs-up fa-2x" id="likes-interact{{ $idea->id }}"></i>
-                    </button>
-                @endif
-                <h6 id="likesCount{{ $idea->id }}">{{ $idea->likes->count() }}</h6>
+            <div class="user-detail">
+                <img src="{{ asset($idea->user->image) }}" width="50" height="50" class="rounded-circle"
+                    alt="" style="object-fit: cover; object-position: center center;">
+                <div class="post-content">
+                    <h4>{{ $idea->title }}</h4>
+                    <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small><br><br>
+                    @foreach ($idea->files as $file)
+                        <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
+                    @endforeach
+                    <br>
+                    <input type="checkbox" id="view{{ $idea->id }}">
+                    <p class="des">{{ $idea->description }}</p>
+                    <label for="view{{ $idea->id }}">View More</label>
+                </div>
             </div>
-            <div>
-                @if (!$idea->dislikedBy(auth()->user()))
-                    <button type="submit"
-                        onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
-                        <i class="fa-regular fa-thumbs-down fa-2x" id="dislikes-interact{{ $idea->id }}"></i>
-                    </button>
-                @else
-                    <button type="submit"
-                        onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
-                        <i class="fa-solid fa-thumbs-down fa-2x" id="dislikes-interact{{ $idea->id }}"></i>
-                    </button>
-                @endif
-                <h6 id="dislikesCount{{ $idea->id }}">{{ $idea->dislikes->count() }}</h6>
-            </div>
-
-            <div>
-                <button
-                    onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
-                    class="comment{{ $idea->id }}"><i class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
-                <h6>{{ $idea->comments->count() }}</h6>
-            </div>
-        </div>
-        <hr>
-
-        <section class="gradient-custom{{ $idea->id }} active">
-            <div class="card-body p-4">
-                @if ($idea->submission->dueDateComment > now())
-                    <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
-                    <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
-                        <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                            alt="user avatar" class="rounded-circle"
-                            style="object-fit: cover; object-position: center center;">
-                        <input type="text" class="form-control" placeholder="Enter your comment..."
-                            id="commentContentInput{{ $idea->id }}">
-                        <button
-                            onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
-                            sent
+            <br>
+            <div class="idea-interact">
+                <br>
+                <div>
+                    @if (!$idea->likedBy(auth()->user()))
+                        <button type="submit"
+                            onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                            <i class="fa-regular fa-thumbs-up fa-2x" id="likes-interact{{ $idea->id }}"></i>
                         </button>
-                    </div>
-                @else
-                    <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
-                        <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                            alt="user avatar" class="rounded-circle"
-                            style="object-fit: cover; object-position: center center;">
-                        <input type="text" class="form-control" placeholder="Over due ..."
-                            id="commentContentInput{{ $idea->id }}" disabled>
-                    </div>
-                @endif
+                    @else
+                        <button type="submit"
+                            onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                            <i class="fa-solid fa-thumbs-up fa-2x" id="likes-interact{{ $idea->id }}"></i>
+                        </button>
+                    @endif
+                    <h6 id="likesCount{{ $idea->id }}">{{ $idea->likes->count() }}</h6>
+                </div>
+                <div>
+                    @if (!$idea->dislikedBy(auth()->user()))
+                        <button type="submit"
+                            onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                            <i class="fa-regular fa-thumbs-down fa-2x" id="dislikes-interact{{ $idea->id }}"></i>
+                        </button>
+                    @else
+                        <button type="submit"
+                            onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                            <i class="fa-solid fa-thumbs-down fa-2x" id="dislikes-interact{{ $idea->id }}"></i>
+                        </button>
+                    @endif
+                    <h6 id="dislikesCount{{ $idea->id }}">{{ $idea->dislikes->count() }}</h6>
+                </div>
 
-                <div class="row">
-                    <div class="col" id="commentContentEle{{ $idea->id }}">
-                        @foreach ($idea->comments as $comment)
-                            <div class="d-flex flex-start mt-4" style="gap: 10px">
-                                <div class="flex-grow-1 flex-shrink-1">
-                                    <div
-                                        style="
+                <div>
+                    <button
+                        onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
+                        class="comment{{ $idea->id }}"><i class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
+                    <h6>{{ $idea->comments->count() }}</h6>
+                </div>
+            </div>
+            <hr>
+
+            <section class="gradient-custom{{ $idea->id }} active">
+                <div class="card-body p-4">
+                    @if ($idea->submission->dueDateComment > now())
+                        <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
+                        <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
+                            <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
+                                alt="user avatar" class="rounded-circle"
+                                style="object-fit: cover; object-position: center center;">
+                            <input type="text" class="form-control" placeholder="Enter your comment..."
+                                id="commentContentInput{{ $idea->id }}">
+                            <button
+                                onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
+                                sent
+                            </button>
+                        </div>
+                    @else
+                        <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
+                            <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
+                                alt="user avatar" class="rounded-circle"
+                                style="object-fit: cover; object-position: center center;">
+                            <input type="text" class="form-control" placeholder="Over due ..."
+                                id="commentContentInput{{ $idea->id }}" disabled>
+                        </div>
+                    @endif
+
+                    <div class="row">
+                        <div class="col" id="commentContentEle{{ $idea->id }}">
+                            @foreach ($idea->comments as $comment)
+                                <div class="d-flex flex-start mt-4" style="gap: 10px">
+                                    <div class="flex-grow-1 flex-shrink-1">
+                                        <div
+                                            style="
                                                     background: #c2ebff;
                                                     border-radius: 20px;
                                                     padding: 10px;
                                                     width: auto;
                                                     ">
-                                        <div class="d-flex "
-                                            style="gap: 10px
+                                            <div class="d-flex "
+                                                style="gap: 10px
                                                             ">
-                                            <img class="rounded-circle" src="{{ asset($comment->user->image) }}"
-                                                alt="avatar" width="50" height="50" />
-                                            <p class="mb-1">
-                                                <b>{{ $comment->user->name }}</b>
-                                            </p>
+                                                <img class="rounded-circle" src="{{ asset($comment->user->image) }}"
+                                                    alt="avatar" width="50" height="50" />
+                                                <p class="mb-1">
+                                                    <b>{{ $comment->user->name }}</b>
+                                                </p>
 
+                                            </div>
+                                            <div class="cmt">
+                                                <p class="small mb-0">
+                                                    {{ $comment->content }}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="cmt">
-                                            <p class="small mb-0">
-                                                {{ $comment->content }}
-                                            </p>
+                                        <div style="gap: 20px; display: flex">
+                                            <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small">
+                                                    reply</span></a>
+                                            <span class="small" style="font-weight: bold">2 hours
+                                                ago</span>
                                         </div>
-                                    </div>
-                                    <div style="gap: 20px; display: flex">
-                                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small">
-                                                reply</span></a>
-                                        <span class="small" style="font-weight: bold">2 hours
-                                            ago</span>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
     </div>
     <br>
     @include('Goodi.footer')

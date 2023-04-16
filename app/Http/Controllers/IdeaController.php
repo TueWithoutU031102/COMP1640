@@ -145,6 +145,8 @@ class IdeaController extends Controller
     public function destroy(Idea $idea)
     {
         //
+        $idea->delete();
+        return redirect(route("showSpecifiedSubmission", ['id' => $idea->submission_id]));
     }
 
     public function downloadData(): Response

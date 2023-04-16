@@ -213,6 +213,7 @@
                                     <option value="{{ Request::url() }}?sort_by=mostPopular">Most Popular Ideas</option>
                                     <option value="{{ Request::url() }}?sort_by=lastestIdeas">Latest Ideas</option>
                                     <option value="{{ Request::url() }}?sort_by=lastestComments">Latest Comments
+                                    <option value="{{ Request::url() }}?sort_by=mostviewed">Most Viewed Ideas</option>
                                     </option>
                                 </select>
                             </form>

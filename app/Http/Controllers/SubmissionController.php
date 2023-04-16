@@ -99,6 +99,7 @@ class SubmissionController extends Controller
                 ->limit(5)
                 ->get(),
             'lastestComments' => Idea::find(Comment::where('idea_id', $id)->latest()->pluck('idea_id')),
+            'mostviewde' => Idea::orderByDesc('views')->limit(5)->get(),
             'none' => $ideas = $this->ideaService->findAll(),
             default => null
         };
