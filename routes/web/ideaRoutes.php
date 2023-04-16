@@ -20,4 +20,6 @@ Route::group(['prefix' => 'idea', 'middleware' => ['auth', 'user']], function ()
     Route::post("{idea}/dislike", [DislikeController::class, 'store'])->name('postDislike');
 
     Route::delete("{idea}/dislike", [DislikeController::class, 'destroy'])->name('destroyDislike');
+
+    Route::delete("/delete/{idea}", [IdeaController::class, 'destroy']);
 });

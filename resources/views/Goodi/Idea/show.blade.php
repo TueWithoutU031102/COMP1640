@@ -157,21 +157,6 @@
     <br><br><br><br><br><br><br>
     <div class="show-post-container">
         <br>
-        <div class="change">
-            <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
-                <p>&dot;&dot;&dot;</p>
-            </button>
-            <button class="idea-back{{ $idea->id }}" onclick="history.back()">
-                <p>&LeftArrow;</p>
-            </button>
-            <div class="idea-effect{{ $idea->id }}">
-                <ul>
-                    <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
-                    <li><a href="">Change Content</a></li>
-                    <li><a href="">Remove Post</a></li>
-                </ul>
-            </div>
-        </div>
         <div class="user-detail">
             <img src="{{ asset($idea->user->image) }}" width="50" height="50" class="rounded-circle" alt=""
                 style="object-fit: cover; object-position: center center;">
@@ -219,81 +204,81 @@
                 <h6 id="dislikesCount{{ $idea->id }}">{{ $idea->dislikes->count() }}</h6>
             </div>
 
-            <div>
-                <button
-                    onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
-                    class="comment{{ $idea->id }}"><i class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
-                <h6>{{ $idea->comments->count() }}</h6>
+                <div>
+                    <button
+                        onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
+                        class="comment{{ $idea->id }}"><i class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
+                    <h6>{{ $idea->comments->count() }}</h6>
+                </div>
             </div>
-        </div>
-        <hr>
+            <hr>
 
-        <section class="gradient-custom{{ $idea->id }} active">
-            <div class="card-body p-4">
-                @if ($idea->submission->dueDateComment > now())
-                    <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
-                    <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
-                        <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                            alt="user avatar" class="rounded-circle"
-                            style="object-fit: cover; object-position: center center;">
-                        <input type="text" class="form-control" placeholder="Enter your comment..."
-                            id="commentContentInput{{ $idea->id }}">
-                        <button
-                            onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
-                            sent
-                        </button>
-                    </div>
-                @else
-                    <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
-                        <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                            alt="user avatar" class="rounded-circle"
-                            style="object-fit: cover; object-position: center center;">
-                        <input type="text" class="form-control" placeholder="Over due ..."
-                            id="commentContentInput{{ $idea->id }}" disabled>
-                    </div>
-                @endif
+            <section class="gradient-custom{{ $idea->id }} active">
+                <div class="card-body p-4">
+                    @if ($idea->submission->dueDateComment > now())
+                        <input type="checkbox" id="commentAnonymousCheck{{ $idea->id }}"> Anonymous
+                        <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
+                            <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
+                                alt="user avatar" class="rounded-circle"
+                                style="object-fit: cover; object-position: center center;">
+                            <input type="text" class="form-control" placeholder="Enter your comment..."
+                                id="commentContentInput{{ $idea->id }}">
+                            <button
+                                onclick="commentOnIdea({{ $idea->id }}, {{ Auth::user()->id }}, 'commentContentInput{{ $idea->id }}')">
+                                sent
+                            </button>
+                        </div>
+                    @else
+                        <div class="mt-3  d-flex flex-row align-items-center p-3 form-color" style="gap: 10px">
+                            <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
+                                alt="user avatar" class="rounded-circle"
+                                style="object-fit: cover; object-position: center center;">
+                            <input type="text" class="form-control" placeholder="Over due ..."
+                                id="commentContentInput{{ $idea->id }}" disabled>
+                        </div>
+                    @endif
 
-                <div class="row">
-                    <div class="col" id="commentContentEle{{ $idea->id }}">
-                        @foreach ($idea->comments as $comment)
-                            <div class="d-flex flex-start mt-4" style="gap: 10px">
-                                <div class="flex-grow-1 flex-shrink-1">
-                                    <div
-                                        style="
+                    <div class="row">
+                        <div class="col" id="commentContentEle{{ $idea->id }}">
+                            @foreach ($idea->comments as $comment)
+                                <div class="d-flex flex-start mt-4" style="gap: 10px">
+                                    <div class="flex-grow-1 flex-shrink-1">
+                                        <div
+                                            style="
                                                     background: #c2ebff;
                                                     border-radius: 20px;
                                                     padding: 10px;
                                                     width: auto;
                                                     ">
-                                        <div class="d-flex "
-                                            style="gap: 10px
+                                            <div class="d-flex "
+                                                style="gap: 10px
                                                             ">
-                                            <img class="rounded-circle" src="{{ asset($comment->user->image) }}"
-                                                alt="avatar" width="50" height="50" />
-                                            <p class="mb-1">
-                                                <b>{{ $comment->user->name }}</b>
-                                            </p>
+                                                <img class="rounded-circle" src="{{ asset($comment->user->image) }}"
+                                                    alt="avatar" width="50" height="50" />
+                                                <p class="mb-1">
+                                                    <b>{{ $comment->user->name }}</b>
+                                                </p>
 
+                                            </div>
+                                            <div class="cmt">
+                                                <p class="small mb-0">
+                                                    {{ $comment->content }}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="cmt">
-                                            <p class="small mb-0">
-                                                {{ $comment->content }}
-                                            </p>
+                                        <div style="gap: 20px; display: flex">
+                                            <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small">
+                                                    reply</span></a>
+                                            <span class="small" style="font-weight: bold">2 hours
+                                                ago</span>
                                         </div>
-                                    </div>
-                                    <div style="gap: 20px; display: flex">
-                                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small">
-                                                reply</span></a>
-                                        <span class="small" style="font-weight: bold">2 hours
-                                            ago</span>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
     </div>
     <br>
     @include('Goodi.footer')

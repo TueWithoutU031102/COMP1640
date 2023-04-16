@@ -88,6 +88,7 @@ class SubmissionController extends Controller
 
         $departments = Department::all();
         //??= la neu ideas chua duoc dinh nghia thi chay vao con neu ideas co gia tri thi k chay
+
         $ideas ??= match ($request->sort_by) {
             'mostPopular' => Idea::withCount('likes', 'dislikes')
                 ->where('submission_id', $id)
@@ -98,8 +99,9 @@ class SubmissionController extends Controller
                 ->latest()
                 ->limit(5)
                 ->get(),
-            'lastestComments' => Idea::find(Comment::where('idea_id', $id)->latest()->pluck('idea_id')),
-            'none' => $ideas = $this->ideaService->findAll(),
+            'lastestComments' => Idea::where('submission_id', $id)->find(Comment::where('idea_id', $id)->latest()->pluck('idea_id')),
+            'mostviewed' => Idea::where('submission_id', $id)->orderByDesc('views')->limit(5)->get(),
+            'none' => $ideas = Idea::where('submission_id', $id)->select()->get(),
             default => null
         };
         //dd($ideas);
