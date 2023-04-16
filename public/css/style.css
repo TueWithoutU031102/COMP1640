@@ -752,12 +752,8 @@ nav.sticky {
     margin-bottom: 50px;
 }
 
-.res_profile-detail {
-    margin-left: -30px;
-    padding: 40px;
-    border-radius: 20px;
-    background: #b0b0b048;
-    margin-bottom: 50px;
+.res_profile-detail{
+    display: none;
 }
 
 .left-profile {
