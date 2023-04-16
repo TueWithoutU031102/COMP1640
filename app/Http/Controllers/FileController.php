@@ -5,10 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\File\StoreFileRequest;
 use App\Http\Requests\File\UpdateFileRequest;
 use App\Models\File;
-use App\Services\CommentService;
-use App\Services\EmailService;
-use App\Services\IdeaService;
-use App\Services\UserService;
 use Illuminate\Http\UploadedFile;
 
 class FileController extends Controller
@@ -110,11 +106,11 @@ class FileController extends Controller
         return "idea/" . $name;
     }
 
-    public function handleUpload(Request $request)
-    {
-        $file = $request->file('files');
+    // public function handleUpload(Request $request)
+    // {
+    //     $file = $request->file('files');
 
 
-        // Do something with the path to the uploaded file...
-    }
+    //     // Do something with the path to the uploaded file...
+    // }
 }

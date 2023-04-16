@@ -297,7 +297,7 @@
                                         <ul>
                                             <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
                                             <li><a href="">Change Content</a></li>
-                                            <li><a href="">Remove Post</a></li>
+                                            <li><a href="/idea/delete/{{ $idea->id }}">Remove Post</a></li>
                                         </ul>
                                     </div>
                                 </div>
