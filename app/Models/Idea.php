@@ -67,10 +67,4 @@ class Idea extends Model
     {
         return $this->hasMany(File::class);
     }
-
-    public function removeFile()
-    {
-        if (File::exists(public_path($this->idea)))
-            return \Illuminate\Support\Facades\File::delete(public_path($this->idea));
-    }
 }
