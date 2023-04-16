@@ -286,6 +286,11 @@
                         @foreach ($ideas as $idea)
                             <br>
                             <div class="post-container">
+                                <div class="idea-effect{{ $idea->id }}">
+                                    <div class="idea-change{{ $idea->id }}">
+                                        <p>&dot;&dot;&dot;</p>
+                                    </div>
+                                </div>
                                 <div class="user-detail">
                                     <img src="{{ asset($idea->user->image) }}" width="50" height="50"
                                         class="rounded-circle" alt=""
