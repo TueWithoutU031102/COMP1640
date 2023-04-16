@@ -172,7 +172,7 @@
     <br><br><br><br><br><br><br>
     <div class="show-post-container">
         <br>
-        <div class="change"> 
+        <div class="change">
             <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
                 <p>&dot;&dot;&dot;</p>
             </button>
@@ -239,6 +239,12 @@
                     onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
                     class="comment{{ $idea->id }}"><i class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
                 <h6>{{ $idea->comments->count() }}</h6>
+            </div>
+            <div>
+                <button>
+                    <a style="text-decoration: none; color:#000" href="/idea/show/{{ $idea->id }}"><i class="fa-solid fa-eye fa-2x"></i></a>
+                </button>
+                <h6>0</h6>
             </div>
         </div>
         <hr>
