@@ -175,7 +175,7 @@
         <br>
         <div class="change">
             <button class="idea-back{{ $idea->id }}">
-                <a href="/submission/show/{{$idea->submission_id}}">
+                <a style="text-decoration: none; color: #000" href="/submission/show/{{$idea->submission_id}}">
                     <p>&LeftArrow;</p>
                 </a>
             </button>
