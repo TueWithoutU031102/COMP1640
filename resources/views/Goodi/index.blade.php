@@ -1,6 +1,7 @@
 @extends('Master.Master')
 
 @section('main')
+<div id="preloader"></div>
 <section class="header">
     @include('Goodi.nav_bar')
     <div class="text-box">

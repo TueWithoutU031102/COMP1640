@@ -1,6 +1,7 @@
 @extends('Master.Master')
 
 @section('main')
+<div id="preloader"></div>
     <style>
         * {
             margin: 0;

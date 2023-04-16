@@ -1,6 +1,7 @@
 @extends('Master.Master')
 
 @section('main')
+<div id="preloader"></div>
     @include('Goodi.nav_bar')
     <br><br><br><br><br>
     <h1 class="display-4" style="text-align: center; font-weight: bold">ACCOUNT INFORMATION</h1><br>

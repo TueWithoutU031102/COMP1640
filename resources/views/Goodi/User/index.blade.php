@@ -1,121 +1,122 @@
 @extends('Master.Master')
 
 @section('main')
+    <div id="preloader"></div>
     @foreach ($listIdeas as $idea)
-    <style>
-        .des {
-            --max-line: 3;
-            width: 700px;
-            overflow-wrap: break-word;
-            font-weight: unset;
-            font-size: 16px;
-            letter-spacing: 1px;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: var(--max-line);
-            overflow: hidden;
-        }
-
-        #view{{ $idea->id }} {
-            display: none;
-        }
-
-        .post-content label {
-            display: inline-block;
-            color: #3564fb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-
-        #view{{ $idea->id }}:checked~.des {
-            --max-line: 0;
-        }
-
-        #view{{ $idea->id }}:checked~label {
-            visibility: hidden;
-        }
-
-        #view{{ $idea->id }}:checked~label:after {
-            content: 'Show Less';
-            display: block;
-            visibility: visible;
-        }
-
-        .gradient-custom{{ $idea->id }} {
-            height: 0;
-            display: none;
-            /* transition: 0.2s; */
-        }
-
-        .gradient-custom{{ $idea->id }}.active {
-            height: auto;
-            display: block;
-        }
-
-        .idea-effect{{ $idea->id }} {
-            display: none;
-            letter-spacing: 0;
-            position: absolute;
-            margin-top: 0px;
-            right: 80px;
-            background: #bababa;
-            padding-right: 10px;
-            border-radius: 10px;
-        }
-
-        .idea-effect{{ $idea->id }}.active {
-            display: block;
-        }
-
-
-        .idea-change{{ $idea->id }} {
-            position: absolute;
-            right: 30px;
-            background: #fff;
-            border: none;
-            transition: 0.2s;
-            padding: 5px;
-            height: 40px;
-            border-radius: 20px;
-            font-size: 30px;
-        }
-
-        .idea-change{{ $idea->id }}:hover {
-            background: #8f8f8f;
-        }
-
-        .idea-effect{{ $idea->id }} ul li {
-            list-style: none;
-        }
-
-        .idea-effect{{ $idea->id }} ul li a {
-            text-decoration: none;
-            color: #000;
-            width: 200px;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            border-radius: 10px;
-            padding: 5px;
-            margin-top: 5px;
-            transition: 0.2s;
-        }
-
-        .idea-effect{{ $idea->id }} ul li a:hover {
-            background: #8f8f8f;
-        }
-
-        @media (width <=800px) {
+        <style>
             .des {
-                width: auto;
                 --max-line: 3;
-                width: 300px;
+                width: 700px;
                 overflow-wrap: break-word;
+                font-weight: unset;
+                font-size: 16px;
+                letter-spacing: 1px;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
                 -webkit-line-clamp: var(--max-line);
+                overflow: hidden;
             }
-        }
-    </style>
+
+            #view{{ $idea->id }} {
+                display: none;
+            }
+
+            .post-content label {
+                display: inline-block;
+                color: #3564fb;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+
+            #view{{ $idea->id }}:checked~.des {
+                --max-line: 0;
+            }
+
+            #view{{ $idea->id }}:checked~label {
+                visibility: hidden;
+            }
+
+            #view{{ $idea->id }}:checked~label:after {
+                content: 'Show Less';
+                display: block;
+                visibility: visible;
+            }
+
+            .gradient-custom{{ $idea->id }} {
+                height: 0;
+                display: none;
+                /* transition: 0.2s; */
+            }
+
+            .gradient-custom{{ $idea->id }}.active {
+                height: auto;
+                display: block;
+            }
+
+            .idea-effect{{ $idea->id }} {
+                display: none;
+                letter-spacing: 0;
+                position: absolute;
+                margin-top: 0px;
+                right: 80px;
+                background: #bababa;
+                padding-right: 10px;
+                border-radius: 10px;
+            }
+
+            .idea-effect{{ $idea->id }}.active {
+                display: block;
+            }
+
+
+            .idea-change{{ $idea->id }} {
+                position: absolute;
+                right: 30px;
+                background: #fff;
+                border: none;
+                transition: 0.2s;
+                padding: 5px;
+                height: 40px;
+                border-radius: 20px;
+                font-size: 30px;
+            }
+
+            .idea-change{{ $idea->id }}:hover {
+                background: #8f8f8f;
+            }
+
+            .idea-effect{{ $idea->id }} ul li {
+                list-style: none;
+            }
+
+            .idea-effect{{ $idea->id }} ul li a {
+                text-decoration: none;
+                color: #000;
+                width: 200px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                border-radius: 10px;
+                padding: 5px;
+                margin-top: 5px;
+                transition: 0.2s;
+            }
+
+            .idea-effect{{ $idea->id }} ul li a:hover {
+                background: #8f8f8f;
+            }
+
+            @media (width <=800px) {
+                .des {
+                    width: auto;
+                    --max-line: 3;
+                    width: 300px;
+                    overflow-wrap: break-word;
+                    -webkit-line-clamp: var(--max-line);
+                }
+            }
+        </style>
     @endforeach
     <h1 id="jwt" hidden="true">{{ session()->pull('jwt') }}</h1>
     <section class="banner">

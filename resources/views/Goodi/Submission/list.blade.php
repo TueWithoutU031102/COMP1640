@@ -1,6 +1,7 @@
 @extends('Master.Master')
 
 @section('main')
+    <div id="preloader"></div>
     <section class="banner">
         @include('Goodi.nav_bar')
         <div class="text-box">
@@ -18,7 +19,7 @@
             <div class="left-side">
                 <div class="profile-display">
                     <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                         class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                        class="rounded-circle" style="object-fit: cover; object-position: center center;">
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
             </div>
@@ -48,40 +49,38 @@
                         <div class="form-group">
                             <label for="title" class="font-weight-bold">Title</label>
                             <input type="title" name="title" class="form-control" id="title"
-                                   aria-describedby="title">
+                                aria-describedby="title">
                         </div>
                         <div class="submission-date">
                             <div class="form-group">
                                 <label for="startDate" class="font-weight-bold">Date Started</label>
                                 <input type="datetime-local" name="startDate" class="form-control" id="startDateInput"
-                                       aria-describedby="startDate" style="width: 300px"
-                                       onchange="limitDueDate(this.value)">
+                                    aria-describedby="startDate" style="width: 300px" onchange="limitDueDate(this.value)">
                             </div>
                             <div class="form-group">
                                 <label for="dueDate" class="font-weight-bold">Date Finished</label>
                                 <input type="datetime-local" name="dueDate" class="form-control" id="dueDateInput"
-                                       aria-describedby="dueDate" style="width: 300px" onchange="checkDueDate(this, 1)">
+                                    aria-describedby="dueDate" style="width: 300px" onchange="checkDueDate(this, 1)">
                                 <label for="select2weeks">2 weeks</label>
                                 <input type="checkbox" id="select2weeks"
-                                       onclick="setDueDateLate2Weeks('startDateInput','dueDateInput')">
+                                    onclick="setDueDateLate2Weeks('startDateInput','dueDateInput')">
                             </div>
                             <div class="form-group">
                                 <label for="dueDateComment" class="font-weight-bold">Date Finished 2</label>
                                 <input type="datetime-local" name="dueDateComment" class="form-control"
-                                       id="dueDateCommentInput" aria-describedby="dueDateComment" style="width: 300px"
-                                       onchange="checkDueDate(this, 2)" disabled>
+                                    id="dueDateCommentInput" aria-describedby="dueDateComment" style="width: 300px"
+                                    onchange="checkDueDate(this, 2)" disabled>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Description</label>
-                            <textarea style="resize: none;" type="description" name="description" class="form-control"
-                                      id="description"
-                                      aria-describedby="description" rows="6"></textarea>
+                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="description"
+                                aria-describedby="description" rows="6"></textarea>
                         </div>
                         <br>
                         <div class="button-idea">
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit"
-                                    id="submitCreate">Submit
+                                id="submitCreate">Submit
                             </button>
                         </div>
                     </form>

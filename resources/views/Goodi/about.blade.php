@@ -1,6 +1,7 @@
 @extends('Master.Master')
 
 @section('main')
+    <div id="preloader"></div>
     @include('Goodi.nav_bar')
     <section class="banner">
         <div class="text-box">
@@ -99,7 +100,7 @@
     <script>
         const img = document.getElementByClass("about-card img");
 
-        window.addEventListener('scroll', function(){
+        window.addEventListener('scroll', function() {
             let value = window.scrollY;
             console.log(value);
             img.style.objectPosition = 'center' + ' ' + value * 0.25 + '%';

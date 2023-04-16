@@ -1,6 +1,7 @@
 @extends('Master.Master')
 
 @section('main')
+    <div id="preloader"></div>
     @foreach ($ideas as $idea)
         <style>
             .des {
@@ -288,7 +289,8 @@
                             <br>
                             <div class="post-container">
                                 <div class="change">
-                                    <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
+                                    <button class="idea-change{{ $idea->id }}"
+                                        onclick="ideaToggle({{ $idea->id }});">
                                         <p>&dot;&dot;&dot;</p>
                                     </button>
                                     <div class="idea-effect{{ $idea->id }}">
@@ -304,7 +306,7 @@
                                         class="rounded-circle" alt=""
                                         style="object-fit: cover; object-position: center center;">
                                     <div class="post-content">
-                                            <h4>{{ $idea->title }}</h4>
+                                        <h4>{{ $idea->title }}</h4>
                                         </a>
                                         <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small>
                                         <br>
@@ -363,7 +365,9 @@
 
                                     <div>
                                         <button>
-                                            <a style="text-decoration: none; color:#000" href="/idea/show/{{ $idea->id }}"><i class="fa-solid fa-eye fa-2x"></i></a>
+                                            <a style="text-decoration: none; color:#000"
+                                                href="/idea/show/{{ $idea->id }}"><i
+                                                    class="fa-solid fa-eye fa-2x"></i></a>
                                         </button>
                                         <h6>0</h6>
                                     </div>

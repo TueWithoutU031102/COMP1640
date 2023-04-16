@@ -25,8 +25,6 @@
 </head>
 
 <body>
-    {{-- <div id="preloader"></div> --}}
-
     <main role="main">
         @yield('main')
     </main>
@@ -40,7 +38,7 @@
     <script>
         var loader = document.getElementById("preloader");
         window.addEventListener("load", function() {
-            loader.style.display = "none";
+            loader.classList.toggle('hidden')
         });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
