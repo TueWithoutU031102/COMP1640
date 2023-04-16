@@ -3,8 +3,10 @@
 @section('main')
     <style>
         .des {
+
             --max-line: 3;
-            width: 1200px;
+
+            width: 1150px;
             overflow-wrap: break-word;
             font-weight: unset;
             font-size: 16px;
@@ -25,6 +27,8 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+
 
 
         #view{{ $idea->id }}:checked~.des {
@@ -70,7 +74,7 @@
 
         .idea-change{{ $idea->id }} {
             position: absolute;
-            right: 30px;
+            right: 350px;
             background: #fff;
             border: none;
             transition: 0.2s;
@@ -78,6 +82,21 @@
             height: 40px;
             border-radius: 20px;
             font-size: 30px;
+        }
+
+        .idea-back{{ $idea->id }} {
+            /* position: absolute; */
+            margin-bottom: 50px;
+            margin-top: -50px;
+            right: 350px;
+            top: 100px;
+            background: #fff;
+            border: none;
+            transition: 0.2s;
+            padding: 5px;
+            height: 50px;
+            border-radius: 20px;
+            font-size: 39px;
         }
 
         .idea-change{{ $idea->id }}:hover {
@@ -138,6 +157,21 @@
     <br><br><br><br><br><br><br>
     <div class="show-post-container">
         <br>
+        <div class="change">
+            <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
+                <p>&dot;&dot;&dot;</p>
+            </button>
+            <button class="idea-back{{ $idea->id }}" onclick="history.back()">
+                <p>&LeftArrow;</p>
+            </button>
+            <div class="idea-effect{{ $idea->id }}">
+                <ul>
+                    <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
+                    <li><a href="">Change Content</a></li>
+                    <li><a href="">Remove Post</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="user-detail">
             <img src="{{ asset($idea->user->image) }}" width="50" height="50" class="rounded-circle" alt=""
                 style="object-fit: cover; object-position: center center;">

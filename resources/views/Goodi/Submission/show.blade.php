@@ -286,9 +286,16 @@
                         @foreach ($ideas as $idea)
                             <br>
                             <div class="post-container">
-                                <div class="idea-effect{{ $idea->id }}">
-                                    <div class="idea-change{{ $idea->id }}">
+                                <div class="change">
+                                    <button class="idea-change{{ $idea->id }}" onclick="ideaToggle({{ $idea->id }});">
                                         <p>&dot;&dot;&dot;</p>
+                                    </button>
+                                    <div class="idea-effect{{ $idea->id }}">
+                                        <ul>
+                                            <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
+                                            <li><a href="">Change Content</a></li>
+                                            <li><a href="">Remove Post</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="user-detail">
@@ -296,7 +303,6 @@
                                         class="rounded-circle" alt=""
                                         style="object-fit: cover; object-position: center center;">
                                     <div class="post-content">
-                                        <a href="/idea/show/{{ $idea->id }}">
                                             <h4>{{ $idea->title }}</h4>
                                         </a>
                                         <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small>
