@@ -1518,6 +1518,52 @@ form .form-content .input-box {
     background: #8f8f8f;
 }
 
+.forbidden{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background: #ff6f00;
+    text-align: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.forbidden h1{
+    font-weight: 600;
+    font-size: 160px;
+    color: #fff;
+}
+
+.forbidden a{
+    text-decoration: none;
+    color: #fff;
+    transition: 0.5s;
+    font-size: 100px;
+}
+
+.forbidden a:hover{
+    color: #000;
+}
+
+.for-highlight{
+    -webkit-text-fill-color:  transparent;
+    -webkit-text-stroke-width: 2px;
+    text-shadow: 10px 10px 20px rgba(255, 255, 255, 0.259);
+}
+
+.for-box{
+    border: solid 10px #fff;
+    border-radius: 20px;
+    margin-left: 600px;
+    margin-right: 600px;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.6);
+    text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.forbidden p{
+    color: #fff;
+}
+
 .login_form input {
     outline: none;
     height: 20px;
