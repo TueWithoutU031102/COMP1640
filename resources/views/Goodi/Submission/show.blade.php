@@ -298,7 +298,7 @@
                                             <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
                                             <li><a href="">Change Content</a></li>
                                             @if ($idea->id == Auth::user()->id || Auth::user()->id == 1)
-                                                <li><a href="/idea/delete/{{ $idea->id }}">Remove Post</a></li>
+                                                <li><a onclick="return confirm('Are you sure to delete {{ $idea->title }} !!!???')" href="/idea/delete/{{ $idea->id }}">Remove Post</a></li>
                                             @endif
                                         </ul>
                                     </div>
