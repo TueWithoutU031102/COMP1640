@@ -210,7 +210,7 @@
                             <form>
                                 @csrf
                                 <select id="sort" name="sort">
-                                    <option value="{{ Request::url() }}?sort_by=none">---Filter by---</option>
+                                    <option value="{{ Request::url() }}?sort_by=allIdea">All Idea</option>
                                     <option value="{{ Request::url() }}?sort_by=mostPopular">Most Popular Ideas</option>
                                     <option value="{{ Request::url() }}?sort_by=lastestIdeas">Latest Ideas</option>
                                     <option value="{{ Request::url() }}?sort_by=lastestComments">Latest Comments
