@@ -279,7 +279,7 @@
                             </div><br>
                             <div class="form-group">
                                 <input type="checkbox">
-                                <label>I Accept All The <a href="/terms&condition#8">term</a></label>
+                                <label>I Accept All The <a href="/terms&condition#8">Terms and Condition</a></label>
                             </div>
                             <br>
                             <div class="form-group">
