@@ -276,6 +276,10 @@
                             <div class="form-group">
                                 <label for="files" class="font-weight-bold"></label>
                                 <input type="file" id="files" name="files[]" multiple>
+                            </div><br>
+                            <div class="form-group">
+                                <input type="checkbox">
+                                <label>I Accept All The <a href="/terms&condition#8">term</a></label>
                             </div>
                             <br>
                             <div class="form-group">
