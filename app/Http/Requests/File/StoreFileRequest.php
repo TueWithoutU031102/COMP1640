@@ -32,6 +32,13 @@ class StoreFileRequest extends FormRequest
             //
             'title' => ['required'],
             'description' => ['required'],
+            'checkbox' => ['required'],
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'checkbox.required' => 'Must ACCEPT All The Terms and Condition before create a idea',
         ];
     }
 }
