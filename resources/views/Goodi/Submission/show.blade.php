@@ -473,9 +473,11 @@
             }
 
             function checkDueDateEdit(seft, dueNo) {
+                console.log('change')
+                let tzOffset = (new Date()).getTimezoneOffset() * 60000;
+
                 let button = document.getElementById('submitEditDate');
                 let dueDate = new Date(seft.value);
-                let tzOffset = (new Date()).getTimezoneOffset() * 60000;
                 let checkPoint = new Date();
                 let startDateInput = document.getElementById('editStartDateInput');
                 let dueDate1Input = document.getElementById('editDueDateInput');
@@ -484,12 +486,14 @@
                 switch (dueNo) {
                     case 1:
                         checkPoint = new Date(startDateInput.value);
+                        checkPoint = new Date(checkPoint.getTime() - (17 * 60 * 60 * 1000));
                         break
                     case 2:
                         checkPoint = new Date(dueDate1Input.value);
+                        checkPoint = new Date(checkPoint.getTime() - (17 * 60 * 60 * 1000));
                         break
                 }
-                checkPoint = new Date(checkPoint.getTime() - tzOffset);
+
                 if (dueDate < checkPoint) {
                     button.disabled = true;
                     seft.value = '';
