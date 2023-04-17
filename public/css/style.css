@@ -38,7 +38,7 @@
     opacity: 1;
 }
 
-#preloader.hidden{
+#preloader.hidden {
     opacity: 0;
     visibility: hidden;
 }
@@ -752,7 +752,7 @@ nav.sticky {
     margin-bottom: 50px;
 }
 
-.res_profile-detail{
+.res_profile-detail {
     display: none;
 }
 
@@ -1376,7 +1376,7 @@ footer {
 .form-container {
     max-width: 700px;
     width: 100%;
-    background: #d5cfcf;
+    background: #eceaea;
     padding: 25px 30px;
     border-radius: 10px;
 }
@@ -1514,7 +1514,7 @@ form .form-content .input-box {
     background: #8f8f8f;
 }
 
-.forbidden{
+.forbidden {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -1524,30 +1524,30 @@ form .form-content .input-box {
     width: 100%;
 }
 
-.forbidden h1{
+.forbidden h1 {
     font-weight: 600;
     font-size: 160px;
     color: #fff;
 }
 
-.forbidden a{
+.forbidden a {
     text-decoration: none;
     color: #fff;
     transition: 0.5s;
     font-size: 100px;
 }
 
-.forbidden a:hover{
+.forbidden a:hover {
     color: #000;
 }
 
-.for-highlight{
-    -webkit-text-fill-color:  transparent;
+.for-highlight {
+    -webkit-text-fill-color: transparent;
     -webkit-text-stroke-width: 2px;
     text-shadow: 10px 10px 20px rgba(255, 255, 255, 0.259);
 }
 
-.for-box{
+.for-box {
     border: solid 10px #fff;
     border-radius: 20px;
     margin-left: 600px;
@@ -1556,14 +1556,89 @@ form .form-content .input-box {
     text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
 }
 
-.forbidden p{
+.forbidden p {
     color: #fff;
 }
 
-.cmt-btn{
+.cmt-btn {
     border: none;
     background: transparent;
 }
+
+.table-content h1{
+    color: #ff9900;
+    font-size: 50px;
+    margin-left: 50px;
+    font-weight: bold;
+}
+
+.table-content hr{
+    width: 50%;
+}
+
+.table-content a{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: #000;
+    margin-bottom: 10px;
+    font-size: 20px;
+    margin-left: 50px;
+    transition: 0.2s;
+    font-weight: 700;
+}
+
+.table-content a:hover{
+    color: #ff9900;
+}
+
+.term-container {
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 5%;
+}
+
+.left-term {
+    padding: 40px 40px 40px 40px;
+    margin-left: 40px;
+    margin-top: 60px;
+    border-radius: 20px;
+    background: transparent;
+    flex-basis: 35%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    /* height: 100vh; */
+}
+
+.right-term {
+    margin-top: 60px;
+    border-radius: 20px;
+    flex-basis: 55%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+    /* height: 100vh; */
+    padding: 20px;
+    border-radius: 4px;
+    color: #626262;
+}
+
+.left-term h1{
+    font-weight: 700;
+    color: #FF9900;
+}
+
+.right-term h3{
+    margin-bottom: 50px;
+}
+
+.right-term h4{
+    margin-bottom: 40px;
+    margin-left: 30px;
+}
+
 
 .login_form input {
     outline: none;
@@ -1661,7 +1736,7 @@ form .form-content .input-box {
     height: 414px;
     padding: 50px 40px;
     display: flex;
-    gap: 10pxpx;
+    gap: 10;
     flex-direction: column;
 }
 
@@ -1704,6 +1779,7 @@ form .form-content .input-box {
 
 .input_box input:valid~span,
 .input_box input:focus~span {
+    font-weight: 700;
     color: rgba(255, 131, 6, 0.537);
     transform: translateY(-34px);
     font-size: 0.75em;

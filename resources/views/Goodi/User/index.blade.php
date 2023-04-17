@@ -238,6 +238,14 @@
                                             class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
                                     <h6>{{ $idea->comments->count() }}</h6>
                                 </div>
+                                <div>
+                                    <button>
+                                        <a style="text-decoration: none; color:#000"
+                                            href="/idea/show/{{ $idea->id }}"><i
+                                                class="fa-solid fa-eye fa-2x"></i></a>
+                                    </button>
+                                    <h6>{{ $idea->views }}</h6>
+                                </div>
                             </div>
                             <hr>
                         </div>

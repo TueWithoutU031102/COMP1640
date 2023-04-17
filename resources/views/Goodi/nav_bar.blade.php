@@ -13,6 +13,7 @@
                 <li><a href="/about">ABOUT</a></li>
                 <li><a href="/FAQ">FAQs</a></li>
                 <li><a href="/login">LOGIN</a></li>
+                <li><a href="/terms&condition">TERMS</a></li>
             </ul>
         </div>
         <div class="home-btn">
@@ -76,6 +77,7 @@
                     </div>
                 </li>
                 <li><a href="/FAQ">FAQs</a></li>
+                <li><a href="/terms&condition">TERMS</a></li>
             </ul>
         </div>
     @endif
