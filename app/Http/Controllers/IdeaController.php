@@ -28,8 +28,7 @@ class IdeaController extends Controller
         EmailService   $mailService,
         IdeaService    $ideaService,
         CommentService $commentService
-    )
-    {
+    ) {
         $this->userService = $userService;
         $this->ideaService = $ideaService;
         $this->mailService = $mailService;
@@ -79,10 +78,13 @@ class IdeaController extends Controller
         if ($this->ideaService->checkDueDate($request->input('dueDate'))) {
             return redirect()->back()->with('message', 'Over due!');
         }
-
+        $this->validate($request, [
+            'checkbox' => ['required'],
+        ]);
         $authorId = Auth::user()->getAuthIdentifier();
-        $idea = new Idea($request->all());
         $idea['author_id'] = $authorId;
+        $idea = new Idea($request->except('checkbox'));
+
 
         if ($idea->save()) {
             $ideaId = $idea->id;

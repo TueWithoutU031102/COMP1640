@@ -278,7 +278,7 @@
                                 <input type="file" id="files" name="files[]" multiple>
                             </div><br>
                             <div class="form-group">
-                                <input type="checkbox">
+                                <input type="checkbox" name="checkbox" value='1'>
                                 <label>I Accept All The <a href="/terms&condition#8">Terms and Condition</a></label>
                             </div>
                             <br>
