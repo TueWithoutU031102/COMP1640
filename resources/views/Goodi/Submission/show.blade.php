@@ -418,15 +418,18 @@
                                 onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
                                 <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i>
                             </button> --}}
-                            <button id="edit" class="btn btn-primary" onclick="edit_date()">
-                                <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i>
-                            </button>
-                            <div style="display: flex; justify-content: space-around">
+                            <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                                <button id="edit" class="btn btn-primary" onclick="edit_date()">
+                                    <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i>
+                                </button>
                                 <button id="done-edit" class="btn btn-success" onclick="change_date()">
                                     Done
                                 </button>
                                 <button id="exit-edit" class="btn btn-danger" onclick="change_date()">
                                     X
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i aria-hidden="true"><i class="fa-solid fa-trash"></i></i>
                                 </button>
                             </div>
                             <form action="{{ $submission->id }}" method="POST" class="d-inline"
@@ -461,8 +464,7 @@
         </section>
         @include('Goodi.footer')
         <script>
-
-            function edit_date(){
+            function edit_date() {
                 const firstStart = document.getElementById("first-change-start-date")
                 const secondStart = document.getElementById("second-change-start-date")
                 const firstDue = document.getElementById("first-change-due-date")
@@ -483,7 +485,7 @@
                 edit.style.display = "none";
             }
 
-            function change_date(){
+            function change_date() {
                 const firstStart = document.getElementById("first-change-start-date")
                 const secondStart = document.getElementById("second-change-start-date")
                 const firstDue = document.getElementById("first-change-due-date")
