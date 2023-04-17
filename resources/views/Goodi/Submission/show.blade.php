@@ -165,6 +165,9 @@
                 </div>
                 <div class="main-content">
                     <section>
+
+                        {{-- show submission tren dien thoai --}}
+
                         <div class="submission-index-res">
                             <div class="user-information">
                                 <h2>{{ $submission->title }}</h2>
@@ -183,7 +186,8 @@
                                 <p><span>Description: </span>{{ $submission->title }}</p>
                                 <button class="btn btn-primary"
                                     onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
-                                    <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i></button>
+                                    <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i>
+                                </button>
                                 <form action="{{ $submission->id }}" method="POST" class="d-inline"
                                     onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
                                     @csrf
@@ -389,13 +393,19 @@
                 <div class="right-side">
                     <h6 class="display-6" style="text-align: center; font-weight: bold">SUBMISSION DETAIL</h6>
                     <div class="submission-index">
+
+                        {{-- show submission tren pc --}}
+
                         <div class="user-information">
                             <h2>{{ $submission->title }}</h2>
                             <p><span>ID: </span>{{ $submission->id }}</p>
                             <p><span>Create by:{{ $submission->user->name }} </span></p>
-                            <p><span>Start date: </span>{{ $submission->startDate }}</p>
-                            <p><span>Due date: </span>{{ $submission->dueDate }}</p>
-                            <p><span>Due date 2: </span>{{ $submission->dueDateComment }}</p>
+                            <p id="first-change-start-date"><span>Start date: </span>{{ $submission->startDate }}</p>
+                            <p id="second-change-start-date"><span>Start date: </span><input type="date"></p>
+                            <p id="first-change-due-date"><span>Due date: </span>{{ $submission->dueDate }}</p>
+                            <p id="second-change-due-date"><span>Due date: </span><input type="date"></p>
+                            <p id="first-change-due-date-2"><span>Due date 2: </span>{{ $submission->dueDateComment }}</p>
+                            <p id="second-change-due-date-2"><span>Due date 2: </span><input type="date"></p>
 
                             <span>Time remaining: </span>
                             {{-- <p
@@ -404,10 +414,21 @@
                             <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)"
                                 @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
                             <p><span>Description: </span>{{ $submission->title }}</p>
-                            <button class="btn btn-primary"
+                            {{-- <button class="btn btn-primary"
                                 onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
                                 <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i>
+                            </button> --}}
+                            <button id="edit" class="btn btn-primary" onclick="edit_date()">
+                                <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i>
                             </button>
+                            <div style="display: flex; justify-content: space-around">
+                                <button id="done-edit" class="btn btn-success" onclick="change_date()">
+                                    Done
+                                </button>
+                                <button id="exit-edit" class="btn btn-danger" onclick="change_date()">
+                                    X
+                                </button>
+                            </div>
                             <form action="{{ $submission->id }}" method="POST" class="d-inline"
                                 onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
                                 @csrf
@@ -440,6 +461,49 @@
         </section>
         @include('Goodi.footer')
         <script>
+
+            function edit_date(){
+                const firstStart = document.getElementById("first-change-start-date")
+                const secondStart = document.getElementById("second-change-start-date")
+                const firstDue = document.getElementById("first-change-due-date")
+                const secondDue = document.getElementById("second-change-due-date")
+                const firstDue2 = document.getElementById("first-change-due-date-2")
+                const secondDue2 = document.getElementById("second-change-due-date-2")
+                const done = document.getElementById("done-edit")
+                const exit = document.getElementById("exit-edit")
+                const edit = document.getElementById("edit")
+                firstStart.style.display = "none";
+                secondStart.style.display = "block";
+                firstDue.style.display = "none";
+                secondDue.style.display = "block";
+                firstDue2.style.display = "none";
+                secondDue2.style.display = "block";
+                done.style.display = "block";
+                exit.style.display = "block"
+                edit.style.display = "none";
+            }
+
+            function change_date(){
+                const firstStart = document.getElementById("first-change-start-date")
+                const secondStart = document.getElementById("second-change-start-date")
+                const firstDue = document.getElementById("first-change-due-date")
+                const secondDue = document.getElementById("second-change-due-date")
+                const firstDue2 = document.getElementById("first-change-due-date-2")
+                const secondDue2 = document.getElementById("second-change-due-date-2")
+                const done = document.getElementById("done-edit")
+                const exit = document.getElementById("exit-edit")
+                const edit = document.getElementById("edit")
+                firstStart.style.display = "block";
+                secondStart.style.display = "none";
+                firstDue.style.display = "block";
+                secondDue.style.display = "none";
+                firstDue2.style.display = "block";
+                secondDue2.style.display = "none";
+                done.style.display = "none";
+                exit.style.display = "none"
+                edit.style.display = "block";
+            }
+
             function formToggle() {
                 const toggleForm = document.querySelector('.create-idea');
                 const toggleButton = document.querySelector('.button-idea');

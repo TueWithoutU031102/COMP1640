@@ -1643,6 +1643,26 @@ form .form-content .input-box {
     margin-left: 30px;
 }
 
+#second-change-start-date,
+#second-change-due-date,
+#second-change-due-date-2,
+#done-edit,
+#exit-edit{
+    display: none;
+}
+
+#second-change-start-date input,
+#second-change-due-date input,
+#second-change-due-date-2 input{
+    border: none;
+    background: #0080ff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 18px;
+    outline: none;
+}
+
 
 .login_form input {
     outline: none;
