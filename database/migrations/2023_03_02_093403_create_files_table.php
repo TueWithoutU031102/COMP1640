@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('filename');
             $table->unsignedBigInteger('idea_id');
             $table->foreign('idea_id')
+                ->cascadeOnDelete()
                 ->references('id')
                 ->on('ideas');
             $table->timestamps();
