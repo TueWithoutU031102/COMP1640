@@ -170,12 +170,13 @@
 
         switch (dueNo) {
             case 1:
-                checkPoint = new Date(startDateInput.value - tzOffset);
+                checkPoint = new Date(startDateInput.value );
                 break
             case 2:
-                checkPoint = new Date(dueDate1Input.value - tzOffset);
+                checkPoint = new Date(dueDate1Input.value );
                 break
         }
+        checkPoint = new Date(checkPoint.getTime() - tzOffset);
         if (dueDate < checkPoint) {
             submitCreate.disabled = true;
             seft.value = '';

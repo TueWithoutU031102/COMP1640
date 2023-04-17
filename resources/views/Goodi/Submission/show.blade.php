@@ -17,7 +17,7 @@
                 overflow: hidden;
             }
 
-            #view{{ $idea->id }} {
+            #view{{ $idea->id }}    {
                 display: none;
             }
 
@@ -29,21 +29,21 @@
             }
 
 
-            #view{{ $idea->id }}:checked~.des {
+            #view{{ $idea->id }}:checked ~ .des {
                 --max-line: 0;
             }
 
-            #view{{ $idea->id }}:checked~label {
+            #view{{ $idea->id }}:checked ~ label {
                 visibility: hidden;
             }
 
-            #view{{ $idea->id }}:checked~label:after {
+            #view{{ $idea->id }}:checked ~ label:after {
                 content: 'Show Less';
                 display: block;
                 visibility: visible;
             }
 
-            .gradient-custom{{ $idea->id }} {
+            .gradient-custom{{ $idea->id }}    {
                 height: 0;
                 display: none;
                 /* transition: 0.2s; */
@@ -54,7 +54,7 @@
                 display: block;
             }
 
-            .idea-effect{{ $idea->id }} {
+            .idea-effect{{ $idea->id }}    {
                 display: none;
                 letter-spacing: 0;
                 position: absolute;
@@ -70,7 +70,7 @@
             }
 
 
-            .idea-change{{ $idea->id }} {
+            .idea-change{{ $idea->id }}    {
                 position: absolute;
                 right: 30px;
                 background: #fff;
@@ -107,7 +107,7 @@
                 background: #8f8f8f;
             }
 
-            @media (width <=800px) {
+            @media (width <= 800px) {
                 .des {
                     width: auto;
                     --max-line: 3;
@@ -141,7 +141,7 @@
                 <div class="left-side">
                     <div class="profile-display">
                         <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                            class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                             class="rounded-circle" style="object-fit: cover; object-position: center center;">
                         <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                     </div>
                     <div class="imp-link">
@@ -165,9 +165,6 @@
                 </div>
                 <div class="main-content">
                     <section>
-
-                        {{-- show submission tren dien thoai --}}
-
                         <div class="submission-index-res">
                             <div class="user-information">
                                 <h2>{{ $submission->title }}</h2>
@@ -182,14 +179,10 @@
                                     onclick="getTimeRemaining('{{ $submission->startDate }}', '{{ $submission->dueDate }}', this)">
                                     ||</p> --}}
                                 <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)"
-                                    @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
+                                   @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
                                 <p><span>Description: </span>{{ $submission->title }}</p>
-                                <button class="btn btn-primary"
-                                    onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
-                                    <i aria-hidden="true"><i class="fa-solid fa-pen"></i></i>
-                                </button>
                                 <form action="{{ $submission->id }}" method="POST" class="d-inline"
-                                    onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
+                                      onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
                                     @csrf
                                     {{-- <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button> --}}
                                 </form>
@@ -230,7 +223,7 @@
                         </form> --}}
                         <div class="btn-idea">
                             @if (\Illuminate\Support\Facades\Auth::user() && !$isDue)
-                                <button class="add-idea" onclick="formToggle();">Post Idea</button>
+                                <button class="add-idea" onclick="formCreateIdeaToggle();">Post Idea</button>
                             @endif
                             {{-- <button class="refresh-idea">Refresh</button> --}}
                         </div>
@@ -254,18 +247,18 @@
                             <div class="form-group">
                                 <label for="dueDate" class="font-weight-bold">Due Date:</label>
                                 <input type="title" name="dueDate" class="form-control" id="dueDate"
-                                    aria-describedby="title" value="{{ $submission->dueDate }}" disabled>
+                                       aria-describedby="title" value="{{ $submission->dueDate }}" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="title" class="font-weight-bold">Title:</label>
                                 <input type="title" name="title" class="form-control" id="title"
-                                    aria-describedby="title">
+                                       aria-describedby="title">
                             </div>
                             <div class="form-group">
                                 <label for="category_id" class="font-weight-bold">Category:</label>
 
                                 <select name="category_id" value="{{ old('category_id') }}" class="form-select"
-                                    id="category" aria-label="Category">
+                                        id="category" aria-label="Category">
                                     @foreach ($listCategories as $category)
                                         <option value="{{ $category->id }}">{{ $category->title }}</option>
                                     @endforeach
@@ -273,17 +266,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="description" class="font-weight-bold">Description: </label>
-                                <textarea type="description" name="description" class="form-control" id="discussion" aria-describedby="description"
-                                    rows="4"></textarea>
+                                <textarea type="description" name="description" class="form-control" id="discussion"
+                                          aria-describedby="description"
+                                          rows="4"></textarea>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="files" class="font-weight-bold"></label>
                                 <input type="file" id="files" name="files[]" multiple>
-                            </div><br>
-                            <div class="form-group">
-                                <input type="checkbox" name="checkbox" value='1'>
-                                <label>I Accept All The <a href="/terms&condition#8">Terms and Condition</a></label>
                             </div>
                             <br>
                             <div class="form-group">
@@ -298,7 +288,7 @@
                             <div class="post-container">
                                 <div class="change">
                                     <button class="idea-change{{ $idea->id }}"
-                                        onclick="ideaToggle({{ $idea->id }});">
+                                            onclick="ideaToggle({{ $idea->id }});">
                                         <p>&dot;&dot;&dot;</p>
                                     </button>
                                     <div class="idea-effect{{ $idea->id }}">
@@ -306,16 +296,17 @@
                                             <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
                                             <li><a href="">Change Content</a></li>
                                             @if ($idea->author_id == Auth::user()->id || Auth::user()->id == 1)
-                                                <li><a onclick="return confirm('Are {{ $idea->user->name }} sure to delete {{ $idea->title }} !!!???')"
-                                                        href="/idea/delete/{{ $idea->id }}">Remove Post</a></li>
+                                                <li>
+                                                    <a onclick="return confirm('Are {{ $idea->user->name }} sure to delete {{ $idea->title }} !!!???')"
+                                                       href="/idea/delete/{{ $idea->id }}">Remove Post</a></li>
                                             @endif
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="user-detail">
                                     <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                        class="rounded-circle" alt=""
-                                        style="object-fit: cover; object-position: center center;">
+                                         class="rounded-circle" alt=""
+                                         style="object-fit: cover; object-position: center center;">
                                     <div class="post-content">
                                         <h4>{{ $idea->title }}</h4>
                                         </a>
@@ -336,15 +327,15 @@
                                     <div>
                                         @if (!$idea->likedBy(auth()->user()))
                                             <button type="submit"
-                                                onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                                    onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
                                                 <i class="fa-regular fa-thumbs-up fa-2x"
-                                                    id="likes-interact{{ $idea->id }}"></i>
+                                                   id="likes-interact{{ $idea->id }}"></i>
                                             </button>
                                         @else
                                             <button type="submit"
-                                                onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                                    onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
                                                 <i class="fa-solid fa-thumbs-up fa-2x"
-                                                    id="likes-interact{{ $idea->id }}"></i>
+                                                   id="likes-interact{{ $idea->id }}"></i>
                                             </button>
                                         @endif
                                         <h6 id="likesCount{{ $idea->id }}">{{ $idea->likes->count() }}</h6>
@@ -352,15 +343,15 @@
                                     <div>
                                         @if (!$idea->dislikedBy(auth()->user()))
                                             <button type="submit"
-                                                onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                                    onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
                                                 <i class="fa-regular fa-thumbs-down fa-2x"
-                                                    id="dislikes-interact{{ $idea->id }}"></i>
+                                                   id="dislikes-interact{{ $idea->id }}"></i>
                                             </button>
                                         @else
                                             <button type="submit"
-                                                onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                                    onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
                                                 <i class="fa-solid fa-thumbs-down fa-2x"
-                                                    id="dislikes-interact{{ $idea->id }}"></i>
+                                                   id="dislikes-interact{{ $idea->id }}"></i>
                                             </button>
                                         @endif
                                         <h6 id="dislikesCount{{ $idea->id }}">{{ $idea->dislikes->count() }}</h6>
@@ -377,7 +368,7 @@
                                     <div>
                                         <button>
                                             <a style="text-decoration: none; color:#000"
-                                                href="/idea/show/{{ $idea->id }}"><i
+                                               href="/idea/show/{{ $idea->id }}"><i
                                                     class="fa-solid fa-eye fa-2x"></i></a>
                                         </button>
                                         <h6>{{ $idea->views }}</h6>
@@ -393,26 +384,16 @@
                 <div class="right-side">
                     <h6 class="display-6" style="text-align: center; font-weight: bold">SUBMISSION DETAIL</h6>
                     <div class="submission-index">
-
-                        {{-- show submission tren pc --}}
-
-                        <div class="user-information">
+                        <div class="submission-information">
                             <h2>{{ $submission->title }}</h2>
                             <p><span>ID: </span>{{ $submission->id }}</p>
                             <p><span>Create by:{{ $submission->user->name }} </span></p>
-                            <p id="first-change-start-date"><span>Start date: </span>{{ $submission->startDate }}</p>
-                            <p id="second-change-start-date"><span>Start date: </span><input type="date"></p>
-                            <p id="first-change-due-date"><span>Due date: </span>{{ $submission->dueDate }}</p>
-                            <p id="second-change-due-date"><span>Due date: </span><input type="date"></p>
-                            <p id="first-change-due-date-2"><span>Due date 2: </span>{{ $submission->dueDateComment }}</p>
-                            <p id="second-change-due-date-2"><span>Due date 2: </span><input type="date"></p>
-
+                            <p><span>Start date: </span>{{ $submission->startDate }}</p>
+                            <p><span>Due date: </span><i id="dueDateInfo">{{ $submission->dueDate }}</i></p>
+                            <p><span>Due date 2: </span><i id="dueDate2Info">{{ $submission->dueDateComment }}</i></p>
                             <span>Time remaining: </span>
-                            {{-- <p
-                                onclick="getTimeRemaining('{{ $submission->startDate }}', '{{ $submission->dueDate }}', this)">
-                                ||</p> --}}
                             <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)"
-                                @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
+                               @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
                             <p><span>Description: </span>{{ $submission->title }}</p>
                             {{-- <button class="btn btn-primary"
                                 onclick="showForm('editDueDate', {{ $submission->id }},'{{ $submission->dueDate }}' ,'{{ $submission->startDate }}')">
@@ -429,92 +410,96 @@
                                     X
                                 </button>
                                 <button class="btn btn-danger">
-                                    <a onclick="return confirm('Are you sure to delete {{ $submission->title }} !!!???')"
-                                        href="/submission/delete/{{ $submission->id }}"><i aria-hidden="true"><i
-                                                class="fa-solid fa-trash"></i></i>
-                                    </a>
-
+                                    <i aria-hidden="true"><i class="fa-solid fa-trash"></i></i>
                                 </button>
                             </div>
                             <form action="{{ $submission->id }}" method="POST" class="d-inline"
-                                onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
+                                  onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
                                 @csrf
                                 {{-- <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button> --}}
                             </form>
-
-                            <div class="editStartDate popup col-4" id="editStartDate" hidden>
-                                <h1>StartDate</h1>
-                                <input type="datetime-local" id="inputEditStartDate">
-                                <button onclick="updateDate('startDate')">Ok</button>
-                                <button onclick="closeForm('editStartDate')">close</button>
-                            </div>
-
-                            <div class="editDueDate popup col-4" id="editDueDate">
-                                <h1>DueDate</h1>
-                                <input type="datetime-local" id="inputEditDueDate">
-                                <button onclick="closeForm('editDueDate')">close</button>
-                                <button onclick="updateDate('dueDate')">Ok</button>
-                            </div>
                         </div>
-
                     </div>
                     {{--                          edit date form --}}
-
                 </div>
 
                 </div>
                 </div>
             </section>
         </section>
+
         @include('Goodi.footer')
         <script>
-            function edit_date() {
-                const firstStart = document.getElementById("first-change-start-date")
-                const secondStart = document.getElementById("second-change-start-date")
-                const firstDue = document.getElementById("first-change-due-date")
-                const secondDue = document.getElementById("second-change-due-date")
-                const firstDue2 = document.getElementById("first-change-due-date-2")
-                const secondDue2 = document.getElementById("second-change-due-date-2")
-                const done = document.getElementById("done-edit")
-                const exit = document.getElementById("exit-edit")
-                const edit = document.getElementById("edit")
-                firstStart.style.display = "none";
-                secondStart.style.display = "block";
-                firstDue.style.display = "none";
-                secondDue.style.display = "block";
-                firstDue2.style.display = "none";
-                secondDue2.style.display = "block";
-                done.style.display = "block";
-                exit.style.display = "block"
-                edit.style.display = "none";
-            }
-
-            function change_date() {
-                const firstStart = document.getElementById("first-change-start-date")
-                const secondStart = document.getElementById("second-change-start-date")
-                const firstDue = document.getElementById("first-change-due-date")
-                const secondDue = document.getElementById("second-change-due-date")
-                const firstDue2 = document.getElementById("first-change-due-date-2")
-                const secondDue2 = document.getElementById("second-change-due-date-2")
-                const done = document.getElementById("done-edit")
-                const exit = document.getElementById("exit-edit")
-                const edit = document.getElementById("edit")
-                firstStart.style.display = "block";
-                secondStart.style.display = "none";
-                firstDue.style.display = "block";
-                secondDue.style.display = "none";
-                firstDue2.style.display = "block";
-                secondDue2.style.display = "none";
-                done.style.display = "none";
-                exit.style.display = "none"
-                edit.style.display = "block";
-            }
-
-            function formToggle() {
+            function formCreateIdeaToggle() {
                 const toggleForm = document.querySelector('.create-idea');
                 const toggleButton = document.querySelector('.button-idea');
                 toggleForm.classList.toggle('active')
                 toggleButton.classList.toggle('active')
+            }
+
+            function editDate(dD1, dD2) {
+                document.getElementById('editStatus')
+                if ($('#editStatus').val() == 0) {
+                    $('#editStatus').val(1);
+                    $('#editButton').html('Cancel');
+                    $('#submitEditDate').attr("hidden", false);
+                    inputDueDate(1, dD1, dD2);
+                } else {
+                    $('#editStatus').val(0);
+                    $('#submitEditDate').attr("hidden", true);
+                    $('#editButton').html(`<i aria-hidden="true"><i class="fa-solid fa-pen"></i> </i>`);
+                    inputDueDate(0, dD1, dD2);
+                }
+
+            }
+
+            function inputDueDate(isEdit, dD1, dD2) {
+                switch (isEdit) {
+                    case 1:
+                        document.getElementById('dueDateInfo').innerHTML =
+                            `<input type="datetime-local" id="editDueDateInput" value="${dD1}"
+                                    onchange="checkDueDateEdit(this, 1)">`
+
+                        document.getElementById('dueDate2Info').innerHTML =
+                            ` <input type="datetime-local" id="editDueDate2Input" value="${dD2}"
+                                     onchange="checkDueDateEdit(this, 2)">`
+                        break;
+                    case 0:
+                        document.getElementById('dueDateInfo').innerHTML = dD1;
+                        document.getElementById('dueDate2Info').innerHTML = dD2;
+                        break;
+                }
+
+            }
+
+            function checkDueDateEdit(seft, dueNo) {
+                let button = document.getElementById('submitEditDate');
+                let dueDate = new Date(seft.value);
+                let tzOffset = (new Date()).getTimezoneOffset() * 60000;
+                let checkPoint = new Date();
+                let startDateInput = document.getElementById('editStartDateInput');
+                let dueDate1Input = document.getElementById('editDueDateInput');
+                let dueDate2Input = document.getElementById('editDueDate2Input');
+
+                switch (dueNo) {
+                    case 1:
+                        checkPoint = new Date(startDateInput.value);
+                        break
+                    case 2:
+                        checkPoint = new Date(dueDate1Input.value);
+                        break
+                }
+                checkPoint = new Date(checkPoint.getTime() - tzOffset);
+                if (dueDate < checkPoint) {
+                    button.disabled = true;
+                    seft.value = '';
+                    alert("due date must be latter than " + checkPoint.toUTCString());
+                } else {
+                    button.disabled = false;
+                }
+                if (dueDate1Input.value == '' || dueDate2Input.value == ''){
+                    button.disabled = true;
+                }
             }
 
             function commentToggle(ideaId) {
@@ -523,13 +508,6 @@
                 commentForm.classList.toggle('active')
                 commentButton.classList.toggle('active')
             }
-
-            // document.onclick = function(idea) {
-            //     const ideaToggleMenu = document.querySelector('.idea-effect');
-            //     const ideaButtonMenu = document.querySelector('')
-            //     if (idea.target.closest(".idea-change")) ideaToggleMenu.classList.toggle('active')
-            //     else ideaToggleMenu.classList.remove('active')
-            // }
 
             function ideaToggle(ideaId) {
                 const ideaToggleMenu = document.querySelector('.idea-effect' + ideaId);
@@ -576,29 +554,6 @@
                 }
                 console.log(url)
                 window.location.href = url;
-            }
-
-            function showForm(formId, submissionId, dueDate, startDate) {
-                console.log(document.getElementById(formId))
-                document.getElementById(formId).hidden = false;
-                document.getElementById('submissionIdToUpdateDate').value = submissionId;
-                console.log(dueDate)
-                if (formId == 'editDueDate') {
-                    let dueDateInput = document.getElementById('inputEditDueDate');
-                    dueDateInput.value = dueDate;
-                    dueDateInput.min = startDate.replace(" ", 'T');
-
-                    console.log("min dueDaet", dueDateInput.min)
-                } else {
-                    let startDateInput = document.getElementById('inputEditStartDate');
-                    startDateInput.value = startDate;
-                    startDateInput.max = dueDate;
-                }
-
-            }
-
-            function closeForm(formId) {
-                document.getElementById(formId).hidden = true;
             }
         </script>
     @else
