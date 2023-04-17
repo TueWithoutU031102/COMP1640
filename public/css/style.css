@@ -1655,8 +1655,8 @@ form .form-content .input-box {
 #second-change-due-date input,
 #second-change-due-date-2 input{
     border: none;
-    background: #0080ff;
-    color: #fff;
+    background: #d3d0c7;
+    color: #000;
     border-radius: 5px;
     padding: 5px;
     font-size: 18px;
