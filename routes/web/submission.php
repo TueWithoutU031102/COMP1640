@@ -17,5 +17,7 @@ Route::group(['prefix' => 'submission', 'middleware' => ['auth', 'qam']], functi
     Route::post("create", [SubmissionController::class, 'store'])->name("storeSubmission");
 
     Route::get("update", [SubmissionController::class, 'update'])->name("update");
+
+    Route::get("/delete/{id}", [SubmissionController::class, 'destroy']);
 });
 

@@ -429,7 +429,11 @@
                                     X
                                 </button>
                                 <button class="btn btn-danger">
-                                    <i aria-hidden="true"><i class="fa-solid fa-trash"></i></i>
+                                    <a onclick="return confirm('Are you sure to delete {{ $submission->title }} !!!???')"
+                                        href="/submission/delete/{{ $submission->id }}"><i aria-hidden="true"><i
+                                                class="fa-solid fa-trash"></i></i>
+                                    </a>
+
                                 </button>
                             </div>
                             <form action="{{ $submission->id }}" method="POST" class="d-inline"

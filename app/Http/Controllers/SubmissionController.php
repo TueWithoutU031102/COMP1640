@@ -173,8 +173,11 @@ class SubmissionController extends Controller
      * @param \App\Models\Submission $submission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Submission $submission)
+    public function destroy($id)
     {
         //
+        $submission = Submission::find($id);
+        $submission->delete();
+        return redirect(route('indexSubmission', ['id' => $submission->id]))->with('success', 'delete submission successfully!!!');
     }
 }
