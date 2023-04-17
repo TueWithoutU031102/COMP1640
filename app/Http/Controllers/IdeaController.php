@@ -28,7 +28,8 @@ class IdeaController extends Controller
         EmailService   $mailService,
         IdeaService    $ideaService,
         CommentService $commentService
-    ) {
+    )
+    {
         $this->userService = $userService;
         $this->ideaService = $ideaService;
         $this->mailService = $mailService;
@@ -140,7 +141,10 @@ class IdeaController extends Controller
     {
         //
         $idea = Idea::find($id);
-        $idea->removeFile();
+        foreach ($idea->files as $file) {
+            $file->delete();
+        }
+
         $idea->delete();
         return redirect(route("showSpecifiedSubmission", ['id' => $idea->submission_id]));
     }
