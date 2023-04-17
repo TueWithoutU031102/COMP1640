@@ -1097,7 +1097,7 @@ footer {
 
 .footer-content h3 {
     font-size: 1.8rem;
-    font-weight: 400;
+    font-weight: 600;
     text-transform: capitalize;
     line-height: 3rem;
 }
@@ -1106,7 +1106,7 @@ footer {
     max-width: 500px;
     margin: 10px auto;
     line-height: 28px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .socials {
@@ -1114,7 +1114,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1rem 0 3rem 0;
+    margin: 1rem 2rem 3rem 0;
 }
 
 .socials li {
@@ -1574,6 +1574,10 @@ form .form-content .input-box {
 
 .table-content hr{
     width: 50%;
+}
+
+.term-link{
+    display: flex;
 }
 
 .table-content a{
