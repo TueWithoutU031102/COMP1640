@@ -17,39 +17,45 @@
     <section class="table-content">
         <h1>Table of Contents</h1>
         <hr>
-        <a href="/terms&condition#1">1. Introduction</a>
-        <a href="/terms&condition#2">2. Credit</a>
-        <a href="/terms&condition#3">3. Copyright notice</a>
-        <a href="/terms&condition#4">4. Licence to use website
-        </a>
-        <a href="/terms&condition#5">5. Acceptable use
-        </a>
-        <a href="/terms&condition#6">6. User login details</a>
-        <a href="/terms&condition#7">7. Cancellation and suspension of account
-        </a>
-        <a href="/terms&condition#8">8. Your content: licence
-        </a>
-        <a href="/terms&condition#9">9. Your content: rules
-        </a>
-        <a href="/terms&condition#10">10. Limited warranties</a>
-        <a href="/terms&condition#11">11. Limitations and exclusions of liability
-        </a>
-        <a href="/terms&condition#12">12. Breaches of these terms and conditions
-        </a>
-        <a href="/terms&condition#13">13. Variation</a>
-        <a href="/terms&condition#14">14. Assignment
-        </a>
-        <a href="/terms&condition#15">15. Severability
-        </a>
-        <a href="/terms&condition#16">16. Third party rights
-        </a>
-        <a href="/terms&condition#17">17. Entire agreement
-        </a>
-        <a href="/terms&condition#18">18. Law and jurisdiction
-        </a>
-        <a href="/terms&condition#19">19. Statutory and regulatory disclosures
-        </a>
-        <a href="/terms&condition#20">20. Our details</a>
+        <div class="term-link">
+            <div>
+                <a href="/terms&condition#1">1. Introduction</a>
+                <a href="/terms&condition#2">2. Credit</a>
+                <a href="/terms&condition#3">3. Copyright notice</a>
+                <a href="/terms&condition#4">4. Licence to use website
+                </a>
+                <a href="/terms&condition#5">5. Acceptable use
+                </a>
+                <a href="/terms&condition#6">6. User login details</a>
+                <a href="/terms&condition#7">7. Cancellation and suspension of account
+                </a>
+                <a href="/terms&condition#8">8. Your content: licence
+                </a>
+                <a href="/terms&condition#9">9. Your content: rules
+                </a>
+                <a href="/terms&condition#10">10. Limited warranties</a>
+            </div>
+            <div>
+                <a href="/terms&condition#11">11. Limitations and exclusions of liability
+                </a>
+                <a href="/terms&condition#12">12. Breaches of these terms and conditions
+                </a>
+                <a href="/terms&condition#13">13. Variation</a>
+                <a href="/terms&condition#14">14. Assignment
+                </a>
+                <a href="/terms&condition#15">15. Severability
+                </a>
+                <a href="/terms&condition#16">16. Third party rights
+                </a>
+                <a href="/terms&condition#17">17. Entire agreement
+                </a>
+                <a href="/terms&condition#18">18. Law and jurisdiction
+                </a>
+                <a href="/terms&condition#19">19. Statutory and regulatory disclosures
+                </a>
+                <a href="/terms&condition#20">20. Our details</a>
+            </div>
+        </div>
     </section>
     <section class="term-content">
         <div class="term-container">

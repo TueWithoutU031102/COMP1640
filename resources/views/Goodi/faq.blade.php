@@ -24,18 +24,8 @@
                         <span class="icon" aria-hidden="true"></span>
                     </button>
                     <div class="accordion-content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis eleifend felis, non
-                        elementum
-                        dolor tristique accumsan. Sed volutpat, sem in suscipit viverra, purus metus malesuada metus, in
-                        fringilla enim metus vitae quam. Sed sagittis, erat auctor finibus scelerisque, risus nisl dictum
-                        risus,
-                        vel sodales ante sapien eget justo. Quisque fringilla placerat sem tempor lobortis. Interdum et
-                        malesuada fames ac ante ipsum primis in faucibus. Aliquam ultricies non quam ac efficitur.
-                        Vestibulum
-                        ornare magna dolor, vel mollis risus vestibulum eget. Integer lectus nisi, bibendum at dictum vitae,
-                        elementum at mi. Pellentesque tempor lacus in quam gravida dignissim. Sed vel metus sapien. Donec
-                        vehicula lorem placerat est aliquet tempus. Aenean elit dolor, dignissim et metus non, luctus
-                        ullamcorper est. Praesent vehicula accumsan lorem ut luctus.
+                        You have to ask your administrator to give you an account. For security reasons, we can’t let you
+                        create your own account
                     </div>
                 </div>
                 <div class="accordion-item">
@@ -44,18 +34,9 @@
                         <span class="icon" aria-hidden="true"></span>
                     </button>
                     <div class="accordion-content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis eleifend felis, non
-                        elementum
-                        dolor tristique accumsan. Sed volutpat, sem in suscipit viverra, purus metus malesuada metus, in
-                        fringilla enim metus vitae quam. Sed sagittis, erat auctor finibus scelerisque, risus nisl dictum
-                        risus,
-                        vel sodales ante sapien eget justo. Quisque fringilla placerat sem tempor lobortis. Interdum et
-                        malesuada fames ac ante ipsum primis in faucibus. Aliquam ultricies non quam ac efficitur.
-                        Vestibulum
-                        ornare magna dolor, vel mollis risus vestibulum eget. Integer lectus nisi, bibendum at dictum vitae,
-                        elementum at mi. Pellentesque tempor lacus in quam gravida dignissim. Sed vel metus sapien. Donec
-                        vehicula lorem placerat est aliquet tempus. Aenean elit dolor, dignissim et metus non, luctus
-                        ullamcorper est. Praesent vehicula accumsan lorem ut luctus.
+                        You have to find the submission that you want to upload your idea in, click submit, put in your
+                        file, idea name, description, choose category, accept our terms and conditions. Than click upload to
+                        upload your idea.
                     </div>
                 </div>
                 <div class="accordion-item">
@@ -64,18 +45,8 @@
                         <span class="icon" aria-hidden="true"></span>
                     </button>
                     <div class="accordion-content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis eleifend felis, non
-                        elementum
-                        dolor tristique accumsan. Sed volutpat, sem in suscipit viverra, purus metus malesuada metus, in
-                        fringilla enim metus vitae quam. Sed sagittis, erat auctor finibus scelerisque, risus nisl dictum
-                        risus,
-                        vel sodales ante sapien eget justo. Quisque fringilla placerat sem tempor lobortis. Interdum et
-                        malesuada fames ac ante ipsum primis in faucibus. Aliquam ultricies non quam ac efficitur.
-                        Vestibulum
-                        ornare magna dolor, vel mollis risus vestibulum eget. Integer lectus nisi, bibendum at dictum vitae,
-                        elementum at mi. Pellentesque tempor lacus in quam gravida dignissim. Sed vel metus sapien. Donec
-                        vehicula lorem placerat est aliquet tempus. Aenean elit dolor, dignissim et metus non, luctus
-                        ullamcorper est. Praesent vehicula accumsan lorem ut luctus.
+                        when an event run out of date, it will turn into red. And after that, you cant comment on the idea
+                        have been submitted anymore
                     </div>
                 </div>
                 <div class="accordion-item">
