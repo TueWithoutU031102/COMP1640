@@ -25,6 +25,7 @@ return new class extends Migration
             $table->datetime('dueDateComment');
             $table->unsignedBigInteger('author_id')->default(3);
             $table->foreign('author_id')
+                ->cascadeOnDelete()
                 ->references('id')
                 ->on('users');
             $table->timestamps();

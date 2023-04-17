@@ -24,7 +24,7 @@ class createSubmission extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'unique:submissions,title'],
+            'title' => ['required'],
             'description' => ['required'],
             'startDate' => ['after_or_equal:today'],
             'dueDate' => ['after_or_equal:startDate'],

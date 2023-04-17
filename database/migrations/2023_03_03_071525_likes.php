@@ -19,10 +19,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')
+                ->cascadeOnDelete()
                 ->references('id')
                 ->on('users');
             $table->unsignedBigInteger('idea_id');
             $table->foreign('idea_id')
+                ->cascadeOnDelete()
                 ->references('id')
                 ->on('ideas');
             $table->timestamps();

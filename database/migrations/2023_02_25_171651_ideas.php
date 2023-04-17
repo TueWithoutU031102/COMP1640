@@ -23,14 +23,17 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')
+                ->cascadeOnDelete()
                 ->references('id')
                 ->on('categories');
             $table->unsignedBigInteger('submission_id');
             $table->foreign('submission_id')
+                ->cascadeOnDelete()
                 ->references('id')
                 ->on('submissions');
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')
+                ->cascadeOnDelete()
                 ->references('id')
                 ->on('users');
             $table->timestamps();

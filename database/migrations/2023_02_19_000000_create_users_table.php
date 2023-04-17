@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id')
+            ->cascadeOnDelete()
                 ->references('id')
                 ->on('departments');
             $table->string('password');
@@ -30,12 +31,26 @@ return new class extends Migration
             $table->longText('image')->nullable();
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')
+            ->cascadeOnDelete()
                 ->references('id')
                 ->on('roles');
             $table->timestamps();
         });
 
         DB::table('users')->insert([
+            [
+                'name' => 'admin',
+                'email' => 'goodiwebsite@gmail.com',
+                'password' => Hash::make('123456'),
+                'image' => 'images/default-avatar.jpg',
+                'role_id' => '1',
+                'DoB' => '2023-04-17',
+                'phone_number' => '0912387645',
+                'department_id' => NULL,
+                'created_at' => '2023-18-04',
+                'updated_at' => '2023-18-04',
+
+            ],
             [
                 'name' => 'Vu Nguyen Duc Tue',
                 'email' => 'tuevndgch200058@fpt.edu.vn',

@@ -22,8 +22,10 @@ return new class extends Migration
             $table->longText('description');
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')
+            ->cascadeOnDelete()
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ;
             $table->timestamps();
         });
 
