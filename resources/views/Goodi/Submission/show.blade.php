@@ -404,7 +404,8 @@
                             <input type="text" id="editStatus" value="0" hidden>
                             <input type="datetime-local" value="{{$submission->startDate}}" id="editStartDateInput"
                                    hidden>
-                            <button class="btn btn-primary" id="submitEditDate" hidden>
+                            <button class="btn btn-primary" id="submitEditDate" hidden
+                                    onclick="updateDate('{{$submission->id}}')">
                                 Ok
                             </button>
                             <form action="{{ $submission->id }}" method="POST" class="d-inline"
@@ -464,6 +465,27 @@
                         break;
                 }
 
+            }
+            function updateDate(submissionId) {
+                let dueDateInput = document.getElementById('editDueDateInput').value;
+                let dueDate2Input = document.getElementById('editDueDate2Input').value;
+
+                let url = `{{ route('updateSubmission',
+                                    [
+                                        'id' => '_submissionId',
+                                        'dueDate' => '_newDate',
+                                        'dueDateComment' => '_newDate2'
+                                    ]
+                                   )
+                           }}`;
+                url = url.replace('_submissionId', submissionId)
+                url = url.replace('_newDate', dueDateInput)
+                url = url.replace('_newDate2', dueDate2Input)
+
+                url = url.replace('&amp;', '&')
+                url = url.replace('&amp;', '&')
+                console.log(url)
+                window.location.href = url;
             }
 
             function checkDueDateEdit(seft, dueNo) {
@@ -528,26 +550,6 @@
                     seft.style.color = "red"
                 }
                 return timeRemaining;
-            }
-
-            function updateDate(dateType) {
-                let startDateInput = document.getElementById('inputEditStartDate').value;
-                let dueDateInput = document.getElementById('inputEditDueDate').value;
-                let submissionId = document.getElementById('submissionIdToUpdateDate').value;
-
-                let url = "{{ route('update', ['id' => '_submissionId', '_dateType' => '_newDate']) }}";
-                url = url.replace('_submissionId', submissionId)
-                url = url.replace('&amp;', '&')
-
-                if (dateType == 'dueDate') {
-                    url = url.replace('_dateType', 'dueDate')
-                    url = url.replace('_newDate', dueDateInput)
-                } else {
-                    url = url.replace('_dateType', 'startDate')
-                    url = url.replace('_newDate', startDateInput)
-                }
-                console.log(url)
-                window.location.href = url;
             }
         </script>
     @else
