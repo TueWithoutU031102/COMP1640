@@ -66,7 +66,7 @@ class CommentController extends Controller
      * get comments by ideaId
      *
      * @param int $ideaId
-     * @return JsonResponse list comments on specific idea
+     * @return JsonResponse list comments on specific ideas
      */
     public function findCommentsByIdeaId(int $ideaId): JsonResponse
     {

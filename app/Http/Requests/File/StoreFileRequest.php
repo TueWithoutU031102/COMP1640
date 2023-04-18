@@ -38,7 +38,7 @@ class StoreFileRequest extends FormRequest
     public function messages()
     {
         return [
-            'checkbox.required' => 'Must ACCEPT All The Terms and Condition before create a idea',
+            'checkbox.required' => 'Must ACCEPT All The Terms and Condition before create a ideas',
         ];
     }
 }

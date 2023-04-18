@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Http\Controllers\CommentController;
 use App\Services\CategoryService;
+use App\Services\CommentService;
 use App\Services\EmailService;
+use App\Services\FileService;
 use App\Services\IdeaService;
 use App\Services\MailService;
 use App\Services\SubmissionService;
@@ -35,10 +37,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(EmailService::class, function ($app) {
             return new EmailService();
         });
-        $this->app->singleton(CommentController::class, function ($app) {
-            return new CommentController();
+        $this->app->singleton(CommentService::class, function ($app) {
+            return new CommentService();
         });
-
     }
 
     /**

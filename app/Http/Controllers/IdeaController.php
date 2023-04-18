@@ -78,11 +78,11 @@ class IdeaController extends Controller
         if ($this->ideaService->checkDueDate($request->input('dueDate'))) {
             return redirect()->back()->with('message', 'Over due!');
         }
-        
+
         $this->validate($request, [
             'checkbox' => ['required'],
         ]);
-        
+
         $idea = new Idea($request->except('checkbox'));
         $idea->author_id = Auth::user()->getAuthIdentifier();
 
@@ -90,9 +90,9 @@ class IdeaController extends Controller
             $ideaId = $idea->id;
             $fileController = new FileController();
             $fileController->store($request, $ideaId);
-            return redirect(route("showSpecifiedSubmission", ['id' => $request->submission_id]))->with('message', 'Submit idea successfully');
+            return redirect(route("showSpecifiedSubmission", ['id' => $request->submission_id]))->with('message', 'Submit ideas successfully');
         };
-        return redirect()->back()->with('message', 'Submit idea fail!');
+        return redirect()->back()->with('message', 'Submit ideas fail!');
     }
 
     /**
@@ -146,12 +146,11 @@ class IdeaController extends Controller
         foreach ($idea->files as $file) {
             $file->delete();
         }
-
         $idea->delete();
         return redirect(route("showSpecifiedSubmission", ['id' => $idea->submission_id]));
     }
 
-    public function downloadData(): Response
+    public function downloadIdeaData(): Response
     {
         $results = Idea::withCount(['likes', 'dislikes', 'comments'])
             ->with(['category', 'submission', 'author'])

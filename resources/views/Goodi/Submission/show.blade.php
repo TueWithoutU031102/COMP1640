@@ -225,7 +225,7 @@
                             @if (\Illuminate\Support\Facades\Auth::user() && !$isDue)
                                 <button class="add-idea" onclick="formCreateIdeaToggle();">Post Idea</button>
                             @endif
-                            {{-- <button class="refresh-idea">Refresh</button> --}}
+                            {{-- <button class="refresh-ideas">Refresh</button> --}}
                         </div>
                     </section>
                     <br>
@@ -433,7 +433,7 @@
         <script>
             function formCreateIdeaToggle() {
                 const toggleForm = document.querySelector('.create-idea');
-                const toggleButton = document.querySelector('.button-idea');
+                const toggleButton = document.querySelector('.button-ideas');
                 toggleForm.classList.toggle('active')
                 toggleButton.classList.toggle('active')
             }

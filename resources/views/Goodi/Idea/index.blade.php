@@ -365,8 +365,8 @@
 
     <script>
         function formToggle() {
-            const toggleForm = document.querySelector('.create-idea');
-            const toggleButton = document.querySelector('.button-idea');
+            const toggleForm = document.querySelector('.create-ideas');
+            const toggleButton = document.querySelector('.button-ideas');
             toggleForm.classList.toggle('active')
             toggleButton.classList.toggle('active')
         }
@@ -378,16 +378,16 @@
             commentButton.classList.toggle('active')
         }
 
-        // document.onclick = function(idea) {
-        //     const ideaToggleMenu = document.querySelector('.idea-effect');
+        // document.onclick = function(ideas) {
+        //     const ideaToggleMenu = document.querySelector('.ideas-effect');
         //     const ideaButtonMenu = document.querySelector('')
-        //     if (idea.target.closest(".idea-change")) ideaToggleMenu.classList.toggle('active')
+        //     if (ideas.target.closest(".ideas-change")) ideaToggleMenu.classList.toggle('active')
         //     else ideaToggleMenu.classList.remove('active')
         // }
 
         function ideaToggle(ideaId) {
-            const ideaToggleMenu = document.querySelector('.idea-effect' + ideaId);
-            const ideaButtonMenu = document.querySelector('.idea-change' + ideaId);
+            const ideaToggleMenu = document.querySelector('.ideas-effect' + ideaId);
+            const ideaButtonMenu = document.querySelector('.ideas-change' + ideaId);
             if (ideaButtonMenu) ideaToggleMenu.classList.toggle('active')
             else ideaToggleMenu.classList.remove('active')
         }

@@ -38,9 +38,9 @@ class LikeController extends Controller
         ], 200);
     }
 
-//    public function destroy(Idea $idea, Request $request)
+//    public function destroy(Idea $ideas, Request $request)
 //    {
-//        $request->user()->likes()->where('idea_id', $idea->id)->delete();
+//        $request->user()->likes()->where('idea_id', $ideas->id)->delete();
 //        return back();
 //    }
 }
