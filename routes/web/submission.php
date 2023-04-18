@@ -16,8 +16,10 @@ Route::group(['prefix' => 'submission', 'middleware' => ['auth', 'qam']], functi
 
     Route::post("create", [SubmissionController::class, 'store'])->name("storeSubmission");
 
+    // sao 2 route giong nhau ntn
+    // ->name() bị ghi đè đấy
     Route::get("update", [SubmissionController::class, 'update'])->name("updateSubmission");
-    Route::get("update", [SubmissionController::class, 'update'])->name("update");
+    // Route::get("update", [SubmissionController::class, 'update'])->name("update");
 
     Route::get("/delete/{id}", [SubmissionController::class, 'destroy']);
 });

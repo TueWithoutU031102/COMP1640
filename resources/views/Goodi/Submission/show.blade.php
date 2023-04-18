@@ -462,7 +462,7 @@
 
                         document.getElementById('dueDate2Info').innerHTML =
                             ` <input type="datetime-local" id="editDueDate2Input" value="${dD2}"
-                                     onchange="checkDueDateEdit(this, 2)">`
+                                    onchange="checkDueDateEdit(this, 2)">`
                         break;
                     case 0:
                         document.getElementById('dueDateInfo').innerHTML = dD1;

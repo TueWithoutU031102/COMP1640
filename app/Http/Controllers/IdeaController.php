@@ -78,13 +78,13 @@ class IdeaController extends Controller
         if ($this->ideaService->checkDueDate($request->input('dueDate'))) {
             return redirect()->back()->with('message', 'Over due!');
         }
+        
         $this->validate($request, [
             'checkbox' => ['required'],
         ]);
-        $authorId = Auth::user()->getAuthIdentifier();
-        $idea['author_id'] = $authorId;
+        
         $idea = new Idea($request->except('checkbox'));
-
+        $idea->author_id = Auth::user()->getAuthIdentifier();
 
         if ($idea->save()) {
             $ideaId = $idea->id;
