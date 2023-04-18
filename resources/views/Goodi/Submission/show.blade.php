@@ -401,6 +401,7 @@
                             <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)"
                                 @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
                             <p><span>Description: </span>{{ $submission->title }}</p>
+                            @if(Auth::user()->role_id == 1)
                             <button class="btn btn-primary"
                                 onclick="editDate('{{ $submission->dueDate }}', '{{ $submission->dueDateComment }}')"
                                 id="editButton">
@@ -417,6 +418,7 @@
                                 onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
                                 <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button>
                             </a>
+                            @endif
                         </div>
                     </div>
                     {{--                          edit date form --}}
