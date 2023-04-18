@@ -35,9 +35,6 @@
                     <i></i>
                 </div>
                 <br>
-                <div class="check">
-                    <input type="checkbox" name="check"> <label for="check">Remember me</label>
-                </div>
                 <button type="submit" onclick="login()">Login</button>
             </form>
         </div>
