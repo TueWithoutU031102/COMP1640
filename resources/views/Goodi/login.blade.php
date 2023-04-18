@@ -2,6 +2,7 @@
 
 @section('main')
 <div id="preloader"></div>
+@include('Goodi.nav_bar')
     <style>
         * {
             margin: 0;
@@ -43,7 +44,6 @@
         </form>
     </div>
     </div>
-    <button onclick="login()">ádaadds</button>
     <script>
         function login() {
             let data = {
