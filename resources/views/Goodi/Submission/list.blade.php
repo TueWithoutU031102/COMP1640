@@ -119,8 +119,8 @@
 
 <script>
     function formToggle() {
-        const toggleForm = document.querySelector('.create-idea');
-        const toggleButton = document.querySelector('.button-idea');
+        const toggleForm = document.querySelector('.create-ideas');
+        const toggleButton = document.querySelector('.button-ideas');
         toggleForm.classList.toggle('active')
         toggleButton.classList.toggle('active')
 

@@ -252,33 +252,33 @@
                         <br>
                     @endforeach
                 </section>
-                {{-- @if (!$idea->likedBy(auth()->user()))
-                            <form action="{{ route('postLike', $idea->id) }}" method="POST">
+                {{-- @if (!$ideas->likedBy(auth()->user()))
+                            <form action="{{ route('postLike', $ideas->id) }}" method="POST">
                                 @csrf
                                 <button type="submit"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
                             </form>
                         @else
-                            <form action="{{ route('destroyLike', $idea->id) }}" method="POST">
+                            <form action="{{ route('destroyLike', $ideas->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"><i class="fa-solid fa-thumbs-up fa-2x"></i></button>
                             </form>
                         @endif
-                        <h6>{{ $idea->likes->count() }}</h6>
+                        <h6>{{ $ideas->likes->count() }}</h6>
 
-                        @if (!$idea->dislikedBy(auth()->user()))
-                            <form action="{{ route('postDislike', $idea->id) }}" method="POST">
+                        @if (!$ideas->dislikedBy(auth()->user()))
+                            <form action="{{ route('postDislike', $ideas->id) }}" method="POST">
                                 @csrf
                                 <button type="submit"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
                             </form>
                         @else
-                            <form action="{{ route('destroyDislike', $idea->id) }}" method="POST">
+                            <form action="{{ route('destroyDislike', $ideas->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"><i class="fa-solid fa-thumbs-down fa-2x"></i></button>
                             </form>
                         @endif
-                        <h6>{{ $idea->dislikes->count() }}</h6> --}}
+                        <h6>{{ $ideas->dislikes->count() }}</h6> --}}
             </div>
         </div>
         </div>
@@ -295,8 +295,8 @@
         })
 
         function ideaToggle(ideaId) {
-            const ideaToggleMenu = document.querySelector('.idea-effect' + ideaId);
-            const ideaButtonMenu = document.querySelector('.idea-change' + ideaId);
+            const ideaToggleMenu = document.querySelector('.ideas-effect' + ideaId);
+            const ideaButtonMenu = document.querySelector('.ideas-change' + ideaId);
             if (ideaButtonMenu) ideaToggleMenu.classList.toggle('active')
             else ideaToggleMenu.classList.remove('active')
         }

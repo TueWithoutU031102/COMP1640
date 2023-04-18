@@ -161,7 +161,7 @@
                                 },
                                 title: {
                                     display: true,
-                                    text: 'Numbers of contributors (staffs with idea submission) per departments'
+                                    text: 'Numbers of contributors (staffs with ideas submission) per departments'
                                 }
                             }
                         },

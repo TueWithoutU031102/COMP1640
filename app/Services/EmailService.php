@@ -14,9 +14,9 @@ class EmailService
     public function submitIdeaNotify($dataInput): ?SentMessage
     {
         $submission = Submission::find($dataInput['submission_id']);
-        $subject = $dataInput['from'] . ' has submitted an idea for submission ' . $submission->title;
+        $subject = $dataInput['from'] . ' has submitted an ideas for submission ' . $submission->title;
         $link = env('MEMCACHED_HOST', '127.0.0.1') . ':8000/submission/show/' . $submission->id;
-        $content = $dataInput['from'] . ' had submitted an idea! You can see your idea submission: ';
+        $content = $dataInput['from'] . ' had submitted an ideas! You can see your ideas submission: ';
         $to = User::find($submission->author_id)->email;
 
         $data = [
@@ -35,9 +35,9 @@ class EmailService
     {
         $idea = Idea::find($dataInput['idea_id']);
         $from = $dataInput['from'];
-        $subject = $from . ' has commented on your idea: ' . $idea->title;
+        $subject = $from . ' has commented on your ideas: ' . $idea->title;
         $link = env('MEMCACHED_HOST', '127.0.0.1') . ':8000/submission/show/' . $idea->submission_id;
-        $content = $from . ' comment an idea! You can see your idea submission: ';
+        $content = $from . ' comment an ideas! You can see your ideas submission: ';
         $to = User::find($idea->author_id)->email;
 
         $data = [
