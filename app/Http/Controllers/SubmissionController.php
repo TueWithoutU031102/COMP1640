@@ -178,6 +178,7 @@ class SubmissionController extends Controller
         //
         $submission = Submission::find($id);
         $submission->delete();
-        return redirect(route('indexSubmission', ['id' => $submission->id]))->with('success', 'delete submission successfully!!!');
+        return redirect(route('indexSubmission', ['id' => $submission->id]))
+            ->with('success', 'delete submission successfully!!!');
     }
 }

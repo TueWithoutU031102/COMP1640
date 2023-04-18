@@ -413,11 +413,10 @@
                                 onclick="updateDate('{{ $submission->id }}')">
                                 Ok
                             </button>
-                            <form action="{{ $submission->id }}" method="POST" class="d-inline"
+                            <a href="/submission/delete/{{ $submission->id }}"class="d-inline"
                                 onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
-                                @csrf
-                                {{-- <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button> --}}
-                            </form>
+                                <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button>
+                            </a>
                         </div>
                     </div>
                     {{--                          edit date form --}}
