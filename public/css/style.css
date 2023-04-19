@@ -986,6 +986,15 @@ nav.sticky {
     font-size: 16px;
 }
 
+.end-due-date {
+    background: #ff2c2c;
+    padding: 10px 10px 10px 10px;
+    /* float: right; */
+    border-radius: 20px;
+    font-weight: none;
+    font-size: 16px;
+}
+
 .submission-link {
     text-decoration: none;
     color: #000000;
@@ -1565,22 +1574,22 @@ form .form-content .input-box {
     background: transparent;
 }
 
-.table-content h1{
+.table-content h1 {
     color: #ff9900;
     font-size: 50px;
     margin-left: 50px;
     font-weight: bold;
 }
 
-.table-content hr{
+.table-content hr {
     width: 50%;
 }
 
-.term-link{
+.term-link {
     display: flex;
 }
 
-.table-content a{
+.table-content a {
     display: flex;
     flex-direction: column;
     text-decoration: none;
@@ -1592,7 +1601,7 @@ form .form-content .input-box {
     font-weight: 700;
 }
 
-.table-content a:hover{
+.table-content a:hover {
     color: #ff9900;
 }
 
@@ -1629,31 +1638,31 @@ form .form-content .input-box {
     color: #626262;
 }
 
-.left-term h1{
+.left-term h1 {
     font-weight: 700;
     color: #FF9900;
 }
 
-.right-term h3{
+.right-term h3 {
     margin-bottom: 50px;
     width: auto;
 }
 
-.right-term h4{
+.right-term h4 {
     margin-bottom: 40px;
     margin-left: 30px;
 }
 
-.res-term h3{
+.res-term h3 {
     margin-bottom: 50px;
 }
 
-.res-term h4{
+.res-term h4 {
     margin-bottom: 40px;
     margin-left: 30px;
 }
 
-.res-term{
+.res-term {
     display: none;
 }
 
@@ -1661,13 +1670,13 @@ form .form-content .input-box {
 #second-change-due-date,
 #second-change-due-date-2,
 #done-edit,
-#exit-edit{
+#exit-edit {
     display: none;
 }
 
 #second-change-start-date input,
 #second-change-due-date input,
-#second-change-due-date-2 input{
+#second-change-due-date-2 input {
     border: none;
     background: #d3d0c7;
     color: #000;
