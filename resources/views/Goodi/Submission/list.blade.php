@@ -19,7 +19,7 @@
             <div class="left-side">
                 <div class="profile-display">
                     <img src="{{ asset(Auth::user()->image) }}" alt="mdo" width="50" height="50"
-                        class="rounded-circle" style="object-fit: cover; object-position: center center;">
+                         class="rounded-circle" style="object-fit: cover; object-position: center center;">
                     <h5 style="font-weight: bold">{{ Auth::user()->name }}</h5>
                 </div>
             </div>
@@ -35,52 +35,58 @@
                 <section class="create-idea">
                     <h2>New Event</h2>
                     <i></i>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    <div id="errors">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
+
+
                     <form action="/submission/create" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="title" class="font-weight-bold">Title</label>
                             <input type="title" name="title" value="{{old('title')}}" class="form-control" id="title"
-                                aria-describedby="title">
+                                   aria-describedby="title">
                         </div>
                         <div class="submission-date">
                             <div class="form-group">
                                 <label for="startDate" class="font-weight-bold">Date Started</label>
                                 <input type="datetime-local" name="startDate" class="form-control" id="startDateInput"
-                                    aria-describedby="startDate" style="width: 300px" onchange="limitDueDate(this.value)">
+                                       aria-describedby="startDate" style="width: 300px"
+                                       onchange="limitDueDate(this.value)">
                             </div>
                             <div class="form-group">
                                 <label for="dueDate" class="font-weight-bold">Date Finished</label>
                                 <input type="datetime-local" name="dueDate" class="form-control" id="dueDateInput"
-                                    aria-describedby="dueDate" style="width: 300px" onchange="checkDueDate(this, 1)">
+                                       aria-describedby="dueDate" style="width: 300px" onchange="checkDueDate(this, 1)">
                                 <label for="select2weeks">2 weeks</label>
                                 <input type="checkbox" id="select2weeks"
-                                    onclick="setDueDateLate2Weeks('startDateInput','dueDateInput')">
+                                       onclick="setDueDateLate2Weeks('startDateInput','dueDateInput')">
                             </div>
                             <div class="form-group">
                                 <label for="dueDateComment" class="font-weight-bold">Date Finished 2</label>
                                 <input type="datetime-local" name="dueDateComment" class="form-control"
-                                    id="dueDateCommentInput" aria-describedby="dueDateComment" style="width: 300px"
-                                    onchange="checkDueDate(this, 2)" disabled>
+                                       id="dueDateCommentInput" aria-describedby="dueDateComment" style="width: 300px"
+                                       onchange="checkDueDate(this, 2)" disabled>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Description</label>
-                            <textarea style="resize: none;" type="description" name="description" value="{{old('description')}}" class="form-control" id="description"
-                                aria-describedby="description" rows="6"></textarea>
+                            <textarea style="resize: none;" type="description" name="description"
+                                      value="{{old('description')}}" class="form-control" id="description"
+                                      aria-describedby="description" rows="6"></textarea>
                         </div>
                         <br>
                         <div class="button-idea">
                             <button class="btn btn-success" style="padding: 10px 100px;" type="submit"
-                                id="submitCreate">Submit
+                                    id="submitCreate">Submit
                             </button>
                         </div>
                     </form>
@@ -167,6 +173,7 @@
     function checkDueDate(seft, dueNo) {
         let select2weeksCheckbox = $('#select2weeks');
         select2weeksCheckbox.prop("checked", false);
+
         let tzOffset = (new Date()).getTimezoneOffset() * 60000;
 
         let submitCreate = document.getElementById('submitCreate');
@@ -177,19 +184,27 @@
 
         switch (dueNo) {
             case 1:
-                checkPoint = new Date(startDateInput.value - tzOffset);
+                checkPoint = new Date(startDateInput.value);
                 break
             case 2:
-                checkPoint = new Date(dueDate1Input.value - tzOffset);
+                checkPoint = new Date(dueDate1Input.value);
                 break
         }
+        checkPoint = new Date(checkPoint.getTime() - tzOffset);
+        console.log(dueDate)
+        console.log(checkPoint)
         if (dueDate < checkPoint) {
+            console.log("er")
             submitCreate.disabled = true;
             seft.value = '';
-            alert("due date must be latter than " + checkPoint.toUTCString());
+            $('#errors').html(
+            `<div class="alert alert-danger">
+                <ul>
+                    <li> ${"due date must be latter than " +checkPoint.toUTCString()}</li>
+                </ul>
+            </div>`)
         } else {
             submitCreate.disabled = false;
-            console.log(document.getElementById('dueDateCommentInput'))
             document.getElementById('dueDateCommentInput').disabled = false;
         }
     }
