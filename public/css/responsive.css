@@ -13,7 +13,7 @@
     }
 
     .black-nav-link.active {
-        height: 450px;
+        height: auto;
     }
 
     .nav-logo {
@@ -88,6 +88,8 @@
 }
 
 @media screen and (max-width: 1100px) {
+
+
     .res_profile-detail {
         margin-left: -30px;
         padding: 40px;
@@ -234,4 +236,15 @@
     .post {}
 
 
+}
+
+@media screen and (max-width: 500px) {
+    .right-term{
+        display: none;
+    }
+
+    .res-term{
+        display: block;
+        width: 250px;
+    }
 }

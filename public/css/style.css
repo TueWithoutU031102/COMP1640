@@ -1636,11 +1636,25 @@ form .form-content .input-box {
 
 .right-term h3{
     margin-bottom: 50px;
+    width: auto;
 }
 
 .right-term h4{
     margin-bottom: 40px;
     margin-left: 30px;
+}
+
+.res-term h3{
+    margin-bottom: 50px;
+}
+
+.res-term h4{
+    margin-bottom: 40px;
+    margin-left: 30px;
+}
+
+.res-term{
+    display: none;
 }
 
 #second-change-start-date,
