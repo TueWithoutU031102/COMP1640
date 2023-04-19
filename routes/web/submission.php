@@ -10,7 +10,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get("submission/show/{id}", [SubmissionController::class, 'show'])->name("showSpecifiedSubmission");
 });
 
-Route::group(['prefix' => 'submission', 'middleware' => ['auth', 'qam']], function () {
+Route::group(['prefix' => 'submission', 'middleware' => ['auth', 'admin']], function () {
     /////// SUBMISSION//
     Route::get("create", [SubmissionController::class, 'create'])->name("showCreateSubmissionForm");
 
