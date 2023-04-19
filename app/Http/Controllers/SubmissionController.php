@@ -99,9 +99,17 @@ class SubmissionController extends Controller
                 ->latest()
                 ->limit(5)
                 ->get(),
-            'lastestComments' => Idea::where('submission_id', $id)->find(Comment::where('idea_id', $id)->latest()->pluck('idea_id')),
-            'mostviewed' => Idea::where('submission_id', $id)->orderByDesc('views')->limit(5)->get(),
-            'allIdea' => $ideas = Idea::where('submission_id', $id)->select()->get(),
+            'lastestComments' => Idea::where('submission_id', $id)
+                ->find(Comment::where('idea_id', $id)
+                ->latest()
+                ->pluck('idea_id')),
+            'mostviewed' => Idea::where('submission_id', $id)
+                ->orderByDesc('views')
+                ->limit(5)
+                ->get(),
+            'allIdea' => $ideas = Idea::where('submission_id', $id)
+                ->select()
+                ->get(),
             default => null
         };
         //dd($ideas);

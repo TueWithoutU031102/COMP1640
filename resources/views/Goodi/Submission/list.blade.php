@@ -48,7 +48,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="title" class="font-weight-bold">Title</label>
-                            <input type="title" name="title" class="form-control" id="title"
+                            <input type="title" name="title" value="{{old('title')}}" class="form-control" id="title"
                                 aria-describedby="title">
                         </div>
                         <div class="submission-date">
@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description" class="font-weight-bold">Description</label>
-                            <textarea style="resize: none;" type="description" name="description" class="form-control" id="description"
+                            <textarea style="resize: none;" type="description" name="description" value="{{old('description')}}" class="form-control" id="description"
                                 aria-describedby="description" rows="6"></textarea>
                         </div>
                         <br>
@@ -97,10 +97,17 @@
                                         <h4>{{ $sub->title }}</h4>
                                         <small>Create by:</small><br>
                                         <p>{{ $sub->description }}</p>
-                                        <span class="due-date">
-                                            <i class="fa-solid fa-triangle-exclamation"></i> Due
-                                            {{ $sub->dueDate }}
-                                        </span>
+                                        @if ($sub->dueDate <= now())
+                                            <span class="end-due-date">
+                                                <i class="fa-solid fa-triangle-exclamation"></i> Due
+                                                {{ $sub->dueDate }}
+                                            </span>
+                                        @else
+                                            <span class="due-date">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Due
+                                                {{ $sub->dueDate }}
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -119,8 +126,8 @@
 
 <script>
     function formToggle() {
-        const toggleForm = document.querySelector('.create-ideas');
-        const toggleButton = document.querySelector('.button-ideas');
+        const toggleForm = document.querySelector('.create-idea');
+        const toggleButton = document.querySelector('.button-idea');
         toggleForm.classList.toggle('active')
         toggleButton.classList.toggle('active')
 
