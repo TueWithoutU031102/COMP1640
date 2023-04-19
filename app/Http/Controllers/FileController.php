@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\File\StoreFileRequest;
 use App\Models\File;
+use App\Models\Submission;
 use App\Services\FileService;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use ZipArchive;
 
 class FileController extends Controller
@@ -15,33 +18,29 @@ class FileController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function downloadAllFiles($submissionId)
     {
-        // Get all PDF and DOC files from a directory (change the path to your directory)
-        $files = Storage::disk('public')->files('ideas');
+        $submission = Submission::find($submissionId);
+        $ideas = $submission->ideas;
 
-        if (count($files) == 0) {
-            abort(404);
-        }
+        $zipName = 'ideas-'.$submission->title.'.zip'; // Replace with the desired name of the zip file
+        $zipPath = public_path('zip/' . $zipName);
 
-        $zipName = 'files.zip';
         $zip = new ZipArchive;
-        $zip->open(storage_path('app/public/'.$zipName), ZipArchive::CREATE);
 
-        foreach ($files as $file) {
-            // Only add PDF and DOC files to the ZIP archive
-            $ext = pathinfo($file, PATHINFO_EXTENSION);
-            if (in_array($ext, ['pdf', 'doc', 'docx'])) {
-                $filename = basename($file);
-                $zip->addFile(Storage::disk('public')->path($file), $filename);
+        if ($zip->open($zipPath, ZipArchive::CREATE) === true) {
+            foreach ($ideas as $idea) {
+                foreach ($idea->files as $file)
+                    $zip->addFile($file->path, $file->filename);
             }
+            $zip->close();
+            return response()->download($zipPath)->deleteFileAfterSend();
+        } else {
+            // Zip archive could not be created
+            return response('Could not create zip archive', 500);
         }
-
-        $zip->close();
-
-        return response()->download(storage_path('app/public/'.$zipName))->deleteFileAfterSend();
     }
 
     /**
