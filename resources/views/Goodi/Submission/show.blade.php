@@ -383,10 +383,7 @@
                                     </div>
 
                                     <div>
-                                        <button
-                                            onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
-                                            class="comment{{ $idea->id }}"><i
-                                                class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
+                                        <button><i class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
                                         <h6>{{ $idea->comments->count() }}</h6>
                                     </div>
 
@@ -430,7 +427,7 @@
                                 <input type="text" id="editStatus" value="0" hidden>
                                 <input type="datetime-local" value="{{ $submission->startDate }}"
                                        id="editStartDateInput" hidden>
-                                <button class="btn btn-primary" id="submitEditDate" hidden
+                                <button class="btn btn-primary" id="submitEditDateButton"
                                         onclick="updateDate('{{ $submission->id }}')">
                                     Ok
                                 </button>
@@ -459,15 +456,16 @@
             }
 
             function editDate(dD1, dD2) {
-                document.getElementById('editStatus')
                 if ($('#editStatus').val() == 0) {
+                    console.log("val-0")
                     $('#editStatus').val(1);
-                    $('#editButton').html('Cancel');
-                    $('#submitEditDate').attr("hidden", false);
+                    document.getElementById('editButton').innerHTML = "cancel";
+                    $('#submitEditDateButton').attr("hidden", false);
                     inputDueDate(1, dD1, dD2);
                 } else {
+                    console.log("val-1")
                     $('#editStatus').val(0);
-                    $('#submitEditDate').attr("hidden", true);
+                    $('#submitEditDateButton').attr("hidden", true);
                     $('#editButton').html(`<i aria-hidden="true"><i class="fa-solid fa-pen"></i> </i>`);
                     inputDueDate(0, dD1, dD2);
                 }
@@ -475,8 +473,12 @@
             }
 
             function inputDueDate(isEdit, dD1, dD2) {
+                console.log("input date")
+                console.log(dD1)
+                console.log(dD2)
                 switch (isEdit) {
                     case 1:
+                        console.log("case 1")
                         document.getElementById('dueDateInfo').innerHTML =
                             `<input type="datetime-local" id="editDueDateInput" value="${dD1}"
                                     onchange="checkDueDateEdit(this, 1)">`
@@ -548,12 +550,7 @@
                 }
             }
 
-            function commentToggle(ideaId) {
-                const commentForm = document.querySelector('.gradient-custom' + ideaId);
-                const commentButton = document.querySelector('.comment' + ideaId);
-                commentForm.classList.toggle('active')
-                commentButton.classList.toggle('active')
-            }
+
 
             function ideaToggle(ideaId) {
                 const ideaToggleMenu = document.querySelector('.idea-effect' + ideaId);
