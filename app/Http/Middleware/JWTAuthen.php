@@ -19,32 +19,21 @@ class JWTAuthen
      */
     public function handle(Request $request, Closure $next)
     {
-
-//        if ($request->bearerToken() == null){
-//            return response()->json(['error' => 'unauthenticated!'], 403);
-//        }
         try {
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
-
         } catch (TokenExpiredException $e) {
-
             return response()->json(
                 [
                     'error' => $e->getMessage(),
                     'token' => $request->bearerToken(),
                     'code' => $e->getMessage()
                 ], 403);
-
         } catch (TokenInvalidException $e) {
-
             return response()->json(['error' => 'token_invalid', 'token' => $request->bearerToken()], 403);
-
         } catch (JWTException $e) {
-
             return response()->json(['error' => 'token_absent', 'code' => $e->getCode()], 403);
-
         }
         return $next($request);
     }

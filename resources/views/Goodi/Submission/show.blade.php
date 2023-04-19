@@ -151,6 +151,9 @@
                             <a href="/api/downloadAllFiles/{{ $submission->id }}"><i class="fa fa-download"></i> Dowload
                                 All Ideas</a>
                         @endif
+                        @if($submission->duedate < now() && (Auth::user()->role_id == 4 || Auth::user()->role_id == 1))
+                            <a href="/api/downloadData"><i class="fa fa-download"></i> Dowload ideas to CSV</a>
+                        @endif
                         <div class="category">
                             <p>Category</p>
                             @foreach ($listCategories as $category)

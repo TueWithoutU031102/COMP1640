@@ -26,7 +26,6 @@ class CommentApi {
                 const commentsData = response.data;
                 console.log("response add comment: ", commentsData);
                 document.getElementById('commentCount').innerHTML = commentsData.commentCount;
-                console.log(commentsData.commentCount);
 
                 let name = JSON.parse(localStorage.getItem('user')).name;
                 if (isAnonymous) name = 'Someone'
