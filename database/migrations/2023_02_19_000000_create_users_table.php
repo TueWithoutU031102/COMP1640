@@ -141,7 +141,7 @@ return new class extends Migration
                 'password' => Hash::make("123456"),
                 'image' => "images/default-avatar.jpg",
                 'role_id' => '2',
-                'DoB' => '2002-18-10',
+                'DoB' => '2002-10-18',
                 'phone_number' => '0326934322',
                 'department_id' => '3',
                 'created_at' => '2023-07-04',
