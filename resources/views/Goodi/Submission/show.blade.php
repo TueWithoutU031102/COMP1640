@@ -267,7 +267,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="title" class="font-weight-bold">Title:</label>
-                                <input type="title" name="title" class="form-control" id="title"
+                                <input type="title" name="title" value="{{old('title')}}" class="form-control" id="title"
                                     aria-describedby="title">
                             </div>
                             <div class="form-group">
@@ -282,7 +282,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="description" class="font-weight-bold">Description: </label>
-                                <textarea type="description" name="description" class="form-control" id="discussion" aria-describedby="description"
+                                <textarea type="description" name="description" value="{{old('description')}}" class="form-control" id="discussion" aria-describedby="description"
                                     rows="4"></textarea>
                             </div>
                             <br>
