@@ -252,6 +252,17 @@ nav.sticky {
     opacity: 1;
 }
 
+.res_menu_pro ul li a{
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.res_menu_pro ul {
+    list-style: none;
+}
+
 
 .action .res_menu_pro::before {
     border-top: solid rgb(185, 199, 250);
