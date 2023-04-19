@@ -78,19 +78,17 @@ class IdeaController extends Controller
         if ($this->ideaService->checkDueDate($request->input('dueDate'))) {
             return redirect()->back()->with('message', 'Over due!');
         }
-
         $this->validate($request, [
             'checkbox' => ['required'],
         ]);
-
         $idea = new Idea($request->except('checkbox'));
         $idea->author_id = Auth::user()->getAuthIdentifier();
-
         if ($idea->save()) {
             $ideaId = $idea->id;
             $fileController = new FileController();
             $fileController->store($request, $ideaId);
-            return redirect(route("showSpecifiedSubmission", ['id' => $request->submission_id]))->with('message', 'Submit ideas successfully');
+            return redirect(route("showSpecifiedSubmission", ['id' => $request->submission_id]))
+                   ->with('message', 'Submit ideas successfully');
         };
         return redirect()->back()->with('message', 'Submit ideas fail!');
     }

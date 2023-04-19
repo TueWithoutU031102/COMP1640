@@ -232,7 +232,7 @@
                 <button
                     onclick="commentToggle({{ $idea->id }}); showCommentByIdea({{ $idea->id }}, 'commentContentEle{{ $idea->id }}')"
                     class="comment{{ $idea->id }}"><i class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
-                <h6>{{ $idea->comments->count() }}</h6>
+                <h6 id="commentCount">{{ $idea->comments->count() }}</h6>
             </div>
             <div>
                 <button>
