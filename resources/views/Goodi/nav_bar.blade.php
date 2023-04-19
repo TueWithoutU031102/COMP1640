@@ -33,7 +33,7 @@
                         <p>{{ Auth::user()->role->name }}</p>
                     </div>
                     <ul>
-                        <li><a href="/index">My Profile</a></li>
+                        <li><a href="/user/index">My Profile</a></li>
                         <li><a href="{{ route('logout') }}">Logout</a></li>
                     </ul>
                 </div>
