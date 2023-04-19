@@ -97,10 +97,17 @@
                                         <h4>{{ $sub->title }}</h4>
                                         <small>Create by:</small><br>
                                         <p>{{ $sub->description }}</p>
-                                        <span class="due-date">
-                                            <i class="fa-solid fa-triangle-exclamation"></i> Due
-                                            {{ $sub->dueDate }}
-                                        </span>
+                                        @if ($sub->dueDate <= now())
+                                            <span class="end-due-date">
+                                                <i class="fa-solid fa-triangle-exclamation"></i> Due
+                                                {{ $sub->dueDate }}
+                                            </span>
+                                        @else
+                                            <span class="due-date">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Due
+                                                {{ $sub->dueDate }}
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -119,8 +126,8 @@
 
 <script>
     function formToggle() {
-        const toggleForm = document.querySelector('.create-ideas');
-        const toggleButton = document.querySelector('.button-ideas');
+        const toggleForm = document.querySelector('.create-idea');
+        const toggleButton = document.querySelector('.button-idea');
         toggleForm.classList.toggle('active')
         toggleButton.classList.toggle('active')
 
