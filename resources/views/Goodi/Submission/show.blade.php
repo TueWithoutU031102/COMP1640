@@ -147,6 +147,13 @@
                     <div class="imp-link">
                         <a href="/submission/index"><i class="fa-solid fa-file"></i> All Events</a>
                         <a href="#"><i class="fa-solid fa-comments"></i> All Ideas</a>
+                        @if (Auth::user()->role_id == 4 || Auth::user()->role_id == 1)
+                            <a href="/api/downloadAllFiles/{{ $submission->id }}"><i class="fa fa-download"></i> Dowload
+                                All Ideas</a>
+                        @endif
+                        @if($submission->duedate < now() && (Auth::user()->role_id == 4 || Auth::user()->role_id == 1))
+                            <a href="/api/downloadData"><i class="fa fa-download"></i> Dowload ideas to CSV</a>
+                        @endif
                         <div class="category">
                             <p>Category</p>
                             @foreach ($listCategories as $category)
@@ -401,23 +408,23 @@
                             <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)"
                                 @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
                             <p><span>Description: </span>{{ $submission->title }}</p>
-                            @if(Auth::user()->role_id == 1)
-                            <button class="btn btn-primary"
-                                onclick="editDate('{{ $submission->dueDate }}', '{{ $submission->dueDateComment }}')"
-                                id="editButton">
-                                <i aria-hidden="true"><i class="fa-solid fa-pen"></i> </i>
-                            </button>
-                            <input type="text" id="editStatus" value="0" hidden>
-                            <input type="datetime-local" value="{{ $submission->startDate }}" id="editStartDateInput"
-                                hidden>
-                            <button class="btn btn-primary" id="submitEditDate" hidden
-                                onclick="updateDate('{{ $submission->id }}')">
-                                Ok
-                            </button>
-                            <a href="/submission/delete/{{ $submission->id }}"class="d-inline"
-                                onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
-                                <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button>
-                            </a>
+                            @if (Auth::user()->role_id == 1)
+                                <button class="btn btn-primary"
+                                    onclick="editDate('{{ $submission->dueDate }}', '{{ $submission->dueDateComment }}')"
+                                    id="editButton">
+                                    <i aria-hidden="true"><i class="fa-solid fa-pen"></i> </i>
+                                </button>
+                                <input type="text" id="editStatus" value="0" hidden>
+                                <input type="datetime-local" value="{{ $submission->startDate }}"
+                                    id="editStartDateInput" hidden>
+                                <button class="btn btn-primary" id="submitEditDate" hidden
+                                    onclick="updateDate('{{ $submission->id }}')">
+                                    Ok
+                                </button>
+                                <a href="/submission/delete/{{ $submission->id }}"class="d-inline"
+                                    onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
+                                    <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button>
+                                </a>
                             @endif
                         </div>
                     </div>
