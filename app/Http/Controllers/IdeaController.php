@@ -28,7 +28,8 @@ class IdeaController extends Controller
         EmailService   $mailService,
         IdeaService    $ideaService,
         CommentService $commentService
-    ) {
+    )
+    {
         $this->userService = $userService;
         $this->ideaService = $ideaService;
         $this->mailService = $mailService;
@@ -87,8 +88,14 @@ class IdeaController extends Controller
             $ideaId = $idea->id;
             $fileController = new FileController();
             $fileController->store($request, $ideaId);
+
+            $mailData = [
+                'from' => $idea->user->name,
+                'submission_id' => $idea->submission_id
+            ];
+            $this->mailService->submitIdeaNotify($mailData);
             return redirect(route("showSpecifiedSubmission", ['id' => $request->submission_id]))
-                   ->with('message', 'Submit ideas successfully');
+                ->with('message', 'Submit ideas successfully');
         };
         return redirect()->back()->with('message', 'Submit ideas fail!');
     }
