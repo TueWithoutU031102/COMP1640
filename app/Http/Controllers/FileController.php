@@ -32,6 +32,7 @@ class FileController extends Controller
 
         if ($zip->open($zipPath, ZipArchive::CREATE) === true) {
             foreach ($ideas as $idea) {
+                if (!$idea->file) continue;
                 foreach ($idea->files as $file)
                     $zip->addFile($file->path, $file->filename);
             }

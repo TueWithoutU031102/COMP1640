@@ -171,41 +171,6 @@
                     </div>
                 </div>
                 <div class="main-content">
-                    <section>
-                        <div class="submission-index-res">
-                            <div class="submission-information">
-                                <h2>{{ $submission->title }}</h2>
-                                <p><span>ID: </span>{{ $submission->id }}</p>
-                                <p><span>Create by:{{ $submission->user->name }} </span></p>
-                                <p><span>Start date: </span>{{ $submission->startDate }}</p>
-                                <p><span>Due date: </span><i id="dueDateInfo">{{ $submission->dueDate }}</i></p>
-                                <p><span>Due date 2: </span><i id="dueDate2Info">{{ $submission->dueDateComment }}</i>
-                                </p>
-                                <span>Time remaining: </span>
-                                <p onclick="getTimeRemaining('{{ $submission->dueDate }}', this)"
-                                   @if ($isDue) style="color: red" @endif>{{ $timeRemaining }}</p>
-                                <p><span>Description: </span>{{ $submission->title }}</p>
-                                @if (Auth::user()->role_id == 1)
-                                    <button class="btn btn-primary"
-                                            onclick="editDate('{{ $submission->dueDate }}', '{{ $submission->dueDateComment }}')"
-                                            id="editButton">
-                                        <i aria-hidden="true"><i class="fa-solid fa-pen"></i> </i>
-                                    </button>
-                                    <input type="text" id="editStatus" value="0" hidden>
-                                    <input type="datetime-local" value="{{ $submission->startDate }}"
-                                           id="editStartDateInput" hidden>
-                                    <button class="btn btn-primary" id="submitEditDate" hidden
-                                            onclick="updateDate('{{ $submission->id }}')">
-                                        Ok
-                                    </button>
-                                    <a href="/submission/delete/{{ $submission->id }}" class="d-inline"
-                                       onsubmit="return confirm('Are you sure to delete {{ $submission->title }} !!!???')">
-                                        <button class="btn btn-danger"><i aria-hidden="true">Delete</i></button>
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </section>
                     <br><br>
                     <section class="idea-action">
                         <div class="sort-idea">
@@ -428,7 +393,7 @@
                                 <input type="datetime-local" value="{{ $submission->startDate }}"
                                        id="editStartDateInput" hidden>
                                 <button class="btn btn-primary" id="submitEditDateButton"
-                                        onclick="updateDate('{{ $submission->id }}')">
+                                        onclick="updateDate('{{ $submission->id }}')" hidden>
                                     Ok
                                 </button>
                                 <a href="/submission/delete/{{ $submission->id }}" class="d-inline"
