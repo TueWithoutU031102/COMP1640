@@ -24,8 +24,8 @@ class updateSubmission extends FormRequest
     public function rules()
     {
         return [
-            'dueDate' => ['after_or_equal:startDate'],
-            'dueDateComment' => ['after_or_equal:startDate'],
+            'dueDate' => ['required', 'after_or_equal:startDate'],
+            'dueDateComment' => ['required', 'after_or_equal:startDate'],
         ];
     }
 }
