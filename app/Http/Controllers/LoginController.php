@@ -22,7 +22,7 @@ class LoginController extends Controller
     {
         $this->validate($request, [
             'email' => ['email'],
-            'password' => ['string','gt:1'],
+            'password' => ['gt:2'],
         ]);
         $credentials = $request->only('email', 'password');
 
