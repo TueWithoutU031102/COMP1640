@@ -31,7 +31,7 @@
                     </div>
                     <div class="input-box">
                         <label for="password" class="font-weight-bold">Password</label>
-                        <input type="password" value="123456" name="password" id="password">
+                        <input type="password" name="password" id="password">
                     </div>
                     <div class="input-box">
                         <label for="phone_number" class="font-weight-bold">Phone Number</label>

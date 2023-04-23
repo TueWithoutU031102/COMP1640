@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Validation\Rules\Password;
 
 class LoginController extends Controller
 {
@@ -15,14 +16,14 @@ class LoginController extends Controller
     private UserService $userService;
     public function __construct(UserService $userService)
     {
-        $this->userService=$userService;
+        $this->userService = $userService;
     }
 
     public function authenticate(Request $request)
     {
         $this->validate($request, [
-            'email' => ['email'],
-            'password' => ['gt:2'],
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
         $credentials = $request->only('email', 'password');
 
@@ -40,7 +41,6 @@ class LoginController extends Controller
     {
         $token = $this->userService->generateJWT($request);
         $user = $this->userService->findUserByToken($token);
-        return response()->json(['user' => $user, 'token'=>$token], 200);
+        return response()->json(['user' => $user, 'token' => $token], 200);
     }
-
 }

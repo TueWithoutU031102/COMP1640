@@ -28,11 +28,11 @@ class updateAcc extends FormRequest
 
         return [
             'name' => ['required'],
-            'DoB' => ['required', 'before:' .now()->subYears(18)->toDateString()],
+            'DoB' => ['required', 'before:' . now()->subYears(18)->toDateString()],
             'role_id' => ['required'],
             'department_id' => ['required'],
-            'email' => ['email'],
-            'phone_number' => ['digits:10', 'starts_with:0'],
+            'email' => ['required', 'email'],
+            'phone_number' => ['required', 'digits:10', 'starts_with:0'],
         ];
     }
     public function messages()

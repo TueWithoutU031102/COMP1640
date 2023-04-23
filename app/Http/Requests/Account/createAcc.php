@@ -4,6 +4,7 @@ namespace App\Http\Requests\Account;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rules\Password;
 
 class createAcc extends FormRequest
 {
@@ -26,11 +27,17 @@ class createAcc extends FormRequest
     {
         return [
             'name' => ['required'],
-            'email' => ['email', 'unique:users,email'],
-            'password' => ['gt:2'],
-            'phone_number' => ['digits:10', 'starts_with:0', 'unique:users,phone_number'],
-            'DoB' => ['required', 'before:' .now()->subYears(18)->toDateString()],
-            'image' => ['image'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => [
+                'required', Password::min(8)
+                    ->mixedCase()
+                    ->letters()
+                    ->numbers()
+                    ->uncompromised(),
+            ],
+            'phone_number' => ['required', 'digits:10', 'starts_with:0', 'unique:users,phone_number'],
+            'DoB' => ['required', 'before:' . now()->subYears(18)->toDateString()],
+            'image' => ['required', 'image'],
             'role_id' => ['required'],
             'department_id' => ['required'],
         ];
@@ -41,7 +48,6 @@ class createAcc extends FormRequest
         return [
             'name.required' => 'Name cannot be empty',
             'email.email' => 'Email cannot be empty and must be in the form of email',
-            'password.gt' => 'Password must be at least 1 character',
             'phone_number.digits' => 'Phone number must be numeric and 10 characters long',
             'phone_number.starts_with' => 'Phone number must start with 0',
             'DoB.required' => 'The date of birth cannot be empty',
