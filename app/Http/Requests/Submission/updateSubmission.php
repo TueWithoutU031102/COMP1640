@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Submission;
 
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class updateSubmission extends FormRequest
@@ -26,6 +27,13 @@ class updateSubmission extends FormRequest
         return [
             'dueDate' => ['required', 'after_or_equal:startDate'],
             'dueDateComment' => ['required', 'after_or_equal:startDate'],
+            'password' => [
+                'required', Password::min(8)
+                    ->mixedCase()
+                    ->letters()
+                    ->numbers()
+                    ->uncompromised(),
+            ],
         ];
     }
 }

@@ -49,9 +49,9 @@ class UserController extends Controller
         $input = $request->all();
 
         $this->validate($request, [
-            'email' => [Rule::unique('users')->ignore($request->id)],
-            'phone_number' => [Rule::unique('users')->ignore($request->id)],
-            'image' => ['image','required'],
+            'email' => ['required', Rule::unique('users')->ignore($request->id)],
+            'phone_number' => ['required', Rule::unique('users')->ignore($request->id)],
+            'image' => ['image', 'required'],
         ]);
 
         if ($request->hasFile('image')) {
