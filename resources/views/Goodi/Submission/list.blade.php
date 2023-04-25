@@ -26,7 +26,7 @@
             <div class="main-content">
                 <section class="idea-action">
                     <div class="btn-idea">
-                        @if (in_array(Auth::user()->role->name, ['QAM', 'ADMIN']))
+                        @if (in_array(Auth::user()->role->name, ['ADMIN']))
                             <button class="add-idea" onclick="formToggle();">Create event</button>
                         @endif
                     </div>
