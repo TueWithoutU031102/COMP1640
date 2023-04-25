@@ -15,7 +15,7 @@ class EmailService
     {
         $submission = Submission::find($dataInput['submission_id']);
         $subject = $dataInput['from'] . ' has submitted an ideas for submission ' . $submission->title;
-        $link = env('MEMCACHED_HOST', '127.0.0.1') . ':8000/submission/show/' . $submission->id;
+        $link = env('MEMCACHED_HOST', '127.0.0.1:8000') . '/submission/show/' . $submission->id;
         $content = $dataInput['from'] . ' in your department had submitted an idea to ' . $submission->title . '! You can check this submission: ';
         $department_id = User::find($submission->author_id)->department_id;
         $to = User::where('department_id', $department_id)->get();
@@ -37,7 +37,7 @@ class EmailService
         $idea = Idea::find($dataInput['idea_id']);
         $from = $dataInput['from'];
         $subject = $from . ' has commented on your ideas: ' . $idea->title;
-        $link = env('MEMCACHED_HOST', '127.0.0.1') . ':8000/submission/show/' . $idea->submission_id;
+        $link = env('MEMCACHED_HOST', '127.0.0.1:8000') . '/submission/show/' . $idea->submission_id;
         $content = $from . ' comment an ideas! You can see your ideas submission: ';
         $to = User::find($idea->author_id)->email;
 
