@@ -76,9 +76,9 @@ class DashboardController extends Controller
         if ($totalIdea != 0) {
             $percentGoodIdea = number_format(($goodIdea / $totalIdea * 100), 2, '.', '');
             $percentBadIdea = number_format(($badIdea / $totalIdea * 100), 2, '.', '');
-            $percentITIdea = number_format(($amountIdeaIT->count() / $totalIdea * 100), 2, '.', '');
-            $percentBussinessIdea = number_format(($amountIdeaBusiness->count() / $totalIdea * 100), 2, '.', '');
-            $percentDesignIdea = number_format(($amountIdeaDesign->count() / $totalIdea * 100), 2, '.', '');
+            $percentITIdea = number_format(($dataCountIT / $totalIdea * 100), 2, '.', '');
+            $percentBussinessIdea = number_format(($dataCountBusiness/ $totalIdea * 100), 2, '.', '');
+            $percentDesignIdea = number_format(($dataCountDesign / $totalIdea * 100), 2, '.', '');
         } else {
             $percentGoodIdea = 0;
             $percentBadIdea = 0;
