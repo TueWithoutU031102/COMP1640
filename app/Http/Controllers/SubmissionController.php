@@ -167,7 +167,7 @@ class SubmissionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(updateSubmission $request)
+    public function update(Request $request)
     {
         $input = $request->all();
         $submissionId = $request->id;
