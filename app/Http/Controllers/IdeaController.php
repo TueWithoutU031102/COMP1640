@@ -91,6 +91,7 @@ class IdeaController extends Controller
 
             $mailData = [
                 'from' => $idea->user->name,
+                'departmentId' => $idea->user->department_id,
                 'submission_id' => $idea->submission_id
             ];
             $this->mailService->submitIdeaNotify($mailData);
