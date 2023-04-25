@@ -19,7 +19,7 @@ class EmailService
         $content = $dataInput['from'] . ' in your department had submitted an idea to ' . $submission->title . '! You can check this submission: ';
 
         $departmentId = $dataInput['departmentId'];
-        if ($departmentId == NULL) return "This user does not belong to any department!!!!!!!";
+        if ($departmentId == NULL) return null;
         $qac = User::where('role_id', 3)
             ->where('department_id', $departmentId)
             ->get();
