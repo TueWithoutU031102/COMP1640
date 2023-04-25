@@ -283,7 +283,6 @@
                                     <div class="idea-effect{{ $idea->id }}">
                                         <ul>
                                             <li><a href="/idea/show/{{ $idea->id }}">Open Idea</a></li>
-                                            <li><a href="">Change Content</a></li>
                                             @if ($idea->author_id == Auth::user()->id || Auth::user()->id == 1)
                                                 <li>
                                                     <a onclick="return confirm('Are {{ $idea->user->name }} sure to delete {{ $idea->title }} !!!???')"
