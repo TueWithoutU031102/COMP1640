@@ -25,14 +25,14 @@ class FileController extends Controller
         $submission = Submission::find($submissionId);
         $ideas = $submission->ideas;
 
-        $zipName = 'ideas-'.$submission->title.'.zip'; // Replace with the desired name of the zip file
+        $zipName = 'ideas-' . $submission->title . '.zip'; // Replace with the desired name of the zip file
         $zipPath = public_path('zip/' . $zipName);
 
         $zip = new ZipArchive;
 
         if ($zip->open($zipPath, ZipArchive::CREATE) === true) {
             foreach ($ideas as $idea) {
-                if (!$idea->file) continue;
+                if (!$idea->files) continue;
                 foreach ($idea->files as $file)
                     $zip->addFile($file->path, $file->filename);
             }
@@ -71,7 +71,8 @@ class FileController extends Controller
                     "path" => $path,
                     "filename" => $pdf->getClientOriginalName(),
                     "idea_id" => $ideaId
-                ]);
+                ]
+            );
             $file->save();
         }
         return true;
