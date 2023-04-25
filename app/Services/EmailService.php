@@ -17,8 +17,7 @@ class EmailService
         $subject = $dataInput['from'] . ' has submitted an ideas for submission ' . $submission->title;
         $link = env('MEMCACHED_HOST', '127.0.0.1:8000') . '/submission/show/' . $submission->id;
         $content = $dataInput['from'] . ' in your department had submitted an idea to ' . $submission->title . '! You can check this submission: ';
-        $to = User::where('role_id', 3)->get();
-        $to = $to[0]->email;
+        $to = User::where('role_id', 3)->pluck('email');
         $data = [
             'from' => $dataInput['from'],
             'to' => $to,
