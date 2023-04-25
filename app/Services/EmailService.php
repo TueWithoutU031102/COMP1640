@@ -19,13 +19,13 @@ class EmailService
         $content = $dataInput['from'] . ' in your department had submitted an idea to ' . $submission->title . '! You can check this submission: ';
 
         $departmentId = $dataInput['departmentId'];
-
+        if ($departmentId == NULL) return "This user does not belong to any department!!!!!!!";
         $qac = User::where('role_id', 3)
             ->where('department_id', $departmentId)
             ->get();
 
         $to = [];
-        foreach ($qac as $item){
+        foreach ($qac as $item) {
             $to[] = $item->email;
         }
         $data = [
