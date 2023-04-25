@@ -35,6 +35,7 @@ class SubmissionController extends Controller
      */
     public function index()
     {
+        //dd(User::where('role_id', 3)->pluck('email')->toArray());
         $subs = Submission::select('*')->orderByDesc('created_at')->get();
         return view('Goodi/Submission/list', ['subs' => $subs]);
     }
