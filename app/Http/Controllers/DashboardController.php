@@ -74,11 +74,14 @@ class DashboardController extends Controller
         $totalIdea = Idea::count();
 
         if ($totalIdea != 0) {
+            $countIdeaIT = Idea::whereIn('author_id', $activeIT)->count();
+            $countIdeaBussiness = Idea::whereIn('author_id', $activeBusiness)->count();
+            $countIdeaDesign = Idea::whereIn('author_id', $activeDesign)->count();
             $percentGoodIdea = number_format(($goodIdea / $totalIdea * 100), 2, '.', '');
             $percentBadIdea = number_format(($badIdea / $totalIdea * 100), 2, '.', '');
-            $percentITIdea = number_format(($dataCountIT / $totalIdea * 100), 2, '.', '');
-            $percentBussinessIdea = number_format(($dataCountBusiness/ $totalIdea * 100), 2, '.', '');
-            $percentDesignIdea = number_format(($dataCountDesign / $totalIdea * 100), 2, '.', '');
+            $percentITIdea = number_format(($countIdeaIT / $totalIdea * 100), 2, '.', '');
+            $percentBussinessIdea = number_format(($countIdeaBussiness / $totalIdea * 100), 2, '.', '');
+            $percentDesignIdea = number_format(($countIdeaDesign / $totalIdea * 100), 2, '.', '');
         } else {
             $percentGoodIdea = 0;
             $percentBadIdea = 0;
