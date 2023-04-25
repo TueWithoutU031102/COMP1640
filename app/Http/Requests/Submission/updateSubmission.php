@@ -26,14 +26,7 @@ class updateSubmission extends FormRequest
     {
         return [
             'dueDate' => ['required', 'after_or_equal:startDate'],
-            'dueDateComment' => ['required', 'after_or_equal:startDate'],
-            'password' => [
-                'required', Password::min(8)
-                    ->mixedCase()
-                    ->letters()
-                    ->numbers()
-                    ->uncompromised(),
-            ],
+            'dueDateComment' => ['required', 'after_or_equal:dueDate'],
         ];
     }
 }
