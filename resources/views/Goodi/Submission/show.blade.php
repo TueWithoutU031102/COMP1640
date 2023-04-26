@@ -17,7 +17,7 @@
                 overflow: hidden;
             }
 
-            #view{{ $idea->id }}   {
+            #view{{ $idea->id }}     {
                 display: none;
             }
 
@@ -43,7 +43,7 @@
                 visibility: visible;
             }
 
-            .gradient-custom{{ $idea->id }}   {
+            .gradient-custom{{ $idea->id }}     {
                 height: 0;
                 display: none;
                 /* transition: 0.2s; */
@@ -54,7 +54,7 @@
                 display: block;
             }
 
-            .idea-effect{{ $idea->id }}   {
+            .idea-effect{{ $idea->id }}     {
                 display: none;
                 letter-spacing: 0;
                 position: absolute;
@@ -70,7 +70,7 @@
             }
 
 
-            .idea-change{{ $idea->id }}   {
+            .idea-change{{ $idea->id }}     {
                 position: absolute;
                 right: 30px;
                 background: #fff;
@@ -260,10 +260,17 @@
                             </div>
                             <br>
                             <div class="form-group">
+                                <input type="radio" id="isAnonymous" name="isAnonymous">
+                                <label for="isAnonymous" class="font-weight-bold">Anonymous</label>
+                            </div>
+                            <br>
+                            <div class="form-group">
                                 <input type="checkbox" name="checkbox" value='1'>
-                                <label for="title" class="font-weight-bold">I Have Accept All <a
+                                <label for="title" class="font-weight-bold">I Accept All <a
                                         href="/terms&condition#8">Terms and Condition</a></label>
                             </div>
+                            <br>
+
                             <br>
                             <div class="form-group">
                                 <button class="btn btn-success" style="padding: 10px 100px;" type="submit">Submit
@@ -293,76 +300,91 @@
                                     </div>
                                 </div>
                                 <div class="user-detail">
-                                    <img src="{{ asset($idea->user->image) }}" width="50" height="50"
-                                         class="rounded-circle" alt=""
-                                         style="object-fit: cover; object-position: center center;">
-                                    <div class="post-content">
-                                        <h4>{{ $idea->title }}</h4>
-                                        </a>
-                                        <small>{{ $idea->user->name }} Has Posted on {{ $idea->created_at }}</small>
+                                    @if($idea->isAnonymous)
+                                        <img
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Anonymous_emblem.svg/2048px-Anonymous_emblem.svg.png"
+                                            width="50" height="50"
+                                            class="rounded-circle" alt=""
+                                            style="object-fit: cover; object-position: center center;">
+                                        <div class="post-content">
+                                            <h4>{{ $idea->title }}</h4>
+                                            </a>
+                                            <small>Anonymous Has Posted on {{ $idea->created_at }}</small>
+
+                                            @else
+                                                <img src="{{ asset($idea->user->image) }}" width="50" height="50"
+                                                     class="rounded-circle" alt=""
+                                                     style="object-fit: cover; object-position: center center;">
+                                                <div class="post-content">
+                                                    <h4>{{ $idea->title }}</h4>
+                                                    </a>
+                                                    <small>{{ $idea->user->name }} Has Posted
+                                                        on {{ $idea->created_at }}</small>
+                                                    @endif
+                                                    <br>
+                                                    @foreach ($idea->files as $file)
+                                                        <a href="{{ url($file->path) }}"
+                                                           target="_blank">{{ $file->filename }}</a>
+                                                    @endforeach
+                                                    <br>
+                                                    <input type="checkbox" id="view{{ $idea->id }}">
+                                                    <p class="des">{{ $idea->description }}</p>
+                                                    <label for="view{{ $idea->id }}">View More</label>
+                                                </div>
+                                        </div>
                                         <br>
-                                        @foreach ($idea->files as $file)
-                                            <a href="{{ url($file->path) }}" target="_blank">{{ $file->filename }}</a>
-                                        @endforeach
-                                        <br>
-                                        <input type="checkbox" id="view{{ $idea->id }}">
-                                        <p class="des">{{ $idea->description }}</p>
-                                        <label for="view{{ $idea->id }}">View More</label>
-                                    </div>
+                                        <div class="idea-interact">
+                                            <br>
+                                            <div>
+                                                @if (!$idea->likedBy(auth()->user()))
+                                                    <button type="submit"
+                                                            onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                                        <i class="fa-regular fa-thumbs-up fa-2x"
+                                                           id="likes-interact{{ $idea->id }}"></i>
+                                                    </button>
+                                                @else
+                                                    <button type="submit"
+                                                            onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                                        <i class="fa-solid fa-thumbs-up fa-2x"
+                                                           id="likes-interact{{ $idea->id }}"></i>
+                                                    </button>
+                                                @endif
+                                                <h6 id="likesCount{{ $idea->id }}">{{ $idea->likes->count() }}</h6>
+                                            </div>
+                                            <div>
+                                                @if (!$idea->dislikedBy(auth()->user()))
+                                                    <button type="submit"
+                                                            onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                                        <i class="fa-regular fa-thumbs-down fa-2x"
+                                                           id="dislikes-interact{{ $idea->id }}"></i>
+                                                    </button>
+                                                @else
+                                                    <button type="submit"
+                                                            onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
+                                                        <i class="fa-solid fa-thumbs-down fa-2x"
+                                                           id="dislikes-interact{{ $idea->id }}"></i>
+                                                    </button>
+                                                @endif
+                                                <h6 id="dislikesCount{{ $idea->id }}">{{ $idea->dislikes->count() }}</h6>
+                                            </div>
+
+                                            <div>
+                                                <button><i class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
+                                                <h6>{{ $idea->comments->count() }}</h6>
+                                            </div>
+
+                                            <div>
+                                                <button>
+                                                    <a style="text-decoration: none; color:#000"
+                                                       href="/idea/show/{{ $idea->id }}"><i
+                                                            class="fa-solid fa-eye fa-2x"></i></a>
+                                                </button>
+                                                <h6>{{ $idea->views }}</h6>
+                                            </div>
+                                        </div>
+                                        <hr>
                                 </div>
                                 <br>
-                                <div class="idea-interact">
-                                    <br>
-                                    <div>
-                                        @if (!$idea->likedBy(auth()->user()))
-                                            <button type="submit"
-                                                    onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
-                                                <i class="fa-regular fa-thumbs-up fa-2x"
-                                                   id="likes-interact{{ $idea->id }}"></i>
-                                            </button>
-                                        @else
-                                            <button type="submit"
-                                                    onclick="likeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
-                                                <i class="fa-solid fa-thumbs-up fa-2x"
-                                                   id="likes-interact{{ $idea->id }}"></i>
-                                            </button>
-                                        @endif
-                                        <h6 id="likesCount{{ $idea->id }}">{{ $idea->likes->count() }}</h6>
-                                    </div>
-                                    <div>
-                                        @if (!$idea->dislikedBy(auth()->user()))
-                                            <button type="submit"
-                                                    onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
-                                                <i class="fa-regular fa-thumbs-down fa-2x"
-                                                   id="dislikes-interact{{ $idea->id }}"></i>
-                                            </button>
-                                        @else
-                                            <button type="submit"
-                                                    onclick="dislikeIdea({{ $idea->id }}, 'likesCount{{ $idea->id }}', 'dislikesCount{{ $idea->id }}')">
-                                                <i class="fa-solid fa-thumbs-down fa-2x"
-                                                   id="dislikes-interact{{ $idea->id }}"></i>
-                                            </button>
-                                        @endif
-                                        <h6 id="dislikesCount{{ $idea->id }}">{{ $idea->dislikes->count() }}</h6>
-                                    </div>
-
-                                    <div>
-                                        <button><i class="fa-sharp fa-solid fa-comment fa-2x"></i></button>
-                                        <h6>{{ $idea->comments->count() }}</h6>
-                                    </div>
-
-                                    <div>
-                                        <button>
-                                            <a style="text-decoration: none; color:#000"
-                                               href="/idea/show/{{ $idea->id }}"><i
-                                                    class="fa-solid fa-eye fa-2x"></i></a>
-                                        </button>
-                                        <h6>{{ $idea->views }}</h6>
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
-                            <br>
                         @endforeach
                     </section>
                 </div>
@@ -513,7 +535,6 @@
                     button.disabled = true;
                 }
             }
-
 
 
             function ideaToggle(ideaId) {

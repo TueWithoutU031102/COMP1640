@@ -84,6 +84,7 @@ class IdeaController extends Controller
         ]);
         $idea = new Idea($request->except('checkbox'));
         $idea->author_id = Auth::user()->getAuthIdentifier();
+        if ($idea->isAnonymous == 'on') $idea->isAnonymous = true;
         if ($idea->save()) {
             $ideaId = $idea->id;
             $fileController = new FileController();
